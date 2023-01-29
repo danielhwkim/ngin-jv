@@ -32,9 +32,9 @@ public final class Command {
      */
     query(65284),
     /**
-     * <code>cobject = 65286;</code>
+     * <code>object = 65286;</code>
      */
-    cobject(65286),
+    object(65286),
     /**
      * <code>contact = 61680;</code>
      */
@@ -60,13 +60,21 @@ public final class Command {
      */
     button(61685),
     /**
-     * <code>tab = 61686;</code>
+     * <code>tap = 61686;</code>
      */
-    tab(61686),
+    tap(61686),
     /**
      * <code>queryresult = 61687;</code>
      */
     queryresult(61687),
+    /**
+     * <code>error = 61688;</code>
+     */
+    error(61688),
+    /**
+     * <code>relay = 61689;</code>
+     */
+    relay(61689),
     UNRECOGNIZED(-1),
     ;
 
@@ -83,9 +91,9 @@ public final class Command {
      */
     public static final int query_VALUE = 65284;
     /**
-     * <code>cobject = 65286;</code>
+     * <code>object = 65286;</code>
      */
-    public static final int cobject_VALUE = 65286;
+    public static final int object_VALUE = 65286;
     /**
      * <code>contact = 61680;</code>
      */
@@ -111,13 +119,21 @@ public final class Command {
      */
     public static final int button_VALUE = 61685;
     /**
-     * <code>tab = 61686;</code>
+     * <code>tap = 61686;</code>
      */
-    public static final int tab_VALUE = 61686;
+    public static final int tap_VALUE = 61686;
     /**
      * <code>queryresult = 61687;</code>
      */
     public static final int queryresult_VALUE = 61687;
+    /**
+     * <code>error = 61688;</code>
+     */
+    public static final int error_VALUE = 61688;
+    /**
+     * <code>relay = 61689;</code>
+     */
+    public static final int relay_VALUE = 61689;
 
 
     public final int getNumber() {
@@ -147,15 +163,17 @@ public final class Command {
         case 0: return cmd;
         case 65280: return stage;
         case 65284: return query;
-        case 65286: return cobject;
+        case 65286: return object;
         case 61680: return contact;
         case 61681: return event;
         case 61682: return key;
         case 61683: return ack;
         case 61684: return directional;
         case 61685: return button;
-        case 61686: return tab;
+        case 61686: return tap;
         case 61687: return queryresult;
+        case 61688: return error;
+        case 61689: return relay;
         default: return null;
       }
     }
@@ -645,77 +663,61 @@ public final class Command {
   }
 
   /**
-   * Protobuf enum {@code commander.ActionEvent}
+   * Protobuf enum {@code commander.TouchMotion}
    */
-  public enum ActionEvent
+  public enum TouchMotion
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>DOWN = 0;</code>
+     * <code>NONE = 0;</code>
      */
-    DOWN(0),
+    NONE(0),
     /**
-     * <code>UP = 1;</code>
+     * <code>DOWN = 1;</code>
      */
-    UP(1),
+    DOWN(1),
     /**
      * <code>MOVE = 2;</code>
      */
     MOVE(2),
     /**
-     * <code>NONE = 3;</code>
+     * <code>UP = 4;</code>
      */
-    NONE(3),
+    UP(4),
     /**
-     * <code>UP_DOWN = 4;</code>
+     * <code>DOWN_UP = 5;</code>
      */
-    UP_DOWN(4),
+    DOWN_UP(5),
     /**
-     * <code>DOWN_MOVE = 5;</code>
+     * <code>ALL = 7;</code>
      */
-    DOWN_MOVE(5),
-    /**
-     * <code>ALL = 6;</code>
-     */
-    ALL(6),
-    /**
-     * <code>UP_MOVE = 7;</code>
-     */
-    UP_MOVE(7),
+    ALL(7),
     UNRECOGNIZED(-1),
     ;
 
     /**
-     * <code>DOWN = 0;</code>
+     * <code>NONE = 0;</code>
      */
-    public static final int DOWN_VALUE = 0;
+    public static final int NONE_VALUE = 0;
     /**
-     * <code>UP = 1;</code>
+     * <code>DOWN = 1;</code>
      */
-    public static final int UP_VALUE = 1;
+    public static final int DOWN_VALUE = 1;
     /**
      * <code>MOVE = 2;</code>
      */
     public static final int MOVE_VALUE = 2;
     /**
-     * <code>NONE = 3;</code>
+     * <code>UP = 4;</code>
      */
-    public static final int NONE_VALUE = 3;
+    public static final int UP_VALUE = 4;
     /**
-     * <code>UP_DOWN = 4;</code>
+     * <code>DOWN_UP = 5;</code>
      */
-    public static final int UP_DOWN_VALUE = 4;
+    public static final int DOWN_UP_VALUE = 5;
     /**
-     * <code>DOWN_MOVE = 5;</code>
+     * <code>ALL = 7;</code>
      */
-    public static final int DOWN_MOVE_VALUE = 5;
-    /**
-     * <code>ALL = 6;</code>
-     */
-    public static final int ALL_VALUE = 6;
-    /**
-     * <code>UP_MOVE = 7;</code>
-     */
-    public static final int UP_MOVE_VALUE = 7;
+    public static final int ALL_VALUE = 7;
 
 
     public final int getNumber() {
@@ -732,7 +734,7 @@ public final class Command {
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @java.lang.Deprecated
-    public static ActionEvent valueOf(int value) {
+    public static TouchMotion valueOf(int value) {
       return forNumber(value);
     }
 
@@ -740,29 +742,27 @@ public final class Command {
      * @param value The numeric wire value of the corresponding enum entry.
      * @return The enum associated with the given numeric wire value.
      */
-    public static ActionEvent forNumber(int value) {
+    public static TouchMotion forNumber(int value) {
       switch (value) {
-        case 0: return DOWN;
-        case 1: return UP;
+        case 0: return NONE;
+        case 1: return DOWN;
         case 2: return MOVE;
-        case 3: return NONE;
-        case 4: return UP_DOWN;
-        case 5: return DOWN_MOVE;
-        case 6: return ALL;
-        case 7: return UP_MOVE;
+        case 4: return UP;
+        case 5: return DOWN_UP;
+        case 7: return ALL;
         default: return null;
       }
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<ActionEvent>
+    public static com.google.protobuf.Internal.EnumLiteMap<TouchMotion>
         internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        ActionEvent> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<ActionEvent>() {
-            public ActionEvent findValueByNumber(int number) {
-              return ActionEvent.forNumber(number);
+        TouchMotion> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<TouchMotion>() {
+            public TouchMotion findValueByNumber(int number) {
+              return TouchMotion.forNumber(number);
             }
           };
 
@@ -783,9 +783,9 @@ public final class Command {
       return commander.Command.getDescriptor().getEnumTypes().get(4);
     }
 
-    private static final ActionEvent[] VALUES = values();
+    private static final TouchMotion[] VALUES = values();
 
-    public static ActionEvent valueOf(
+    public static TouchMotion valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -799,11 +799,11 @@ public final class Command {
 
     private final int value;
 
-    private ActionEvent(int value) {
+    private TouchMotion(int value) {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:commander.ActionEvent)
+    // @@protoc_insertion_point(enum_scope:commander.TouchMotion)
   }
 
   /**
@@ -824,9 +824,9 @@ public final class Command {
      */
     button2Input(2),
     /**
-     * <code>tabInput = 3;</code>
+     * <code>tapInput = 3;</code>
      */
-    tabInput(3),
+    tapInput(3),
     UNRECOGNIZED(-1),
     ;
 
@@ -843,9 +843,9 @@ public final class Command {
      */
     public static final int button2Input_VALUE = 2;
     /**
-     * <code>tabInput = 3;</code>
+     * <code>tapInput = 3;</code>
      */
-    public static final int tabInput_VALUE = 3;
+    public static final int tapInput_VALUE = 3;
 
 
     public final int getNumber() {
@@ -875,7 +875,7 @@ public final class Command {
         case 0: return joystickInput;
         case 1: return button1Input;
         case 2: return button2Input;
-        case 3: return tabInput;
+        case 3: return tapInput;
         default: return null;
       }
     }
@@ -1059,9 +1059,9 @@ public final class Command {
   }
 
   /**
-   * Protobuf enum {@code commander.CActionType}
+   * Protobuf enum {@code commander.NClipType}
    */
-  public enum CActionType
+  public enum NClipType
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <code>idle = 0;</code>
@@ -1135,6 +1135,46 @@ public final class Command {
      * <code>svg = 17;</code>
      */
     svg(17),
+    /**
+     * <code>t0 = 18;</code>
+     */
+    t0(18),
+    /**
+     * <code>t1 = 19;</code>
+     */
+    t1(19),
+    /**
+     * <code>t2 = 20;</code>
+     */
+    t2(20),
+    /**
+     * <code>t3 = 21;</code>
+     */
+    t3(21),
+    /**
+     * <code>t4 = 22;</code>
+     */
+    t4(22),
+    /**
+     * <code>t5 = 23;</code>
+     */
+    t5(23),
+    /**
+     * <code>t6 = 24;</code>
+     */
+    t6(24),
+    /**
+     * <code>t7 = 25;</code>
+     */
+    t7(25),
+    /**
+     * <code>t8 = 26;</code>
+     */
+    t8(26),
+    /**
+     * <code>t9 = 27;</code>
+     */
+    t9(27),
     UNRECOGNIZED(-1),
     ;
 
@@ -1210,6 +1250,46 @@ public final class Command {
      * <code>svg = 17;</code>
      */
     public static final int svg_VALUE = 17;
+    /**
+     * <code>t0 = 18;</code>
+     */
+    public static final int t0_VALUE = 18;
+    /**
+     * <code>t1 = 19;</code>
+     */
+    public static final int t1_VALUE = 19;
+    /**
+     * <code>t2 = 20;</code>
+     */
+    public static final int t2_VALUE = 20;
+    /**
+     * <code>t3 = 21;</code>
+     */
+    public static final int t3_VALUE = 21;
+    /**
+     * <code>t4 = 22;</code>
+     */
+    public static final int t4_VALUE = 22;
+    /**
+     * <code>t5 = 23;</code>
+     */
+    public static final int t5_VALUE = 23;
+    /**
+     * <code>t6 = 24;</code>
+     */
+    public static final int t6_VALUE = 24;
+    /**
+     * <code>t7 = 25;</code>
+     */
+    public static final int t7_VALUE = 25;
+    /**
+     * <code>t8 = 26;</code>
+     */
+    public static final int t8_VALUE = 26;
+    /**
+     * <code>t9 = 27;</code>
+     */
+    public static final int t9_VALUE = 27;
 
 
     public final int getNumber() {
@@ -1226,7 +1306,7 @@ public final class Command {
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @java.lang.Deprecated
-    public static CActionType valueOf(int value) {
+    public static NClipType valueOf(int value) {
       return forNumber(value);
     }
 
@@ -1234,7 +1314,7 @@ public final class Command {
      * @param value The numeric wire value of the corresponding enum entry.
      * @return The enum associated with the given numeric wire value.
      */
-    public static CActionType forNumber(int value) {
+    public static NClipType forNumber(int value) {
       switch (value) {
         case 0: return idle;
         case 1: return run;
@@ -1254,19 +1334,29 @@ public final class Command {
         case 15: return noChange;
         case 16: return tiles;
         case 17: return svg;
+        case 18: return t0;
+        case 19: return t1;
+        case 20: return t2;
+        case 21: return t3;
+        case 22: return t4;
+        case 23: return t5;
+        case 24: return t6;
+        case 25: return t7;
+        case 26: return t8;
+        case 27: return t9;
         default: return null;
       }
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<CActionType>
+    public static com.google.protobuf.Internal.EnumLiteMap<NClipType>
         internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        CActionType> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<CActionType>() {
-            public CActionType findValueByNumber(int number) {
-              return CActionType.forNumber(number);
+        NClipType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<NClipType>() {
+            public NClipType findValueByNumber(int number) {
+              return NClipType.forNumber(number);
             }
           };
 
@@ -1287,9 +1377,9 @@ public final class Command {
       return commander.Command.getDescriptor().getEnumTypes().get(7);
     }
 
-    private static final CActionType[] VALUES = values();
+    private static final NClipType[] VALUES = values();
 
-    public static CActionType valueOf(
+    public static NClipType valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -1303,11 +1393,11 @@ public final class Command {
 
     private final int value;
 
-    private CActionType(int value) {
+    private NClipType(int value) {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:commander.CActionType)
+    // @@protoc_insertion_point(enum_scope:commander.NClipType)
   }
 
   public interface QueryInfoOrBuilder extends
@@ -2209,10835 +2299,8 @@ public final class Command {
 
   }
 
-  public interface EventInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.EventInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>uint32 id = 1;</code>
-     * @return The id.
-     */
-    int getId();
-
-    /**
-     * <code>string info = 2;</code>
-     * @return The info.
-     */
-    java.lang.String getInfo();
-    /**
-     * <code>string info = 2;</code>
-     * @return The bytes for info.
-     */
-    com.google.protobuf.ByteString
-        getInfoBytes();
-
-    /**
-     * <code>string event = 3;</code>
-     * @return The event.
-     */
-    java.lang.String getEvent();
-    /**
-     * <code>string event = 3;</code>
-     * @return The bytes for event.
-     */
-    com.google.protobuf.ByteString
-        getEventBytes();
-
-    /**
-     * <code>float x = 4;</code>
-     * @return The x.
-     */
-    float getX();
-
-    /**
-     * <code>float y = 5;</code>
-     * @return The y.
-     */
-    float getY();
-
-    /**
-     * <code>bool isCompleted = 6;</code>
-     * @return The isCompleted.
-     */
-    boolean getIsCompleted();
-  }
-  /**
-   * Protobuf type {@code commander.EventInfo}
-   */
-  public static final class EventInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.EventInfo)
-      EventInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use EventInfo.newBuilder() to construct.
-    private EventInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private EventInfo() {
-      info_ = "";
-      event_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new EventInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_EventInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_EventInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.EventInfo.class, commander.Command.EventInfo.Builder.class);
-    }
-
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    /**
-     * <code>uint32 id = 1;</code>
-     * @return The id.
-     */
-    @java.lang.Override
-    public int getId() {
-      return id_;
-    }
-
-    public static final int INFO_FIELD_NUMBER = 2;
-    private volatile java.lang.Object info_;
-    /**
-     * <code>string info = 2;</code>
-     * @return The info.
-     */
-    @java.lang.Override
-    public java.lang.String getInfo() {
-      java.lang.Object ref = info_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        info_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string info = 2;</code>
-     * @return The bytes for info.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getInfoBytes() {
-      java.lang.Object ref = info_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        info_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int EVENT_FIELD_NUMBER = 3;
-    private volatile java.lang.Object event_;
-    /**
-     * <code>string event = 3;</code>
-     * @return The event.
-     */
-    @java.lang.Override
-    public java.lang.String getEvent() {
-      java.lang.Object ref = event_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        event_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string event = 3;</code>
-     * @return The bytes for event.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getEventBytes() {
-      java.lang.Object ref = event_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        event_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int X_FIELD_NUMBER = 4;
-    private float x_;
-    /**
-     * <code>float x = 4;</code>
-     * @return The x.
-     */
-    @java.lang.Override
-    public float getX() {
-      return x_;
-    }
-
-    public static final int Y_FIELD_NUMBER = 5;
-    private float y_;
-    /**
-     * <code>float y = 5;</code>
-     * @return The y.
-     */
-    @java.lang.Override
-    public float getY() {
-      return y_;
-    }
-
-    public static final int ISCOMPLETED_FIELD_NUMBER = 6;
-    private boolean isCompleted_;
-    /**
-     * <code>bool isCompleted = 6;</code>
-     * @return The isCompleted.
-     */
-    @java.lang.Override
-    public boolean getIsCompleted() {
-      return isCompleted_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (id_ != 0) {
-        output.writeUInt32(1, id_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, info_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(event_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, event_);
-      }
-      if (java.lang.Float.floatToRawIntBits(x_) != 0) {
-        output.writeFloat(4, x_);
-      }
-      if (java.lang.Float.floatToRawIntBits(y_) != 0) {
-        output.writeFloat(5, y_);
-      }
-      if (isCompleted_ != false) {
-        output.writeBool(6, isCompleted_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (id_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, id_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, info_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(event_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, event_);
-      }
-      if (java.lang.Float.floatToRawIntBits(x_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(4, x_);
-      }
-      if (java.lang.Float.floatToRawIntBits(y_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(5, y_);
-      }
-      if (isCompleted_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(6, isCompleted_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.EventInfo)) {
-        return super.equals(obj);
-      }
-      commander.Command.EventInfo other = (commander.Command.EventInfo) obj;
-
-      if (getId()
-          != other.getId()) return false;
-      if (!getInfo()
-          .equals(other.getInfo())) return false;
-      if (!getEvent()
-          .equals(other.getEvent())) return false;
-      if (java.lang.Float.floatToIntBits(getX())
-          != java.lang.Float.floatToIntBits(
-              other.getX())) return false;
-      if (java.lang.Float.floatToIntBits(getY())
-          != java.lang.Float.floatToIntBits(
-              other.getY())) return false;
-      if (getIsCompleted()
-          != other.getIsCompleted()) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId();
-      hash = (37 * hash) + INFO_FIELD_NUMBER;
-      hash = (53 * hash) + getInfo().hashCode();
-      hash = (37 * hash) + EVENT_FIELD_NUMBER;
-      hash = (53 * hash) + getEvent().hashCode();
-      hash = (37 * hash) + X_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getX());
-      hash = (37 * hash) + Y_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getY());
-      hash = (37 * hash) + ISCOMPLETED_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getIsCompleted());
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.EventInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.EventInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.EventInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.EventInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.EventInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.EventInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.EventInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.EventInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.EventInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.EventInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.EventInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.EventInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.EventInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.EventInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.EventInfo)
-        commander.Command.EventInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_EventInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_EventInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.EventInfo.class, commander.Command.EventInfo.Builder.class);
-      }
-
-      // Construct using commander.Command.EventInfo.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        id_ = 0;
-
-        info_ = "";
-
-        event_ = "";
-
-        x_ = 0F;
-
-        y_ = 0F;
-
-        isCompleted_ = false;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_EventInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.EventInfo getDefaultInstanceForType() {
-        return commander.Command.EventInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.EventInfo build() {
-        commander.Command.EventInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.EventInfo buildPartial() {
-        commander.Command.EventInfo result = new commander.Command.EventInfo(this);
-        result.id_ = id_;
-        result.info_ = info_;
-        result.event_ = event_;
-        result.x_ = x_;
-        result.y_ = y_;
-        result.isCompleted_ = isCompleted_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.EventInfo) {
-          return mergeFrom((commander.Command.EventInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.EventInfo other) {
-        if (other == commander.Command.EventInfo.getDefaultInstance()) return this;
-        if (other.getId() != 0) {
-          setId(other.getId());
-        }
-        if (!other.getInfo().isEmpty()) {
-          info_ = other.info_;
-          onChanged();
-        }
-        if (!other.getEvent().isEmpty()) {
-          event_ = other.event_;
-          onChanged();
-        }
-        if (other.getX() != 0F) {
-          setX(other.getX());
-        }
-        if (other.getY() != 0F) {
-          setY(other.getY());
-        }
-        if (other.getIsCompleted() != false) {
-          setIsCompleted(other.getIsCompleted());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                id_ = input.readUInt32();
-
-                break;
-              } // case 8
-              case 18: {
-                info_ = input.readStringRequireUtf8();
-
-                break;
-              } // case 18
-              case 26: {
-                event_ = input.readStringRequireUtf8();
-
-                break;
-              } // case 26
-              case 37: {
-                x_ = input.readFloat();
-
-                break;
-              } // case 37
-              case 45: {
-                y_ = input.readFloat();
-
-                break;
-              } // case 45
-              case 48: {
-                isCompleted_ = input.readBool();
-
-                break;
-              } // case 48
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private int id_ ;
-      /**
-       * <code>uint32 id = 1;</code>
-       * @return The id.
-       */
-      @java.lang.Override
-      public int getId() {
-        return id_;
-      }
-      /**
-       * <code>uint32 id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setId(int value) {
-        
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object info_ = "";
-      /**
-       * <code>string info = 2;</code>
-       * @return The info.
-       */
-      public java.lang.String getInfo() {
-        java.lang.Object ref = info_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          info_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string info = 2;</code>
-       * @return The bytes for info.
-       */
-      public com.google.protobuf.ByteString
-          getInfoBytes() {
-        java.lang.Object ref = info_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          info_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string info = 2;</code>
-       * @param value The info to set.
-       * @return This builder for chaining.
-       */
-      public Builder setInfo(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        info_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string info = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearInfo() {
-        
-        info_ = getDefaultInstance().getInfo();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string info = 2;</code>
-       * @param value The bytes for info to set.
-       * @return This builder for chaining.
-       */
-      public Builder setInfoBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        info_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object event_ = "";
-      /**
-       * <code>string event = 3;</code>
-       * @return The event.
-       */
-      public java.lang.String getEvent() {
-        java.lang.Object ref = event_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          event_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string event = 3;</code>
-       * @return The bytes for event.
-       */
-      public com.google.protobuf.ByteString
-          getEventBytes() {
-        java.lang.Object ref = event_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          event_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string event = 3;</code>
-       * @param value The event to set.
-       * @return This builder for chaining.
-       */
-      public Builder setEvent(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        event_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string event = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearEvent() {
-        
-        event_ = getDefaultInstance().getEvent();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string event = 3;</code>
-       * @param value The bytes for event to set.
-       * @return This builder for chaining.
-       */
-      public Builder setEventBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        event_ = value;
-        onChanged();
-        return this;
-      }
-
-      private float x_ ;
-      /**
-       * <code>float x = 4;</code>
-       * @return The x.
-       */
-      @java.lang.Override
-      public float getX() {
-        return x_;
-      }
-      /**
-       * <code>float x = 4;</code>
-       * @param value The x to set.
-       * @return This builder for chaining.
-       */
-      public Builder setX(float value) {
-        
-        x_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>float x = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearX() {
-        
-        x_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private float y_ ;
-      /**
-       * <code>float y = 5;</code>
-       * @return The y.
-       */
-      @java.lang.Override
-      public float getY() {
-        return y_;
-      }
-      /**
-       * <code>float y = 5;</code>
-       * @param value The y to set.
-       * @return This builder for chaining.
-       */
-      public Builder setY(float value) {
-        
-        y_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>float y = 5;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearY() {
-        
-        y_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private boolean isCompleted_ ;
-      /**
-       * <code>bool isCompleted = 6;</code>
-       * @return The isCompleted.
-       */
-      @java.lang.Override
-      public boolean getIsCompleted() {
-        return isCompleted_;
-      }
-      /**
-       * <code>bool isCompleted = 6;</code>
-       * @param value The isCompleted to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIsCompleted(boolean value) {
-        
-        isCompleted_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bool isCompleted = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIsCompleted() {
-        
-        isCompleted_ = false;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.EventInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.EventInfo)
-    private static final commander.Command.EventInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.EventInfo();
-    }
-
-    public static commander.Command.EventInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<EventInfo>
-        PARSER = new com.google.protobuf.AbstractParser<EventInfo>() {
-      @java.lang.Override
-      public EventInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<EventInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<EventInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.EventInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface KeyInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.KeyInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string name = 1;</code>
-     * @return The name.
-     */
-    java.lang.String getName();
-    /**
-     * <code>string name = 1;</code>
-     * @return The bytes for name.
-     */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
-    /**
-     * <code>bool isPressed = 2;</code>
-     * @return The isPressed.
-     */
-    boolean getIsPressed();
-  }
-  /**
-   * Protobuf type {@code commander.KeyInfo}
-   */
-  public static final class KeyInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.KeyInfo)
-      KeyInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use KeyInfo.newBuilder() to construct.
-    private KeyInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private KeyInfo() {
-      name_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new KeyInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_KeyInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_KeyInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.KeyInfo.class, commander.Command.KeyInfo.Builder.class);
-    }
-
-    public static final int NAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object name_;
-    /**
-     * <code>string name = 1;</code>
-     * @return The name.
-     */
-    @java.lang.Override
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        name_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string name = 1;</code>
-     * @return The bytes for name.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int ISPRESSED_FIELD_NUMBER = 2;
-    private boolean isPressed_;
-    /**
-     * <code>bool isPressed = 2;</code>
-     * @return The isPressed.
-     */
-    @java.lang.Override
-    public boolean getIsPressed() {
-      return isPressed_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
-      }
-      if (isPressed_ != false) {
-        output.writeBool(2, isPressed_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
-      }
-      if (isPressed_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(2, isPressed_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.KeyInfo)) {
-        return super.equals(obj);
-      }
-      commander.Command.KeyInfo other = (commander.Command.KeyInfo) obj;
-
-      if (!getName()
-          .equals(other.getName())) return false;
-      if (getIsPressed()
-          != other.getIsPressed()) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
-      hash = (37 * hash) + ISPRESSED_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getIsPressed());
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.KeyInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.KeyInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.KeyInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.KeyInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.KeyInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.KeyInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.KeyInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.KeyInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.KeyInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.KeyInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.KeyInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.KeyInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.KeyInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.KeyInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.KeyInfo)
-        commander.Command.KeyInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_KeyInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_KeyInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.KeyInfo.class, commander.Command.KeyInfo.Builder.class);
-      }
-
-      // Construct using commander.Command.KeyInfo.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        name_ = "";
-
-        isPressed_ = false;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_KeyInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.KeyInfo getDefaultInstanceForType() {
-        return commander.Command.KeyInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.KeyInfo build() {
-        commander.Command.KeyInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.KeyInfo buildPartial() {
-        commander.Command.KeyInfo result = new commander.Command.KeyInfo(this);
-        result.name_ = name_;
-        result.isPressed_ = isPressed_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.KeyInfo) {
-          return mergeFrom((commander.Command.KeyInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.KeyInfo other) {
-        if (other == commander.Command.KeyInfo.getDefaultInstance()) return this;
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
-          onChanged();
-        }
-        if (other.getIsPressed() != false) {
-          setIsPressed(other.getIsPressed());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                name_ = input.readStringRequireUtf8();
-
-                break;
-              } // case 10
-              case 16: {
-                isPressed_ = input.readBool();
-
-                break;
-              } // case 16
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private java.lang.Object name_ = "";
-      /**
-       * <code>string name = 1;</code>
-       * @return The name.
-       */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          name_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string name = 1;</code>
-       * @return The bytes for name.
-       */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string name = 1;</code>
-       * @param value The name to set.
-       * @return This builder for chaining.
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearName() {
-        
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 1;</code>
-       * @param value The bytes for name to set.
-       * @return This builder for chaining.
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        name_ = value;
-        onChanged();
-        return this;
-      }
-
-      private boolean isPressed_ ;
-      /**
-       * <code>bool isPressed = 2;</code>
-       * @return The isPressed.
-       */
-      @java.lang.Override
-      public boolean getIsPressed() {
-        return isPressed_;
-      }
-      /**
-       * <code>bool isPressed = 2;</code>
-       * @param value The isPressed to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIsPressed(boolean value) {
-        
-        isPressed_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bool isPressed = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIsPressed() {
-        
-        isPressed_ = false;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.KeyInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.KeyInfo)
-    private static final commander.Command.KeyInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.KeyInfo();
-    }
-
-    public static commander.Command.KeyInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<KeyInfo>
-        PARSER = new com.google.protobuf.AbstractParser<KeyInfo>() {
-      @java.lang.Override
-      public KeyInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<KeyInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<KeyInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.KeyInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface AckInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.AckInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string info = 1;</code>
-     * @return The info.
-     */
-    java.lang.String getInfo();
-    /**
-     * <code>string info = 1;</code>
-     * @return The bytes for info.
-     */
-    com.google.protobuf.ByteString
-        getInfoBytes();
-
-    /**
-     * <code>uint32 code = 2;</code>
-     * @return The code.
-     */
-    int getCode();
-  }
-  /**
-   * Protobuf type {@code commander.AckInfo}
-   */
-  public static final class AckInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.AckInfo)
-      AckInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use AckInfo.newBuilder() to construct.
-    private AckInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private AckInfo() {
-      info_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new AckInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_AckInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_AckInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.AckInfo.class, commander.Command.AckInfo.Builder.class);
-    }
-
-    public static final int INFO_FIELD_NUMBER = 1;
-    private volatile java.lang.Object info_;
-    /**
-     * <code>string info = 1;</code>
-     * @return The info.
-     */
-    @java.lang.Override
-    public java.lang.String getInfo() {
-      java.lang.Object ref = info_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        info_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string info = 1;</code>
-     * @return The bytes for info.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getInfoBytes() {
-      java.lang.Object ref = info_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        info_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int CODE_FIELD_NUMBER = 2;
-    private int code_;
-    /**
-     * <code>uint32 code = 2;</code>
-     * @return The code.
-     */
-    @java.lang.Override
-    public int getCode() {
-      return code_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, info_);
-      }
-      if (code_ != 0) {
-        output.writeUInt32(2, code_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, info_);
-      }
-      if (code_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, code_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.AckInfo)) {
-        return super.equals(obj);
-      }
-      commander.Command.AckInfo other = (commander.Command.AckInfo) obj;
-
-      if (!getInfo()
-          .equals(other.getInfo())) return false;
-      if (getCode()
-          != other.getCode()) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + INFO_FIELD_NUMBER;
-      hash = (53 * hash) + getInfo().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + getCode();
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.AckInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.AckInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.AckInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.AckInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.AckInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.AckInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.AckInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.AckInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.AckInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.AckInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.AckInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.AckInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.AckInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.AckInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.AckInfo)
-        commander.Command.AckInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_AckInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_AckInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.AckInfo.class, commander.Command.AckInfo.Builder.class);
-      }
-
-      // Construct using commander.Command.AckInfo.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        info_ = "";
-
-        code_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_AckInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.AckInfo getDefaultInstanceForType() {
-        return commander.Command.AckInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.AckInfo build() {
-        commander.Command.AckInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.AckInfo buildPartial() {
-        commander.Command.AckInfo result = new commander.Command.AckInfo(this);
-        result.info_ = info_;
-        result.code_ = code_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.AckInfo) {
-          return mergeFrom((commander.Command.AckInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.AckInfo other) {
-        if (other == commander.Command.AckInfo.getDefaultInstance()) return this;
-        if (!other.getInfo().isEmpty()) {
-          info_ = other.info_;
-          onChanged();
-        }
-        if (other.getCode() != 0) {
-          setCode(other.getCode());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                info_ = input.readStringRequireUtf8();
-
-                break;
-              } // case 10
-              case 16: {
-                code_ = input.readUInt32();
-
-                break;
-              } // case 16
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private java.lang.Object info_ = "";
-      /**
-       * <code>string info = 1;</code>
-       * @return The info.
-       */
-      public java.lang.String getInfo() {
-        java.lang.Object ref = info_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          info_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string info = 1;</code>
-       * @return The bytes for info.
-       */
-      public com.google.protobuf.ByteString
-          getInfoBytes() {
-        java.lang.Object ref = info_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          info_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string info = 1;</code>
-       * @param value The info to set.
-       * @return This builder for chaining.
-       */
-      public Builder setInfo(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        info_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string info = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearInfo() {
-        
-        info_ = getDefaultInstance().getInfo();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string info = 1;</code>
-       * @param value The bytes for info to set.
-       * @return This builder for chaining.
-       */
-      public Builder setInfoBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        info_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int code_ ;
-      /**
-       * <code>uint32 code = 2;</code>
-       * @return The code.
-       */
-      @java.lang.Override
-      public int getCode() {
-        return code_;
-      }
-      /**
-       * <code>uint32 code = 2;</code>
-       * @param value The code to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCode(int value) {
-        
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 code = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.AckInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.AckInfo)
-    private static final commander.Command.AckInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.AckInfo();
-    }
-
-    public static commander.Command.AckInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<AckInfo>
-        PARSER = new com.google.protobuf.AbstractParser<AckInfo>() {
-      @java.lang.Override
-      public AckInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<AckInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AckInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.AckInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface DirectionalInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.DirectionalInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The enum numeric value on the wire for iid.
-     */
-    int getIidValue();
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The iid.
-     */
-    commander.Command.TouchInputId getIid();
-
-    /**
-     * <code>.commander.JoystickMoveDirectional direction = 2;</code>
-     * @return The enum numeric value on the wire for direction.
-     */
-    int getDirectionValue();
-    /**
-     * <code>.commander.JoystickMoveDirectional direction = 2;</code>
-     * @return The direction.
-     */
-    commander.Command.JoystickMoveDirectional getDirection();
-
-    /**
-     * <code>double intensity = 3;</code>
-     * @return The intensity.
-     */
-    double getIntensity();
-
-    /**
-     * <code>double radAngle = 4;</code>
-     * @return The radAngle.
-     */
-    double getRadAngle();
-  }
-  /**
-   * Protobuf type {@code commander.DirectionalInfo}
-   */
-  public static final class DirectionalInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.DirectionalInfo)
-      DirectionalInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use DirectionalInfo.newBuilder() to construct.
-    private DirectionalInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private DirectionalInfo() {
-      iid_ = 0;
-      direction_ = 0;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new DirectionalInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_DirectionalInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_DirectionalInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.DirectionalInfo.class, commander.Command.DirectionalInfo.Builder.class);
-    }
-
-    public static final int IID_FIELD_NUMBER = 1;
-    private int iid_;
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The enum numeric value on the wire for iid.
-     */
-    @java.lang.Override public int getIidValue() {
-      return iid_;
-    }
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The iid.
-     */
-    @java.lang.Override public commander.Command.TouchInputId getIid() {
-      @SuppressWarnings("deprecation")
-      commander.Command.TouchInputId result = commander.Command.TouchInputId.valueOf(iid_);
-      return result == null ? commander.Command.TouchInputId.UNRECOGNIZED : result;
-    }
-
-    public static final int DIRECTION_FIELD_NUMBER = 2;
-    private int direction_;
-    /**
-     * <code>.commander.JoystickMoveDirectional direction = 2;</code>
-     * @return The enum numeric value on the wire for direction.
-     */
-    @java.lang.Override public int getDirectionValue() {
-      return direction_;
-    }
-    /**
-     * <code>.commander.JoystickMoveDirectional direction = 2;</code>
-     * @return The direction.
-     */
-    @java.lang.Override public commander.Command.JoystickMoveDirectional getDirection() {
-      @SuppressWarnings("deprecation")
-      commander.Command.JoystickMoveDirectional result = commander.Command.JoystickMoveDirectional.valueOf(direction_);
-      return result == null ? commander.Command.JoystickMoveDirectional.UNRECOGNIZED : result;
-    }
-
-    public static final int INTENSITY_FIELD_NUMBER = 3;
-    private double intensity_;
-    /**
-     * <code>double intensity = 3;</code>
-     * @return The intensity.
-     */
-    @java.lang.Override
-    public double getIntensity() {
-      return intensity_;
-    }
-
-    public static final int RADANGLE_FIELD_NUMBER = 4;
-    private double radAngle_;
-    /**
-     * <code>double radAngle = 4;</code>
-     * @return The radAngle.
-     */
-    @java.lang.Override
-    public double getRadAngle() {
-      return radAngle_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (iid_ != commander.Command.TouchInputId.joystickInput.getNumber()) {
-        output.writeEnum(1, iid_);
-      }
-      if (direction_ != commander.Command.JoystickMoveDirectional.MOVE_UP.getNumber()) {
-        output.writeEnum(2, direction_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(intensity_) != 0) {
-        output.writeDouble(3, intensity_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(radAngle_) != 0) {
-        output.writeDouble(4, radAngle_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (iid_ != commander.Command.TouchInputId.joystickInput.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, iid_);
-      }
-      if (direction_ != commander.Command.JoystickMoveDirectional.MOVE_UP.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, direction_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(intensity_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, intensity_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(radAngle_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, radAngle_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.DirectionalInfo)) {
-        return super.equals(obj);
-      }
-      commander.Command.DirectionalInfo other = (commander.Command.DirectionalInfo) obj;
-
-      if (iid_ != other.iid_) return false;
-      if (direction_ != other.direction_) return false;
-      if (java.lang.Double.doubleToLongBits(getIntensity())
-          != java.lang.Double.doubleToLongBits(
-              other.getIntensity())) return false;
-      if (java.lang.Double.doubleToLongBits(getRadAngle())
-          != java.lang.Double.doubleToLongBits(
-              other.getRadAngle())) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + IID_FIELD_NUMBER;
-      hash = (53 * hash) + iid_;
-      hash = (37 * hash) + DIRECTION_FIELD_NUMBER;
-      hash = (53 * hash) + direction_;
-      hash = (37 * hash) + INTENSITY_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getIntensity()));
-      hash = (37 * hash) + RADANGLE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getRadAngle()));
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.DirectionalInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.DirectionalInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.DirectionalInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.DirectionalInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.DirectionalInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.DirectionalInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.DirectionalInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.DirectionalInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.DirectionalInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.DirectionalInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.DirectionalInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.DirectionalInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.DirectionalInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.DirectionalInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.DirectionalInfo)
-        commander.Command.DirectionalInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_DirectionalInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_DirectionalInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.DirectionalInfo.class, commander.Command.DirectionalInfo.Builder.class);
-      }
-
-      // Construct using commander.Command.DirectionalInfo.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        iid_ = 0;
-
-        direction_ = 0;
-
-        intensity_ = 0D;
-
-        radAngle_ = 0D;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_DirectionalInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.DirectionalInfo getDefaultInstanceForType() {
-        return commander.Command.DirectionalInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.DirectionalInfo build() {
-        commander.Command.DirectionalInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.DirectionalInfo buildPartial() {
-        commander.Command.DirectionalInfo result = new commander.Command.DirectionalInfo(this);
-        result.iid_ = iid_;
-        result.direction_ = direction_;
-        result.intensity_ = intensity_;
-        result.radAngle_ = radAngle_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.DirectionalInfo) {
-          return mergeFrom((commander.Command.DirectionalInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.DirectionalInfo other) {
-        if (other == commander.Command.DirectionalInfo.getDefaultInstance()) return this;
-        if (other.iid_ != 0) {
-          setIidValue(other.getIidValue());
-        }
-        if (other.direction_ != 0) {
-          setDirectionValue(other.getDirectionValue());
-        }
-        if (other.getIntensity() != 0D) {
-          setIntensity(other.getIntensity());
-        }
-        if (other.getRadAngle() != 0D) {
-          setRadAngle(other.getRadAngle());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                iid_ = input.readEnum();
-
-                break;
-              } // case 8
-              case 16: {
-                direction_ = input.readEnum();
-
-                break;
-              } // case 16
-              case 25: {
-                intensity_ = input.readDouble();
-
-                break;
-              } // case 25
-              case 33: {
-                radAngle_ = input.readDouble();
-
-                break;
-              } // case 33
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private int iid_ = 0;
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @return The enum numeric value on the wire for iid.
-       */
-      @java.lang.Override public int getIidValue() {
-        return iid_;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @param value The enum numeric value on the wire for iid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIidValue(int value) {
-        
-        iid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @return The iid.
-       */
-      @java.lang.Override
-      public commander.Command.TouchInputId getIid() {
-        @SuppressWarnings("deprecation")
-        commander.Command.TouchInputId result = commander.Command.TouchInputId.valueOf(iid_);
-        return result == null ? commander.Command.TouchInputId.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @param value The iid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIid(commander.Command.TouchInputId value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        iid_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIid() {
-        
-        iid_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int direction_ = 0;
-      /**
-       * <code>.commander.JoystickMoveDirectional direction = 2;</code>
-       * @return The enum numeric value on the wire for direction.
-       */
-      @java.lang.Override public int getDirectionValue() {
-        return direction_;
-      }
-      /**
-       * <code>.commander.JoystickMoveDirectional direction = 2;</code>
-       * @param value The enum numeric value on the wire for direction to set.
-       * @return This builder for chaining.
-       */
-      public Builder setDirectionValue(int value) {
-        
-        direction_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.JoystickMoveDirectional direction = 2;</code>
-       * @return The direction.
-       */
-      @java.lang.Override
-      public commander.Command.JoystickMoveDirectional getDirection() {
-        @SuppressWarnings("deprecation")
-        commander.Command.JoystickMoveDirectional result = commander.Command.JoystickMoveDirectional.valueOf(direction_);
-        return result == null ? commander.Command.JoystickMoveDirectional.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.JoystickMoveDirectional direction = 2;</code>
-       * @param value The direction to set.
-       * @return This builder for chaining.
-       */
-      public Builder setDirection(commander.Command.JoystickMoveDirectional value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        direction_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.JoystickMoveDirectional direction = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearDirection() {
-        
-        direction_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private double intensity_ ;
-      /**
-       * <code>double intensity = 3;</code>
-       * @return The intensity.
-       */
-      @java.lang.Override
-      public double getIntensity() {
-        return intensity_;
-      }
-      /**
-       * <code>double intensity = 3;</code>
-       * @param value The intensity to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIntensity(double value) {
-        
-        intensity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double intensity = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIntensity() {
-        
-        intensity_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double radAngle_ ;
-      /**
-       * <code>double radAngle = 4;</code>
-       * @return The radAngle.
-       */
-      @java.lang.Override
-      public double getRadAngle() {
-        return radAngle_;
-      }
-      /**
-       * <code>double radAngle = 4;</code>
-       * @param value The radAngle to set.
-       * @return This builder for chaining.
-       */
-      public Builder setRadAngle(double value) {
-        
-        radAngle_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double radAngle = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearRadAngle() {
-        
-        radAngle_ = 0D;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.DirectionalInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.DirectionalInfo)
-    private static final commander.Command.DirectionalInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.DirectionalInfo();
-    }
-
-    public static commander.Command.DirectionalInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<DirectionalInfo>
-        PARSER = new com.google.protobuf.AbstractParser<DirectionalInfo>() {
-      @java.lang.Override
-      public DirectionalInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<DirectionalInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<DirectionalInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.DirectionalInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ButtonInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.ButtonInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The enum numeric value on the wire for iid.
-     */
-    int getIidValue();
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The iid.
-     */
-    commander.Command.TouchInputId getIid();
-
-    /**
-     * <code>.commander.ActionEvent event = 2;</code>
-     * @return The enum numeric value on the wire for event.
-     */
-    int getEventValue();
-    /**
-     * <code>.commander.ActionEvent event = 2;</code>
-     * @return The event.
-     */
-    commander.Command.ActionEvent getEvent();
-  }
-  /**
-   * Protobuf type {@code commander.ButtonInfo}
-   */
-  public static final class ButtonInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.ButtonInfo)
-      ButtonInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use ButtonInfo.newBuilder() to construct.
-    private ButtonInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ButtonInfo() {
-      iid_ = 0;
-      event_ = 0;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new ButtonInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_ButtonInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_ButtonInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.ButtonInfo.class, commander.Command.ButtonInfo.Builder.class);
-    }
-
-    public static final int IID_FIELD_NUMBER = 1;
-    private int iid_;
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The enum numeric value on the wire for iid.
-     */
-    @java.lang.Override public int getIidValue() {
-      return iid_;
-    }
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The iid.
-     */
-    @java.lang.Override public commander.Command.TouchInputId getIid() {
-      @SuppressWarnings("deprecation")
-      commander.Command.TouchInputId result = commander.Command.TouchInputId.valueOf(iid_);
-      return result == null ? commander.Command.TouchInputId.UNRECOGNIZED : result;
-    }
-
-    public static final int EVENT_FIELD_NUMBER = 2;
-    private int event_;
-    /**
-     * <code>.commander.ActionEvent event = 2;</code>
-     * @return The enum numeric value on the wire for event.
-     */
-    @java.lang.Override public int getEventValue() {
-      return event_;
-    }
-    /**
-     * <code>.commander.ActionEvent event = 2;</code>
-     * @return The event.
-     */
-    @java.lang.Override public commander.Command.ActionEvent getEvent() {
-      @SuppressWarnings("deprecation")
-      commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(event_);
-      return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (iid_ != commander.Command.TouchInputId.joystickInput.getNumber()) {
-        output.writeEnum(1, iid_);
-      }
-      if (event_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        output.writeEnum(2, event_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (iid_ != commander.Command.TouchInputId.joystickInput.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, iid_);
-      }
-      if (event_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, event_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.ButtonInfo)) {
-        return super.equals(obj);
-      }
-      commander.Command.ButtonInfo other = (commander.Command.ButtonInfo) obj;
-
-      if (iid_ != other.iid_) return false;
-      if (event_ != other.event_) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + IID_FIELD_NUMBER;
-      hash = (53 * hash) + iid_;
-      hash = (37 * hash) + EVENT_FIELD_NUMBER;
-      hash = (53 * hash) + event_;
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.ButtonInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.ButtonInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.ButtonInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.ButtonInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.ButtonInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.ButtonInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.ButtonInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.ButtonInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.ButtonInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.ButtonInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.ButtonInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.ButtonInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.ButtonInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.ButtonInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.ButtonInfo)
-        commander.Command.ButtonInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_ButtonInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_ButtonInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.ButtonInfo.class, commander.Command.ButtonInfo.Builder.class);
-      }
-
-      // Construct using commander.Command.ButtonInfo.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        iid_ = 0;
-
-        event_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_ButtonInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.ButtonInfo getDefaultInstanceForType() {
-        return commander.Command.ButtonInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.ButtonInfo build() {
-        commander.Command.ButtonInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.ButtonInfo buildPartial() {
-        commander.Command.ButtonInfo result = new commander.Command.ButtonInfo(this);
-        result.iid_ = iid_;
-        result.event_ = event_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.ButtonInfo) {
-          return mergeFrom((commander.Command.ButtonInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.ButtonInfo other) {
-        if (other == commander.Command.ButtonInfo.getDefaultInstance()) return this;
-        if (other.iid_ != 0) {
-          setIidValue(other.getIidValue());
-        }
-        if (other.event_ != 0) {
-          setEventValue(other.getEventValue());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                iid_ = input.readEnum();
-
-                break;
-              } // case 8
-              case 16: {
-                event_ = input.readEnum();
-
-                break;
-              } // case 16
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private int iid_ = 0;
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @return The enum numeric value on the wire for iid.
-       */
-      @java.lang.Override public int getIidValue() {
-        return iid_;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @param value The enum numeric value on the wire for iid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIidValue(int value) {
-        
-        iid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @return The iid.
-       */
-      @java.lang.Override
-      public commander.Command.TouchInputId getIid() {
-        @SuppressWarnings("deprecation")
-        commander.Command.TouchInputId result = commander.Command.TouchInputId.valueOf(iid_);
-        return result == null ? commander.Command.TouchInputId.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @param value The iid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIid(commander.Command.TouchInputId value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        iid_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIid() {
-        
-        iid_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int event_ = 0;
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @return The enum numeric value on the wire for event.
-       */
-      @java.lang.Override public int getEventValue() {
-        return event_;
-      }
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @param value The enum numeric value on the wire for event to set.
-       * @return This builder for chaining.
-       */
-      public Builder setEventValue(int value) {
-        
-        event_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @return The event.
-       */
-      @java.lang.Override
-      public commander.Command.ActionEvent getEvent() {
-        @SuppressWarnings("deprecation")
-        commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(event_);
-        return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @param value The event to set.
-       * @return This builder for chaining.
-       */
-      public Builder setEvent(commander.Command.ActionEvent value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        event_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearEvent() {
-        
-        event_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.ButtonInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.ButtonInfo)
-    private static final commander.Command.ButtonInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.ButtonInfo();
-    }
-
-    public static commander.Command.ButtonInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ButtonInfo>
-        PARSER = new com.google.protobuf.AbstractParser<ButtonInfo>() {
-      @java.lang.Override
-      public ButtonInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<ButtonInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ButtonInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.ButtonInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface TabInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.TabInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The enum numeric value on the wire for iid.
-     */
-    int getIidValue();
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The iid.
-     */
-    commander.Command.TouchInputId getIid();
-
-    /**
-     * <code>.commander.ActionEvent event = 2;</code>
-     * @return The enum numeric value on the wire for event.
-     */
-    int getEventValue();
-    /**
-     * <code>.commander.ActionEvent event = 2;</code>
-     * @return The event.
-     */
-    commander.Command.ActionEvent getEvent();
-
-    /**
-     * <code>double x = 3;</code>
-     * @return The x.
-     */
-    double getX();
-
-    /**
-     * <code>double y = 4;</code>
-     * @return The y.
-     */
-    double getY();
-  }
-  /**
-   * Protobuf type {@code commander.TabInfo}
-   */
-  public static final class TabInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.TabInfo)
-      TabInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use TabInfo.newBuilder() to construct.
-    private TabInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private TabInfo() {
-      iid_ = 0;
-      event_ = 0;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new TabInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_TabInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_TabInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.TabInfo.class, commander.Command.TabInfo.Builder.class);
-    }
-
-    public static final int IID_FIELD_NUMBER = 1;
-    private int iid_;
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The enum numeric value on the wire for iid.
-     */
-    @java.lang.Override public int getIidValue() {
-      return iid_;
-    }
-    /**
-     * <code>.commander.TouchInputId iid = 1;</code>
-     * @return The iid.
-     */
-    @java.lang.Override public commander.Command.TouchInputId getIid() {
-      @SuppressWarnings("deprecation")
-      commander.Command.TouchInputId result = commander.Command.TouchInputId.valueOf(iid_);
-      return result == null ? commander.Command.TouchInputId.UNRECOGNIZED : result;
-    }
-
-    public static final int EVENT_FIELD_NUMBER = 2;
-    private int event_;
-    /**
-     * <code>.commander.ActionEvent event = 2;</code>
-     * @return The enum numeric value on the wire for event.
-     */
-    @java.lang.Override public int getEventValue() {
-      return event_;
-    }
-    /**
-     * <code>.commander.ActionEvent event = 2;</code>
-     * @return The event.
-     */
-    @java.lang.Override public commander.Command.ActionEvent getEvent() {
-      @SuppressWarnings("deprecation")
-      commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(event_);
-      return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-    }
-
-    public static final int X_FIELD_NUMBER = 3;
-    private double x_;
-    /**
-     * <code>double x = 3;</code>
-     * @return The x.
-     */
-    @java.lang.Override
-    public double getX() {
-      return x_;
-    }
-
-    public static final int Y_FIELD_NUMBER = 4;
-    private double y_;
-    /**
-     * <code>double y = 4;</code>
-     * @return The y.
-     */
-    @java.lang.Override
-    public double getY() {
-      return y_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (iid_ != commander.Command.TouchInputId.joystickInput.getNumber()) {
-        output.writeEnum(1, iid_);
-      }
-      if (event_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        output.writeEnum(2, event_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(x_) != 0) {
-        output.writeDouble(3, x_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(y_) != 0) {
-        output.writeDouble(4, y_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (iid_ != commander.Command.TouchInputId.joystickInput.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, iid_);
-      }
-      if (event_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, event_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(x_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, x_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(y_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, y_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.TabInfo)) {
-        return super.equals(obj);
-      }
-      commander.Command.TabInfo other = (commander.Command.TabInfo) obj;
-
-      if (iid_ != other.iid_) return false;
-      if (event_ != other.event_) return false;
-      if (java.lang.Double.doubleToLongBits(getX())
-          != java.lang.Double.doubleToLongBits(
-              other.getX())) return false;
-      if (java.lang.Double.doubleToLongBits(getY())
-          != java.lang.Double.doubleToLongBits(
-              other.getY())) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + IID_FIELD_NUMBER;
-      hash = (53 * hash) + iid_;
-      hash = (37 * hash) + EVENT_FIELD_NUMBER;
-      hash = (53 * hash) + event_;
-      hash = (37 * hash) + X_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getX()));
-      hash = (37 * hash) + Y_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getY()));
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.TabInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.TabInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.TabInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.TabInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.TabInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.TabInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.TabInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.TabInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.TabInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.TabInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.TabInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.TabInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.TabInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.TabInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.TabInfo)
-        commander.Command.TabInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_TabInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_TabInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.TabInfo.class, commander.Command.TabInfo.Builder.class);
-      }
-
-      // Construct using commander.Command.TabInfo.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        iid_ = 0;
-
-        event_ = 0;
-
-        x_ = 0D;
-
-        y_ = 0D;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_TabInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.TabInfo getDefaultInstanceForType() {
-        return commander.Command.TabInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.TabInfo build() {
-        commander.Command.TabInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.TabInfo buildPartial() {
-        commander.Command.TabInfo result = new commander.Command.TabInfo(this);
-        result.iid_ = iid_;
-        result.event_ = event_;
-        result.x_ = x_;
-        result.y_ = y_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.TabInfo) {
-          return mergeFrom((commander.Command.TabInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.TabInfo other) {
-        if (other == commander.Command.TabInfo.getDefaultInstance()) return this;
-        if (other.iid_ != 0) {
-          setIidValue(other.getIidValue());
-        }
-        if (other.event_ != 0) {
-          setEventValue(other.getEventValue());
-        }
-        if (other.getX() != 0D) {
-          setX(other.getX());
-        }
-        if (other.getY() != 0D) {
-          setY(other.getY());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                iid_ = input.readEnum();
-
-                break;
-              } // case 8
-              case 16: {
-                event_ = input.readEnum();
-
-                break;
-              } // case 16
-              case 25: {
-                x_ = input.readDouble();
-
-                break;
-              } // case 25
-              case 33: {
-                y_ = input.readDouble();
-
-                break;
-              } // case 33
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private int iid_ = 0;
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @return The enum numeric value on the wire for iid.
-       */
-      @java.lang.Override public int getIidValue() {
-        return iid_;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @param value The enum numeric value on the wire for iid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIidValue(int value) {
-        
-        iid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @return The iid.
-       */
-      @java.lang.Override
-      public commander.Command.TouchInputId getIid() {
-        @SuppressWarnings("deprecation")
-        commander.Command.TouchInputId result = commander.Command.TouchInputId.valueOf(iid_);
-        return result == null ? commander.Command.TouchInputId.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @param value The iid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIid(commander.Command.TouchInputId value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        iid_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.TouchInputId iid = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIid() {
-        
-        iid_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int event_ = 0;
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @return The enum numeric value on the wire for event.
-       */
-      @java.lang.Override public int getEventValue() {
-        return event_;
-      }
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @param value The enum numeric value on the wire for event to set.
-       * @return This builder for chaining.
-       */
-      public Builder setEventValue(int value) {
-        
-        event_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @return The event.
-       */
-      @java.lang.Override
-      public commander.Command.ActionEvent getEvent() {
-        @SuppressWarnings("deprecation")
-        commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(event_);
-        return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @param value The event to set.
-       * @return This builder for chaining.
-       */
-      public Builder setEvent(commander.Command.ActionEvent value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        event_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent event = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearEvent() {
-        
-        event_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private double x_ ;
-      /**
-       * <code>double x = 3;</code>
-       * @return The x.
-       */
-      @java.lang.Override
-      public double getX() {
-        return x_;
-      }
-      /**
-       * <code>double x = 3;</code>
-       * @param value The x to set.
-       * @return This builder for chaining.
-       */
-      public Builder setX(double value) {
-        
-        x_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double x = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearX() {
-        
-        x_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double y_ ;
-      /**
-       * <code>double y = 4;</code>
-       * @return The y.
-       */
-      @java.lang.Override
-      public double getY() {
-        return y_;
-      }
-      /**
-       * <code>double y = 4;</code>
-       * @param value The y to set.
-       * @return This builder for chaining.
-       */
-      public Builder setY(double value) {
-        
-        y_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double y = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearY() {
-        
-        y_ = 0D;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.TabInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.TabInfo)
-    private static final commander.Command.TabInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.TabInfo();
-    }
-
-    public static commander.Command.TabInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<TabInfo>
-        PARSER = new com.google.protobuf.AbstractParser<TabInfo>() {
-      @java.lang.Override
-      public TabInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<TabInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<TabInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.TabInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ObjectPositionOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.ObjectPosition)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>uint32 id = 1;</code>
-     * @return The id.
-     */
-    int getId();
-
-    /**
-     * <code>double x = 2;</code>
-     * @return The x.
-     */
-    double getX();
-
-    /**
-     * <code>double y = 3;</code>
-     * @return The y.
-     */
-    double getY();
-  }
-  /**
-   * Protobuf type {@code commander.ObjectPosition}
-   */
-  public static final class ObjectPosition extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.ObjectPosition)
-      ObjectPositionOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use ObjectPosition.newBuilder() to construct.
-    private ObjectPosition(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ObjectPosition() {
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new ObjectPosition();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_ObjectPosition_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_ObjectPosition_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.ObjectPosition.class, commander.Command.ObjectPosition.Builder.class);
-    }
-
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    /**
-     * <code>uint32 id = 1;</code>
-     * @return The id.
-     */
-    @java.lang.Override
-    public int getId() {
-      return id_;
-    }
-
-    public static final int X_FIELD_NUMBER = 2;
-    private double x_;
-    /**
-     * <code>double x = 2;</code>
-     * @return The x.
-     */
-    @java.lang.Override
-    public double getX() {
-      return x_;
-    }
-
-    public static final int Y_FIELD_NUMBER = 3;
-    private double y_;
-    /**
-     * <code>double y = 3;</code>
-     * @return The y.
-     */
-    @java.lang.Override
-    public double getY() {
-      return y_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (id_ != 0) {
-        output.writeUInt32(1, id_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(x_) != 0) {
-        output.writeDouble(2, x_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(y_) != 0) {
-        output.writeDouble(3, y_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (id_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, id_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(x_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, x_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(y_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, y_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.ObjectPosition)) {
-        return super.equals(obj);
-      }
-      commander.Command.ObjectPosition other = (commander.Command.ObjectPosition) obj;
-
-      if (getId()
-          != other.getId()) return false;
-      if (java.lang.Double.doubleToLongBits(getX())
-          != java.lang.Double.doubleToLongBits(
-              other.getX())) return false;
-      if (java.lang.Double.doubleToLongBits(getY())
-          != java.lang.Double.doubleToLongBits(
-              other.getY())) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId();
-      hash = (37 * hash) + X_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getX()));
-      hash = (37 * hash) + Y_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getY()));
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.ObjectPosition parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.ObjectPosition parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.ObjectPosition parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.ObjectPosition parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.ObjectPosition parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.ObjectPosition parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.ObjectPosition parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.ObjectPosition parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.ObjectPosition parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.ObjectPosition parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.ObjectPosition parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.ObjectPosition parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.ObjectPosition prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.ObjectPosition}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.ObjectPosition)
-        commander.Command.ObjectPositionOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_ObjectPosition_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_ObjectPosition_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.ObjectPosition.class, commander.Command.ObjectPosition.Builder.class);
-      }
-
-      // Construct using commander.Command.ObjectPosition.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        id_ = 0;
-
-        x_ = 0D;
-
-        y_ = 0D;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_ObjectPosition_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.ObjectPosition getDefaultInstanceForType() {
-        return commander.Command.ObjectPosition.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.ObjectPosition build() {
-        commander.Command.ObjectPosition result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.ObjectPosition buildPartial() {
-        commander.Command.ObjectPosition result = new commander.Command.ObjectPosition(this);
-        result.id_ = id_;
-        result.x_ = x_;
-        result.y_ = y_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.ObjectPosition) {
-          return mergeFrom((commander.Command.ObjectPosition)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.ObjectPosition other) {
-        if (other == commander.Command.ObjectPosition.getDefaultInstance()) return this;
-        if (other.getId() != 0) {
-          setId(other.getId());
-        }
-        if (other.getX() != 0D) {
-          setX(other.getX());
-        }
-        if (other.getY() != 0D) {
-          setY(other.getY());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                id_ = input.readUInt32();
-
-                break;
-              } // case 8
-              case 17: {
-                x_ = input.readDouble();
-
-                break;
-              } // case 17
-              case 25: {
-                y_ = input.readDouble();
-
-                break;
-              } // case 25
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private int id_ ;
-      /**
-       * <code>uint32 id = 1;</code>
-       * @return The id.
-       */
-      @java.lang.Override
-      public int getId() {
-        return id_;
-      }
-      /**
-       * <code>uint32 id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setId(int value) {
-        
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private double x_ ;
-      /**
-       * <code>double x = 2;</code>
-       * @return The x.
-       */
-      @java.lang.Override
-      public double getX() {
-        return x_;
-      }
-      /**
-       * <code>double x = 2;</code>
-       * @param value The x to set.
-       * @return This builder for chaining.
-       */
-      public Builder setX(double value) {
-        
-        x_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double x = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearX() {
-        
-        x_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double y_ ;
-      /**
-       * <code>double y = 3;</code>
-       * @return The y.
-       */
-      @java.lang.Override
-      public double getY() {
-        return y_;
-      }
-      /**
-       * <code>double y = 3;</code>
-       * @param value The y to set.
-       * @return This builder for chaining.
-       */
-      public Builder setY(double value) {
-        
-        y_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double y = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearY() {
-        
-        y_ = 0D;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.ObjectPosition)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.ObjectPosition)
-    private static final commander.Command.ObjectPosition DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.ObjectPosition();
-    }
-
-    public static commander.Command.ObjectPosition getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ObjectPosition>
-        PARSER = new com.google.protobuf.AbstractParser<ObjectPosition>() {
-      @java.lang.Override
-      public ObjectPosition parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<ObjectPosition> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ObjectPosition> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.ObjectPosition getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface QueryResultOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.QueryResult)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>uint32 qid = 1;</code>
-     * @return The qid.
-     */
-    int getQid();
-
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    java.util.List<commander.Command.ObjectPosition> 
-        getObjsList();
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    commander.Command.ObjectPosition getObjs(int index);
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    int getObjsCount();
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    java.util.List<? extends commander.Command.ObjectPositionOrBuilder> 
-        getObjsOrBuilderList();
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    commander.Command.ObjectPositionOrBuilder getObjsOrBuilder(
-        int index);
-  }
-  /**
-   * Protobuf type {@code commander.QueryResult}
-   */
-  public static final class QueryResult extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.QueryResult)
-      QueryResultOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use QueryResult.newBuilder() to construct.
-    private QueryResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private QueryResult() {
-      objs_ = java.util.Collections.emptyList();
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new QueryResult();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_QueryResult_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_QueryResult_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.QueryResult.class, commander.Command.QueryResult.Builder.class);
-    }
-
-    public static final int QID_FIELD_NUMBER = 1;
-    private int qid_;
-    /**
-     * <code>uint32 qid = 1;</code>
-     * @return The qid.
-     */
-    @java.lang.Override
-    public int getQid() {
-      return qid_;
-    }
-
-    public static final int OBJS_FIELD_NUMBER = 2;
-    private java.util.List<commander.Command.ObjectPosition> objs_;
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    @java.lang.Override
-    public java.util.List<commander.Command.ObjectPosition> getObjsList() {
-      return objs_;
-    }
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    @java.lang.Override
-    public java.util.List<? extends commander.Command.ObjectPositionOrBuilder> 
-        getObjsOrBuilderList() {
-      return objs_;
-    }
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    @java.lang.Override
-    public int getObjsCount() {
-      return objs_.size();
-    }
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    @java.lang.Override
-    public commander.Command.ObjectPosition getObjs(int index) {
-      return objs_.get(index);
-    }
-    /**
-     * <code>repeated .commander.ObjectPosition objs = 2;</code>
-     */
-    @java.lang.Override
-    public commander.Command.ObjectPositionOrBuilder getObjsOrBuilder(
-        int index) {
-      return objs_.get(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (qid_ != 0) {
-        output.writeUInt32(1, qid_);
-      }
-      for (int i = 0; i < objs_.size(); i++) {
-        output.writeMessage(2, objs_.get(i));
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (qid_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, qid_);
-      }
-      for (int i = 0; i < objs_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, objs_.get(i));
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.QueryResult)) {
-        return super.equals(obj);
-      }
-      commander.Command.QueryResult other = (commander.Command.QueryResult) obj;
-
-      if (getQid()
-          != other.getQid()) return false;
-      if (!getObjsList()
-          .equals(other.getObjsList())) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + QID_FIELD_NUMBER;
-      hash = (53 * hash) + getQid();
-      if (getObjsCount() > 0) {
-        hash = (37 * hash) + OBJS_FIELD_NUMBER;
-        hash = (53 * hash) + getObjsList().hashCode();
-      }
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.QueryResult parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.QueryResult parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.QueryResult parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.QueryResult parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.QueryResult parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.QueryResult parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.QueryResult parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.QueryResult parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.QueryResult parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.QueryResult parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.QueryResult parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.QueryResult parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.QueryResult prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.QueryResult}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.QueryResult)
-        commander.Command.QueryResultOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_QueryResult_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_QueryResult_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.QueryResult.class, commander.Command.QueryResult.Builder.class);
-      }
-
-      // Construct using commander.Command.QueryResult.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        qid_ = 0;
-
-        if (objsBuilder_ == null) {
-          objs_ = java.util.Collections.emptyList();
-        } else {
-          objs_ = null;
-          objsBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_QueryResult_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.QueryResult getDefaultInstanceForType() {
-        return commander.Command.QueryResult.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.QueryResult build() {
-        commander.Command.QueryResult result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.QueryResult buildPartial() {
-        commander.Command.QueryResult result = new commander.Command.QueryResult(this);
-        int from_bitField0_ = bitField0_;
-        result.qid_ = qid_;
-        if (objsBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
-            objs_ = java.util.Collections.unmodifiableList(objs_);
-            bitField0_ = (bitField0_ & ~0x00000001);
-          }
-          result.objs_ = objs_;
-        } else {
-          result.objs_ = objsBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.QueryResult) {
-          return mergeFrom((commander.Command.QueryResult)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.QueryResult other) {
-        if (other == commander.Command.QueryResult.getDefaultInstance()) return this;
-        if (other.getQid() != 0) {
-          setQid(other.getQid());
-        }
-        if (objsBuilder_ == null) {
-          if (!other.objs_.isEmpty()) {
-            if (objs_.isEmpty()) {
-              objs_ = other.objs_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-            } else {
-              ensureObjsIsMutable();
-              objs_.addAll(other.objs_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.objs_.isEmpty()) {
-            if (objsBuilder_.isEmpty()) {
-              objsBuilder_.dispose();
-              objsBuilder_ = null;
-              objs_ = other.objs_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-              objsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getObjsFieldBuilder() : null;
-            } else {
-              objsBuilder_.addAllMessages(other.objs_);
-            }
-          }
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                qid_ = input.readUInt32();
-
-                break;
-              } // case 8
-              case 18: {
-                commander.Command.ObjectPosition m =
-                    input.readMessage(
-                        commander.Command.ObjectPosition.parser(),
-                        extensionRegistry);
-                if (objsBuilder_ == null) {
-                  ensureObjsIsMutable();
-                  objs_.add(m);
-                } else {
-                  objsBuilder_.addMessage(m);
-                }
-                break;
-              } // case 18
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-      private int bitField0_;
-
-      private int qid_ ;
-      /**
-       * <code>uint32 qid = 1;</code>
-       * @return The qid.
-       */
-      @java.lang.Override
-      public int getQid() {
-        return qid_;
-      }
-      /**
-       * <code>uint32 qid = 1;</code>
-       * @param value The qid to set.
-       * @return This builder for chaining.
-       */
-      public Builder setQid(int value) {
-        
-        qid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 qid = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearQid() {
-        
-        qid_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<commander.Command.ObjectPosition> objs_ =
-        java.util.Collections.emptyList();
-      private void ensureObjsIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          objs_ = new java.util.ArrayList<commander.Command.ObjectPosition>(objs_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          commander.Command.ObjectPosition, commander.Command.ObjectPosition.Builder, commander.Command.ObjectPositionOrBuilder> objsBuilder_;
-
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public java.util.List<commander.Command.ObjectPosition> getObjsList() {
-        if (objsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(objs_);
-        } else {
-          return objsBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public int getObjsCount() {
-        if (objsBuilder_ == null) {
-          return objs_.size();
-        } else {
-          return objsBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public commander.Command.ObjectPosition getObjs(int index) {
-        if (objsBuilder_ == null) {
-          return objs_.get(index);
-        } else {
-          return objsBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public Builder setObjs(
-          int index, commander.Command.ObjectPosition value) {
-        if (objsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureObjsIsMutable();
-          objs_.set(index, value);
-          onChanged();
-        } else {
-          objsBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public Builder setObjs(
-          int index, commander.Command.ObjectPosition.Builder builderForValue) {
-        if (objsBuilder_ == null) {
-          ensureObjsIsMutable();
-          objs_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          objsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public Builder addObjs(commander.Command.ObjectPosition value) {
-        if (objsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureObjsIsMutable();
-          objs_.add(value);
-          onChanged();
-        } else {
-          objsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public Builder addObjs(
-          int index, commander.Command.ObjectPosition value) {
-        if (objsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureObjsIsMutable();
-          objs_.add(index, value);
-          onChanged();
-        } else {
-          objsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public Builder addObjs(
-          commander.Command.ObjectPosition.Builder builderForValue) {
-        if (objsBuilder_ == null) {
-          ensureObjsIsMutable();
-          objs_.add(builderForValue.build());
-          onChanged();
-        } else {
-          objsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public Builder addObjs(
-          int index, commander.Command.ObjectPosition.Builder builderForValue) {
-        if (objsBuilder_ == null) {
-          ensureObjsIsMutable();
-          objs_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          objsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public Builder addAllObjs(
-          java.lang.Iterable<? extends commander.Command.ObjectPosition> values) {
-        if (objsBuilder_ == null) {
-          ensureObjsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, objs_);
-          onChanged();
-        } else {
-          objsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public Builder clearObjs() {
-        if (objsBuilder_ == null) {
-          objs_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-          onChanged();
-        } else {
-          objsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public Builder removeObjs(int index) {
-        if (objsBuilder_ == null) {
-          ensureObjsIsMutable();
-          objs_.remove(index);
-          onChanged();
-        } else {
-          objsBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public commander.Command.ObjectPosition.Builder getObjsBuilder(
-          int index) {
-        return getObjsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public commander.Command.ObjectPositionOrBuilder getObjsOrBuilder(
-          int index) {
-        if (objsBuilder_ == null) {
-          return objs_.get(index);  } else {
-          return objsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public java.util.List<? extends commander.Command.ObjectPositionOrBuilder> 
-           getObjsOrBuilderList() {
-        if (objsBuilder_ != null) {
-          return objsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(objs_);
-        }
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public commander.Command.ObjectPosition.Builder addObjsBuilder() {
-        return getObjsFieldBuilder().addBuilder(
-            commander.Command.ObjectPosition.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public commander.Command.ObjectPosition.Builder addObjsBuilder(
-          int index) {
-        return getObjsFieldBuilder().addBuilder(
-            index, commander.Command.ObjectPosition.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .commander.ObjectPosition objs = 2;</code>
-       */
-      public java.util.List<commander.Command.ObjectPosition.Builder> 
-           getObjsBuilderList() {
-        return getObjsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          commander.Command.ObjectPosition, commander.Command.ObjectPosition.Builder, commander.Command.ObjectPositionOrBuilder> 
-          getObjsFieldBuilder() {
-        if (objsBuilder_ == null) {
-          objsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              commander.Command.ObjectPosition, commander.Command.ObjectPosition.Builder, commander.Command.ObjectPositionOrBuilder>(
-                  objs_,
-                  ((bitField0_ & 0x00000001) != 0),
-                  getParentForChildren(),
-                  isClean());
-          objs_ = null;
-        }
-        return objsBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.QueryResult)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.QueryResult)
-    private static final commander.Command.QueryResult DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.QueryResult();
-    }
-
-    public static commander.Command.QueryResult getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<QueryResult>
-        PARSER = new com.google.protobuf.AbstractParser<QueryResult>() {
-      @java.lang.Override
-      public QueryResult parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<QueryResult> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<QueryResult> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.QueryResult getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface CmdInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.CmdInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.commander.Head head = 1;</code>
-     * @return The enum numeric value on the wire for head.
-     */
-    int getHeadValue();
-    /**
-     * <code>.commander.Head head = 1;</code>
-     * @return The head.
-     */
-    commander.Command.Head getHead();
-
-    /**
-     * <code>.commander.ContactInfo contact = 2;</code>
-     * @return Whether the contact field is set.
-     */
-    boolean hasContact();
-    /**
-     * <code>.commander.ContactInfo contact = 2;</code>
-     * @return The contact.
-     */
-    commander.Command.ContactInfo getContact();
-    /**
-     * <code>.commander.ContactInfo contact = 2;</code>
-     */
-    commander.Command.ContactInfoOrBuilder getContactOrBuilder();
-
-    /**
-     * <code>.commander.EventInfo event = 3;</code>
-     * @return Whether the event field is set.
-     */
-    boolean hasEvent();
-    /**
-     * <code>.commander.EventInfo event = 3;</code>
-     * @return The event.
-     */
-    commander.Command.EventInfo getEvent();
-    /**
-     * <code>.commander.EventInfo event = 3;</code>
-     */
-    commander.Command.EventInfoOrBuilder getEventOrBuilder();
-
-    /**
-     * <code>.commander.KeyInfo key = 4;</code>
-     * @return Whether the key field is set.
-     */
-    boolean hasKey();
-    /**
-     * <code>.commander.KeyInfo key = 4;</code>
-     * @return The key.
-     */
-    commander.Command.KeyInfo getKey();
-    /**
-     * <code>.commander.KeyInfo key = 4;</code>
-     */
-    commander.Command.KeyInfoOrBuilder getKeyOrBuilder();
-
-    /**
-     * <code>.commander.AckInfo ack = 5;</code>
-     * @return Whether the ack field is set.
-     */
-    boolean hasAck();
-    /**
-     * <code>.commander.AckInfo ack = 5;</code>
-     * @return The ack.
-     */
-    commander.Command.AckInfo getAck();
-    /**
-     * <code>.commander.AckInfo ack = 5;</code>
-     */
-    commander.Command.AckInfoOrBuilder getAckOrBuilder();
-
-    /**
-     * <code>.commander.DirectionalInfo directional = 6;</code>
-     * @return Whether the directional field is set.
-     */
-    boolean hasDirectional();
-    /**
-     * <code>.commander.DirectionalInfo directional = 6;</code>
-     * @return The directional.
-     */
-    commander.Command.DirectionalInfo getDirectional();
-    /**
-     * <code>.commander.DirectionalInfo directional = 6;</code>
-     */
-    commander.Command.DirectionalInfoOrBuilder getDirectionalOrBuilder();
-
-    /**
-     * <code>.commander.ButtonInfo button = 7;</code>
-     * @return Whether the button field is set.
-     */
-    boolean hasButton();
-    /**
-     * <code>.commander.ButtonInfo button = 7;</code>
-     * @return The button.
-     */
-    commander.Command.ButtonInfo getButton();
-    /**
-     * <code>.commander.ButtonInfo button = 7;</code>
-     */
-    commander.Command.ButtonInfoOrBuilder getButtonOrBuilder();
-
-    /**
-     * <code>.commander.TabInfo tab = 8;</code>
-     * @return Whether the tab field is set.
-     */
-    boolean hasTab();
-    /**
-     * <code>.commander.TabInfo tab = 8;</code>
-     * @return The tab.
-     */
-    commander.Command.TabInfo getTab();
-    /**
-     * <code>.commander.TabInfo tab = 8;</code>
-     */
-    commander.Command.TabInfoOrBuilder getTabOrBuilder();
-
-    /**
-     * <code>.commander.QueryResult result = 9;</code>
-     * @return Whether the result field is set.
-     */
-    boolean hasResult();
-    /**
-     * <code>.commander.QueryResult result = 9;</code>
-     * @return The result.
-     */
-    commander.Command.QueryResult getResult();
-    /**
-     * <code>.commander.QueryResult result = 9;</code>
-     */
-    commander.Command.QueryResultOrBuilder getResultOrBuilder();
-
-    /**
-     * <code>.commander.Cmd cmd = 10;</code>
-     * @return Whether the cmd field is set.
-     */
-    boolean hasCmd();
-    /**
-     * <code>.commander.Cmd cmd = 10;</code>
-     * @return The cmd.
-     */
-    commander.Command.Cmd getCmd();
-    /**
-     * <code>.commander.Cmd cmd = 10;</code>
-     */
-    commander.Command.CmdOrBuilder getCmdOrBuilder();
-  }
-  /**
-   * Protobuf type {@code commander.CmdInfo}
-   */
-  public static final class CmdInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.CmdInfo)
-      CmdInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use CmdInfo.newBuilder() to construct.
-    private CmdInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private CmdInfo() {
-      head_ = 0;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new CmdInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_CmdInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_CmdInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.CmdInfo.class, commander.Command.CmdInfo.Builder.class);
-    }
-
-    public static final int HEAD_FIELD_NUMBER = 1;
-    private int head_;
-    /**
-     * <code>.commander.Head head = 1;</code>
-     * @return The enum numeric value on the wire for head.
-     */
-    @java.lang.Override public int getHeadValue() {
-      return head_;
-    }
-    /**
-     * <code>.commander.Head head = 1;</code>
-     * @return The head.
-     */
-    @java.lang.Override public commander.Command.Head getHead() {
-      @SuppressWarnings("deprecation")
-      commander.Command.Head result = commander.Command.Head.valueOf(head_);
-      return result == null ? commander.Command.Head.UNRECOGNIZED : result;
-    }
-
-    public static final int CONTACT_FIELD_NUMBER = 2;
-    private commander.Command.ContactInfo contact_;
-    /**
-     * <code>.commander.ContactInfo contact = 2;</code>
-     * @return Whether the contact field is set.
-     */
-    @java.lang.Override
-    public boolean hasContact() {
-      return contact_ != null;
-    }
-    /**
-     * <code>.commander.ContactInfo contact = 2;</code>
-     * @return The contact.
-     */
-    @java.lang.Override
-    public commander.Command.ContactInfo getContact() {
-      return contact_ == null ? commander.Command.ContactInfo.getDefaultInstance() : contact_;
-    }
-    /**
-     * <code>.commander.ContactInfo contact = 2;</code>
-     */
-    @java.lang.Override
-    public commander.Command.ContactInfoOrBuilder getContactOrBuilder() {
-      return getContact();
-    }
-
-    public static final int EVENT_FIELD_NUMBER = 3;
-    private commander.Command.EventInfo event_;
-    /**
-     * <code>.commander.EventInfo event = 3;</code>
-     * @return Whether the event field is set.
-     */
-    @java.lang.Override
-    public boolean hasEvent() {
-      return event_ != null;
-    }
-    /**
-     * <code>.commander.EventInfo event = 3;</code>
-     * @return The event.
-     */
-    @java.lang.Override
-    public commander.Command.EventInfo getEvent() {
-      return event_ == null ? commander.Command.EventInfo.getDefaultInstance() : event_;
-    }
-    /**
-     * <code>.commander.EventInfo event = 3;</code>
-     */
-    @java.lang.Override
-    public commander.Command.EventInfoOrBuilder getEventOrBuilder() {
-      return getEvent();
-    }
-
-    public static final int KEY_FIELD_NUMBER = 4;
-    private commander.Command.KeyInfo key_;
-    /**
-     * <code>.commander.KeyInfo key = 4;</code>
-     * @return Whether the key field is set.
-     */
-    @java.lang.Override
-    public boolean hasKey() {
-      return key_ != null;
-    }
-    /**
-     * <code>.commander.KeyInfo key = 4;</code>
-     * @return The key.
-     */
-    @java.lang.Override
-    public commander.Command.KeyInfo getKey() {
-      return key_ == null ? commander.Command.KeyInfo.getDefaultInstance() : key_;
-    }
-    /**
-     * <code>.commander.KeyInfo key = 4;</code>
-     */
-    @java.lang.Override
-    public commander.Command.KeyInfoOrBuilder getKeyOrBuilder() {
-      return getKey();
-    }
-
-    public static final int ACK_FIELD_NUMBER = 5;
-    private commander.Command.AckInfo ack_;
-    /**
-     * <code>.commander.AckInfo ack = 5;</code>
-     * @return Whether the ack field is set.
-     */
-    @java.lang.Override
-    public boolean hasAck() {
-      return ack_ != null;
-    }
-    /**
-     * <code>.commander.AckInfo ack = 5;</code>
-     * @return The ack.
-     */
-    @java.lang.Override
-    public commander.Command.AckInfo getAck() {
-      return ack_ == null ? commander.Command.AckInfo.getDefaultInstance() : ack_;
-    }
-    /**
-     * <code>.commander.AckInfo ack = 5;</code>
-     */
-    @java.lang.Override
-    public commander.Command.AckInfoOrBuilder getAckOrBuilder() {
-      return getAck();
-    }
-
-    public static final int DIRECTIONAL_FIELD_NUMBER = 6;
-    private commander.Command.DirectionalInfo directional_;
-    /**
-     * <code>.commander.DirectionalInfo directional = 6;</code>
-     * @return Whether the directional field is set.
-     */
-    @java.lang.Override
-    public boolean hasDirectional() {
-      return directional_ != null;
-    }
-    /**
-     * <code>.commander.DirectionalInfo directional = 6;</code>
-     * @return The directional.
-     */
-    @java.lang.Override
-    public commander.Command.DirectionalInfo getDirectional() {
-      return directional_ == null ? commander.Command.DirectionalInfo.getDefaultInstance() : directional_;
-    }
-    /**
-     * <code>.commander.DirectionalInfo directional = 6;</code>
-     */
-    @java.lang.Override
-    public commander.Command.DirectionalInfoOrBuilder getDirectionalOrBuilder() {
-      return getDirectional();
-    }
-
-    public static final int BUTTON_FIELD_NUMBER = 7;
-    private commander.Command.ButtonInfo button_;
-    /**
-     * <code>.commander.ButtonInfo button = 7;</code>
-     * @return Whether the button field is set.
-     */
-    @java.lang.Override
-    public boolean hasButton() {
-      return button_ != null;
-    }
-    /**
-     * <code>.commander.ButtonInfo button = 7;</code>
-     * @return The button.
-     */
-    @java.lang.Override
-    public commander.Command.ButtonInfo getButton() {
-      return button_ == null ? commander.Command.ButtonInfo.getDefaultInstance() : button_;
-    }
-    /**
-     * <code>.commander.ButtonInfo button = 7;</code>
-     */
-    @java.lang.Override
-    public commander.Command.ButtonInfoOrBuilder getButtonOrBuilder() {
-      return getButton();
-    }
-
-    public static final int TAB_FIELD_NUMBER = 8;
-    private commander.Command.TabInfo tab_;
-    /**
-     * <code>.commander.TabInfo tab = 8;</code>
-     * @return Whether the tab field is set.
-     */
-    @java.lang.Override
-    public boolean hasTab() {
-      return tab_ != null;
-    }
-    /**
-     * <code>.commander.TabInfo tab = 8;</code>
-     * @return The tab.
-     */
-    @java.lang.Override
-    public commander.Command.TabInfo getTab() {
-      return tab_ == null ? commander.Command.TabInfo.getDefaultInstance() : tab_;
-    }
-    /**
-     * <code>.commander.TabInfo tab = 8;</code>
-     */
-    @java.lang.Override
-    public commander.Command.TabInfoOrBuilder getTabOrBuilder() {
-      return getTab();
-    }
-
-    public static final int RESULT_FIELD_NUMBER = 9;
-    private commander.Command.QueryResult result_;
-    /**
-     * <code>.commander.QueryResult result = 9;</code>
-     * @return Whether the result field is set.
-     */
-    @java.lang.Override
-    public boolean hasResult() {
-      return result_ != null;
-    }
-    /**
-     * <code>.commander.QueryResult result = 9;</code>
-     * @return The result.
-     */
-    @java.lang.Override
-    public commander.Command.QueryResult getResult() {
-      return result_ == null ? commander.Command.QueryResult.getDefaultInstance() : result_;
-    }
-    /**
-     * <code>.commander.QueryResult result = 9;</code>
-     */
-    @java.lang.Override
-    public commander.Command.QueryResultOrBuilder getResultOrBuilder() {
-      return getResult();
-    }
-
-    public static final int CMD_FIELD_NUMBER = 10;
-    private commander.Command.Cmd cmd_;
-    /**
-     * <code>.commander.Cmd cmd = 10;</code>
-     * @return Whether the cmd field is set.
-     */
-    @java.lang.Override
-    public boolean hasCmd() {
-      return cmd_ != null;
-    }
-    /**
-     * <code>.commander.Cmd cmd = 10;</code>
-     * @return The cmd.
-     */
-    @java.lang.Override
-    public commander.Command.Cmd getCmd() {
-      return cmd_ == null ? commander.Command.Cmd.getDefaultInstance() : cmd_;
-    }
-    /**
-     * <code>.commander.Cmd cmd = 10;</code>
-     */
-    @java.lang.Override
-    public commander.Command.CmdOrBuilder getCmdOrBuilder() {
-      return getCmd();
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (head_ != commander.Command.Head.cmd.getNumber()) {
-        output.writeEnum(1, head_);
-      }
-      if (contact_ != null) {
-        output.writeMessage(2, getContact());
-      }
-      if (event_ != null) {
-        output.writeMessage(3, getEvent());
-      }
-      if (key_ != null) {
-        output.writeMessage(4, getKey());
-      }
-      if (ack_ != null) {
-        output.writeMessage(5, getAck());
-      }
-      if (directional_ != null) {
-        output.writeMessage(6, getDirectional());
-      }
-      if (button_ != null) {
-        output.writeMessage(7, getButton());
-      }
-      if (tab_ != null) {
-        output.writeMessage(8, getTab());
-      }
-      if (result_ != null) {
-        output.writeMessage(9, getResult());
-      }
-      if (cmd_ != null) {
-        output.writeMessage(10, getCmd());
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (head_ != commander.Command.Head.cmd.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, head_);
-      }
-      if (contact_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getContact());
-      }
-      if (event_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getEvent());
-      }
-      if (key_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getKey());
-      }
-      if (ack_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getAck());
-      }
-      if (directional_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getDirectional());
-      }
-      if (button_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getButton());
-      }
-      if (tab_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, getTab());
-      }
-      if (result_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, getResult());
-      }
-      if (cmd_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, getCmd());
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.CmdInfo)) {
-        return super.equals(obj);
-      }
-      commander.Command.CmdInfo other = (commander.Command.CmdInfo) obj;
-
-      if (head_ != other.head_) return false;
-      if (hasContact() != other.hasContact()) return false;
-      if (hasContact()) {
-        if (!getContact()
-            .equals(other.getContact())) return false;
-      }
-      if (hasEvent() != other.hasEvent()) return false;
-      if (hasEvent()) {
-        if (!getEvent()
-            .equals(other.getEvent())) return false;
-      }
-      if (hasKey() != other.hasKey()) return false;
-      if (hasKey()) {
-        if (!getKey()
-            .equals(other.getKey())) return false;
-      }
-      if (hasAck() != other.hasAck()) return false;
-      if (hasAck()) {
-        if (!getAck()
-            .equals(other.getAck())) return false;
-      }
-      if (hasDirectional() != other.hasDirectional()) return false;
-      if (hasDirectional()) {
-        if (!getDirectional()
-            .equals(other.getDirectional())) return false;
-      }
-      if (hasButton() != other.hasButton()) return false;
-      if (hasButton()) {
-        if (!getButton()
-            .equals(other.getButton())) return false;
-      }
-      if (hasTab() != other.hasTab()) return false;
-      if (hasTab()) {
-        if (!getTab()
-            .equals(other.getTab())) return false;
-      }
-      if (hasResult() != other.hasResult()) return false;
-      if (hasResult()) {
-        if (!getResult()
-            .equals(other.getResult())) return false;
-      }
-      if (hasCmd() != other.hasCmd()) return false;
-      if (hasCmd()) {
-        if (!getCmd()
-            .equals(other.getCmd())) return false;
-      }
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + HEAD_FIELD_NUMBER;
-      hash = (53 * hash) + head_;
-      if (hasContact()) {
-        hash = (37 * hash) + CONTACT_FIELD_NUMBER;
-        hash = (53 * hash) + getContact().hashCode();
-      }
-      if (hasEvent()) {
-        hash = (37 * hash) + EVENT_FIELD_NUMBER;
-        hash = (53 * hash) + getEvent().hashCode();
-      }
-      if (hasKey()) {
-        hash = (37 * hash) + KEY_FIELD_NUMBER;
-        hash = (53 * hash) + getKey().hashCode();
-      }
-      if (hasAck()) {
-        hash = (37 * hash) + ACK_FIELD_NUMBER;
-        hash = (53 * hash) + getAck().hashCode();
-      }
-      if (hasDirectional()) {
-        hash = (37 * hash) + DIRECTIONAL_FIELD_NUMBER;
-        hash = (53 * hash) + getDirectional().hashCode();
-      }
-      if (hasButton()) {
-        hash = (37 * hash) + BUTTON_FIELD_NUMBER;
-        hash = (53 * hash) + getButton().hashCode();
-      }
-      if (hasTab()) {
-        hash = (37 * hash) + TAB_FIELD_NUMBER;
-        hash = (53 * hash) + getTab().hashCode();
-      }
-      if (hasResult()) {
-        hash = (37 * hash) + RESULT_FIELD_NUMBER;
-        hash = (53 * hash) + getResult().hashCode();
-      }
-      if (hasCmd()) {
-        hash = (37 * hash) + CMD_FIELD_NUMBER;
-        hash = (53 * hash) + getCmd().hashCode();
-      }
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.CmdInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.CmdInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.CmdInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.CmdInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.CmdInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.CmdInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.CmdInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.CmdInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.CmdInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.CmdInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.CmdInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.CmdInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.CmdInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.CmdInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.CmdInfo)
-        commander.Command.CmdInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_CmdInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_CmdInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.CmdInfo.class, commander.Command.CmdInfo.Builder.class);
-      }
-
-      // Construct using commander.Command.CmdInfo.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        head_ = 0;
-
-        if (contactBuilder_ == null) {
-          contact_ = null;
-        } else {
-          contact_ = null;
-          contactBuilder_ = null;
-        }
-        if (eventBuilder_ == null) {
-          event_ = null;
-        } else {
-          event_ = null;
-          eventBuilder_ = null;
-        }
-        if (keyBuilder_ == null) {
-          key_ = null;
-        } else {
-          key_ = null;
-          keyBuilder_ = null;
-        }
-        if (ackBuilder_ == null) {
-          ack_ = null;
-        } else {
-          ack_ = null;
-          ackBuilder_ = null;
-        }
-        if (directionalBuilder_ == null) {
-          directional_ = null;
-        } else {
-          directional_ = null;
-          directionalBuilder_ = null;
-        }
-        if (buttonBuilder_ == null) {
-          button_ = null;
-        } else {
-          button_ = null;
-          buttonBuilder_ = null;
-        }
-        if (tabBuilder_ == null) {
-          tab_ = null;
-        } else {
-          tab_ = null;
-          tabBuilder_ = null;
-        }
-        if (resultBuilder_ == null) {
-          result_ = null;
-        } else {
-          result_ = null;
-          resultBuilder_ = null;
-        }
-        if (cmdBuilder_ == null) {
-          cmd_ = null;
-        } else {
-          cmd_ = null;
-          cmdBuilder_ = null;
-        }
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_CmdInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.CmdInfo getDefaultInstanceForType() {
-        return commander.Command.CmdInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.CmdInfo build() {
-        commander.Command.CmdInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.CmdInfo buildPartial() {
-        commander.Command.CmdInfo result = new commander.Command.CmdInfo(this);
-        result.head_ = head_;
-        if (contactBuilder_ == null) {
-          result.contact_ = contact_;
-        } else {
-          result.contact_ = contactBuilder_.build();
-        }
-        if (eventBuilder_ == null) {
-          result.event_ = event_;
-        } else {
-          result.event_ = eventBuilder_.build();
-        }
-        if (keyBuilder_ == null) {
-          result.key_ = key_;
-        } else {
-          result.key_ = keyBuilder_.build();
-        }
-        if (ackBuilder_ == null) {
-          result.ack_ = ack_;
-        } else {
-          result.ack_ = ackBuilder_.build();
-        }
-        if (directionalBuilder_ == null) {
-          result.directional_ = directional_;
-        } else {
-          result.directional_ = directionalBuilder_.build();
-        }
-        if (buttonBuilder_ == null) {
-          result.button_ = button_;
-        } else {
-          result.button_ = buttonBuilder_.build();
-        }
-        if (tabBuilder_ == null) {
-          result.tab_ = tab_;
-        } else {
-          result.tab_ = tabBuilder_.build();
-        }
-        if (resultBuilder_ == null) {
-          result.result_ = result_;
-        } else {
-          result.result_ = resultBuilder_.build();
-        }
-        if (cmdBuilder_ == null) {
-          result.cmd_ = cmd_;
-        } else {
-          result.cmd_ = cmdBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.CmdInfo) {
-          return mergeFrom((commander.Command.CmdInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.CmdInfo other) {
-        if (other == commander.Command.CmdInfo.getDefaultInstance()) return this;
-        if (other.head_ != 0) {
-          setHeadValue(other.getHeadValue());
-        }
-        if (other.hasContact()) {
-          mergeContact(other.getContact());
-        }
-        if (other.hasEvent()) {
-          mergeEvent(other.getEvent());
-        }
-        if (other.hasKey()) {
-          mergeKey(other.getKey());
-        }
-        if (other.hasAck()) {
-          mergeAck(other.getAck());
-        }
-        if (other.hasDirectional()) {
-          mergeDirectional(other.getDirectional());
-        }
-        if (other.hasButton()) {
-          mergeButton(other.getButton());
-        }
-        if (other.hasTab()) {
-          mergeTab(other.getTab());
-        }
-        if (other.hasResult()) {
-          mergeResult(other.getResult());
-        }
-        if (other.hasCmd()) {
-          mergeCmd(other.getCmd());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                head_ = input.readEnum();
-
-                break;
-              } // case 8
-              case 18: {
-                input.readMessage(
-                    getContactFieldBuilder().getBuilder(),
-                    extensionRegistry);
-
-                break;
-              } // case 18
-              case 26: {
-                input.readMessage(
-                    getEventFieldBuilder().getBuilder(),
-                    extensionRegistry);
-
-                break;
-              } // case 26
-              case 34: {
-                input.readMessage(
-                    getKeyFieldBuilder().getBuilder(),
-                    extensionRegistry);
-
-                break;
-              } // case 34
-              case 42: {
-                input.readMessage(
-                    getAckFieldBuilder().getBuilder(),
-                    extensionRegistry);
-
-                break;
-              } // case 42
-              case 50: {
-                input.readMessage(
-                    getDirectionalFieldBuilder().getBuilder(),
-                    extensionRegistry);
-
-                break;
-              } // case 50
-              case 58: {
-                input.readMessage(
-                    getButtonFieldBuilder().getBuilder(),
-                    extensionRegistry);
-
-                break;
-              } // case 58
-              case 66: {
-                input.readMessage(
-                    getTabFieldBuilder().getBuilder(),
-                    extensionRegistry);
-
-                break;
-              } // case 66
-              case 74: {
-                input.readMessage(
-                    getResultFieldBuilder().getBuilder(),
-                    extensionRegistry);
-
-                break;
-              } // case 74
-              case 82: {
-                input.readMessage(
-                    getCmdFieldBuilder().getBuilder(),
-                    extensionRegistry);
-
-                break;
-              } // case 82
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private int head_ = 0;
-      /**
-       * <code>.commander.Head head = 1;</code>
-       * @return The enum numeric value on the wire for head.
-       */
-      @java.lang.Override public int getHeadValue() {
-        return head_;
-      }
-      /**
-       * <code>.commander.Head head = 1;</code>
-       * @param value The enum numeric value on the wire for head to set.
-       * @return This builder for chaining.
-       */
-      public Builder setHeadValue(int value) {
-        
-        head_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.Head head = 1;</code>
-       * @return The head.
-       */
-      @java.lang.Override
-      public commander.Command.Head getHead() {
-        @SuppressWarnings("deprecation")
-        commander.Command.Head result = commander.Command.Head.valueOf(head_);
-        return result == null ? commander.Command.Head.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.Head head = 1;</code>
-       * @param value The head to set.
-       * @return This builder for chaining.
-       */
-      public Builder setHead(commander.Command.Head value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        head_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.Head head = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearHead() {
-        
-        head_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private commander.Command.ContactInfo contact_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.ContactInfo, commander.Command.ContactInfo.Builder, commander.Command.ContactInfoOrBuilder> contactBuilder_;
-      /**
-       * <code>.commander.ContactInfo contact = 2;</code>
-       * @return Whether the contact field is set.
-       */
-      public boolean hasContact() {
-        return contactBuilder_ != null || contact_ != null;
-      }
-      /**
-       * <code>.commander.ContactInfo contact = 2;</code>
-       * @return The contact.
-       */
-      public commander.Command.ContactInfo getContact() {
-        if (contactBuilder_ == null) {
-          return contact_ == null ? commander.Command.ContactInfo.getDefaultInstance() : contact_;
-        } else {
-          return contactBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.commander.ContactInfo contact = 2;</code>
-       */
-      public Builder setContact(commander.Command.ContactInfo value) {
-        if (contactBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          contact_ = value;
-          onChanged();
-        } else {
-          contactBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.ContactInfo contact = 2;</code>
-       */
-      public Builder setContact(
-          commander.Command.ContactInfo.Builder builderForValue) {
-        if (contactBuilder_ == null) {
-          contact_ = builderForValue.build();
-          onChanged();
-        } else {
-          contactBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.ContactInfo contact = 2;</code>
-       */
-      public Builder mergeContact(commander.Command.ContactInfo value) {
-        if (contactBuilder_ == null) {
-          if (contact_ != null) {
-            contact_ =
-              commander.Command.ContactInfo.newBuilder(contact_).mergeFrom(value).buildPartial();
-          } else {
-            contact_ = value;
-          }
-          onChanged();
-        } else {
-          contactBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.ContactInfo contact = 2;</code>
-       */
-      public Builder clearContact() {
-        if (contactBuilder_ == null) {
-          contact_ = null;
-          onChanged();
-        } else {
-          contact_ = null;
-          contactBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.ContactInfo contact = 2;</code>
-       */
-      public commander.Command.ContactInfo.Builder getContactBuilder() {
-        
-        onChanged();
-        return getContactFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.commander.ContactInfo contact = 2;</code>
-       */
-      public commander.Command.ContactInfoOrBuilder getContactOrBuilder() {
-        if (contactBuilder_ != null) {
-          return contactBuilder_.getMessageOrBuilder();
-        } else {
-          return contact_ == null ?
-              commander.Command.ContactInfo.getDefaultInstance() : contact_;
-        }
-      }
-      /**
-       * <code>.commander.ContactInfo contact = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.ContactInfo, commander.Command.ContactInfo.Builder, commander.Command.ContactInfoOrBuilder> 
-          getContactFieldBuilder() {
-        if (contactBuilder_ == null) {
-          contactBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.ContactInfo, commander.Command.ContactInfo.Builder, commander.Command.ContactInfoOrBuilder>(
-                  getContact(),
-                  getParentForChildren(),
-                  isClean());
-          contact_ = null;
-        }
-        return contactBuilder_;
-      }
-
-      private commander.Command.EventInfo event_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.EventInfo, commander.Command.EventInfo.Builder, commander.Command.EventInfoOrBuilder> eventBuilder_;
-      /**
-       * <code>.commander.EventInfo event = 3;</code>
-       * @return Whether the event field is set.
-       */
-      public boolean hasEvent() {
-        return eventBuilder_ != null || event_ != null;
-      }
-      /**
-       * <code>.commander.EventInfo event = 3;</code>
-       * @return The event.
-       */
-      public commander.Command.EventInfo getEvent() {
-        if (eventBuilder_ == null) {
-          return event_ == null ? commander.Command.EventInfo.getDefaultInstance() : event_;
-        } else {
-          return eventBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.commander.EventInfo event = 3;</code>
-       */
-      public Builder setEvent(commander.Command.EventInfo value) {
-        if (eventBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          event_ = value;
-          onChanged();
-        } else {
-          eventBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.EventInfo event = 3;</code>
-       */
-      public Builder setEvent(
-          commander.Command.EventInfo.Builder builderForValue) {
-        if (eventBuilder_ == null) {
-          event_ = builderForValue.build();
-          onChanged();
-        } else {
-          eventBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.EventInfo event = 3;</code>
-       */
-      public Builder mergeEvent(commander.Command.EventInfo value) {
-        if (eventBuilder_ == null) {
-          if (event_ != null) {
-            event_ =
-              commander.Command.EventInfo.newBuilder(event_).mergeFrom(value).buildPartial();
-          } else {
-            event_ = value;
-          }
-          onChanged();
-        } else {
-          eventBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.EventInfo event = 3;</code>
-       */
-      public Builder clearEvent() {
-        if (eventBuilder_ == null) {
-          event_ = null;
-          onChanged();
-        } else {
-          event_ = null;
-          eventBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.EventInfo event = 3;</code>
-       */
-      public commander.Command.EventInfo.Builder getEventBuilder() {
-        
-        onChanged();
-        return getEventFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.commander.EventInfo event = 3;</code>
-       */
-      public commander.Command.EventInfoOrBuilder getEventOrBuilder() {
-        if (eventBuilder_ != null) {
-          return eventBuilder_.getMessageOrBuilder();
-        } else {
-          return event_ == null ?
-              commander.Command.EventInfo.getDefaultInstance() : event_;
-        }
-      }
-      /**
-       * <code>.commander.EventInfo event = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.EventInfo, commander.Command.EventInfo.Builder, commander.Command.EventInfoOrBuilder> 
-          getEventFieldBuilder() {
-        if (eventBuilder_ == null) {
-          eventBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.EventInfo, commander.Command.EventInfo.Builder, commander.Command.EventInfoOrBuilder>(
-                  getEvent(),
-                  getParentForChildren(),
-                  isClean());
-          event_ = null;
-        }
-        return eventBuilder_;
-      }
-
-      private commander.Command.KeyInfo key_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.KeyInfo, commander.Command.KeyInfo.Builder, commander.Command.KeyInfoOrBuilder> keyBuilder_;
-      /**
-       * <code>.commander.KeyInfo key = 4;</code>
-       * @return Whether the key field is set.
-       */
-      public boolean hasKey() {
-        return keyBuilder_ != null || key_ != null;
-      }
-      /**
-       * <code>.commander.KeyInfo key = 4;</code>
-       * @return The key.
-       */
-      public commander.Command.KeyInfo getKey() {
-        if (keyBuilder_ == null) {
-          return key_ == null ? commander.Command.KeyInfo.getDefaultInstance() : key_;
-        } else {
-          return keyBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.commander.KeyInfo key = 4;</code>
-       */
-      public Builder setKey(commander.Command.KeyInfo value) {
-        if (keyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          key_ = value;
-          onChanged();
-        } else {
-          keyBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.KeyInfo key = 4;</code>
-       */
-      public Builder setKey(
-          commander.Command.KeyInfo.Builder builderForValue) {
-        if (keyBuilder_ == null) {
-          key_ = builderForValue.build();
-          onChanged();
-        } else {
-          keyBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.KeyInfo key = 4;</code>
-       */
-      public Builder mergeKey(commander.Command.KeyInfo value) {
-        if (keyBuilder_ == null) {
-          if (key_ != null) {
-            key_ =
-              commander.Command.KeyInfo.newBuilder(key_).mergeFrom(value).buildPartial();
-          } else {
-            key_ = value;
-          }
-          onChanged();
-        } else {
-          keyBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.KeyInfo key = 4;</code>
-       */
-      public Builder clearKey() {
-        if (keyBuilder_ == null) {
-          key_ = null;
-          onChanged();
-        } else {
-          key_ = null;
-          keyBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.KeyInfo key = 4;</code>
-       */
-      public commander.Command.KeyInfo.Builder getKeyBuilder() {
-        
-        onChanged();
-        return getKeyFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.commander.KeyInfo key = 4;</code>
-       */
-      public commander.Command.KeyInfoOrBuilder getKeyOrBuilder() {
-        if (keyBuilder_ != null) {
-          return keyBuilder_.getMessageOrBuilder();
-        } else {
-          return key_ == null ?
-              commander.Command.KeyInfo.getDefaultInstance() : key_;
-        }
-      }
-      /**
-       * <code>.commander.KeyInfo key = 4;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.KeyInfo, commander.Command.KeyInfo.Builder, commander.Command.KeyInfoOrBuilder> 
-          getKeyFieldBuilder() {
-        if (keyBuilder_ == null) {
-          keyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.KeyInfo, commander.Command.KeyInfo.Builder, commander.Command.KeyInfoOrBuilder>(
-                  getKey(),
-                  getParentForChildren(),
-                  isClean());
-          key_ = null;
-        }
-        return keyBuilder_;
-      }
-
-      private commander.Command.AckInfo ack_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.AckInfo, commander.Command.AckInfo.Builder, commander.Command.AckInfoOrBuilder> ackBuilder_;
-      /**
-       * <code>.commander.AckInfo ack = 5;</code>
-       * @return Whether the ack field is set.
-       */
-      public boolean hasAck() {
-        return ackBuilder_ != null || ack_ != null;
-      }
-      /**
-       * <code>.commander.AckInfo ack = 5;</code>
-       * @return The ack.
-       */
-      public commander.Command.AckInfo getAck() {
-        if (ackBuilder_ == null) {
-          return ack_ == null ? commander.Command.AckInfo.getDefaultInstance() : ack_;
-        } else {
-          return ackBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.commander.AckInfo ack = 5;</code>
-       */
-      public Builder setAck(commander.Command.AckInfo value) {
-        if (ackBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ack_ = value;
-          onChanged();
-        } else {
-          ackBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.AckInfo ack = 5;</code>
-       */
-      public Builder setAck(
-          commander.Command.AckInfo.Builder builderForValue) {
-        if (ackBuilder_ == null) {
-          ack_ = builderForValue.build();
-          onChanged();
-        } else {
-          ackBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.AckInfo ack = 5;</code>
-       */
-      public Builder mergeAck(commander.Command.AckInfo value) {
-        if (ackBuilder_ == null) {
-          if (ack_ != null) {
-            ack_ =
-              commander.Command.AckInfo.newBuilder(ack_).mergeFrom(value).buildPartial();
-          } else {
-            ack_ = value;
-          }
-          onChanged();
-        } else {
-          ackBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.AckInfo ack = 5;</code>
-       */
-      public Builder clearAck() {
-        if (ackBuilder_ == null) {
-          ack_ = null;
-          onChanged();
-        } else {
-          ack_ = null;
-          ackBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.AckInfo ack = 5;</code>
-       */
-      public commander.Command.AckInfo.Builder getAckBuilder() {
-        
-        onChanged();
-        return getAckFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.commander.AckInfo ack = 5;</code>
-       */
-      public commander.Command.AckInfoOrBuilder getAckOrBuilder() {
-        if (ackBuilder_ != null) {
-          return ackBuilder_.getMessageOrBuilder();
-        } else {
-          return ack_ == null ?
-              commander.Command.AckInfo.getDefaultInstance() : ack_;
-        }
-      }
-      /**
-       * <code>.commander.AckInfo ack = 5;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.AckInfo, commander.Command.AckInfo.Builder, commander.Command.AckInfoOrBuilder> 
-          getAckFieldBuilder() {
-        if (ackBuilder_ == null) {
-          ackBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.AckInfo, commander.Command.AckInfo.Builder, commander.Command.AckInfoOrBuilder>(
-                  getAck(),
-                  getParentForChildren(),
-                  isClean());
-          ack_ = null;
-        }
-        return ackBuilder_;
-      }
-
-      private commander.Command.DirectionalInfo directional_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.DirectionalInfo, commander.Command.DirectionalInfo.Builder, commander.Command.DirectionalInfoOrBuilder> directionalBuilder_;
-      /**
-       * <code>.commander.DirectionalInfo directional = 6;</code>
-       * @return Whether the directional field is set.
-       */
-      public boolean hasDirectional() {
-        return directionalBuilder_ != null || directional_ != null;
-      }
-      /**
-       * <code>.commander.DirectionalInfo directional = 6;</code>
-       * @return The directional.
-       */
-      public commander.Command.DirectionalInfo getDirectional() {
-        if (directionalBuilder_ == null) {
-          return directional_ == null ? commander.Command.DirectionalInfo.getDefaultInstance() : directional_;
-        } else {
-          return directionalBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.commander.DirectionalInfo directional = 6;</code>
-       */
-      public Builder setDirectional(commander.Command.DirectionalInfo value) {
-        if (directionalBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          directional_ = value;
-          onChanged();
-        } else {
-          directionalBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.DirectionalInfo directional = 6;</code>
-       */
-      public Builder setDirectional(
-          commander.Command.DirectionalInfo.Builder builderForValue) {
-        if (directionalBuilder_ == null) {
-          directional_ = builderForValue.build();
-          onChanged();
-        } else {
-          directionalBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.DirectionalInfo directional = 6;</code>
-       */
-      public Builder mergeDirectional(commander.Command.DirectionalInfo value) {
-        if (directionalBuilder_ == null) {
-          if (directional_ != null) {
-            directional_ =
-              commander.Command.DirectionalInfo.newBuilder(directional_).mergeFrom(value).buildPartial();
-          } else {
-            directional_ = value;
-          }
-          onChanged();
-        } else {
-          directionalBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.DirectionalInfo directional = 6;</code>
-       */
-      public Builder clearDirectional() {
-        if (directionalBuilder_ == null) {
-          directional_ = null;
-          onChanged();
-        } else {
-          directional_ = null;
-          directionalBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.DirectionalInfo directional = 6;</code>
-       */
-      public commander.Command.DirectionalInfo.Builder getDirectionalBuilder() {
-        
-        onChanged();
-        return getDirectionalFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.commander.DirectionalInfo directional = 6;</code>
-       */
-      public commander.Command.DirectionalInfoOrBuilder getDirectionalOrBuilder() {
-        if (directionalBuilder_ != null) {
-          return directionalBuilder_.getMessageOrBuilder();
-        } else {
-          return directional_ == null ?
-              commander.Command.DirectionalInfo.getDefaultInstance() : directional_;
-        }
-      }
-      /**
-       * <code>.commander.DirectionalInfo directional = 6;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.DirectionalInfo, commander.Command.DirectionalInfo.Builder, commander.Command.DirectionalInfoOrBuilder> 
-          getDirectionalFieldBuilder() {
-        if (directionalBuilder_ == null) {
-          directionalBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.DirectionalInfo, commander.Command.DirectionalInfo.Builder, commander.Command.DirectionalInfoOrBuilder>(
-                  getDirectional(),
-                  getParentForChildren(),
-                  isClean());
-          directional_ = null;
-        }
-        return directionalBuilder_;
-      }
-
-      private commander.Command.ButtonInfo button_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.ButtonInfo, commander.Command.ButtonInfo.Builder, commander.Command.ButtonInfoOrBuilder> buttonBuilder_;
-      /**
-       * <code>.commander.ButtonInfo button = 7;</code>
-       * @return Whether the button field is set.
-       */
-      public boolean hasButton() {
-        return buttonBuilder_ != null || button_ != null;
-      }
-      /**
-       * <code>.commander.ButtonInfo button = 7;</code>
-       * @return The button.
-       */
-      public commander.Command.ButtonInfo getButton() {
-        if (buttonBuilder_ == null) {
-          return button_ == null ? commander.Command.ButtonInfo.getDefaultInstance() : button_;
-        } else {
-          return buttonBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.commander.ButtonInfo button = 7;</code>
-       */
-      public Builder setButton(commander.Command.ButtonInfo value) {
-        if (buttonBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          button_ = value;
-          onChanged();
-        } else {
-          buttonBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.ButtonInfo button = 7;</code>
-       */
-      public Builder setButton(
-          commander.Command.ButtonInfo.Builder builderForValue) {
-        if (buttonBuilder_ == null) {
-          button_ = builderForValue.build();
-          onChanged();
-        } else {
-          buttonBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.ButtonInfo button = 7;</code>
-       */
-      public Builder mergeButton(commander.Command.ButtonInfo value) {
-        if (buttonBuilder_ == null) {
-          if (button_ != null) {
-            button_ =
-              commander.Command.ButtonInfo.newBuilder(button_).mergeFrom(value).buildPartial();
-          } else {
-            button_ = value;
-          }
-          onChanged();
-        } else {
-          buttonBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.ButtonInfo button = 7;</code>
-       */
-      public Builder clearButton() {
-        if (buttonBuilder_ == null) {
-          button_ = null;
-          onChanged();
-        } else {
-          button_ = null;
-          buttonBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.ButtonInfo button = 7;</code>
-       */
-      public commander.Command.ButtonInfo.Builder getButtonBuilder() {
-        
-        onChanged();
-        return getButtonFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.commander.ButtonInfo button = 7;</code>
-       */
-      public commander.Command.ButtonInfoOrBuilder getButtonOrBuilder() {
-        if (buttonBuilder_ != null) {
-          return buttonBuilder_.getMessageOrBuilder();
-        } else {
-          return button_ == null ?
-              commander.Command.ButtonInfo.getDefaultInstance() : button_;
-        }
-      }
-      /**
-       * <code>.commander.ButtonInfo button = 7;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.ButtonInfo, commander.Command.ButtonInfo.Builder, commander.Command.ButtonInfoOrBuilder> 
-          getButtonFieldBuilder() {
-        if (buttonBuilder_ == null) {
-          buttonBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.ButtonInfo, commander.Command.ButtonInfo.Builder, commander.Command.ButtonInfoOrBuilder>(
-                  getButton(),
-                  getParentForChildren(),
-                  isClean());
-          button_ = null;
-        }
-        return buttonBuilder_;
-      }
-
-      private commander.Command.TabInfo tab_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.TabInfo, commander.Command.TabInfo.Builder, commander.Command.TabInfoOrBuilder> tabBuilder_;
-      /**
-       * <code>.commander.TabInfo tab = 8;</code>
-       * @return Whether the tab field is set.
-       */
-      public boolean hasTab() {
-        return tabBuilder_ != null || tab_ != null;
-      }
-      /**
-       * <code>.commander.TabInfo tab = 8;</code>
-       * @return The tab.
-       */
-      public commander.Command.TabInfo getTab() {
-        if (tabBuilder_ == null) {
-          return tab_ == null ? commander.Command.TabInfo.getDefaultInstance() : tab_;
-        } else {
-          return tabBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.commander.TabInfo tab = 8;</code>
-       */
-      public Builder setTab(commander.Command.TabInfo value) {
-        if (tabBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          tab_ = value;
-          onChanged();
-        } else {
-          tabBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.TabInfo tab = 8;</code>
-       */
-      public Builder setTab(
-          commander.Command.TabInfo.Builder builderForValue) {
-        if (tabBuilder_ == null) {
-          tab_ = builderForValue.build();
-          onChanged();
-        } else {
-          tabBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.TabInfo tab = 8;</code>
-       */
-      public Builder mergeTab(commander.Command.TabInfo value) {
-        if (tabBuilder_ == null) {
-          if (tab_ != null) {
-            tab_ =
-              commander.Command.TabInfo.newBuilder(tab_).mergeFrom(value).buildPartial();
-          } else {
-            tab_ = value;
-          }
-          onChanged();
-        } else {
-          tabBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.TabInfo tab = 8;</code>
-       */
-      public Builder clearTab() {
-        if (tabBuilder_ == null) {
-          tab_ = null;
-          onChanged();
-        } else {
-          tab_ = null;
-          tabBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.TabInfo tab = 8;</code>
-       */
-      public commander.Command.TabInfo.Builder getTabBuilder() {
-        
-        onChanged();
-        return getTabFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.commander.TabInfo tab = 8;</code>
-       */
-      public commander.Command.TabInfoOrBuilder getTabOrBuilder() {
-        if (tabBuilder_ != null) {
-          return tabBuilder_.getMessageOrBuilder();
-        } else {
-          return tab_ == null ?
-              commander.Command.TabInfo.getDefaultInstance() : tab_;
-        }
-      }
-      /**
-       * <code>.commander.TabInfo tab = 8;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.TabInfo, commander.Command.TabInfo.Builder, commander.Command.TabInfoOrBuilder> 
-          getTabFieldBuilder() {
-        if (tabBuilder_ == null) {
-          tabBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.TabInfo, commander.Command.TabInfo.Builder, commander.Command.TabInfoOrBuilder>(
-                  getTab(),
-                  getParentForChildren(),
-                  isClean());
-          tab_ = null;
-        }
-        return tabBuilder_;
-      }
-
-      private commander.Command.QueryResult result_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.QueryResult, commander.Command.QueryResult.Builder, commander.Command.QueryResultOrBuilder> resultBuilder_;
-      /**
-       * <code>.commander.QueryResult result = 9;</code>
-       * @return Whether the result field is set.
-       */
-      public boolean hasResult() {
-        return resultBuilder_ != null || result_ != null;
-      }
-      /**
-       * <code>.commander.QueryResult result = 9;</code>
-       * @return The result.
-       */
-      public commander.Command.QueryResult getResult() {
-        if (resultBuilder_ == null) {
-          return result_ == null ? commander.Command.QueryResult.getDefaultInstance() : result_;
-        } else {
-          return resultBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.commander.QueryResult result = 9;</code>
-       */
-      public Builder setResult(commander.Command.QueryResult value) {
-        if (resultBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          result_ = value;
-          onChanged();
-        } else {
-          resultBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.QueryResult result = 9;</code>
-       */
-      public Builder setResult(
-          commander.Command.QueryResult.Builder builderForValue) {
-        if (resultBuilder_ == null) {
-          result_ = builderForValue.build();
-          onChanged();
-        } else {
-          resultBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.QueryResult result = 9;</code>
-       */
-      public Builder mergeResult(commander.Command.QueryResult value) {
-        if (resultBuilder_ == null) {
-          if (result_ != null) {
-            result_ =
-              commander.Command.QueryResult.newBuilder(result_).mergeFrom(value).buildPartial();
-          } else {
-            result_ = value;
-          }
-          onChanged();
-        } else {
-          resultBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.QueryResult result = 9;</code>
-       */
-      public Builder clearResult() {
-        if (resultBuilder_ == null) {
-          result_ = null;
-          onChanged();
-        } else {
-          result_ = null;
-          resultBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.QueryResult result = 9;</code>
-       */
-      public commander.Command.QueryResult.Builder getResultBuilder() {
-        
-        onChanged();
-        return getResultFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.commander.QueryResult result = 9;</code>
-       */
-      public commander.Command.QueryResultOrBuilder getResultOrBuilder() {
-        if (resultBuilder_ != null) {
-          return resultBuilder_.getMessageOrBuilder();
-        } else {
-          return result_ == null ?
-              commander.Command.QueryResult.getDefaultInstance() : result_;
-        }
-      }
-      /**
-       * <code>.commander.QueryResult result = 9;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.QueryResult, commander.Command.QueryResult.Builder, commander.Command.QueryResultOrBuilder> 
-          getResultFieldBuilder() {
-        if (resultBuilder_ == null) {
-          resultBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.QueryResult, commander.Command.QueryResult.Builder, commander.Command.QueryResultOrBuilder>(
-                  getResult(),
-                  getParentForChildren(),
-                  isClean());
-          result_ = null;
-        }
-        return resultBuilder_;
-      }
-
-      private commander.Command.Cmd cmd_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.Cmd, commander.Command.Cmd.Builder, commander.Command.CmdOrBuilder> cmdBuilder_;
-      /**
-       * <code>.commander.Cmd cmd = 10;</code>
-       * @return Whether the cmd field is set.
-       */
-      public boolean hasCmd() {
-        return cmdBuilder_ != null || cmd_ != null;
-      }
-      /**
-       * <code>.commander.Cmd cmd = 10;</code>
-       * @return The cmd.
-       */
-      public commander.Command.Cmd getCmd() {
-        if (cmdBuilder_ == null) {
-          return cmd_ == null ? commander.Command.Cmd.getDefaultInstance() : cmd_;
-        } else {
-          return cmdBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.commander.Cmd cmd = 10;</code>
-       */
-      public Builder setCmd(commander.Command.Cmd value) {
-        if (cmdBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          cmd_ = value;
-          onChanged();
-        } else {
-          cmdBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.Cmd cmd = 10;</code>
-       */
-      public Builder setCmd(
-          commander.Command.Cmd.Builder builderForValue) {
-        if (cmdBuilder_ == null) {
-          cmd_ = builderForValue.build();
-          onChanged();
-        } else {
-          cmdBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.Cmd cmd = 10;</code>
-       */
-      public Builder mergeCmd(commander.Command.Cmd value) {
-        if (cmdBuilder_ == null) {
-          if (cmd_ != null) {
-            cmd_ =
-              commander.Command.Cmd.newBuilder(cmd_).mergeFrom(value).buildPartial();
-          } else {
-            cmd_ = value;
-          }
-          onChanged();
-        } else {
-          cmdBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.Cmd cmd = 10;</code>
-       */
-      public Builder clearCmd() {
-        if (cmdBuilder_ == null) {
-          cmd_ = null;
-          onChanged();
-        } else {
-          cmd_ = null;
-          cmdBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.commander.Cmd cmd = 10;</code>
-       */
-      public commander.Command.Cmd.Builder getCmdBuilder() {
-        
-        onChanged();
-        return getCmdFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.commander.Cmd cmd = 10;</code>
-       */
-      public commander.Command.CmdOrBuilder getCmdOrBuilder() {
-        if (cmdBuilder_ != null) {
-          return cmdBuilder_.getMessageOrBuilder();
-        } else {
-          return cmd_ == null ?
-              commander.Command.Cmd.getDefaultInstance() : cmd_;
-        }
-      }
-      /**
-       * <code>.commander.Cmd cmd = 10;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.Cmd, commander.Command.Cmd.Builder, commander.Command.CmdOrBuilder> 
-          getCmdFieldBuilder() {
-        if (cmdBuilder_ == null) {
-          cmdBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.Cmd, commander.Command.Cmd.Builder, commander.Command.CmdOrBuilder>(
-                  getCmd(),
-                  getParentForChildren(),
-                  isClean());
-          cmd_ = null;
-        }
-        return cmdBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.CmdInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.CmdInfo)
-    private static final commander.Command.CmdInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.CmdInfo();
-    }
-
-    public static commander.Command.CmdInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<CmdInfo>
-        PARSER = new com.google.protobuf.AbstractParser<CmdInfo>() {
-      @java.lang.Override
-      public CmdInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<CmdInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<CmdInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.CmdInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ContactInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.ContactInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>uint32 id1 = 1;</code>
-     * @return The id1.
-     */
-    int getId1();
-
-    /**
-     * <code>uint32 id2 = 2;</code>
-     * @return The id2.
-     */
-    int getId2();
-
-    /**
-     * <code>string info1 = 3;</code>
-     * @return The info1.
-     */
-    java.lang.String getInfo1();
-    /**
-     * <code>string info1 = 3;</code>
-     * @return The bytes for info1.
-     */
-    com.google.protobuf.ByteString
-        getInfo1Bytes();
-
-    /**
-     * <code>string info2 = 4;</code>
-     * @return The info2.
-     */
-    java.lang.String getInfo2();
-    /**
-     * <code>string info2 = 4;</code>
-     * @return The bytes for info2.
-     */
-    com.google.protobuf.ByteString
-        getInfo2Bytes();
-
-    /**
-     * <code>float x = 7;</code>
-     * @return The x.
-     */
-    float getX();
-
-    /**
-     * <code>float y = 8;</code>
-     * @return The y.
-     */
-    float getY();
-
-    /**
-     * <code>float x1 = 9;</code>
-     * @return The x1.
-     */
-    float getX1();
-
-    /**
-     * <code>float y1 = 10;</code>
-     * @return The y1.
-     */
-    float getY1();
-
-    /**
-     * <code>float x2 = 11;</code>
-     * @return The x2.
-     */
-    float getX2();
-
-    /**
-     * <code>float y2 = 12;</code>
-     * @return The y2.
-     */
-    float getY2();
-
-    /**
-     * <code>bool isEnded = 13;</code>
-     * @return The isEnded.
-     */
-    boolean getIsEnded();
-  }
-  /**
-   * Protobuf type {@code commander.ContactInfo}
-   */
-  public static final class ContactInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.ContactInfo)
-      ContactInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use ContactInfo.newBuilder() to construct.
-    private ContactInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ContactInfo() {
-      info1_ = "";
-      info2_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new ContactInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_ContactInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_ContactInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.ContactInfo.class, commander.Command.ContactInfo.Builder.class);
-    }
-
-    public static final int ID1_FIELD_NUMBER = 1;
-    private int id1_;
-    /**
-     * <code>uint32 id1 = 1;</code>
-     * @return The id1.
-     */
-    @java.lang.Override
-    public int getId1() {
-      return id1_;
-    }
-
-    public static final int ID2_FIELD_NUMBER = 2;
-    private int id2_;
-    /**
-     * <code>uint32 id2 = 2;</code>
-     * @return The id2.
-     */
-    @java.lang.Override
-    public int getId2() {
-      return id2_;
-    }
-
-    public static final int INFO1_FIELD_NUMBER = 3;
-    private volatile java.lang.Object info1_;
-    /**
-     * <code>string info1 = 3;</code>
-     * @return The info1.
-     */
-    @java.lang.Override
-    public java.lang.String getInfo1() {
-      java.lang.Object ref = info1_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        info1_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string info1 = 3;</code>
-     * @return The bytes for info1.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getInfo1Bytes() {
-      java.lang.Object ref = info1_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        info1_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int INFO2_FIELD_NUMBER = 4;
-    private volatile java.lang.Object info2_;
-    /**
-     * <code>string info2 = 4;</code>
-     * @return The info2.
-     */
-    @java.lang.Override
-    public java.lang.String getInfo2() {
-      java.lang.Object ref = info2_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        info2_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string info2 = 4;</code>
-     * @return The bytes for info2.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getInfo2Bytes() {
-      java.lang.Object ref = info2_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        info2_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int X_FIELD_NUMBER = 7;
-    private float x_;
-    /**
-     * <code>float x = 7;</code>
-     * @return The x.
-     */
-    @java.lang.Override
-    public float getX() {
-      return x_;
-    }
-
-    public static final int Y_FIELD_NUMBER = 8;
-    private float y_;
-    /**
-     * <code>float y = 8;</code>
-     * @return The y.
-     */
-    @java.lang.Override
-    public float getY() {
-      return y_;
-    }
-
-    public static final int X1_FIELD_NUMBER = 9;
-    private float x1_;
-    /**
-     * <code>float x1 = 9;</code>
-     * @return The x1.
-     */
-    @java.lang.Override
-    public float getX1() {
-      return x1_;
-    }
-
-    public static final int Y1_FIELD_NUMBER = 10;
-    private float y1_;
-    /**
-     * <code>float y1 = 10;</code>
-     * @return The y1.
-     */
-    @java.lang.Override
-    public float getY1() {
-      return y1_;
-    }
-
-    public static final int X2_FIELD_NUMBER = 11;
-    private float x2_;
-    /**
-     * <code>float x2 = 11;</code>
-     * @return The x2.
-     */
-    @java.lang.Override
-    public float getX2() {
-      return x2_;
-    }
-
-    public static final int Y2_FIELD_NUMBER = 12;
-    private float y2_;
-    /**
-     * <code>float y2 = 12;</code>
-     * @return The y2.
-     */
-    @java.lang.Override
-    public float getY2() {
-      return y2_;
-    }
-
-    public static final int ISENDED_FIELD_NUMBER = 13;
-    private boolean isEnded_;
-    /**
-     * <code>bool isEnded = 13;</code>
-     * @return The isEnded.
-     */
-    @java.lang.Override
-    public boolean getIsEnded() {
-      return isEnded_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (id1_ != 0) {
-        output.writeUInt32(1, id1_);
-      }
-      if (id2_ != 0) {
-        output.writeUInt32(2, id2_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info1_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, info1_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info2_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, info2_);
-      }
-      if (java.lang.Float.floatToRawIntBits(x_) != 0) {
-        output.writeFloat(7, x_);
-      }
-      if (java.lang.Float.floatToRawIntBits(y_) != 0) {
-        output.writeFloat(8, y_);
-      }
-      if (java.lang.Float.floatToRawIntBits(x1_) != 0) {
-        output.writeFloat(9, x1_);
-      }
-      if (java.lang.Float.floatToRawIntBits(y1_) != 0) {
-        output.writeFloat(10, y1_);
-      }
-      if (java.lang.Float.floatToRawIntBits(x2_) != 0) {
-        output.writeFloat(11, x2_);
-      }
-      if (java.lang.Float.floatToRawIntBits(y2_) != 0) {
-        output.writeFloat(12, y2_);
-      }
-      if (isEnded_ != false) {
-        output.writeBool(13, isEnded_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (id1_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, id1_);
-      }
-      if (id2_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, id2_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info1_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, info1_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info2_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, info2_);
-      }
-      if (java.lang.Float.floatToRawIntBits(x_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(7, x_);
-      }
-      if (java.lang.Float.floatToRawIntBits(y_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(8, y_);
-      }
-      if (java.lang.Float.floatToRawIntBits(x1_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(9, x1_);
-      }
-      if (java.lang.Float.floatToRawIntBits(y1_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(10, y1_);
-      }
-      if (java.lang.Float.floatToRawIntBits(x2_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(11, x2_);
-      }
-      if (java.lang.Float.floatToRawIntBits(y2_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(12, y2_);
-      }
-      if (isEnded_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(13, isEnded_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.ContactInfo)) {
-        return super.equals(obj);
-      }
-      commander.Command.ContactInfo other = (commander.Command.ContactInfo) obj;
-
-      if (getId1()
-          != other.getId1()) return false;
-      if (getId2()
-          != other.getId2()) return false;
-      if (!getInfo1()
-          .equals(other.getInfo1())) return false;
-      if (!getInfo2()
-          .equals(other.getInfo2())) return false;
-      if (java.lang.Float.floatToIntBits(getX())
-          != java.lang.Float.floatToIntBits(
-              other.getX())) return false;
-      if (java.lang.Float.floatToIntBits(getY())
-          != java.lang.Float.floatToIntBits(
-              other.getY())) return false;
-      if (java.lang.Float.floatToIntBits(getX1())
-          != java.lang.Float.floatToIntBits(
-              other.getX1())) return false;
-      if (java.lang.Float.floatToIntBits(getY1())
-          != java.lang.Float.floatToIntBits(
-              other.getY1())) return false;
-      if (java.lang.Float.floatToIntBits(getX2())
-          != java.lang.Float.floatToIntBits(
-              other.getX2())) return false;
-      if (java.lang.Float.floatToIntBits(getY2())
-          != java.lang.Float.floatToIntBits(
-              other.getY2())) return false;
-      if (getIsEnded()
-          != other.getIsEnded()) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID1_FIELD_NUMBER;
-      hash = (53 * hash) + getId1();
-      hash = (37 * hash) + ID2_FIELD_NUMBER;
-      hash = (53 * hash) + getId2();
-      hash = (37 * hash) + INFO1_FIELD_NUMBER;
-      hash = (53 * hash) + getInfo1().hashCode();
-      hash = (37 * hash) + INFO2_FIELD_NUMBER;
-      hash = (53 * hash) + getInfo2().hashCode();
-      hash = (37 * hash) + X_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getX());
-      hash = (37 * hash) + Y_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getY());
-      hash = (37 * hash) + X1_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getX1());
-      hash = (37 * hash) + Y1_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getY1());
-      hash = (37 * hash) + X2_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getX2());
-      hash = (37 * hash) + Y2_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getY2());
-      hash = (37 * hash) + ISENDED_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getIsEnded());
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.ContactInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.ContactInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.ContactInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.ContactInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.ContactInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.ContactInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.ContactInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.ContactInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.ContactInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.ContactInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.ContactInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.ContactInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.ContactInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.ContactInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.ContactInfo)
-        commander.Command.ContactInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_ContactInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_ContactInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.ContactInfo.class, commander.Command.ContactInfo.Builder.class);
-      }
-
-      // Construct using commander.Command.ContactInfo.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        id1_ = 0;
-
-        id2_ = 0;
-
-        info1_ = "";
-
-        info2_ = "";
-
-        x_ = 0F;
-
-        y_ = 0F;
-
-        x1_ = 0F;
-
-        y1_ = 0F;
-
-        x2_ = 0F;
-
-        y2_ = 0F;
-
-        isEnded_ = false;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_ContactInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.ContactInfo getDefaultInstanceForType() {
-        return commander.Command.ContactInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.ContactInfo build() {
-        commander.Command.ContactInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.ContactInfo buildPartial() {
-        commander.Command.ContactInfo result = new commander.Command.ContactInfo(this);
-        result.id1_ = id1_;
-        result.id2_ = id2_;
-        result.info1_ = info1_;
-        result.info2_ = info2_;
-        result.x_ = x_;
-        result.y_ = y_;
-        result.x1_ = x1_;
-        result.y1_ = y1_;
-        result.x2_ = x2_;
-        result.y2_ = y2_;
-        result.isEnded_ = isEnded_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.ContactInfo) {
-          return mergeFrom((commander.Command.ContactInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.ContactInfo other) {
-        if (other == commander.Command.ContactInfo.getDefaultInstance()) return this;
-        if (other.getId1() != 0) {
-          setId1(other.getId1());
-        }
-        if (other.getId2() != 0) {
-          setId2(other.getId2());
-        }
-        if (!other.getInfo1().isEmpty()) {
-          info1_ = other.info1_;
-          onChanged();
-        }
-        if (!other.getInfo2().isEmpty()) {
-          info2_ = other.info2_;
-          onChanged();
-        }
-        if (other.getX() != 0F) {
-          setX(other.getX());
-        }
-        if (other.getY() != 0F) {
-          setY(other.getY());
-        }
-        if (other.getX1() != 0F) {
-          setX1(other.getX1());
-        }
-        if (other.getY1() != 0F) {
-          setY1(other.getY1());
-        }
-        if (other.getX2() != 0F) {
-          setX2(other.getX2());
-        }
-        if (other.getY2() != 0F) {
-          setY2(other.getY2());
-        }
-        if (other.getIsEnded() != false) {
-          setIsEnded(other.getIsEnded());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 8: {
-                id1_ = input.readUInt32();
-
-                break;
-              } // case 8
-              case 16: {
-                id2_ = input.readUInt32();
-
-                break;
-              } // case 16
-              case 26: {
-                info1_ = input.readStringRequireUtf8();
-
-                break;
-              } // case 26
-              case 34: {
-                info2_ = input.readStringRequireUtf8();
-
-                break;
-              } // case 34
-              case 61: {
-                x_ = input.readFloat();
-
-                break;
-              } // case 61
-              case 69: {
-                y_ = input.readFloat();
-
-                break;
-              } // case 69
-              case 77: {
-                x1_ = input.readFloat();
-
-                break;
-              } // case 77
-              case 85: {
-                y1_ = input.readFloat();
-
-                break;
-              } // case 85
-              case 93: {
-                x2_ = input.readFloat();
-
-                break;
-              } // case 93
-              case 101: {
-                y2_ = input.readFloat();
-
-                break;
-              } // case 101
-              case 104: {
-                isEnded_ = input.readBool();
-
-                break;
-              } // case 104
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private int id1_ ;
-      /**
-       * <code>uint32 id1 = 1;</code>
-       * @return The id1.
-       */
-      @java.lang.Override
-      public int getId1() {
-        return id1_;
-      }
-      /**
-       * <code>uint32 id1 = 1;</code>
-       * @param value The id1 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setId1(int value) {
-        
-        id1_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 id1 = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId1() {
-        
-        id1_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int id2_ ;
-      /**
-       * <code>uint32 id2 = 2;</code>
-       * @return The id2.
-       */
-      @java.lang.Override
-      public int getId2() {
-        return id2_;
-      }
-      /**
-       * <code>uint32 id2 = 2;</code>
-       * @param value The id2 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setId2(int value) {
-        
-        id2_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 id2 = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId2() {
-        
-        id2_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object info1_ = "";
-      /**
-       * <code>string info1 = 3;</code>
-       * @return The info1.
-       */
-      public java.lang.String getInfo1() {
-        java.lang.Object ref = info1_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          info1_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string info1 = 3;</code>
-       * @return The bytes for info1.
-       */
-      public com.google.protobuf.ByteString
-          getInfo1Bytes() {
-        java.lang.Object ref = info1_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          info1_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string info1 = 3;</code>
-       * @param value The info1 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setInfo1(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        info1_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string info1 = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearInfo1() {
-        
-        info1_ = getDefaultInstance().getInfo1();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string info1 = 3;</code>
-       * @param value The bytes for info1 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setInfo1Bytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        info1_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object info2_ = "";
-      /**
-       * <code>string info2 = 4;</code>
-       * @return The info2.
-       */
-      public java.lang.String getInfo2() {
-        java.lang.Object ref = info2_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          info2_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string info2 = 4;</code>
-       * @return The bytes for info2.
-       */
-      public com.google.protobuf.ByteString
-          getInfo2Bytes() {
-        java.lang.Object ref = info2_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          info2_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string info2 = 4;</code>
-       * @param value The info2 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setInfo2(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        info2_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string info2 = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearInfo2() {
-        
-        info2_ = getDefaultInstance().getInfo2();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string info2 = 4;</code>
-       * @param value The bytes for info2 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setInfo2Bytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        info2_ = value;
-        onChanged();
-        return this;
-      }
-
-      private float x_ ;
-      /**
-       * <code>float x = 7;</code>
-       * @return The x.
-       */
-      @java.lang.Override
-      public float getX() {
-        return x_;
-      }
-      /**
-       * <code>float x = 7;</code>
-       * @param value The x to set.
-       * @return This builder for chaining.
-       */
-      public Builder setX(float value) {
-        
-        x_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>float x = 7;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearX() {
-        
-        x_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private float y_ ;
-      /**
-       * <code>float y = 8;</code>
-       * @return The y.
-       */
-      @java.lang.Override
-      public float getY() {
-        return y_;
-      }
-      /**
-       * <code>float y = 8;</code>
-       * @param value The y to set.
-       * @return This builder for chaining.
-       */
-      public Builder setY(float value) {
-        
-        y_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>float y = 8;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearY() {
-        
-        y_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private float x1_ ;
-      /**
-       * <code>float x1 = 9;</code>
-       * @return The x1.
-       */
-      @java.lang.Override
-      public float getX1() {
-        return x1_;
-      }
-      /**
-       * <code>float x1 = 9;</code>
-       * @param value The x1 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setX1(float value) {
-        
-        x1_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>float x1 = 9;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearX1() {
-        
-        x1_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private float y1_ ;
-      /**
-       * <code>float y1 = 10;</code>
-       * @return The y1.
-       */
-      @java.lang.Override
-      public float getY1() {
-        return y1_;
-      }
-      /**
-       * <code>float y1 = 10;</code>
-       * @param value The y1 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setY1(float value) {
-        
-        y1_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>float y1 = 10;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearY1() {
-        
-        y1_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private float x2_ ;
-      /**
-       * <code>float x2 = 11;</code>
-       * @return The x2.
-       */
-      @java.lang.Override
-      public float getX2() {
-        return x2_;
-      }
-      /**
-       * <code>float x2 = 11;</code>
-       * @param value The x2 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setX2(float value) {
-        
-        x2_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>float x2 = 11;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearX2() {
-        
-        x2_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private float y2_ ;
-      /**
-       * <code>float y2 = 12;</code>
-       * @return The y2.
-       */
-      @java.lang.Override
-      public float getY2() {
-        return y2_;
-      }
-      /**
-       * <code>float y2 = 12;</code>
-       * @param value The y2 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setY2(float value) {
-        
-        y2_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>float y2 = 12;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearY2() {
-        
-        y2_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private boolean isEnded_ ;
-      /**
-       * <code>bool isEnded = 13;</code>
-       * @return The isEnded.
-       */
-      @java.lang.Override
-      public boolean getIsEnded() {
-        return isEnded_;
-      }
-      /**
-       * <code>bool isEnded = 13;</code>
-       * @param value The isEnded to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIsEnded(boolean value) {
-        
-        isEnded_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bool isEnded = 13;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIsEnded() {
-        
-        isEnded_ = false;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.ContactInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.ContactInfo)
-    private static final commander.Command.ContactInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.ContactInfo();
-    }
-
-    public static commander.Command.ContactInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ContactInfo>
-        PARSER = new com.google.protobuf.AbstractParser<ContactInfo>() {
-      @java.lang.Override
-      public ContactInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<ContactInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ContactInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.ContactInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface CStageInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.CStageInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string background = 1;</code>
-     * @return The background.
-     */
-    java.lang.String getBackground();
-    /**
-     * <code>string background = 1;</code>
-     * @return The bytes for background.
-     */
-    com.google.protobuf.ByteString
-        getBackgroundBytes();
-
-    /**
-     * <code>double gravityX = 2;</code>
-     * @return The gravityX.
-     */
-    double getGravityX();
-
-    /**
-     * <code>double gravityY = 3;</code>
-     * @return The gravityY.
-     */
-    double getGravityY();
-
-    /**
-     * <code>double width = 4;</code>
-     * @return The width.
-     */
-    double getWidth();
-
-    /**
-     * <code>double height = 5;</code>
-     * @return The height.
-     */
-    double getHeight();
-
-    /**
-     * <code>bool debug = 6;</code>
-     * @return The debug.
-     */
-    boolean getDebug();
-
-    /**
-     * <code>.commander.JoystickDirectionals joystickDirectionals = 7;</code>
-     * @return The enum numeric value on the wire for joystickDirectionals.
-     */
-    int getJoystickDirectionalsValue();
-    /**
-     * <code>.commander.JoystickDirectionals joystickDirectionals = 7;</code>
-     * @return The joystickDirectionals.
-     */
-    commander.Command.JoystickDirectionals getJoystickDirectionals();
-
-    /**
-     * <code>uint32 joystickPrecision = 8;</code>
-     * @return The joystickPrecision.
-     */
-    int getJoystickPrecision();
-
-    /**
-     * <code>.commander.ActionEvent button1 = 9;</code>
-     * @return The enum numeric value on the wire for button1.
-     */
-    int getButton1Value();
-    /**
-     * <code>.commander.ActionEvent button1 = 9;</code>
-     * @return The button1.
-     */
-    commander.Command.ActionEvent getButton1();
-
-    /**
-     * <code>.commander.ActionEvent button2 = 10;</code>
-     * @return The enum numeric value on the wire for button2.
-     */
-    int getButton2Value();
-    /**
-     * <code>.commander.ActionEvent button2 = 10;</code>
-     * @return The button2.
-     */
-    commander.Command.ActionEvent getButton2();
-
-    /**
-     * <code>.commander.ActionEvent tab = 11;</code>
-     * @return The enum numeric value on the wire for tab.
-     */
-    int getTabValue();
-    /**
-     * <code>.commander.ActionEvent tab = 11;</code>
-     * @return The tab.
-     */
-    commander.Command.ActionEvent getTab();
-  }
-  /**
-   * Protobuf type {@code commander.CStageInfo}
-   */
-  public static final class CStageInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.CStageInfo)
-      CStageInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use CStageInfo.newBuilder() to construct.
-    private CStageInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private CStageInfo() {
-      background_ = "";
-      joystickDirectionals_ = 0;
-      button1_ = 0;
-      button2_ = 0;
-      tab_ = 0;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new CStageInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return commander.Command.internal_static_commander_CStageInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_CStageInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              commander.Command.CStageInfo.class, commander.Command.CStageInfo.Builder.class);
-    }
-
-    public static final int BACKGROUND_FIELD_NUMBER = 1;
-    private volatile java.lang.Object background_;
-    /**
-     * <code>string background = 1;</code>
-     * @return The background.
-     */
-    @java.lang.Override
-    public java.lang.String getBackground() {
-      java.lang.Object ref = background_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        background_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string background = 1;</code>
-     * @return The bytes for background.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getBackgroundBytes() {
-      java.lang.Object ref = background_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        background_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int GRAVITYX_FIELD_NUMBER = 2;
-    private double gravityX_;
-    /**
-     * <code>double gravityX = 2;</code>
-     * @return The gravityX.
-     */
-    @java.lang.Override
-    public double getGravityX() {
-      return gravityX_;
-    }
-
-    public static final int GRAVITYY_FIELD_NUMBER = 3;
-    private double gravityY_;
-    /**
-     * <code>double gravityY = 3;</code>
-     * @return The gravityY.
-     */
-    @java.lang.Override
-    public double getGravityY() {
-      return gravityY_;
-    }
-
-    public static final int WIDTH_FIELD_NUMBER = 4;
-    private double width_;
-    /**
-     * <code>double width = 4;</code>
-     * @return The width.
-     */
-    @java.lang.Override
-    public double getWidth() {
-      return width_;
-    }
-
-    public static final int HEIGHT_FIELD_NUMBER = 5;
-    private double height_;
-    /**
-     * <code>double height = 5;</code>
-     * @return The height.
-     */
-    @java.lang.Override
-    public double getHeight() {
-      return height_;
-    }
-
-    public static final int DEBUG_FIELD_NUMBER = 6;
-    private boolean debug_;
-    /**
-     * <code>bool debug = 6;</code>
-     * @return The debug.
-     */
-    @java.lang.Override
-    public boolean getDebug() {
-      return debug_;
-    }
-
-    public static final int JOYSTICKDIRECTIONALS_FIELD_NUMBER = 7;
-    private int joystickDirectionals_;
-    /**
-     * <code>.commander.JoystickDirectionals joystickDirectionals = 7;</code>
-     * @return The enum numeric value on the wire for joystickDirectionals.
-     */
-    @java.lang.Override public int getJoystickDirectionalsValue() {
-      return joystickDirectionals_;
-    }
-    /**
-     * <code>.commander.JoystickDirectionals joystickDirectionals = 7;</code>
-     * @return The joystickDirectionals.
-     */
-    @java.lang.Override public commander.Command.JoystickDirectionals getJoystickDirectionals() {
-      @SuppressWarnings("deprecation")
-      commander.Command.JoystickDirectionals result = commander.Command.JoystickDirectionals.valueOf(joystickDirectionals_);
-      return result == null ? commander.Command.JoystickDirectionals.UNRECOGNIZED : result;
-    }
-
-    public static final int JOYSTICKPRECISION_FIELD_NUMBER = 8;
-    private int joystickPrecision_;
-    /**
-     * <code>uint32 joystickPrecision = 8;</code>
-     * @return The joystickPrecision.
-     */
-    @java.lang.Override
-    public int getJoystickPrecision() {
-      return joystickPrecision_;
-    }
-
-    public static final int BUTTON1_FIELD_NUMBER = 9;
-    private int button1_;
-    /**
-     * <code>.commander.ActionEvent button1 = 9;</code>
-     * @return The enum numeric value on the wire for button1.
-     */
-    @java.lang.Override public int getButton1Value() {
-      return button1_;
-    }
-    /**
-     * <code>.commander.ActionEvent button1 = 9;</code>
-     * @return The button1.
-     */
-    @java.lang.Override public commander.Command.ActionEvent getButton1() {
-      @SuppressWarnings("deprecation")
-      commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(button1_);
-      return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-    }
-
-    public static final int BUTTON2_FIELD_NUMBER = 10;
-    private int button2_;
-    /**
-     * <code>.commander.ActionEvent button2 = 10;</code>
-     * @return The enum numeric value on the wire for button2.
-     */
-    @java.lang.Override public int getButton2Value() {
-      return button2_;
-    }
-    /**
-     * <code>.commander.ActionEvent button2 = 10;</code>
-     * @return The button2.
-     */
-    @java.lang.Override public commander.Command.ActionEvent getButton2() {
-      @SuppressWarnings("deprecation")
-      commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(button2_);
-      return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-    }
-
-    public static final int TAB_FIELD_NUMBER = 11;
-    private int tab_;
-    /**
-     * <code>.commander.ActionEvent tab = 11;</code>
-     * @return The enum numeric value on the wire for tab.
-     */
-    @java.lang.Override public int getTabValue() {
-      return tab_;
-    }
-    /**
-     * <code>.commander.ActionEvent tab = 11;</code>
-     * @return The tab.
-     */
-    @java.lang.Override public commander.Command.ActionEvent getTab() {
-      @SuppressWarnings("deprecation")
-      commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(tab_);
-      return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(background_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, background_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(gravityX_) != 0) {
-        output.writeDouble(2, gravityX_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(gravityY_) != 0) {
-        output.writeDouble(3, gravityY_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(width_) != 0) {
-        output.writeDouble(4, width_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(height_) != 0) {
-        output.writeDouble(5, height_);
-      }
-      if (debug_ != false) {
-        output.writeBool(6, debug_);
-      }
-      if (joystickDirectionals_ != commander.Command.JoystickDirectionals.none.getNumber()) {
-        output.writeEnum(7, joystickDirectionals_);
-      }
-      if (joystickPrecision_ != 0) {
-        output.writeUInt32(8, joystickPrecision_);
-      }
-      if (button1_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        output.writeEnum(9, button1_);
-      }
-      if (button2_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        output.writeEnum(10, button2_);
-      }
-      if (tab_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        output.writeEnum(11, tab_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(background_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, background_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(gravityX_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, gravityX_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(gravityY_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, gravityY_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(width_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, width_);
-      }
-      if (java.lang.Double.doubleToRawLongBits(height_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(5, height_);
-      }
-      if (debug_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(6, debug_);
-      }
-      if (joystickDirectionals_ != commander.Command.JoystickDirectionals.none.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(7, joystickDirectionals_);
-      }
-      if (joystickPrecision_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, joystickPrecision_);
-      }
-      if (button1_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(9, button1_);
-      }
-      if (button2_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(10, button2_);
-      }
-      if (tab_ != commander.Command.ActionEvent.DOWN.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(11, tab_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof commander.Command.CStageInfo)) {
-        return super.equals(obj);
-      }
-      commander.Command.CStageInfo other = (commander.Command.CStageInfo) obj;
-
-      if (!getBackground()
-          .equals(other.getBackground())) return false;
-      if (java.lang.Double.doubleToLongBits(getGravityX())
-          != java.lang.Double.doubleToLongBits(
-              other.getGravityX())) return false;
-      if (java.lang.Double.doubleToLongBits(getGravityY())
-          != java.lang.Double.doubleToLongBits(
-              other.getGravityY())) return false;
-      if (java.lang.Double.doubleToLongBits(getWidth())
-          != java.lang.Double.doubleToLongBits(
-              other.getWidth())) return false;
-      if (java.lang.Double.doubleToLongBits(getHeight())
-          != java.lang.Double.doubleToLongBits(
-              other.getHeight())) return false;
-      if (getDebug()
-          != other.getDebug()) return false;
-      if (joystickDirectionals_ != other.joystickDirectionals_) return false;
-      if (getJoystickPrecision()
-          != other.getJoystickPrecision()) return false;
-      if (button1_ != other.button1_) return false;
-      if (button2_ != other.button2_) return false;
-      if (tab_ != other.tab_) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + BACKGROUND_FIELD_NUMBER;
-      hash = (53 * hash) + getBackground().hashCode();
-      hash = (37 * hash) + GRAVITYX_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getGravityX()));
-      hash = (37 * hash) + GRAVITYY_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getGravityY()));
-      hash = (37 * hash) + WIDTH_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getWidth()));
-      hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getHeight()));
-      hash = (37 * hash) + DEBUG_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getDebug());
-      hash = (37 * hash) + JOYSTICKDIRECTIONALS_FIELD_NUMBER;
-      hash = (53 * hash) + joystickDirectionals_;
-      hash = (37 * hash) + JOYSTICKPRECISION_FIELD_NUMBER;
-      hash = (53 * hash) + getJoystickPrecision();
-      hash = (37 * hash) + BUTTON1_FIELD_NUMBER;
-      hash = (53 * hash) + button1_;
-      hash = (37 * hash) + BUTTON2_FIELD_NUMBER;
-      hash = (53 * hash) + button2_;
-      hash = (37 * hash) + TAB_FIELD_NUMBER;
-      hash = (53 * hash) + tab_;
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static commander.Command.CStageInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.CStageInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.CStageInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.CStageInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.CStageInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static commander.Command.CStageInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static commander.Command.CStageInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.CStageInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.CStageInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static commander.Command.CStageInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static commander.Command.CStageInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static commander.Command.CStageInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(commander.Command.CStageInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code commander.CStageInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.CStageInfo)
-        commander.Command.CStageInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return commander.Command.internal_static_commander_CStageInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_CStageInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                commander.Command.CStageInfo.class, commander.Command.CStageInfo.Builder.class);
-      }
-
-      // Construct using commander.Command.CStageInfo.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        background_ = "";
-
-        gravityX_ = 0D;
-
-        gravityY_ = 0D;
-
-        width_ = 0D;
-
-        height_ = 0D;
-
-        debug_ = false;
-
-        joystickDirectionals_ = 0;
-
-        joystickPrecision_ = 0;
-
-        button1_ = 0;
-
-        button2_ = 0;
-
-        tab_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return commander.Command.internal_static_commander_CStageInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public commander.Command.CStageInfo getDefaultInstanceForType() {
-        return commander.Command.CStageInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public commander.Command.CStageInfo build() {
-        commander.Command.CStageInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public commander.Command.CStageInfo buildPartial() {
-        commander.Command.CStageInfo result = new commander.Command.CStageInfo(this);
-        result.background_ = background_;
-        result.gravityX_ = gravityX_;
-        result.gravityY_ = gravityY_;
-        result.width_ = width_;
-        result.height_ = height_;
-        result.debug_ = debug_;
-        result.joystickDirectionals_ = joystickDirectionals_;
-        result.joystickPrecision_ = joystickPrecision_;
-        result.button1_ = button1_;
-        result.button2_ = button2_;
-        result.tab_ = tab_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.CStageInfo) {
-          return mergeFrom((commander.Command.CStageInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(commander.Command.CStageInfo other) {
-        if (other == commander.Command.CStageInfo.getDefaultInstance()) return this;
-        if (!other.getBackground().isEmpty()) {
-          background_ = other.background_;
-          onChanged();
-        }
-        if (other.getGravityX() != 0D) {
-          setGravityX(other.getGravityX());
-        }
-        if (other.getGravityY() != 0D) {
-          setGravityY(other.getGravityY());
-        }
-        if (other.getWidth() != 0D) {
-          setWidth(other.getWidth());
-        }
-        if (other.getHeight() != 0D) {
-          setHeight(other.getHeight());
-        }
-        if (other.getDebug() != false) {
-          setDebug(other.getDebug());
-        }
-        if (other.joystickDirectionals_ != 0) {
-          setJoystickDirectionalsValue(other.getJoystickDirectionalsValue());
-        }
-        if (other.getJoystickPrecision() != 0) {
-          setJoystickPrecision(other.getJoystickPrecision());
-        }
-        if (other.button1_ != 0) {
-          setButton1Value(other.getButton1Value());
-        }
-        if (other.button2_ != 0) {
-          setButton2Value(other.getButton2Value());
-        }
-        if (other.tab_ != 0) {
-          setTabValue(other.getTabValue());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                background_ = input.readStringRequireUtf8();
-
-                break;
-              } // case 10
-              case 17: {
-                gravityX_ = input.readDouble();
-
-                break;
-              } // case 17
-              case 25: {
-                gravityY_ = input.readDouble();
-
-                break;
-              } // case 25
-              case 33: {
-                width_ = input.readDouble();
-
-                break;
-              } // case 33
-              case 41: {
-                height_ = input.readDouble();
-
-                break;
-              } // case 41
-              case 48: {
-                debug_ = input.readBool();
-
-                break;
-              } // case 48
-              case 56: {
-                joystickDirectionals_ = input.readEnum();
-
-                break;
-              } // case 56
-              case 64: {
-                joystickPrecision_ = input.readUInt32();
-
-                break;
-              } // case 64
-              case 72: {
-                button1_ = input.readEnum();
-
-                break;
-              } // case 72
-              case 80: {
-                button2_ = input.readEnum();
-
-                break;
-              } // case 80
-              case 88: {
-                tab_ = input.readEnum();
-
-                break;
-              } // case 88
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-
-      private java.lang.Object background_ = "";
-      /**
-       * <code>string background = 1;</code>
-       * @return The background.
-       */
-      public java.lang.String getBackground() {
-        java.lang.Object ref = background_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          background_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string background = 1;</code>
-       * @return The bytes for background.
-       */
-      public com.google.protobuf.ByteString
-          getBackgroundBytes() {
-        java.lang.Object ref = background_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          background_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string background = 1;</code>
-       * @param value The background to set.
-       * @return This builder for chaining.
-       */
-      public Builder setBackground(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        background_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string background = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearBackground() {
-        
-        background_ = getDefaultInstance().getBackground();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string background = 1;</code>
-       * @param value The bytes for background to set.
-       * @return This builder for chaining.
-       */
-      public Builder setBackgroundBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        background_ = value;
-        onChanged();
-        return this;
-      }
-
-      private double gravityX_ ;
-      /**
-       * <code>double gravityX = 2;</code>
-       * @return The gravityX.
-       */
-      @java.lang.Override
-      public double getGravityX() {
-        return gravityX_;
-      }
-      /**
-       * <code>double gravityX = 2;</code>
-       * @param value The gravityX to set.
-       * @return This builder for chaining.
-       */
-      public Builder setGravityX(double value) {
-        
-        gravityX_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double gravityX = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearGravityX() {
-        
-        gravityX_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double gravityY_ ;
-      /**
-       * <code>double gravityY = 3;</code>
-       * @return The gravityY.
-       */
-      @java.lang.Override
-      public double getGravityY() {
-        return gravityY_;
-      }
-      /**
-       * <code>double gravityY = 3;</code>
-       * @param value The gravityY to set.
-       * @return This builder for chaining.
-       */
-      public Builder setGravityY(double value) {
-        
-        gravityY_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double gravityY = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearGravityY() {
-        
-        gravityY_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double width_ ;
-      /**
-       * <code>double width = 4;</code>
-       * @return The width.
-       */
-      @java.lang.Override
-      public double getWidth() {
-        return width_;
-      }
-      /**
-       * <code>double width = 4;</code>
-       * @param value The width to set.
-       * @return This builder for chaining.
-       */
-      public Builder setWidth(double value) {
-        
-        width_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double width = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearWidth() {
-        
-        width_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double height_ ;
-      /**
-       * <code>double height = 5;</code>
-       * @return The height.
-       */
-      @java.lang.Override
-      public double getHeight() {
-        return height_;
-      }
-      /**
-       * <code>double height = 5;</code>
-       * @param value The height to set.
-       * @return This builder for chaining.
-       */
-      public Builder setHeight(double value) {
-        
-        height_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double height = 5;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearHeight() {
-        
-        height_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private boolean debug_ ;
-      /**
-       * <code>bool debug = 6;</code>
-       * @return The debug.
-       */
-      @java.lang.Override
-      public boolean getDebug() {
-        return debug_;
-      }
-      /**
-       * <code>bool debug = 6;</code>
-       * @param value The debug to set.
-       * @return This builder for chaining.
-       */
-      public Builder setDebug(boolean value) {
-        
-        debug_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bool debug = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearDebug() {
-        
-        debug_ = false;
-        onChanged();
-        return this;
-      }
-
-      private int joystickDirectionals_ = 0;
-      /**
-       * <code>.commander.JoystickDirectionals joystickDirectionals = 7;</code>
-       * @return The enum numeric value on the wire for joystickDirectionals.
-       */
-      @java.lang.Override public int getJoystickDirectionalsValue() {
-        return joystickDirectionals_;
-      }
-      /**
-       * <code>.commander.JoystickDirectionals joystickDirectionals = 7;</code>
-       * @param value The enum numeric value on the wire for joystickDirectionals to set.
-       * @return This builder for chaining.
-       */
-      public Builder setJoystickDirectionalsValue(int value) {
-        
-        joystickDirectionals_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.JoystickDirectionals joystickDirectionals = 7;</code>
-       * @return The joystickDirectionals.
-       */
-      @java.lang.Override
-      public commander.Command.JoystickDirectionals getJoystickDirectionals() {
-        @SuppressWarnings("deprecation")
-        commander.Command.JoystickDirectionals result = commander.Command.JoystickDirectionals.valueOf(joystickDirectionals_);
-        return result == null ? commander.Command.JoystickDirectionals.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.JoystickDirectionals joystickDirectionals = 7;</code>
-       * @param value The joystickDirectionals to set.
-       * @return This builder for chaining.
-       */
-      public Builder setJoystickDirectionals(commander.Command.JoystickDirectionals value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        joystickDirectionals_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.JoystickDirectionals joystickDirectionals = 7;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearJoystickDirectionals() {
-        
-        joystickDirectionals_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int joystickPrecision_ ;
-      /**
-       * <code>uint32 joystickPrecision = 8;</code>
-       * @return The joystickPrecision.
-       */
-      @java.lang.Override
-      public int getJoystickPrecision() {
-        return joystickPrecision_;
-      }
-      /**
-       * <code>uint32 joystickPrecision = 8;</code>
-       * @param value The joystickPrecision to set.
-       * @return This builder for chaining.
-       */
-      public Builder setJoystickPrecision(int value) {
-        
-        joystickPrecision_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 joystickPrecision = 8;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearJoystickPrecision() {
-        
-        joystickPrecision_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int button1_ = 0;
-      /**
-       * <code>.commander.ActionEvent button1 = 9;</code>
-       * @return The enum numeric value on the wire for button1.
-       */
-      @java.lang.Override public int getButton1Value() {
-        return button1_;
-      }
-      /**
-       * <code>.commander.ActionEvent button1 = 9;</code>
-       * @param value The enum numeric value on the wire for button1 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setButton1Value(int value) {
-        
-        button1_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent button1 = 9;</code>
-       * @return The button1.
-       */
-      @java.lang.Override
-      public commander.Command.ActionEvent getButton1() {
-        @SuppressWarnings("deprecation")
-        commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(button1_);
-        return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.ActionEvent button1 = 9;</code>
-       * @param value The button1 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setButton1(commander.Command.ActionEvent value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        button1_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent button1 = 9;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearButton1() {
-        
-        button1_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int button2_ = 0;
-      /**
-       * <code>.commander.ActionEvent button2 = 10;</code>
-       * @return The enum numeric value on the wire for button2.
-       */
-      @java.lang.Override public int getButton2Value() {
-        return button2_;
-      }
-      /**
-       * <code>.commander.ActionEvent button2 = 10;</code>
-       * @param value The enum numeric value on the wire for button2 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setButton2Value(int value) {
-        
-        button2_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent button2 = 10;</code>
-       * @return The button2.
-       */
-      @java.lang.Override
-      public commander.Command.ActionEvent getButton2() {
-        @SuppressWarnings("deprecation")
-        commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(button2_);
-        return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.ActionEvent button2 = 10;</code>
-       * @param value The button2 to set.
-       * @return This builder for chaining.
-       */
-      public Builder setButton2(commander.Command.ActionEvent value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        button2_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent button2 = 10;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearButton2() {
-        
-        button2_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int tab_ = 0;
-      /**
-       * <code>.commander.ActionEvent tab = 11;</code>
-       * @return The enum numeric value on the wire for tab.
-       */
-      @java.lang.Override public int getTabValue() {
-        return tab_;
-      }
-      /**
-       * <code>.commander.ActionEvent tab = 11;</code>
-       * @param value The enum numeric value on the wire for tab to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTabValue(int value) {
-        
-        tab_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent tab = 11;</code>
-       * @return The tab.
-       */
-      @java.lang.Override
-      public commander.Command.ActionEvent getTab() {
-        @SuppressWarnings("deprecation")
-        commander.Command.ActionEvent result = commander.Command.ActionEvent.valueOf(tab_);
-        return result == null ? commander.Command.ActionEvent.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.ActionEvent tab = 11;</code>
-       * @param value The tab to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTab(commander.Command.ActionEvent value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        tab_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.ActionEvent tab = 11;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTab() {
-        
-        tab_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:commander.CStageInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:commander.CStageInfo)
-    private static final commander.Command.CStageInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new commander.Command.CStageInfo();
-    }
-
-    public static commander.Command.CStageInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<CStageInfo>
-        PARSER = new com.google.protobuf.AbstractParser<CStageInfo>() {
-      @java.lang.Override
-      public CStageInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<CStageInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<CStageInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public commander.Command.CStageInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface CmdOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.Cmd)
+  public interface NEventOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:commander.NEvent)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -13100,18 +2363,18 @@ public final class Command {
         getStringsBytes(int index);
   }
   /**
-   * Protobuf type {@code commander.Cmd}
+   * Protobuf type {@code commander.NEvent}
    */
-  public static final class Cmd extends
+  public static final class NEvent extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.Cmd)
-      CmdOrBuilder {
+      // @@protoc_insertion_point(message_implements:commander.NEvent)
+      NEventOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use Cmd.newBuilder() to construct.
-    private Cmd(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use NEvent.newBuilder() to construct.
+    private NEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private Cmd() {
+    private NEvent() {
       ints_ = emptyIntList();
       floats_ = emptyFloatList();
       strings_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -13121,7 +2384,7 @@ public final class Command {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new Cmd();
+      return new NEvent();
     }
 
     @java.lang.Override
@@ -13131,15 +2394,15 @@ public final class Command {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return commander.Command.internal_static_commander_Cmd_descriptor;
+      return commander.Command.internal_static_commander_NEvent_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_Cmd_fieldAccessorTable
+      return commander.Command.internal_static_commander_NEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              commander.Command.Cmd.class, commander.Command.Cmd.Builder.class);
+              commander.Command.NEvent.class, commander.Command.NEvent.Builder.class);
     }
 
     public static final int INTS_FIELD_NUMBER = 2;
@@ -13317,10 +2580,10 @@ public final class Command {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof commander.Command.Cmd)) {
+      if (!(obj instanceof commander.Command.NEvent)) {
         return super.equals(obj);
       }
-      commander.Command.Cmd other = (commander.Command.Cmd) obj;
+      commander.Command.NEvent other = (commander.Command.NEvent) obj;
 
       if (!getIntsList()
           .equals(other.getIntsList())) return false;
@@ -13356,69 +2619,69 @@ public final class Command {
       return hash;
     }
 
-    public static commander.Command.Cmd parseFrom(
+    public static commander.Command.NEvent parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.Cmd parseFrom(
+    public static commander.Command.NEvent parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.Cmd parseFrom(
+    public static commander.Command.NEvent parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.Cmd parseFrom(
+    public static commander.Command.NEvent parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.Cmd parseFrom(byte[] data)
+    public static commander.Command.NEvent parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.Cmd parseFrom(
+    public static commander.Command.NEvent parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.Cmd parseFrom(java.io.InputStream input)
+    public static commander.Command.NEvent parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.Cmd parseFrom(
+    public static commander.Command.NEvent parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.Cmd parseDelimitedFrom(java.io.InputStream input)
+    public static commander.Command.NEvent parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static commander.Command.Cmd parseDelimitedFrom(
+    public static commander.Command.NEvent parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.Cmd parseFrom(
+    public static commander.Command.NEvent parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.Cmd parseFrom(
+    public static commander.Command.NEvent parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -13431,7 +2694,7 @@ public final class Command {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(commander.Command.Cmd prototype) {
+    public static Builder newBuilder(commander.Command.NEvent prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -13447,26 +2710,26 @@ public final class Command {
       return builder;
     }
     /**
-     * Protobuf type {@code commander.Cmd}
+     * Protobuf type {@code commander.NEvent}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.Cmd)
-        commander.Command.CmdOrBuilder {
+        // @@protoc_insertion_point(builder_implements:commander.NEvent)
+        commander.Command.NEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return commander.Command.internal_static_commander_Cmd_descriptor;
+        return commander.Command.internal_static_commander_NEvent_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_Cmd_fieldAccessorTable
+        return commander.Command.internal_static_commander_NEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                commander.Command.Cmd.class, commander.Command.Cmd.Builder.class);
+                commander.Command.NEvent.class, commander.Command.NEvent.Builder.class);
       }
 
-      // Construct using commander.Command.Cmd.newBuilder()
+      // Construct using commander.Command.NEvent.newBuilder()
       private Builder() {
 
       }
@@ -13491,17 +2754,17 @@ public final class Command {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return commander.Command.internal_static_commander_Cmd_descriptor;
+        return commander.Command.internal_static_commander_NEvent_descriptor;
       }
 
       @java.lang.Override
-      public commander.Command.Cmd getDefaultInstanceForType() {
-        return commander.Command.Cmd.getDefaultInstance();
+      public commander.Command.NEvent getDefaultInstanceForType() {
+        return commander.Command.NEvent.getDefaultInstance();
       }
 
       @java.lang.Override
-      public commander.Command.Cmd build() {
-        commander.Command.Cmd result = buildPartial();
+      public commander.Command.NEvent build() {
+        commander.Command.NEvent result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -13509,8 +2772,8 @@ public final class Command {
       }
 
       @java.lang.Override
-      public commander.Command.Cmd buildPartial() {
-        commander.Command.Cmd result = new commander.Command.Cmd(this);
+      public commander.Command.NEvent buildPartial() {
+        commander.Command.NEvent result = new commander.Command.NEvent(this);
         int from_bitField0_ = bitField0_;
         if (((bitField0_ & 0x00000001) != 0)) {
           ints_.makeImmutable();
@@ -13565,16 +2828,16 @@ public final class Command {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.Cmd) {
-          return mergeFrom((commander.Command.Cmd)other);
+        if (other instanceof commander.Command.NEvent) {
+          return mergeFrom((commander.Command.NEvent)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(commander.Command.Cmd other) {
-        if (other == commander.Command.Cmd.getDefaultInstance()) return this;
+      public Builder mergeFrom(commander.Command.NEvent other) {
+        if (other == commander.Command.NEvent.getDefaultInstance()) return this;
         if (!other.ints_.isEmpty()) {
           if (ints_.isEmpty()) {
             ints_ = other.ints_;
@@ -13966,6 +3229,2844 @@ public final class Command {
       }
 
 
+      // @@protoc_insertion_point(builder_scope:commander.NEvent)
+    }
+
+    // @@protoc_insertion_point(class_scope:commander.NEvent)
+    private static final commander.Command.NEvent DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new commander.Command.NEvent();
+    }
+
+    public static commander.Command.NEvent getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<NEvent>
+        PARSER = new com.google.protobuf.AbstractParser<NEvent>() {
+      @java.lang.Override
+      public NEvent parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<NEvent> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<NEvent> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public commander.Command.NEvent getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface NStageInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:commander.NStageInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>uint32 sn = 1;</code>
+     * @return The sn.
+     */
+    int getSn();
+
+    /**
+     * <code>string background = 2;</code>
+     * @return The background.
+     */
+    java.lang.String getBackground();
+    /**
+     * <code>string background = 2;</code>
+     * @return The bytes for background.
+     */
+    com.google.protobuf.ByteString
+        getBackgroundBytes();
+
+    /**
+     * <code>float gravityX = 3;</code>
+     * @return The gravityX.
+     */
+    float getGravityX();
+
+    /**
+     * <code>float gravityY = 4;</code>
+     * @return The gravityY.
+     */
+    float getGravityY();
+
+    /**
+     * <code>float width = 5;</code>
+     * @return The width.
+     */
+    float getWidth();
+
+    /**
+     * <code>float height = 6;</code>
+     * @return The height.
+     */
+    float getHeight();
+
+    /**
+     * <code>bool debug = 7;</code>
+     * @return The debug.
+     */
+    boolean getDebug();
+
+    /**
+     * <code>.commander.JoystickDirectionals joystickDirectionals = 8;</code>
+     * @return The enum numeric value on the wire for joystickDirectionals.
+     */
+    int getJoystickDirectionalsValue();
+    /**
+     * <code>.commander.JoystickDirectionals joystickDirectionals = 8;</code>
+     * @return The joystickDirectionals.
+     */
+    commander.Command.JoystickDirectionals getJoystickDirectionals();
+
+    /**
+     * <code>uint32 joystickPrecision = 9;</code>
+     * @return The joystickPrecision.
+     */
+    int getJoystickPrecision();
+
+    /**
+     * <code>.commander.TouchMotion button1 = 10;</code>
+     * @return The enum numeric value on the wire for button1.
+     */
+    int getButton1Value();
+    /**
+     * <code>.commander.TouchMotion button1 = 10;</code>
+     * @return The button1.
+     */
+    commander.Command.TouchMotion getButton1();
+
+    /**
+     * <code>.commander.TouchMotion button2 = 11;</code>
+     * @return The enum numeric value on the wire for button2.
+     */
+    int getButton2Value();
+    /**
+     * <code>.commander.TouchMotion button2 = 11;</code>
+     * @return The button2.
+     */
+    commander.Command.TouchMotion getButton2();
+
+    /**
+     * <code>.commander.TouchMotion tap = 12;</code>
+     * @return The enum numeric value on the wire for tap.
+     */
+    int getTapValue();
+    /**
+     * <code>.commander.TouchMotion tap = 12;</code>
+     * @return The tap.
+     */
+    commander.Command.TouchMotion getTap();
+
+    /**
+     * <code>float tapMinMoveDistance = 13;</code>
+     * @return The tapMinMoveDistance.
+     */
+    float getTapMinMoveDistance();
+
+    /**
+     * <code>float distanceTrackingInternal = 14;</code>
+     * @return The distanceTrackingInternal.
+     */
+    float getDistanceTrackingInternal();
+  }
+  /**
+   * Protobuf type {@code commander.NStageInfo}
+   */
+  public static final class NStageInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:commander.NStageInfo)
+      NStageInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use NStageInfo.newBuilder() to construct.
+    private NStageInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private NStageInfo() {
+      background_ = "";
+      joystickDirectionals_ = 0;
+      button1_ = 0;
+      button2_ = 0;
+      tap_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new NStageInfo();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return commander.Command.internal_static_commander_NStageInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return commander.Command.internal_static_commander_NStageInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              commander.Command.NStageInfo.class, commander.Command.NStageInfo.Builder.class);
+    }
+
+    public static final int SN_FIELD_NUMBER = 1;
+    private int sn_;
+    /**
+     * <code>uint32 sn = 1;</code>
+     * @return The sn.
+     */
+    @java.lang.Override
+    public int getSn() {
+      return sn_;
+    }
+
+    public static final int BACKGROUND_FIELD_NUMBER = 2;
+    private volatile java.lang.Object background_;
+    /**
+     * <code>string background = 2;</code>
+     * @return The background.
+     */
+    @java.lang.Override
+    public java.lang.String getBackground() {
+      java.lang.Object ref = background_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        background_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string background = 2;</code>
+     * @return The bytes for background.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getBackgroundBytes() {
+      java.lang.Object ref = background_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        background_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int GRAVITYX_FIELD_NUMBER = 3;
+    private float gravityX_;
+    /**
+     * <code>float gravityX = 3;</code>
+     * @return The gravityX.
+     */
+    @java.lang.Override
+    public float getGravityX() {
+      return gravityX_;
+    }
+
+    public static final int GRAVITYY_FIELD_NUMBER = 4;
+    private float gravityY_;
+    /**
+     * <code>float gravityY = 4;</code>
+     * @return The gravityY.
+     */
+    @java.lang.Override
+    public float getGravityY() {
+      return gravityY_;
+    }
+
+    public static final int WIDTH_FIELD_NUMBER = 5;
+    private float width_;
+    /**
+     * <code>float width = 5;</code>
+     * @return The width.
+     */
+    @java.lang.Override
+    public float getWidth() {
+      return width_;
+    }
+
+    public static final int HEIGHT_FIELD_NUMBER = 6;
+    private float height_;
+    /**
+     * <code>float height = 6;</code>
+     * @return The height.
+     */
+    @java.lang.Override
+    public float getHeight() {
+      return height_;
+    }
+
+    public static final int DEBUG_FIELD_NUMBER = 7;
+    private boolean debug_;
+    /**
+     * <code>bool debug = 7;</code>
+     * @return The debug.
+     */
+    @java.lang.Override
+    public boolean getDebug() {
+      return debug_;
+    }
+
+    public static final int JOYSTICKDIRECTIONALS_FIELD_NUMBER = 8;
+    private int joystickDirectionals_;
+    /**
+     * <code>.commander.JoystickDirectionals joystickDirectionals = 8;</code>
+     * @return The enum numeric value on the wire for joystickDirectionals.
+     */
+    @java.lang.Override public int getJoystickDirectionalsValue() {
+      return joystickDirectionals_;
+    }
+    /**
+     * <code>.commander.JoystickDirectionals joystickDirectionals = 8;</code>
+     * @return The joystickDirectionals.
+     */
+    @java.lang.Override public commander.Command.JoystickDirectionals getJoystickDirectionals() {
+      @SuppressWarnings("deprecation")
+      commander.Command.JoystickDirectionals result = commander.Command.JoystickDirectionals.valueOf(joystickDirectionals_);
+      return result == null ? commander.Command.JoystickDirectionals.UNRECOGNIZED : result;
+    }
+
+    public static final int JOYSTICKPRECISION_FIELD_NUMBER = 9;
+    private int joystickPrecision_;
+    /**
+     * <code>uint32 joystickPrecision = 9;</code>
+     * @return The joystickPrecision.
+     */
+    @java.lang.Override
+    public int getJoystickPrecision() {
+      return joystickPrecision_;
+    }
+
+    public static final int BUTTON1_FIELD_NUMBER = 10;
+    private int button1_;
+    /**
+     * <code>.commander.TouchMotion button1 = 10;</code>
+     * @return The enum numeric value on the wire for button1.
+     */
+    @java.lang.Override public int getButton1Value() {
+      return button1_;
+    }
+    /**
+     * <code>.commander.TouchMotion button1 = 10;</code>
+     * @return The button1.
+     */
+    @java.lang.Override public commander.Command.TouchMotion getButton1() {
+      @SuppressWarnings("deprecation")
+      commander.Command.TouchMotion result = commander.Command.TouchMotion.valueOf(button1_);
+      return result == null ? commander.Command.TouchMotion.UNRECOGNIZED : result;
+    }
+
+    public static final int BUTTON2_FIELD_NUMBER = 11;
+    private int button2_;
+    /**
+     * <code>.commander.TouchMotion button2 = 11;</code>
+     * @return The enum numeric value on the wire for button2.
+     */
+    @java.lang.Override public int getButton2Value() {
+      return button2_;
+    }
+    /**
+     * <code>.commander.TouchMotion button2 = 11;</code>
+     * @return The button2.
+     */
+    @java.lang.Override public commander.Command.TouchMotion getButton2() {
+      @SuppressWarnings("deprecation")
+      commander.Command.TouchMotion result = commander.Command.TouchMotion.valueOf(button2_);
+      return result == null ? commander.Command.TouchMotion.UNRECOGNIZED : result;
+    }
+
+    public static final int TAP_FIELD_NUMBER = 12;
+    private int tap_;
+    /**
+     * <code>.commander.TouchMotion tap = 12;</code>
+     * @return The enum numeric value on the wire for tap.
+     */
+    @java.lang.Override public int getTapValue() {
+      return tap_;
+    }
+    /**
+     * <code>.commander.TouchMotion tap = 12;</code>
+     * @return The tap.
+     */
+    @java.lang.Override public commander.Command.TouchMotion getTap() {
+      @SuppressWarnings("deprecation")
+      commander.Command.TouchMotion result = commander.Command.TouchMotion.valueOf(tap_);
+      return result == null ? commander.Command.TouchMotion.UNRECOGNIZED : result;
+    }
+
+    public static final int TAPMINMOVEDISTANCE_FIELD_NUMBER = 13;
+    private float tapMinMoveDistance_;
+    /**
+     * <code>float tapMinMoveDistance = 13;</code>
+     * @return The tapMinMoveDistance.
+     */
+    @java.lang.Override
+    public float getTapMinMoveDistance() {
+      return tapMinMoveDistance_;
+    }
+
+    public static final int DISTANCETRACKINGINTERNAL_FIELD_NUMBER = 14;
+    private float distanceTrackingInternal_;
+    /**
+     * <code>float distanceTrackingInternal = 14;</code>
+     * @return The distanceTrackingInternal.
+     */
+    @java.lang.Override
+    public float getDistanceTrackingInternal() {
+      return distanceTrackingInternal_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (sn_ != 0) {
+        output.writeUInt32(1, sn_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(background_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, background_);
+      }
+      if (java.lang.Float.floatToRawIntBits(gravityX_) != 0) {
+        output.writeFloat(3, gravityX_);
+      }
+      if (java.lang.Float.floatToRawIntBits(gravityY_) != 0) {
+        output.writeFloat(4, gravityY_);
+      }
+      if (java.lang.Float.floatToRawIntBits(width_) != 0) {
+        output.writeFloat(5, width_);
+      }
+      if (java.lang.Float.floatToRawIntBits(height_) != 0) {
+        output.writeFloat(6, height_);
+      }
+      if (debug_ != false) {
+        output.writeBool(7, debug_);
+      }
+      if (joystickDirectionals_ != commander.Command.JoystickDirectionals.none.getNumber()) {
+        output.writeEnum(8, joystickDirectionals_);
+      }
+      if (joystickPrecision_ != 0) {
+        output.writeUInt32(9, joystickPrecision_);
+      }
+      if (button1_ != commander.Command.TouchMotion.NONE.getNumber()) {
+        output.writeEnum(10, button1_);
+      }
+      if (button2_ != commander.Command.TouchMotion.NONE.getNumber()) {
+        output.writeEnum(11, button2_);
+      }
+      if (tap_ != commander.Command.TouchMotion.NONE.getNumber()) {
+        output.writeEnum(12, tap_);
+      }
+      if (java.lang.Float.floatToRawIntBits(tapMinMoveDistance_) != 0) {
+        output.writeFloat(13, tapMinMoveDistance_);
+      }
+      if (java.lang.Float.floatToRawIntBits(distanceTrackingInternal_) != 0) {
+        output.writeFloat(14, distanceTrackingInternal_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (sn_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, sn_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(background_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, background_);
+      }
+      if (java.lang.Float.floatToRawIntBits(gravityX_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(3, gravityX_);
+      }
+      if (java.lang.Float.floatToRawIntBits(gravityY_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(4, gravityY_);
+      }
+      if (java.lang.Float.floatToRawIntBits(width_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(5, width_);
+      }
+      if (java.lang.Float.floatToRawIntBits(height_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(6, height_);
+      }
+      if (debug_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(7, debug_);
+      }
+      if (joystickDirectionals_ != commander.Command.JoystickDirectionals.none.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(8, joystickDirectionals_);
+      }
+      if (joystickPrecision_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(9, joystickPrecision_);
+      }
+      if (button1_ != commander.Command.TouchMotion.NONE.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(10, button1_);
+      }
+      if (button2_ != commander.Command.TouchMotion.NONE.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(11, button2_);
+      }
+      if (tap_ != commander.Command.TouchMotion.NONE.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(12, tap_);
+      }
+      if (java.lang.Float.floatToRawIntBits(tapMinMoveDistance_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(13, tapMinMoveDistance_);
+      }
+      if (java.lang.Float.floatToRawIntBits(distanceTrackingInternal_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(14, distanceTrackingInternal_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof commander.Command.NStageInfo)) {
+        return super.equals(obj);
+      }
+      commander.Command.NStageInfo other = (commander.Command.NStageInfo) obj;
+
+      if (getSn()
+          != other.getSn()) return false;
+      if (!getBackground()
+          .equals(other.getBackground())) return false;
+      if (java.lang.Float.floatToIntBits(getGravityX())
+          != java.lang.Float.floatToIntBits(
+              other.getGravityX())) return false;
+      if (java.lang.Float.floatToIntBits(getGravityY())
+          != java.lang.Float.floatToIntBits(
+              other.getGravityY())) return false;
+      if (java.lang.Float.floatToIntBits(getWidth())
+          != java.lang.Float.floatToIntBits(
+              other.getWidth())) return false;
+      if (java.lang.Float.floatToIntBits(getHeight())
+          != java.lang.Float.floatToIntBits(
+              other.getHeight())) return false;
+      if (getDebug()
+          != other.getDebug()) return false;
+      if (joystickDirectionals_ != other.joystickDirectionals_) return false;
+      if (getJoystickPrecision()
+          != other.getJoystickPrecision()) return false;
+      if (button1_ != other.button1_) return false;
+      if (button2_ != other.button2_) return false;
+      if (tap_ != other.tap_) return false;
+      if (java.lang.Float.floatToIntBits(getTapMinMoveDistance())
+          != java.lang.Float.floatToIntBits(
+              other.getTapMinMoveDistance())) return false;
+      if (java.lang.Float.floatToIntBits(getDistanceTrackingInternal())
+          != java.lang.Float.floatToIntBits(
+              other.getDistanceTrackingInternal())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SN_FIELD_NUMBER;
+      hash = (53 * hash) + getSn();
+      hash = (37 * hash) + BACKGROUND_FIELD_NUMBER;
+      hash = (53 * hash) + getBackground().hashCode();
+      hash = (37 * hash) + GRAVITYX_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getGravityX());
+      hash = (37 * hash) + GRAVITYY_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getGravityY());
+      hash = (37 * hash) + WIDTH_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getWidth());
+      hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getHeight());
+      hash = (37 * hash) + DEBUG_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getDebug());
+      hash = (37 * hash) + JOYSTICKDIRECTIONALS_FIELD_NUMBER;
+      hash = (53 * hash) + joystickDirectionals_;
+      hash = (37 * hash) + JOYSTICKPRECISION_FIELD_NUMBER;
+      hash = (53 * hash) + getJoystickPrecision();
+      hash = (37 * hash) + BUTTON1_FIELD_NUMBER;
+      hash = (53 * hash) + button1_;
+      hash = (37 * hash) + BUTTON2_FIELD_NUMBER;
+      hash = (53 * hash) + button2_;
+      hash = (37 * hash) + TAP_FIELD_NUMBER;
+      hash = (53 * hash) + tap_;
+      hash = (37 * hash) + TAPMINMOVEDISTANCE_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getTapMinMoveDistance());
+      hash = (37 * hash) + DISTANCETRACKINGINTERNAL_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getDistanceTrackingInternal());
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static commander.Command.NStageInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static commander.Command.NStageInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static commander.Command.NStageInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static commander.Command.NStageInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static commander.Command.NStageInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static commander.Command.NStageInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static commander.Command.NStageInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static commander.Command.NStageInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static commander.Command.NStageInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static commander.Command.NStageInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static commander.Command.NStageInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static commander.Command.NStageInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(commander.Command.NStageInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code commander.NStageInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:commander.NStageInfo)
+        commander.Command.NStageInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return commander.Command.internal_static_commander_NStageInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return commander.Command.internal_static_commander_NStageInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                commander.Command.NStageInfo.class, commander.Command.NStageInfo.Builder.class);
+      }
+
+      // Construct using commander.Command.NStageInfo.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        sn_ = 0;
+
+        background_ = "";
+
+        gravityX_ = 0F;
+
+        gravityY_ = 0F;
+
+        width_ = 0F;
+
+        height_ = 0F;
+
+        debug_ = false;
+
+        joystickDirectionals_ = 0;
+
+        joystickPrecision_ = 0;
+
+        button1_ = 0;
+
+        button2_ = 0;
+
+        tap_ = 0;
+
+        tapMinMoveDistance_ = 0F;
+
+        distanceTrackingInternal_ = 0F;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return commander.Command.internal_static_commander_NStageInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public commander.Command.NStageInfo getDefaultInstanceForType() {
+        return commander.Command.NStageInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public commander.Command.NStageInfo build() {
+        commander.Command.NStageInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public commander.Command.NStageInfo buildPartial() {
+        commander.Command.NStageInfo result = new commander.Command.NStageInfo(this);
+        result.sn_ = sn_;
+        result.background_ = background_;
+        result.gravityX_ = gravityX_;
+        result.gravityY_ = gravityY_;
+        result.width_ = width_;
+        result.height_ = height_;
+        result.debug_ = debug_;
+        result.joystickDirectionals_ = joystickDirectionals_;
+        result.joystickPrecision_ = joystickPrecision_;
+        result.button1_ = button1_;
+        result.button2_ = button2_;
+        result.tap_ = tap_;
+        result.tapMinMoveDistance_ = tapMinMoveDistance_;
+        result.distanceTrackingInternal_ = distanceTrackingInternal_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof commander.Command.NStageInfo) {
+          return mergeFrom((commander.Command.NStageInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(commander.Command.NStageInfo other) {
+        if (other == commander.Command.NStageInfo.getDefaultInstance()) return this;
+        if (other.getSn() != 0) {
+          setSn(other.getSn());
+        }
+        if (!other.getBackground().isEmpty()) {
+          background_ = other.background_;
+          onChanged();
+        }
+        if (other.getGravityX() != 0F) {
+          setGravityX(other.getGravityX());
+        }
+        if (other.getGravityY() != 0F) {
+          setGravityY(other.getGravityY());
+        }
+        if (other.getWidth() != 0F) {
+          setWidth(other.getWidth());
+        }
+        if (other.getHeight() != 0F) {
+          setHeight(other.getHeight());
+        }
+        if (other.getDebug() != false) {
+          setDebug(other.getDebug());
+        }
+        if (other.joystickDirectionals_ != 0) {
+          setJoystickDirectionalsValue(other.getJoystickDirectionalsValue());
+        }
+        if (other.getJoystickPrecision() != 0) {
+          setJoystickPrecision(other.getJoystickPrecision());
+        }
+        if (other.button1_ != 0) {
+          setButton1Value(other.getButton1Value());
+        }
+        if (other.button2_ != 0) {
+          setButton2Value(other.getButton2Value());
+        }
+        if (other.tap_ != 0) {
+          setTapValue(other.getTapValue());
+        }
+        if (other.getTapMinMoveDistance() != 0F) {
+          setTapMinMoveDistance(other.getTapMinMoveDistance());
+        }
+        if (other.getDistanceTrackingInternal() != 0F) {
+          setDistanceTrackingInternal(other.getDistanceTrackingInternal());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                sn_ = input.readUInt32();
+
+                break;
+              } // case 8
+              case 18: {
+                background_ = input.readStringRequireUtf8();
+
+                break;
+              } // case 18
+              case 29: {
+                gravityX_ = input.readFloat();
+
+                break;
+              } // case 29
+              case 37: {
+                gravityY_ = input.readFloat();
+
+                break;
+              } // case 37
+              case 45: {
+                width_ = input.readFloat();
+
+                break;
+              } // case 45
+              case 53: {
+                height_ = input.readFloat();
+
+                break;
+              } // case 53
+              case 56: {
+                debug_ = input.readBool();
+
+                break;
+              } // case 56
+              case 64: {
+                joystickDirectionals_ = input.readEnum();
+
+                break;
+              } // case 64
+              case 72: {
+                joystickPrecision_ = input.readUInt32();
+
+                break;
+              } // case 72
+              case 80: {
+                button1_ = input.readEnum();
+
+                break;
+              } // case 80
+              case 88: {
+                button2_ = input.readEnum();
+
+                break;
+              } // case 88
+              case 96: {
+                tap_ = input.readEnum();
+
+                break;
+              } // case 96
+              case 109: {
+                tapMinMoveDistance_ = input.readFloat();
+
+                break;
+              } // case 109
+              case 117: {
+                distanceTrackingInternal_ = input.readFloat();
+
+                break;
+              } // case 117
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+
+      private int sn_ ;
+      /**
+       * <code>uint32 sn = 1;</code>
+       * @return The sn.
+       */
+      @java.lang.Override
+      public int getSn() {
+        return sn_;
+      }
+      /**
+       * <code>uint32 sn = 1;</code>
+       * @param value The sn to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSn(int value) {
+        
+        sn_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 sn = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSn() {
+        
+        sn_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object background_ = "";
+      /**
+       * <code>string background = 2;</code>
+       * @return The background.
+       */
+      public java.lang.String getBackground() {
+        java.lang.Object ref = background_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          background_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string background = 2;</code>
+       * @return The bytes for background.
+       */
+      public com.google.protobuf.ByteString
+          getBackgroundBytes() {
+        java.lang.Object ref = background_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          background_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string background = 2;</code>
+       * @param value The background to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBackground(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        background_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string background = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBackground() {
+        
+        background_ = getDefaultInstance().getBackground();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string background = 2;</code>
+       * @param value The bytes for background to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBackgroundBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        background_ = value;
+        onChanged();
+        return this;
+      }
+
+      private float gravityX_ ;
+      /**
+       * <code>float gravityX = 3;</code>
+       * @return The gravityX.
+       */
+      @java.lang.Override
+      public float getGravityX() {
+        return gravityX_;
+      }
+      /**
+       * <code>float gravityX = 3;</code>
+       * @param value The gravityX to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGravityX(float value) {
+        
+        gravityX_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float gravityX = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGravityX() {
+        
+        gravityX_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float gravityY_ ;
+      /**
+       * <code>float gravityY = 4;</code>
+       * @return The gravityY.
+       */
+      @java.lang.Override
+      public float getGravityY() {
+        return gravityY_;
+      }
+      /**
+       * <code>float gravityY = 4;</code>
+       * @param value The gravityY to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGravityY(float value) {
+        
+        gravityY_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float gravityY = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGravityY() {
+        
+        gravityY_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float width_ ;
+      /**
+       * <code>float width = 5;</code>
+       * @return The width.
+       */
+      @java.lang.Override
+      public float getWidth() {
+        return width_;
+      }
+      /**
+       * <code>float width = 5;</code>
+       * @param value The width to set.
+       * @return This builder for chaining.
+       */
+      public Builder setWidth(float value) {
+        
+        width_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float width = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearWidth() {
+        
+        width_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float height_ ;
+      /**
+       * <code>float height = 6;</code>
+       * @return The height.
+       */
+      @java.lang.Override
+      public float getHeight() {
+        return height_;
+      }
+      /**
+       * <code>float height = 6;</code>
+       * @param value The height to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHeight(float value) {
+        
+        height_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float height = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearHeight() {
+        
+        height_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private boolean debug_ ;
+      /**
+       * <code>bool debug = 7;</code>
+       * @return The debug.
+       */
+      @java.lang.Override
+      public boolean getDebug() {
+        return debug_;
+      }
+      /**
+       * <code>bool debug = 7;</code>
+       * @param value The debug to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDebug(boolean value) {
+        
+        debug_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool debug = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDebug() {
+        
+        debug_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int joystickDirectionals_ = 0;
+      /**
+       * <code>.commander.JoystickDirectionals joystickDirectionals = 8;</code>
+       * @return The enum numeric value on the wire for joystickDirectionals.
+       */
+      @java.lang.Override public int getJoystickDirectionalsValue() {
+        return joystickDirectionals_;
+      }
+      /**
+       * <code>.commander.JoystickDirectionals joystickDirectionals = 8;</code>
+       * @param value The enum numeric value on the wire for joystickDirectionals to set.
+       * @return This builder for chaining.
+       */
+      public Builder setJoystickDirectionalsValue(int value) {
+        
+        joystickDirectionals_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.commander.JoystickDirectionals joystickDirectionals = 8;</code>
+       * @return The joystickDirectionals.
+       */
+      @java.lang.Override
+      public commander.Command.JoystickDirectionals getJoystickDirectionals() {
+        @SuppressWarnings("deprecation")
+        commander.Command.JoystickDirectionals result = commander.Command.JoystickDirectionals.valueOf(joystickDirectionals_);
+        return result == null ? commander.Command.JoystickDirectionals.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.commander.JoystickDirectionals joystickDirectionals = 8;</code>
+       * @param value The joystickDirectionals to set.
+       * @return This builder for chaining.
+       */
+      public Builder setJoystickDirectionals(commander.Command.JoystickDirectionals value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        joystickDirectionals_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.commander.JoystickDirectionals joystickDirectionals = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearJoystickDirectionals() {
+        
+        joystickDirectionals_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int joystickPrecision_ ;
+      /**
+       * <code>uint32 joystickPrecision = 9;</code>
+       * @return The joystickPrecision.
+       */
+      @java.lang.Override
+      public int getJoystickPrecision() {
+        return joystickPrecision_;
+      }
+      /**
+       * <code>uint32 joystickPrecision = 9;</code>
+       * @param value The joystickPrecision to set.
+       * @return This builder for chaining.
+       */
+      public Builder setJoystickPrecision(int value) {
+        
+        joystickPrecision_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 joystickPrecision = 9;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearJoystickPrecision() {
+        
+        joystickPrecision_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int button1_ = 0;
+      /**
+       * <code>.commander.TouchMotion button1 = 10;</code>
+       * @return The enum numeric value on the wire for button1.
+       */
+      @java.lang.Override public int getButton1Value() {
+        return button1_;
+      }
+      /**
+       * <code>.commander.TouchMotion button1 = 10;</code>
+       * @param value The enum numeric value on the wire for button1 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setButton1Value(int value) {
+        
+        button1_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.commander.TouchMotion button1 = 10;</code>
+       * @return The button1.
+       */
+      @java.lang.Override
+      public commander.Command.TouchMotion getButton1() {
+        @SuppressWarnings("deprecation")
+        commander.Command.TouchMotion result = commander.Command.TouchMotion.valueOf(button1_);
+        return result == null ? commander.Command.TouchMotion.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.commander.TouchMotion button1 = 10;</code>
+       * @param value The button1 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setButton1(commander.Command.TouchMotion value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        button1_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.commander.TouchMotion button1 = 10;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearButton1() {
+        
+        button1_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int button2_ = 0;
+      /**
+       * <code>.commander.TouchMotion button2 = 11;</code>
+       * @return The enum numeric value on the wire for button2.
+       */
+      @java.lang.Override public int getButton2Value() {
+        return button2_;
+      }
+      /**
+       * <code>.commander.TouchMotion button2 = 11;</code>
+       * @param value The enum numeric value on the wire for button2 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setButton2Value(int value) {
+        
+        button2_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.commander.TouchMotion button2 = 11;</code>
+       * @return The button2.
+       */
+      @java.lang.Override
+      public commander.Command.TouchMotion getButton2() {
+        @SuppressWarnings("deprecation")
+        commander.Command.TouchMotion result = commander.Command.TouchMotion.valueOf(button2_);
+        return result == null ? commander.Command.TouchMotion.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.commander.TouchMotion button2 = 11;</code>
+       * @param value The button2 to set.
+       * @return This builder for chaining.
+       */
+      public Builder setButton2(commander.Command.TouchMotion value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        button2_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.commander.TouchMotion button2 = 11;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearButton2() {
+        
+        button2_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int tap_ = 0;
+      /**
+       * <code>.commander.TouchMotion tap = 12;</code>
+       * @return The enum numeric value on the wire for tap.
+       */
+      @java.lang.Override public int getTapValue() {
+        return tap_;
+      }
+      /**
+       * <code>.commander.TouchMotion tap = 12;</code>
+       * @param value The enum numeric value on the wire for tap to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTapValue(int value) {
+        
+        tap_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.commander.TouchMotion tap = 12;</code>
+       * @return The tap.
+       */
+      @java.lang.Override
+      public commander.Command.TouchMotion getTap() {
+        @SuppressWarnings("deprecation")
+        commander.Command.TouchMotion result = commander.Command.TouchMotion.valueOf(tap_);
+        return result == null ? commander.Command.TouchMotion.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.commander.TouchMotion tap = 12;</code>
+       * @param value The tap to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTap(commander.Command.TouchMotion value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        tap_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.commander.TouchMotion tap = 12;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTap() {
+        
+        tap_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float tapMinMoveDistance_ ;
+      /**
+       * <code>float tapMinMoveDistance = 13;</code>
+       * @return The tapMinMoveDistance.
+       */
+      @java.lang.Override
+      public float getTapMinMoveDistance() {
+        return tapMinMoveDistance_;
+      }
+      /**
+       * <code>float tapMinMoveDistance = 13;</code>
+       * @param value The tapMinMoveDistance to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTapMinMoveDistance(float value) {
+        
+        tapMinMoveDistance_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float tapMinMoveDistance = 13;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTapMinMoveDistance() {
+        
+        tapMinMoveDistance_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float distanceTrackingInternal_ ;
+      /**
+       * <code>float distanceTrackingInternal = 14;</code>
+       * @return The distanceTrackingInternal.
+       */
+      @java.lang.Override
+      public float getDistanceTrackingInternal() {
+        return distanceTrackingInternal_;
+      }
+      /**
+       * <code>float distanceTrackingInternal = 14;</code>
+       * @param value The distanceTrackingInternal to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDistanceTrackingInternal(float value) {
+        
+        distanceTrackingInternal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float distanceTrackingInternal = 14;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDistanceTrackingInternal() {
+        
+        distanceTrackingInternal_ = 0F;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:commander.NStageInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:commander.NStageInfo)
+    private static final commander.Command.NStageInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new commander.Command.NStageInfo();
+    }
+
+    public static commander.Command.NStageInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<NStageInfo>
+        PARSER = new com.google.protobuf.AbstractParser<NStageInfo>() {
+      @java.lang.Override
+      public NStageInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<NStageInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<NStageInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public commander.Command.NStageInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface CmdOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:commander.Cmd)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>uint32 sn = 1;</code>
+     * @return The sn.
+     */
+    int getSn();
+
+    /**
+     * <code>repeated int32 ints = 2;</code>
+     * @return A list containing the ints.
+     */
+    java.util.List<java.lang.Integer> getIntsList();
+    /**
+     * <code>repeated int32 ints = 2;</code>
+     * @return The count of ints.
+     */
+    int getIntsCount();
+    /**
+     * <code>repeated int32 ints = 2;</code>
+     * @param index The index of the element to return.
+     * @return The ints at the given index.
+     */
+    int getInts(int index);
+
+    /**
+     * <code>repeated float floats = 3;</code>
+     * @return A list containing the floats.
+     */
+    java.util.List<java.lang.Float> getFloatsList();
+    /**
+     * <code>repeated float floats = 3;</code>
+     * @return The count of floats.
+     */
+    int getFloatsCount();
+    /**
+     * <code>repeated float floats = 3;</code>
+     * @param index The index of the element to return.
+     * @return The floats at the given index.
+     */
+    float getFloats(int index);
+
+    /**
+     * <code>repeated string strings = 4;</code>
+     * @return A list containing the strings.
+     */
+    java.util.List<java.lang.String>
+        getStringsList();
+    /**
+     * <code>repeated string strings = 4;</code>
+     * @return The count of strings.
+     */
+    int getStringsCount();
+    /**
+     * <code>repeated string strings = 4;</code>
+     * @param index The index of the element to return.
+     * @return The strings at the given index.
+     */
+    java.lang.String getStrings(int index);
+    /**
+     * <code>repeated string strings = 4;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the strings at the given index.
+     */
+    com.google.protobuf.ByteString
+        getStringsBytes(int index);
+
+    /**
+     * <code>repeated bytes bytes = 5;</code>
+     * @return A list containing the bytes.
+     */
+    java.util.List<com.google.protobuf.ByteString> getBytesList();
+    /**
+     * <code>repeated bytes bytes = 5;</code>
+     * @return The count of bytes.
+     */
+    int getBytesCount();
+    /**
+     * <code>repeated bytes bytes = 5;</code>
+     * @param index The index of the element to return.
+     * @return The bytes at the given index.
+     */
+    com.google.protobuf.ByteString getBytes(int index);
+  }
+  /**
+   * Protobuf type {@code commander.Cmd}
+   */
+  public static final class Cmd extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:commander.Cmd)
+      CmdOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Cmd.newBuilder() to construct.
+    private Cmd(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Cmd() {
+      ints_ = emptyIntList();
+      floats_ = emptyFloatList();
+      strings_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bytes_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Cmd();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return commander.Command.internal_static_commander_Cmd_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return commander.Command.internal_static_commander_Cmd_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              commander.Command.Cmd.class, commander.Command.Cmd.Builder.class);
+    }
+
+    public static final int SN_FIELD_NUMBER = 1;
+    private int sn_;
+    /**
+     * <code>uint32 sn = 1;</code>
+     * @return The sn.
+     */
+    @java.lang.Override
+    public int getSn() {
+      return sn_;
+    }
+
+    public static final int INTS_FIELD_NUMBER = 2;
+    private com.google.protobuf.Internal.IntList ints_;
+    /**
+     * <code>repeated int32 ints = 2;</code>
+     * @return A list containing the ints.
+     */
+    @java.lang.Override
+    public java.util.List<java.lang.Integer>
+        getIntsList() {
+      return ints_;
+    }
+    /**
+     * <code>repeated int32 ints = 2;</code>
+     * @return The count of ints.
+     */
+    public int getIntsCount() {
+      return ints_.size();
+    }
+    /**
+     * <code>repeated int32 ints = 2;</code>
+     * @param index The index of the element to return.
+     * @return The ints at the given index.
+     */
+    public int getInts(int index) {
+      return ints_.getInt(index);
+    }
+    private int intsMemoizedSerializedSize = -1;
+
+    public static final int FLOATS_FIELD_NUMBER = 3;
+    private com.google.protobuf.Internal.FloatList floats_;
+    /**
+     * <code>repeated float floats = 3;</code>
+     * @return A list containing the floats.
+     */
+    @java.lang.Override
+    public java.util.List<java.lang.Float>
+        getFloatsList() {
+      return floats_;
+    }
+    /**
+     * <code>repeated float floats = 3;</code>
+     * @return The count of floats.
+     */
+    public int getFloatsCount() {
+      return floats_.size();
+    }
+    /**
+     * <code>repeated float floats = 3;</code>
+     * @param index The index of the element to return.
+     * @return The floats at the given index.
+     */
+    public float getFloats(int index) {
+      return floats_.getFloat(index);
+    }
+    private int floatsMemoizedSerializedSize = -1;
+
+    public static final int STRINGS_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList strings_;
+    /**
+     * <code>repeated string strings = 4;</code>
+     * @return A list containing the strings.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getStringsList() {
+      return strings_;
+    }
+    /**
+     * <code>repeated string strings = 4;</code>
+     * @return The count of strings.
+     */
+    public int getStringsCount() {
+      return strings_.size();
+    }
+    /**
+     * <code>repeated string strings = 4;</code>
+     * @param index The index of the element to return.
+     * @return The strings at the given index.
+     */
+    public java.lang.String getStrings(int index) {
+      return strings_.get(index);
+    }
+    /**
+     * <code>repeated string strings = 4;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the strings at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getStringsBytes(int index) {
+      return strings_.getByteString(index);
+    }
+
+    public static final int BYTES_FIELD_NUMBER = 5;
+    private java.util.List<com.google.protobuf.ByteString> bytes_;
+    /**
+     * <code>repeated bytes bytes = 5;</code>
+     * @return A list containing the bytes.
+     */
+    @java.lang.Override
+    public java.util.List<com.google.protobuf.ByteString>
+        getBytesList() {
+      return bytes_;
+    }
+    /**
+     * <code>repeated bytes bytes = 5;</code>
+     * @return The count of bytes.
+     */
+    public int getBytesCount() {
+      return bytes_.size();
+    }
+    /**
+     * <code>repeated bytes bytes = 5;</code>
+     * @param index The index of the element to return.
+     * @return The bytes at the given index.
+     */
+    public com.google.protobuf.ByteString getBytes(int index) {
+      return bytes_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (sn_ != 0) {
+        output.writeUInt32(1, sn_);
+      }
+      if (getIntsList().size() > 0) {
+        output.writeUInt32NoTag(18);
+        output.writeUInt32NoTag(intsMemoizedSerializedSize);
+      }
+      for (int i = 0; i < ints_.size(); i++) {
+        output.writeInt32NoTag(ints_.getInt(i));
+      }
+      if (getFloatsList().size() > 0) {
+        output.writeUInt32NoTag(26);
+        output.writeUInt32NoTag(floatsMemoizedSerializedSize);
+      }
+      for (int i = 0; i < floats_.size(); i++) {
+        output.writeFloatNoTag(floats_.getFloat(i));
+      }
+      for (int i = 0; i < strings_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, strings_.getRaw(i));
+      }
+      for (int i = 0; i < bytes_.size(); i++) {
+        output.writeBytes(5, bytes_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (sn_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, sn_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < ints_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(ints_.getInt(i));
+        }
+        size += dataSize;
+        if (!getIntsList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        intsMemoizedSerializedSize = dataSize;
+      }
+      {
+        int dataSize = 0;
+        dataSize = 4 * getFloatsList().size();
+        size += dataSize;
+        if (!getFloatsList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        floatsMemoizedSerializedSize = dataSize;
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < strings_.size(); i++) {
+          dataSize += computeStringSizeNoTag(strings_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getStringsList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < bytes_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(bytes_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getBytesList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof commander.Command.Cmd)) {
+        return super.equals(obj);
+      }
+      commander.Command.Cmd other = (commander.Command.Cmd) obj;
+
+      if (getSn()
+          != other.getSn()) return false;
+      if (!getIntsList()
+          .equals(other.getIntsList())) return false;
+      if (!getFloatsList()
+          .equals(other.getFloatsList())) return false;
+      if (!getStringsList()
+          .equals(other.getStringsList())) return false;
+      if (!getBytesList()
+          .equals(other.getBytesList())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SN_FIELD_NUMBER;
+      hash = (53 * hash) + getSn();
+      if (getIntsCount() > 0) {
+        hash = (37 * hash) + INTS_FIELD_NUMBER;
+        hash = (53 * hash) + getIntsList().hashCode();
+      }
+      if (getFloatsCount() > 0) {
+        hash = (37 * hash) + FLOATS_FIELD_NUMBER;
+        hash = (53 * hash) + getFloatsList().hashCode();
+      }
+      if (getStringsCount() > 0) {
+        hash = (37 * hash) + STRINGS_FIELD_NUMBER;
+        hash = (53 * hash) + getStringsList().hashCode();
+      }
+      if (getBytesCount() > 0) {
+        hash = (37 * hash) + BYTES_FIELD_NUMBER;
+        hash = (53 * hash) + getBytesList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static commander.Command.Cmd parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static commander.Command.Cmd parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static commander.Command.Cmd parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static commander.Command.Cmd parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static commander.Command.Cmd parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static commander.Command.Cmd parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static commander.Command.Cmd parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static commander.Command.Cmd parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static commander.Command.Cmd parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static commander.Command.Cmd parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static commander.Command.Cmd parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static commander.Command.Cmd parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(commander.Command.Cmd prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code commander.Cmd}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:commander.Cmd)
+        commander.Command.CmdOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return commander.Command.internal_static_commander_Cmd_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return commander.Command.internal_static_commander_Cmd_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                commander.Command.Cmd.class, commander.Command.Cmd.Builder.class);
+      }
+
+      // Construct using commander.Command.Cmd.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        sn_ = 0;
+
+        ints_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        floats_ = emptyFloatList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        strings_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        bytes_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return commander.Command.internal_static_commander_Cmd_descriptor;
+      }
+
+      @java.lang.Override
+      public commander.Command.Cmd getDefaultInstanceForType() {
+        return commander.Command.Cmd.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public commander.Command.Cmd build() {
+        commander.Command.Cmd result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public commander.Command.Cmd buildPartial() {
+        commander.Command.Cmd result = new commander.Command.Cmd(this);
+        int from_bitField0_ = bitField0_;
+        result.sn_ = sn_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          ints_.makeImmutable();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.ints_ = ints_;
+        if (((bitField0_ & 0x00000002) != 0)) {
+          floats_.makeImmutable();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.floats_ = floats_;
+        if (((bitField0_ & 0x00000004) != 0)) {
+          strings_ = strings_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.strings_ = strings_;
+        if (((bitField0_ & 0x00000008) != 0)) {
+          bytes_ = java.util.Collections.unmodifiableList(bytes_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.bytes_ = bytes_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof commander.Command.Cmd) {
+          return mergeFrom((commander.Command.Cmd)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(commander.Command.Cmd other) {
+        if (other == commander.Command.Cmd.getDefaultInstance()) return this;
+        if (other.getSn() != 0) {
+          setSn(other.getSn());
+        }
+        if (!other.ints_.isEmpty()) {
+          if (ints_.isEmpty()) {
+            ints_ = other.ints_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureIntsIsMutable();
+            ints_.addAll(other.ints_);
+          }
+          onChanged();
+        }
+        if (!other.floats_.isEmpty()) {
+          if (floats_.isEmpty()) {
+            floats_ = other.floats_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureFloatsIsMutable();
+            floats_.addAll(other.floats_);
+          }
+          onChanged();
+        }
+        if (!other.strings_.isEmpty()) {
+          if (strings_.isEmpty()) {
+            strings_ = other.strings_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureStringsIsMutable();
+            strings_.addAll(other.strings_);
+          }
+          onChanged();
+        }
+        if (!other.bytes_.isEmpty()) {
+          if (bytes_.isEmpty()) {
+            bytes_ = other.bytes_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureBytesIsMutable();
+            bytes_.addAll(other.bytes_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                sn_ = input.readUInt32();
+
+                break;
+              } // case 8
+              case 16: {
+                int v = input.readInt32();
+                ensureIntsIsMutable();
+                ints_.addInt(v);
+                break;
+              } // case 16
+              case 18: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                ensureIntsIsMutable();
+                while (input.getBytesUntilLimit() > 0) {
+                  ints_.addInt(input.readInt32());
+                }
+                input.popLimit(limit);
+                break;
+              } // case 18
+              case 29: {
+                float v = input.readFloat();
+                ensureFloatsIsMutable();
+                floats_.addFloat(v);
+                break;
+              } // case 29
+              case 26: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                ensureFloatsIsMutable();
+                while (input.getBytesUntilLimit() > 0) {
+                  floats_.addFloat(input.readFloat());
+                }
+                input.popLimit(limit);
+                break;
+              } // case 26
+              case 34: {
+                java.lang.String s = input.readStringRequireUtf8();
+                ensureStringsIsMutable();
+                strings_.add(s);
+                break;
+              } // case 34
+              case 42: {
+                com.google.protobuf.ByteString v = input.readBytes();
+                ensureBytesIsMutable();
+                bytes_.add(v);
+                break;
+              } // case 42
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private int sn_ ;
+      /**
+       * <code>uint32 sn = 1;</code>
+       * @return The sn.
+       */
+      @java.lang.Override
+      public int getSn() {
+        return sn_;
+      }
+      /**
+       * <code>uint32 sn = 1;</code>
+       * @param value The sn to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSn(int value) {
+        
+        sn_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 sn = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSn() {
+        
+        sn_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.Internal.IntList ints_ = emptyIntList();
+      private void ensureIntsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          ints_ = mutableCopy(ints_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated int32 ints = 2;</code>
+       * @return A list containing the ints.
+       */
+      public java.util.List<java.lang.Integer>
+          getIntsList() {
+        return ((bitField0_ & 0x00000001) != 0) ?
+                 java.util.Collections.unmodifiableList(ints_) : ints_;
+      }
+      /**
+       * <code>repeated int32 ints = 2;</code>
+       * @return The count of ints.
+       */
+      public int getIntsCount() {
+        return ints_.size();
+      }
+      /**
+       * <code>repeated int32 ints = 2;</code>
+       * @param index The index of the element to return.
+       * @return The ints at the given index.
+       */
+      public int getInts(int index) {
+        return ints_.getInt(index);
+      }
+      /**
+       * <code>repeated int32 ints = 2;</code>
+       * @param index The index to set the value at.
+       * @param value The ints to set.
+       * @return This builder for chaining.
+       */
+      public Builder setInts(
+          int index, int value) {
+        ensureIntsIsMutable();
+        ints_.setInt(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 ints = 2;</code>
+       * @param value The ints to add.
+       * @return This builder for chaining.
+       */
+      public Builder addInts(int value) {
+        ensureIntsIsMutable();
+        ints_.addInt(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 ints = 2;</code>
+       * @param values The ints to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllInts(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureIntsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, ints_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 ints = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearInts() {
+        ints_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.Internal.FloatList floats_ = emptyFloatList();
+      private void ensureFloatsIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          floats_ = mutableCopy(floats_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated float floats = 3;</code>
+       * @return A list containing the floats.
+       */
+      public java.util.List<java.lang.Float>
+          getFloatsList() {
+        return ((bitField0_ & 0x00000002) != 0) ?
+                 java.util.Collections.unmodifiableList(floats_) : floats_;
+      }
+      /**
+       * <code>repeated float floats = 3;</code>
+       * @return The count of floats.
+       */
+      public int getFloatsCount() {
+        return floats_.size();
+      }
+      /**
+       * <code>repeated float floats = 3;</code>
+       * @param index The index of the element to return.
+       * @return The floats at the given index.
+       */
+      public float getFloats(int index) {
+        return floats_.getFloat(index);
+      }
+      /**
+       * <code>repeated float floats = 3;</code>
+       * @param index The index to set the value at.
+       * @param value The floats to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFloats(
+          int index, float value) {
+        ensureFloatsIsMutable();
+        floats_.setFloat(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated float floats = 3;</code>
+       * @param value The floats to add.
+       * @return This builder for chaining.
+       */
+      public Builder addFloats(float value) {
+        ensureFloatsIsMutable();
+        floats_.addFloat(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated float floats = 3;</code>
+       * @param values The floats to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllFloats(
+          java.lang.Iterable<? extends java.lang.Float> values) {
+        ensureFloatsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, floats_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated float floats = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFloats() {
+        floats_ = emptyFloatList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList strings_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureStringsIsMutable() {
+        if (!((bitField0_ & 0x00000004) != 0)) {
+          strings_ = new com.google.protobuf.LazyStringArrayList(strings_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      /**
+       * <code>repeated string strings = 4;</code>
+       * @return A list containing the strings.
+       */
+      public com.google.protobuf.ProtocolStringList
+          getStringsList() {
+        return strings_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string strings = 4;</code>
+       * @return The count of strings.
+       */
+      public int getStringsCount() {
+        return strings_.size();
+      }
+      /**
+       * <code>repeated string strings = 4;</code>
+       * @param index The index of the element to return.
+       * @return The strings at the given index.
+       */
+      public java.lang.String getStrings(int index) {
+        return strings_.get(index);
+      }
+      /**
+       * <code>repeated string strings = 4;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the strings at the given index.
+       */
+      public com.google.protobuf.ByteString
+          getStringsBytes(int index) {
+        return strings_.getByteString(index);
+      }
+      /**
+       * <code>repeated string strings = 4;</code>
+       * @param index The index to set the value at.
+       * @param value The strings to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStrings(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureStringsIsMutable();
+        strings_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string strings = 4;</code>
+       * @param value The strings to add.
+       * @return This builder for chaining.
+       */
+      public Builder addStrings(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureStringsIsMutable();
+        strings_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string strings = 4;</code>
+       * @param values The strings to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllStrings(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureStringsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, strings_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string strings = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearStrings() {
+        strings_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string strings = 4;</code>
+       * @param value The bytes of the strings to add.
+       * @return This builder for chaining.
+       */
+      public Builder addStringsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureStringsIsMutable();
+        strings_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.google.protobuf.ByteString> bytes_ = java.util.Collections.emptyList();
+      private void ensureBytesIsMutable() {
+        if (!((bitField0_ & 0x00000008) != 0)) {
+          bytes_ = new java.util.ArrayList<com.google.protobuf.ByteString>(bytes_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated bytes bytes = 5;</code>
+       * @return A list containing the bytes.
+       */
+      public java.util.List<com.google.protobuf.ByteString>
+          getBytesList() {
+        return ((bitField0_ & 0x00000008) != 0) ?
+                 java.util.Collections.unmodifiableList(bytes_) : bytes_;
+      }
+      /**
+       * <code>repeated bytes bytes = 5;</code>
+       * @return The count of bytes.
+       */
+      public int getBytesCount() {
+        return bytes_.size();
+      }
+      /**
+       * <code>repeated bytes bytes = 5;</code>
+       * @param index The index of the element to return.
+       * @return The bytes at the given index.
+       */
+      public com.google.protobuf.ByteString getBytes(int index) {
+        return bytes_.get(index);
+      }
+      /**
+       * <code>repeated bytes bytes = 5;</code>
+       * @param index The index to set the value at.
+       * @param value The bytes to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBytes(
+          int index, com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBytesIsMutable();
+        bytes_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes bytes = 5;</code>
+       * @param value The bytes to add.
+       * @return This builder for chaining.
+       */
+      public Builder addBytes(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBytesIsMutable();
+        bytes_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes bytes = 5;</code>
+       * @param values The bytes to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllBytes(
+          java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
+        ensureBytesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, bytes_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes bytes = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBytes() {
+        bytes_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
       // @@protoc_insertion_point(builder_scope:commander.Cmd)
     }
 
@@ -14017,77 +6118,83 @@ public final class Command {
 
   }
 
-  public interface CObjectOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.CObject)
+  public interface NObjectOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:commander.NObject)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 id = 1;</code>
+     * <code>uint32 sn = 1;</code>
+     * @return The sn.
+     */
+    int getSn();
+
+    /**
+     * <code>int32 id = 2;</code>
      * @return The id.
      */
     int getId();
 
     /**
-     * <code>optional .commander.CPhysical physical = 2;</code>
-     * @return Whether the physical field is set.
+     * <code>optional .commander.NBody body = 3;</code>
+     * @return Whether the body field is set.
      */
-    boolean hasPhysical();
+    boolean hasBody();
     /**
-     * <code>optional .commander.CPhysical physical = 2;</code>
-     * @return The physical.
+     * <code>optional .commander.NBody body = 3;</code>
+     * @return The body.
      */
-    commander.Command.CPhysical getPhysical();
+    commander.Command.NBody getBody();
     /**
-     * <code>optional .commander.CPhysical physical = 2;</code>
+     * <code>optional .commander.NBody body = 3;</code>
      */
-    commander.Command.CPhysicalOrBuilder getPhysicalOrBuilder();
+    commander.Command.NBodyOrBuilder getBodyOrBuilder();
 
     /**
-     * <code>optional .commander.CVisible visible = 3;</code>
-     * @return Whether the visible field is set.
+     * <code>optional .commander.NVisual visual = 4;</code>
+     * @return Whether the visual field is set.
      */
-    boolean hasVisible();
+    boolean hasVisual();
     /**
-     * <code>optional .commander.CVisible visible = 3;</code>
-     * @return The visible.
+     * <code>optional .commander.NVisual visual = 4;</code>
+     * @return The visual.
      */
-    commander.Command.CVisible getVisible();
+    commander.Command.NVisual getVisual();
     /**
-     * <code>optional .commander.CVisible visible = 3;</code>
+     * <code>optional .commander.NVisual visual = 4;</code>
      */
-    commander.Command.CVisibleOrBuilder getVisibleOrBuilder();
+    commander.Command.NVisualOrBuilder getVisualOrBuilder();
 
     /**
-     * <code>uint32 tid = 4;</code>
+     * <code>uint32 tid = 5;</code>
      * @return The tid.
      */
     int getTid();
 
     /**
-     * <code>string info = 5;</code>
+     * <code>string info = 6;</code>
      * @return The info.
      */
     java.lang.String getInfo();
     /**
-     * <code>string info = 5;</code>
+     * <code>string info = 6;</code>
      * @return The bytes for info.
      */
     com.google.protobuf.ByteString
         getInfoBytes();
   }
   /**
-   * Protobuf type {@code commander.CObject}
+   * Protobuf type {@code commander.NObject}
    */
-  public static final class CObject extends
+  public static final class NObject extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.CObject)
-      CObjectOrBuilder {
+      // @@protoc_insertion_point(message_implements:commander.NObject)
+      NObjectOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use CObject.newBuilder() to construct.
-    private CObject(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use NObject.newBuilder() to construct.
+    private NObject(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private CObject() {
+    private NObject() {
       info_ = "";
     }
 
@@ -14095,7 +6202,7 @@ public final class Command {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new CObject();
+      return new NObject();
     }
 
     @java.lang.Override
@@ -14105,22 +6212,33 @@ public final class Command {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return commander.Command.internal_static_commander_CObject_descriptor;
+      return commander.Command.internal_static_commander_NObject_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_CObject_fieldAccessorTable
+      return commander.Command.internal_static_commander_NObject_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              commander.Command.CObject.class, commander.Command.CObject.Builder.class);
+              commander.Command.NObject.class, commander.Command.NObject.Builder.class);
     }
 
     private int bitField0_;
-    public static final int ID_FIELD_NUMBER = 1;
+    public static final int SN_FIELD_NUMBER = 1;
+    private int sn_;
+    /**
+     * <code>uint32 sn = 1;</code>
+     * @return The sn.
+     */
+    @java.lang.Override
+    public int getSn() {
+      return sn_;
+    }
+
+    public static final int ID_FIELD_NUMBER = 2;
     private int id_;
     /**
-     * <code>uint32 id = 1;</code>
+     * <code>int32 id = 2;</code>
      * @return The id.
      */
     @java.lang.Override
@@ -14128,62 +6246,62 @@ public final class Command {
       return id_;
     }
 
-    public static final int PHYSICAL_FIELD_NUMBER = 2;
-    private commander.Command.CPhysical physical_;
+    public static final int BODY_FIELD_NUMBER = 3;
+    private commander.Command.NBody body_;
     /**
-     * <code>optional .commander.CPhysical physical = 2;</code>
-     * @return Whether the physical field is set.
+     * <code>optional .commander.NBody body = 3;</code>
+     * @return Whether the body field is set.
      */
     @java.lang.Override
-    public boolean hasPhysical() {
+    public boolean hasBody() {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>optional .commander.CPhysical physical = 2;</code>
-     * @return The physical.
+     * <code>optional .commander.NBody body = 3;</code>
+     * @return The body.
      */
     @java.lang.Override
-    public commander.Command.CPhysical getPhysical() {
-      return physical_ == null ? commander.Command.CPhysical.getDefaultInstance() : physical_;
+    public commander.Command.NBody getBody() {
+      return body_ == null ? commander.Command.NBody.getDefaultInstance() : body_;
     }
     /**
-     * <code>optional .commander.CPhysical physical = 2;</code>
+     * <code>optional .commander.NBody body = 3;</code>
      */
     @java.lang.Override
-    public commander.Command.CPhysicalOrBuilder getPhysicalOrBuilder() {
-      return physical_ == null ? commander.Command.CPhysical.getDefaultInstance() : physical_;
+    public commander.Command.NBodyOrBuilder getBodyOrBuilder() {
+      return body_ == null ? commander.Command.NBody.getDefaultInstance() : body_;
     }
 
-    public static final int VISIBLE_FIELD_NUMBER = 3;
-    private commander.Command.CVisible visible_;
+    public static final int VISUAL_FIELD_NUMBER = 4;
+    private commander.Command.NVisual visual_;
     /**
-     * <code>optional .commander.CVisible visible = 3;</code>
-     * @return Whether the visible field is set.
+     * <code>optional .commander.NVisual visual = 4;</code>
+     * @return Whether the visual field is set.
      */
     @java.lang.Override
-    public boolean hasVisible() {
+    public boolean hasVisual() {
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>optional .commander.CVisible visible = 3;</code>
-     * @return The visible.
+     * <code>optional .commander.NVisual visual = 4;</code>
+     * @return The visual.
      */
     @java.lang.Override
-    public commander.Command.CVisible getVisible() {
-      return visible_ == null ? commander.Command.CVisible.getDefaultInstance() : visible_;
+    public commander.Command.NVisual getVisual() {
+      return visual_ == null ? commander.Command.NVisual.getDefaultInstance() : visual_;
     }
     /**
-     * <code>optional .commander.CVisible visible = 3;</code>
+     * <code>optional .commander.NVisual visual = 4;</code>
      */
     @java.lang.Override
-    public commander.Command.CVisibleOrBuilder getVisibleOrBuilder() {
-      return visible_ == null ? commander.Command.CVisible.getDefaultInstance() : visible_;
+    public commander.Command.NVisualOrBuilder getVisualOrBuilder() {
+      return visual_ == null ? commander.Command.NVisual.getDefaultInstance() : visual_;
     }
 
-    public static final int TID_FIELD_NUMBER = 4;
+    public static final int TID_FIELD_NUMBER = 5;
     private int tid_;
     /**
-     * <code>uint32 tid = 4;</code>
+     * <code>uint32 tid = 5;</code>
      * @return The tid.
      */
     @java.lang.Override
@@ -14191,10 +6309,10 @@ public final class Command {
       return tid_;
     }
 
-    public static final int INFO_FIELD_NUMBER = 5;
+    public static final int INFO_FIELD_NUMBER = 6;
     private volatile java.lang.Object info_;
     /**
-     * <code>string info = 5;</code>
+     * <code>string info = 6;</code>
      * @return The info.
      */
     @java.lang.Override
@@ -14211,7 +6329,7 @@ public final class Command {
       }
     }
     /**
-     * <code>string info = 5;</code>
+     * <code>string info = 6;</code>
      * @return The bytes for info.
      */
     @java.lang.Override
@@ -14243,20 +6361,23 @@ public final class Command {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (sn_ != 0) {
+        output.writeUInt32(1, sn_);
+      }
       if (id_ != 0) {
-        output.writeUInt32(1, id_);
+        output.writeInt32(2, id_);
       }
       if (((bitField0_ & 0x00000001) != 0)) {
-        output.writeMessage(2, getPhysical());
+        output.writeMessage(3, getBody());
       }
       if (((bitField0_ & 0x00000002) != 0)) {
-        output.writeMessage(3, getVisible());
+        output.writeMessage(4, getVisual());
       }
       if (tid_ != 0) {
-        output.writeUInt32(4, tid_);
+        output.writeUInt32(5, tid_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, info_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, info_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -14267,24 +6388,28 @@ public final class Command {
       if (size != -1) return size;
 
       size = 0;
+      if (sn_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, sn_);
+      }
       if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, id_);
+          .computeInt32Size(2, id_);
       }
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getPhysical());
+          .computeMessageSize(3, getBody());
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getVisible());
+          .computeMessageSize(4, getVisual());
       }
       if (tid_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(4, tid_);
+          .computeUInt32Size(5, tid_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(info_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, info_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, info_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -14296,22 +6421,24 @@ public final class Command {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof commander.Command.CObject)) {
+      if (!(obj instanceof commander.Command.NObject)) {
         return super.equals(obj);
       }
-      commander.Command.CObject other = (commander.Command.CObject) obj;
+      commander.Command.NObject other = (commander.Command.NObject) obj;
 
+      if (getSn()
+          != other.getSn()) return false;
       if (getId()
           != other.getId()) return false;
-      if (hasPhysical() != other.hasPhysical()) return false;
-      if (hasPhysical()) {
-        if (!getPhysical()
-            .equals(other.getPhysical())) return false;
+      if (hasBody() != other.hasBody()) return false;
+      if (hasBody()) {
+        if (!getBody()
+            .equals(other.getBody())) return false;
       }
-      if (hasVisible() != other.hasVisible()) return false;
-      if (hasVisible()) {
-        if (!getVisible()
-            .equals(other.getVisible())) return false;
+      if (hasVisual() != other.hasVisual()) return false;
+      if (hasVisual()) {
+        if (!getVisual()
+            .equals(other.getVisual())) return false;
       }
       if (getTid()
           != other.getTid()) return false;
@@ -14328,15 +6455,17 @@ public final class Command {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SN_FIELD_NUMBER;
+      hash = (53 * hash) + getSn();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId();
-      if (hasPhysical()) {
-        hash = (37 * hash) + PHYSICAL_FIELD_NUMBER;
-        hash = (53 * hash) + getPhysical().hashCode();
+      if (hasBody()) {
+        hash = (37 * hash) + BODY_FIELD_NUMBER;
+        hash = (53 * hash) + getBody().hashCode();
       }
-      if (hasVisible()) {
-        hash = (37 * hash) + VISIBLE_FIELD_NUMBER;
-        hash = (53 * hash) + getVisible().hashCode();
+      if (hasVisual()) {
+        hash = (37 * hash) + VISUAL_FIELD_NUMBER;
+        hash = (53 * hash) + getVisual().hashCode();
       }
       hash = (37 * hash) + TID_FIELD_NUMBER;
       hash = (53 * hash) + getTid();
@@ -14347,69 +6476,69 @@ public final class Command {
       return hash;
     }
 
-    public static commander.Command.CObject parseFrom(
+    public static commander.Command.NObject parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CObject parseFrom(
+    public static commander.Command.NObject parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CObject parseFrom(
+    public static commander.Command.NObject parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CObject parseFrom(
+    public static commander.Command.NObject parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CObject parseFrom(byte[] data)
+    public static commander.Command.NObject parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CObject parseFrom(
+    public static commander.Command.NObject parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CObject parseFrom(java.io.InputStream input)
+    public static commander.Command.NObject parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.CObject parseFrom(
+    public static commander.Command.NObject parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.CObject parseDelimitedFrom(java.io.InputStream input)
+    public static commander.Command.NObject parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static commander.Command.CObject parseDelimitedFrom(
+    public static commander.Command.NObject parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.CObject parseFrom(
+    public static commander.Command.NObject parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.CObject parseFrom(
+    public static commander.Command.NObject parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -14422,7 +6551,7 @@ public final class Command {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(commander.Command.CObject prototype) {
+    public static Builder newBuilder(commander.Command.NObject prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -14438,26 +6567,26 @@ public final class Command {
       return builder;
     }
     /**
-     * Protobuf type {@code commander.CObject}
+     * Protobuf type {@code commander.NObject}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.CObject)
-        commander.Command.CObjectOrBuilder {
+        // @@protoc_insertion_point(builder_implements:commander.NObject)
+        commander.Command.NObjectOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return commander.Command.internal_static_commander_CObject_descriptor;
+        return commander.Command.internal_static_commander_NObject_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_CObject_fieldAccessorTable
+        return commander.Command.internal_static_commander_NObject_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                commander.Command.CObject.class, commander.Command.CObject.Builder.class);
+                commander.Command.NObject.class, commander.Command.NObject.Builder.class);
       }
 
-      // Construct using commander.Command.CObject.newBuilder()
+      // Construct using commander.Command.NObject.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -14470,25 +6599,27 @@ public final class Command {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getPhysicalFieldBuilder();
-          getVisibleFieldBuilder();
+          getBodyFieldBuilder();
+          getVisualFieldBuilder();
         }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        sn_ = 0;
+
         id_ = 0;
 
-        if (physicalBuilder_ == null) {
-          physical_ = null;
+        if (bodyBuilder_ == null) {
+          body_ = null;
         } else {
-          physicalBuilder_.clear();
+          bodyBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (visibleBuilder_ == null) {
-          visible_ = null;
+        if (visualBuilder_ == null) {
+          visual_ = null;
         } else {
-          visibleBuilder_.clear();
+          visualBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
         tid_ = 0;
@@ -14501,17 +6632,17 @@ public final class Command {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return commander.Command.internal_static_commander_CObject_descriptor;
+        return commander.Command.internal_static_commander_NObject_descriptor;
       }
 
       @java.lang.Override
-      public commander.Command.CObject getDefaultInstanceForType() {
-        return commander.Command.CObject.getDefaultInstance();
+      public commander.Command.NObject getDefaultInstanceForType() {
+        return commander.Command.NObject.getDefaultInstance();
       }
 
       @java.lang.Override
-      public commander.Command.CObject build() {
-        commander.Command.CObject result = buildPartial();
+      public commander.Command.NObject build() {
+        commander.Command.NObject result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -14519,24 +6650,25 @@ public final class Command {
       }
 
       @java.lang.Override
-      public commander.Command.CObject buildPartial() {
-        commander.Command.CObject result = new commander.Command.CObject(this);
+      public commander.Command.NObject buildPartial() {
+        commander.Command.NObject result = new commander.Command.NObject(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
+        result.sn_ = sn_;
         result.id_ = id_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          if (physicalBuilder_ == null) {
-            result.physical_ = physical_;
+          if (bodyBuilder_ == null) {
+            result.body_ = body_;
           } else {
-            result.physical_ = physicalBuilder_.build();
+            result.body_ = bodyBuilder_.build();
           }
           to_bitField0_ |= 0x00000001;
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
-          if (visibleBuilder_ == null) {
-            result.visible_ = visible_;
+          if (visualBuilder_ == null) {
+            result.visual_ = visual_;
           } else {
-            result.visible_ = visibleBuilder_.build();
+            result.visual_ = visualBuilder_.build();
           }
           to_bitField0_ |= 0x00000002;
         }
@@ -14581,24 +6713,27 @@ public final class Command {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.CObject) {
-          return mergeFrom((commander.Command.CObject)other);
+        if (other instanceof commander.Command.NObject) {
+          return mergeFrom((commander.Command.NObject)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(commander.Command.CObject other) {
-        if (other == commander.Command.CObject.getDefaultInstance()) return this;
+      public Builder mergeFrom(commander.Command.NObject other) {
+        if (other == commander.Command.NObject.getDefaultInstance()) return this;
+        if (other.getSn() != 0) {
+          setSn(other.getSn());
+        }
         if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (other.hasPhysical()) {
-          mergePhysical(other.getPhysical());
+        if (other.hasBody()) {
+          mergeBody(other.getBody());
         }
-        if (other.hasVisible()) {
-          mergeVisible(other.getVisible());
+        if (other.hasVisual()) {
+          mergeVisual(other.getVisual());
         }
         if (other.getTid() != 0) {
           setTid(other.getTid());
@@ -14634,34 +6769,39 @@ public final class Command {
                 done = true;
                 break;
               case 8: {
-                id_ = input.readUInt32();
+                sn_ = input.readUInt32();
 
                 break;
               } // case 8
-              case 18: {
+              case 16: {
+                id_ = input.readInt32();
+
+                break;
+              } // case 16
+              case 26: {
                 input.readMessage(
-                    getPhysicalFieldBuilder().getBuilder(),
+                    getBodyFieldBuilder().getBuilder(),
                     extensionRegistry);
                 bitField0_ |= 0x00000001;
                 break;
-              } // case 18
-              case 26: {
+              } // case 26
+              case 34: {
                 input.readMessage(
-                    getVisibleFieldBuilder().getBuilder(),
+                    getVisualFieldBuilder().getBuilder(),
                     extensionRegistry);
                 bitField0_ |= 0x00000002;
                 break;
-              } // case 26
-              case 32: {
+              } // case 34
+              case 40: {
                 tid_ = input.readUInt32();
 
                 break;
-              } // case 32
-              case 42: {
+              } // case 40
+              case 50: {
                 info_ = input.readStringRequireUtf8();
 
                 break;
-              } // case 42
+              } // case 50
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -14679,9 +6819,40 @@ public final class Command {
       }
       private int bitField0_;
 
+      private int sn_ ;
+      /**
+       * <code>uint32 sn = 1;</code>
+       * @return The sn.
+       */
+      @java.lang.Override
+      public int getSn() {
+        return sn_;
+      }
+      /**
+       * <code>uint32 sn = 1;</code>
+       * @param value The sn to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSn(int value) {
+        
+        sn_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 sn = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSn() {
+        
+        sn_ = 0;
+        onChanged();
+        return this;
+      }
+
       private int id_ ;
       /**
-       * <code>uint32 id = 1;</code>
+       * <code>int32 id = 2;</code>
        * @return The id.
        */
       @java.lang.Override
@@ -14689,7 +6860,7 @@ public final class Command {
         return id_;
       }
       /**
-       * <code>uint32 id = 1;</code>
+       * <code>int32 id = 2;</code>
        * @param value The id to set.
        * @return This builder for chaining.
        */
@@ -14700,7 +6871,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>uint32 id = 1;</code>
+       * <code>int32 id = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearId() {
@@ -14710,249 +6881,249 @@ public final class Command {
         return this;
       }
 
-      private commander.Command.CPhysical physical_;
+      private commander.Command.NBody body_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.CPhysical, commander.Command.CPhysical.Builder, commander.Command.CPhysicalOrBuilder> physicalBuilder_;
+          commander.Command.NBody, commander.Command.NBody.Builder, commander.Command.NBodyOrBuilder> bodyBuilder_;
       /**
-       * <code>optional .commander.CPhysical physical = 2;</code>
-       * @return Whether the physical field is set.
+       * <code>optional .commander.NBody body = 3;</code>
+       * @return Whether the body field is set.
        */
-      public boolean hasPhysical() {
+      public boolean hasBody() {
         return ((bitField0_ & 0x00000001) != 0);
       }
       /**
-       * <code>optional .commander.CPhysical physical = 2;</code>
-       * @return The physical.
+       * <code>optional .commander.NBody body = 3;</code>
+       * @return The body.
        */
-      public commander.Command.CPhysical getPhysical() {
-        if (physicalBuilder_ == null) {
-          return physical_ == null ? commander.Command.CPhysical.getDefaultInstance() : physical_;
+      public commander.Command.NBody getBody() {
+        if (bodyBuilder_ == null) {
+          return body_ == null ? commander.Command.NBody.getDefaultInstance() : body_;
         } else {
-          return physicalBuilder_.getMessage();
+          return bodyBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .commander.CPhysical physical = 2;</code>
+       * <code>optional .commander.NBody body = 3;</code>
        */
-      public Builder setPhysical(commander.Command.CPhysical value) {
-        if (physicalBuilder_ == null) {
+      public Builder setBody(commander.Command.NBody value) {
+        if (bodyBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          physical_ = value;
+          body_ = value;
           onChanged();
         } else {
-          physicalBuilder_.setMessage(value);
+          bodyBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .commander.CPhysical physical = 2;</code>
+       * <code>optional .commander.NBody body = 3;</code>
        */
-      public Builder setPhysical(
-          commander.Command.CPhysical.Builder builderForValue) {
-        if (physicalBuilder_ == null) {
-          physical_ = builderForValue.build();
+      public Builder setBody(
+          commander.Command.NBody.Builder builderForValue) {
+        if (bodyBuilder_ == null) {
+          body_ = builderForValue.build();
           onChanged();
         } else {
-          physicalBuilder_.setMessage(builderForValue.build());
+          bodyBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .commander.CPhysical physical = 2;</code>
+       * <code>optional .commander.NBody body = 3;</code>
        */
-      public Builder mergePhysical(commander.Command.CPhysical value) {
-        if (physicalBuilder_ == null) {
+      public Builder mergeBody(commander.Command.NBody value) {
+        if (bodyBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
-              physical_ != null &&
-              physical_ != commander.Command.CPhysical.getDefaultInstance()) {
-            physical_ =
-              commander.Command.CPhysical.newBuilder(physical_).mergeFrom(value).buildPartial();
+              body_ != null &&
+              body_ != commander.Command.NBody.getDefaultInstance()) {
+            body_ =
+              commander.Command.NBody.newBuilder(body_).mergeFrom(value).buildPartial();
           } else {
-            physical_ = value;
+            body_ = value;
           }
           onChanged();
         } else {
-          physicalBuilder_.mergeFrom(value);
+          bodyBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .commander.CPhysical physical = 2;</code>
+       * <code>optional .commander.NBody body = 3;</code>
        */
-      public Builder clearPhysical() {
-        if (physicalBuilder_ == null) {
-          physical_ = null;
+      public Builder clearBody() {
+        if (bodyBuilder_ == null) {
+          body_ = null;
           onChanged();
         } else {
-          physicalBuilder_.clear();
+          bodyBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
       /**
-       * <code>optional .commander.CPhysical physical = 2;</code>
+       * <code>optional .commander.NBody body = 3;</code>
        */
-      public commander.Command.CPhysical.Builder getPhysicalBuilder() {
+      public commander.Command.NBody.Builder getBodyBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
-        return getPhysicalFieldBuilder().getBuilder();
+        return getBodyFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .commander.CPhysical physical = 2;</code>
+       * <code>optional .commander.NBody body = 3;</code>
        */
-      public commander.Command.CPhysicalOrBuilder getPhysicalOrBuilder() {
-        if (physicalBuilder_ != null) {
-          return physicalBuilder_.getMessageOrBuilder();
+      public commander.Command.NBodyOrBuilder getBodyOrBuilder() {
+        if (bodyBuilder_ != null) {
+          return bodyBuilder_.getMessageOrBuilder();
         } else {
-          return physical_ == null ?
-              commander.Command.CPhysical.getDefaultInstance() : physical_;
+          return body_ == null ?
+              commander.Command.NBody.getDefaultInstance() : body_;
         }
       }
       /**
-       * <code>optional .commander.CPhysical physical = 2;</code>
+       * <code>optional .commander.NBody body = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.CPhysical, commander.Command.CPhysical.Builder, commander.Command.CPhysicalOrBuilder> 
-          getPhysicalFieldBuilder() {
-        if (physicalBuilder_ == null) {
-          physicalBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.CPhysical, commander.Command.CPhysical.Builder, commander.Command.CPhysicalOrBuilder>(
-                  getPhysical(),
+          commander.Command.NBody, commander.Command.NBody.Builder, commander.Command.NBodyOrBuilder> 
+          getBodyFieldBuilder() {
+        if (bodyBuilder_ == null) {
+          bodyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              commander.Command.NBody, commander.Command.NBody.Builder, commander.Command.NBodyOrBuilder>(
+                  getBody(),
                   getParentForChildren(),
                   isClean());
-          physical_ = null;
+          body_ = null;
         }
-        return physicalBuilder_;
+        return bodyBuilder_;
       }
 
-      private commander.Command.CVisible visible_;
+      private commander.Command.NVisual visual_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.CVisible, commander.Command.CVisible.Builder, commander.Command.CVisibleOrBuilder> visibleBuilder_;
+          commander.Command.NVisual, commander.Command.NVisual.Builder, commander.Command.NVisualOrBuilder> visualBuilder_;
       /**
-       * <code>optional .commander.CVisible visible = 3;</code>
-       * @return Whether the visible field is set.
+       * <code>optional .commander.NVisual visual = 4;</code>
+       * @return Whether the visual field is set.
        */
-      public boolean hasVisible() {
+      public boolean hasVisual() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>optional .commander.CVisible visible = 3;</code>
-       * @return The visible.
+       * <code>optional .commander.NVisual visual = 4;</code>
+       * @return The visual.
        */
-      public commander.Command.CVisible getVisible() {
-        if (visibleBuilder_ == null) {
-          return visible_ == null ? commander.Command.CVisible.getDefaultInstance() : visible_;
+      public commander.Command.NVisual getVisual() {
+        if (visualBuilder_ == null) {
+          return visual_ == null ? commander.Command.NVisual.getDefaultInstance() : visual_;
         } else {
-          return visibleBuilder_.getMessage();
+          return visualBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .commander.CVisible visible = 3;</code>
+       * <code>optional .commander.NVisual visual = 4;</code>
        */
-      public Builder setVisible(commander.Command.CVisible value) {
-        if (visibleBuilder_ == null) {
+      public Builder setVisual(commander.Command.NVisual value) {
+        if (visualBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          visible_ = value;
+          visual_ = value;
           onChanged();
         } else {
-          visibleBuilder_.setMessage(value);
+          visualBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .commander.CVisible visible = 3;</code>
+       * <code>optional .commander.NVisual visual = 4;</code>
        */
-      public Builder setVisible(
-          commander.Command.CVisible.Builder builderForValue) {
-        if (visibleBuilder_ == null) {
-          visible_ = builderForValue.build();
+      public Builder setVisual(
+          commander.Command.NVisual.Builder builderForValue) {
+        if (visualBuilder_ == null) {
+          visual_ = builderForValue.build();
           onChanged();
         } else {
-          visibleBuilder_.setMessage(builderForValue.build());
+          visualBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .commander.CVisible visible = 3;</code>
+       * <code>optional .commander.NVisual visual = 4;</code>
        */
-      public Builder mergeVisible(commander.Command.CVisible value) {
-        if (visibleBuilder_ == null) {
+      public Builder mergeVisual(commander.Command.NVisual value) {
+        if (visualBuilder_ == null) {
           if (((bitField0_ & 0x00000002) != 0) &&
-              visible_ != null &&
-              visible_ != commander.Command.CVisible.getDefaultInstance()) {
-            visible_ =
-              commander.Command.CVisible.newBuilder(visible_).mergeFrom(value).buildPartial();
+              visual_ != null &&
+              visual_ != commander.Command.NVisual.getDefaultInstance()) {
+            visual_ =
+              commander.Command.NVisual.newBuilder(visual_).mergeFrom(value).buildPartial();
           } else {
-            visible_ = value;
+            visual_ = value;
           }
           onChanged();
         } else {
-          visibleBuilder_.mergeFrom(value);
+          visualBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .commander.CVisible visible = 3;</code>
+       * <code>optional .commander.NVisual visual = 4;</code>
        */
-      public Builder clearVisible() {
-        if (visibleBuilder_ == null) {
-          visible_ = null;
+      public Builder clearVisual() {
+        if (visualBuilder_ == null) {
+          visual_ = null;
           onChanged();
         } else {
-          visibleBuilder_.clear();
+          visualBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       /**
-       * <code>optional .commander.CVisible visible = 3;</code>
+       * <code>optional .commander.NVisual visual = 4;</code>
        */
-      public commander.Command.CVisible.Builder getVisibleBuilder() {
+      public commander.Command.NVisual.Builder getVisualBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
-        return getVisibleFieldBuilder().getBuilder();
+        return getVisualFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .commander.CVisible visible = 3;</code>
+       * <code>optional .commander.NVisual visual = 4;</code>
        */
-      public commander.Command.CVisibleOrBuilder getVisibleOrBuilder() {
-        if (visibleBuilder_ != null) {
-          return visibleBuilder_.getMessageOrBuilder();
+      public commander.Command.NVisualOrBuilder getVisualOrBuilder() {
+        if (visualBuilder_ != null) {
+          return visualBuilder_.getMessageOrBuilder();
         } else {
-          return visible_ == null ?
-              commander.Command.CVisible.getDefaultInstance() : visible_;
+          return visual_ == null ?
+              commander.Command.NVisual.getDefaultInstance() : visual_;
         }
       }
       /**
-       * <code>optional .commander.CVisible visible = 3;</code>
+       * <code>optional .commander.NVisual visual = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          commander.Command.CVisible, commander.Command.CVisible.Builder, commander.Command.CVisibleOrBuilder> 
-          getVisibleFieldBuilder() {
-        if (visibleBuilder_ == null) {
-          visibleBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              commander.Command.CVisible, commander.Command.CVisible.Builder, commander.Command.CVisibleOrBuilder>(
-                  getVisible(),
+          commander.Command.NVisual, commander.Command.NVisual.Builder, commander.Command.NVisualOrBuilder> 
+          getVisualFieldBuilder() {
+        if (visualBuilder_ == null) {
+          visualBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              commander.Command.NVisual, commander.Command.NVisual.Builder, commander.Command.NVisualOrBuilder>(
+                  getVisual(),
                   getParentForChildren(),
                   isClean());
-          visible_ = null;
+          visual_ = null;
         }
-        return visibleBuilder_;
+        return visualBuilder_;
       }
 
       private int tid_ ;
       /**
-       * <code>uint32 tid = 4;</code>
+       * <code>uint32 tid = 5;</code>
        * @return The tid.
        */
       @java.lang.Override
@@ -14960,7 +7131,7 @@ public final class Command {
         return tid_;
       }
       /**
-       * <code>uint32 tid = 4;</code>
+       * <code>uint32 tid = 5;</code>
        * @param value The tid to set.
        * @return This builder for chaining.
        */
@@ -14971,7 +7142,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>uint32 tid = 4;</code>
+       * <code>uint32 tid = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearTid() {
@@ -14983,7 +7154,7 @@ public final class Command {
 
       private java.lang.Object info_ = "";
       /**
-       * <code>string info = 5;</code>
+       * <code>string info = 6;</code>
        * @return The info.
        */
       public java.lang.String getInfo() {
@@ -14999,7 +7170,7 @@ public final class Command {
         }
       }
       /**
-       * <code>string info = 5;</code>
+       * <code>string info = 6;</code>
        * @return The bytes for info.
        */
       public com.google.protobuf.ByteString
@@ -15016,7 +7187,7 @@ public final class Command {
         }
       }
       /**
-       * <code>string info = 5;</code>
+       * <code>string info = 6;</code>
        * @param value The info to set.
        * @return This builder for chaining.
        */
@@ -15031,7 +7202,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>string info = 5;</code>
+       * <code>string info = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearInfo() {
@@ -15041,7 +7212,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>string info = 5;</code>
+       * <code>string info = 6;</code>
        * @param value The bytes for info to set.
        * @return This builder for chaining.
        */
@@ -15069,23 +7240,23 @@ public final class Command {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:commander.CObject)
+      // @@protoc_insertion_point(builder_scope:commander.NObject)
     }
 
-    // @@protoc_insertion_point(class_scope:commander.CObject)
-    private static final commander.Command.CObject DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:commander.NObject)
+    private static final commander.Command.NObject DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new commander.Command.CObject();
+      DEFAULT_INSTANCE = new commander.Command.NObject();
     }
 
-    public static commander.Command.CObject getDefaultInstance() {
+    public static commander.Command.NObject getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<CObject>
-        PARSER = new com.google.protobuf.AbstractParser<CObject>() {
+    private static final com.google.protobuf.Parser<NObject>
+        PARSER = new com.google.protobuf.AbstractParser<NObject>() {
       @java.lang.Override
-      public CObject parsePartialFrom(
+      public NObject parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -15104,36 +7275,36 @@ public final class Command {
       }
     };
 
-    public static com.google.protobuf.Parser<CObject> parser() {
+    public static com.google.protobuf.Parser<NObject> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<CObject> getParserForType() {
+    public com.google.protobuf.Parser<NObject> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public commander.Command.CObject getDefaultInstanceForType() {
+    public commander.Command.NObject getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface CVisibleOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.CVisible)
+  public interface NVisualOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:commander.NVisual)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.commander.CActionType current = 1;</code>
+     * <code>.commander.NClipType current = 1;</code>
      * @return The enum numeric value on the wire for current.
      */
     int getCurrentValue();
     /**
-     * <code>.commander.CActionType current = 1;</code>
+     * <code>.commander.NClipType current = 1;</code>
      * @return The current.
      */
-    commander.Command.CActionType getCurrent();
+    commander.Command.NClipType getCurrent();
 
     /**
      * <code>uint32 priority = 2;</code>
@@ -15142,99 +7313,99 @@ public final class Command {
     int getPriority();
 
     /**
-     * <code>double x = 3;</code>
+     * <code>float x = 3;</code>
      * @return The x.
      */
-    double getX();
+    float getX();
 
     /**
-     * <code>double y = 4;</code>
+     * <code>float y = 4;</code>
      * @return The y.
      */
-    double getY();
+    float getY();
 
     /**
-     * <code>double width = 5;</code>
+     * <code>float width = 5;</code>
      * @return The width.
      */
-    double getWidth();
+    float getWidth();
 
     /**
-     * <code>double height = 6;</code>
+     * <code>float height = 6;</code>
      * @return The height.
      */
-    double getHeight();
+    float getHeight();
 
     /**
-     * <code>double scaleX = 7;</code>
+     * <code>float scaleX = 7;</code>
      * @return The scaleX.
      */
-    double getScaleX();
+    float getScaleX();
 
     /**
-     * <code>double scaleY = 8;</code>
+     * <code>float scaleY = 8;</code>
      * @return The scaleY.
      */
-    double getScaleY();
+    float getScaleY();
 
     /**
-     * <code>double anchorX = 9;</code>
+     * <code>float anchorX = 9;</code>
      * @return The anchorX.
      */
-    double getAnchorX();
+    float getAnchorX();
 
     /**
-     * <code>double anchorY = 10;</code>
+     * <code>float anchorY = 10;</code>
      * @return The anchorY.
      */
-    double getAnchorY();
+    float getAnchorY();
 
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
-    java.util.List<commander.Command.CAction> 
-        getActionsList();
+    java.util.List<commander.Command.NClip> 
+        getClipsList();
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
-    commander.Command.CAction getActions(int index);
+    commander.Command.NClip getClips(int index);
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
-    int getActionsCount();
+    int getClipsCount();
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
-    java.util.List<? extends commander.Command.CActionOrBuilder> 
-        getActionsOrBuilderList();
+    java.util.List<? extends commander.Command.NClipOrBuilder> 
+        getClipsOrBuilderList();
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
-    commander.Command.CActionOrBuilder getActionsOrBuilder(
+    commander.Command.NClipOrBuilder getClipsOrBuilder(
         int index);
   }
   /**
-   * Protobuf type {@code commander.CVisible}
+   * Protobuf type {@code commander.NVisual}
    */
-  public static final class CVisible extends
+  public static final class NVisual extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.CVisible)
-      CVisibleOrBuilder {
+      // @@protoc_insertion_point(message_implements:commander.NVisual)
+      NVisualOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use CVisible.newBuilder() to construct.
-    private CVisible(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use NVisual.newBuilder() to construct.
+    private NVisual(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private CVisible() {
+    private NVisual() {
       current_ = 0;
-      actions_ = java.util.Collections.emptyList();
+      clips_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new CVisible();
+      return new NVisual();
     }
 
     @java.lang.Override
@@ -15244,34 +7415,34 @@ public final class Command {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return commander.Command.internal_static_commander_CVisible_descriptor;
+      return commander.Command.internal_static_commander_NVisual_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_CVisible_fieldAccessorTable
+      return commander.Command.internal_static_commander_NVisual_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              commander.Command.CVisible.class, commander.Command.CVisible.Builder.class);
+              commander.Command.NVisual.class, commander.Command.NVisual.Builder.class);
     }
 
     public static final int CURRENT_FIELD_NUMBER = 1;
     private int current_;
     /**
-     * <code>.commander.CActionType current = 1;</code>
+     * <code>.commander.NClipType current = 1;</code>
      * @return The enum numeric value on the wire for current.
      */
     @java.lang.Override public int getCurrentValue() {
       return current_;
     }
     /**
-     * <code>.commander.CActionType current = 1;</code>
+     * <code>.commander.NClipType current = 1;</code>
      * @return The current.
      */
-    @java.lang.Override public commander.Command.CActionType getCurrent() {
+    @java.lang.Override public commander.Command.NClipType getCurrent() {
       @SuppressWarnings("deprecation")
-      commander.Command.CActionType result = commander.Command.CActionType.valueOf(current_);
-      return result == null ? commander.Command.CActionType.UNRECOGNIZED : result;
+      commander.Command.NClipType result = commander.Command.NClipType.valueOf(current_);
+      return result == null ? commander.Command.NClipType.UNRECOGNIZED : result;
     }
 
     public static final int PRIORITY_FIELD_NUMBER = 2;
@@ -15286,131 +7457,131 @@ public final class Command {
     }
 
     public static final int X_FIELD_NUMBER = 3;
-    private double x_;
+    private float x_;
     /**
-     * <code>double x = 3;</code>
+     * <code>float x = 3;</code>
      * @return The x.
      */
     @java.lang.Override
-    public double getX() {
+    public float getX() {
       return x_;
     }
 
     public static final int Y_FIELD_NUMBER = 4;
-    private double y_;
+    private float y_;
     /**
-     * <code>double y = 4;</code>
+     * <code>float y = 4;</code>
      * @return The y.
      */
     @java.lang.Override
-    public double getY() {
+    public float getY() {
       return y_;
     }
 
     public static final int WIDTH_FIELD_NUMBER = 5;
-    private double width_;
+    private float width_;
     /**
-     * <code>double width = 5;</code>
+     * <code>float width = 5;</code>
      * @return The width.
      */
     @java.lang.Override
-    public double getWidth() {
+    public float getWidth() {
       return width_;
     }
 
     public static final int HEIGHT_FIELD_NUMBER = 6;
-    private double height_;
+    private float height_;
     /**
-     * <code>double height = 6;</code>
+     * <code>float height = 6;</code>
      * @return The height.
      */
     @java.lang.Override
-    public double getHeight() {
+    public float getHeight() {
       return height_;
     }
 
     public static final int SCALEX_FIELD_NUMBER = 7;
-    private double scaleX_;
+    private float scaleX_;
     /**
-     * <code>double scaleX = 7;</code>
+     * <code>float scaleX = 7;</code>
      * @return The scaleX.
      */
     @java.lang.Override
-    public double getScaleX() {
+    public float getScaleX() {
       return scaleX_;
     }
 
     public static final int SCALEY_FIELD_NUMBER = 8;
-    private double scaleY_;
+    private float scaleY_;
     /**
-     * <code>double scaleY = 8;</code>
+     * <code>float scaleY = 8;</code>
      * @return The scaleY.
      */
     @java.lang.Override
-    public double getScaleY() {
+    public float getScaleY() {
       return scaleY_;
     }
 
     public static final int ANCHORX_FIELD_NUMBER = 9;
-    private double anchorX_;
+    private float anchorX_;
     /**
-     * <code>double anchorX = 9;</code>
+     * <code>float anchorX = 9;</code>
      * @return The anchorX.
      */
     @java.lang.Override
-    public double getAnchorX() {
+    public float getAnchorX() {
       return anchorX_;
     }
 
     public static final int ANCHORY_FIELD_NUMBER = 10;
-    private double anchorY_;
+    private float anchorY_;
     /**
-     * <code>double anchorY = 10;</code>
+     * <code>float anchorY = 10;</code>
      * @return The anchorY.
      */
     @java.lang.Override
-    public double getAnchorY() {
+    public float getAnchorY() {
       return anchorY_;
     }
 
-    public static final int ACTIONS_FIELD_NUMBER = 11;
-    private java.util.List<commander.Command.CAction> actions_;
+    public static final int CLIPS_FIELD_NUMBER = 11;
+    private java.util.List<commander.Command.NClip> clips_;
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
-    public java.util.List<commander.Command.CAction> getActionsList() {
-      return actions_;
+    public java.util.List<commander.Command.NClip> getClipsList() {
+      return clips_;
     }
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends commander.Command.CActionOrBuilder> 
-        getActionsOrBuilderList() {
-      return actions_;
+    public java.util.List<? extends commander.Command.NClipOrBuilder> 
+        getClipsOrBuilderList() {
+      return clips_;
     }
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
-    public int getActionsCount() {
-      return actions_.size();
+    public int getClipsCount() {
+      return clips_.size();
     }
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
-    public commander.Command.CAction getActions(int index) {
-      return actions_.get(index);
+    public commander.Command.NClip getClips(int index) {
+      return clips_.get(index);
     }
     /**
-     * <code>repeated .commander.CAction actions = 11;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
-    public commander.Command.CActionOrBuilder getActionsOrBuilder(
+    public commander.Command.NClipOrBuilder getClipsOrBuilder(
         int index) {
-      return actions_.get(index);
+      return clips_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -15427,38 +7598,38 @@ public final class Command {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (current_ != commander.Command.CActionType.idle.getNumber()) {
+      if (current_ != commander.Command.NClipType.idle.getNumber()) {
         output.writeEnum(1, current_);
       }
       if (priority_ != 0) {
         output.writeUInt32(2, priority_);
       }
-      if (java.lang.Double.doubleToRawLongBits(x_) != 0) {
-        output.writeDouble(3, x_);
+      if (java.lang.Float.floatToRawIntBits(x_) != 0) {
+        output.writeFloat(3, x_);
       }
-      if (java.lang.Double.doubleToRawLongBits(y_) != 0) {
-        output.writeDouble(4, y_);
+      if (java.lang.Float.floatToRawIntBits(y_) != 0) {
+        output.writeFloat(4, y_);
       }
-      if (java.lang.Double.doubleToRawLongBits(width_) != 0) {
-        output.writeDouble(5, width_);
+      if (java.lang.Float.floatToRawIntBits(width_) != 0) {
+        output.writeFloat(5, width_);
       }
-      if (java.lang.Double.doubleToRawLongBits(height_) != 0) {
-        output.writeDouble(6, height_);
+      if (java.lang.Float.floatToRawIntBits(height_) != 0) {
+        output.writeFloat(6, height_);
       }
-      if (java.lang.Double.doubleToRawLongBits(scaleX_) != 0) {
-        output.writeDouble(7, scaleX_);
+      if (java.lang.Float.floatToRawIntBits(scaleX_) != 0) {
+        output.writeFloat(7, scaleX_);
       }
-      if (java.lang.Double.doubleToRawLongBits(scaleY_) != 0) {
-        output.writeDouble(8, scaleY_);
+      if (java.lang.Float.floatToRawIntBits(scaleY_) != 0) {
+        output.writeFloat(8, scaleY_);
       }
-      if (java.lang.Double.doubleToRawLongBits(anchorX_) != 0) {
-        output.writeDouble(9, anchorX_);
+      if (java.lang.Float.floatToRawIntBits(anchorX_) != 0) {
+        output.writeFloat(9, anchorX_);
       }
-      if (java.lang.Double.doubleToRawLongBits(anchorY_) != 0) {
-        output.writeDouble(10, anchorY_);
+      if (java.lang.Float.floatToRawIntBits(anchorY_) != 0) {
+        output.writeFloat(10, anchorY_);
       }
-      for (int i = 0; i < actions_.size(); i++) {
-        output.writeMessage(11, actions_.get(i));
+      for (int i = 0; i < clips_.size(); i++) {
+        output.writeMessage(11, clips_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -15469,7 +7640,7 @@ public final class Command {
       if (size != -1) return size;
 
       size = 0;
-      if (current_ != commander.Command.CActionType.idle.getNumber()) {
+      if (current_ != commander.Command.NClipType.idle.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, current_);
       }
@@ -15477,41 +7648,41 @@ public final class Command {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, priority_);
       }
-      if (java.lang.Double.doubleToRawLongBits(x_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(x_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, x_);
+          .computeFloatSize(3, x_);
       }
-      if (java.lang.Double.doubleToRawLongBits(y_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(y_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, y_);
+          .computeFloatSize(4, y_);
       }
-      if (java.lang.Double.doubleToRawLongBits(width_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(width_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(5, width_);
+          .computeFloatSize(5, width_);
       }
-      if (java.lang.Double.doubleToRawLongBits(height_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(height_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(6, height_);
+          .computeFloatSize(6, height_);
       }
-      if (java.lang.Double.doubleToRawLongBits(scaleX_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(scaleX_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(7, scaleX_);
+          .computeFloatSize(7, scaleX_);
       }
-      if (java.lang.Double.doubleToRawLongBits(scaleY_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(scaleY_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(8, scaleY_);
+          .computeFloatSize(8, scaleY_);
       }
-      if (java.lang.Double.doubleToRawLongBits(anchorX_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(anchorX_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(9, anchorX_);
+          .computeFloatSize(9, anchorX_);
       }
-      if (java.lang.Double.doubleToRawLongBits(anchorY_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(anchorY_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(10, anchorY_);
+          .computeFloatSize(10, anchorY_);
       }
-      for (int i = 0; i < actions_.size(); i++) {
+      for (int i = 0; i < clips_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, actions_.get(i));
+          .computeMessageSize(11, clips_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -15523,40 +7694,40 @@ public final class Command {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof commander.Command.CVisible)) {
+      if (!(obj instanceof commander.Command.NVisual)) {
         return super.equals(obj);
       }
-      commander.Command.CVisible other = (commander.Command.CVisible) obj;
+      commander.Command.NVisual other = (commander.Command.NVisual) obj;
 
       if (current_ != other.current_) return false;
       if (getPriority()
           != other.getPriority()) return false;
-      if (java.lang.Double.doubleToLongBits(getX())
-          != java.lang.Double.doubleToLongBits(
+      if (java.lang.Float.floatToIntBits(getX())
+          != java.lang.Float.floatToIntBits(
               other.getX())) return false;
-      if (java.lang.Double.doubleToLongBits(getY())
-          != java.lang.Double.doubleToLongBits(
+      if (java.lang.Float.floatToIntBits(getY())
+          != java.lang.Float.floatToIntBits(
               other.getY())) return false;
-      if (java.lang.Double.doubleToLongBits(getWidth())
-          != java.lang.Double.doubleToLongBits(
+      if (java.lang.Float.floatToIntBits(getWidth())
+          != java.lang.Float.floatToIntBits(
               other.getWidth())) return false;
-      if (java.lang.Double.doubleToLongBits(getHeight())
-          != java.lang.Double.doubleToLongBits(
+      if (java.lang.Float.floatToIntBits(getHeight())
+          != java.lang.Float.floatToIntBits(
               other.getHeight())) return false;
-      if (java.lang.Double.doubleToLongBits(getScaleX())
-          != java.lang.Double.doubleToLongBits(
+      if (java.lang.Float.floatToIntBits(getScaleX())
+          != java.lang.Float.floatToIntBits(
               other.getScaleX())) return false;
-      if (java.lang.Double.doubleToLongBits(getScaleY())
-          != java.lang.Double.doubleToLongBits(
+      if (java.lang.Float.floatToIntBits(getScaleY())
+          != java.lang.Float.floatToIntBits(
               other.getScaleY())) return false;
-      if (java.lang.Double.doubleToLongBits(getAnchorX())
-          != java.lang.Double.doubleToLongBits(
+      if (java.lang.Float.floatToIntBits(getAnchorX())
+          != java.lang.Float.floatToIntBits(
               other.getAnchorX())) return false;
-      if (java.lang.Double.doubleToLongBits(getAnchorY())
-          != java.lang.Double.doubleToLongBits(
+      if (java.lang.Float.floatToIntBits(getAnchorY())
+          != java.lang.Float.floatToIntBits(
               other.getAnchorY())) return false;
-      if (!getActionsList()
-          .equals(other.getActionsList())) return false;
+      if (!getClipsList()
+          .equals(other.getClipsList())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -15573,101 +7744,101 @@ public final class Command {
       hash = (37 * hash) + PRIORITY_FIELD_NUMBER;
       hash = (53 * hash) + getPriority();
       hash = (37 * hash) + X_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getX()));
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getX());
       hash = (37 * hash) + Y_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getY()));
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getY());
       hash = (37 * hash) + WIDTH_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getWidth()));
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getWidth());
       hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getHeight()));
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getHeight());
       hash = (37 * hash) + SCALEX_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getScaleX()));
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getScaleX());
       hash = (37 * hash) + SCALEY_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getScaleY()));
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getScaleY());
       hash = (37 * hash) + ANCHORX_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getAnchorX()));
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getAnchorX());
       hash = (37 * hash) + ANCHORY_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getAnchorY()));
-      if (getActionsCount() > 0) {
-        hash = (37 * hash) + ACTIONS_FIELD_NUMBER;
-        hash = (53 * hash) + getActionsList().hashCode();
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getAnchorY());
+      if (getClipsCount() > 0) {
+        hash = (37 * hash) + CLIPS_FIELD_NUMBER;
+        hash = (53 * hash) + getClipsList().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static commander.Command.CVisible parseFrom(
+    public static commander.Command.NVisual parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CVisible parseFrom(
+    public static commander.Command.NVisual parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CVisible parseFrom(
+    public static commander.Command.NVisual parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CVisible parseFrom(
+    public static commander.Command.NVisual parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CVisible parseFrom(byte[] data)
+    public static commander.Command.NVisual parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CVisible parseFrom(
+    public static commander.Command.NVisual parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CVisible parseFrom(java.io.InputStream input)
+    public static commander.Command.NVisual parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.CVisible parseFrom(
+    public static commander.Command.NVisual parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.CVisible parseDelimitedFrom(java.io.InputStream input)
+    public static commander.Command.NVisual parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static commander.Command.CVisible parseDelimitedFrom(
+    public static commander.Command.NVisual parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.CVisible parseFrom(
+    public static commander.Command.NVisual parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.CVisible parseFrom(
+    public static commander.Command.NVisual parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -15680,7 +7851,7 @@ public final class Command {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(commander.Command.CVisible prototype) {
+    public static Builder newBuilder(commander.Command.NVisual prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -15696,26 +7867,26 @@ public final class Command {
       return builder;
     }
     /**
-     * Protobuf type {@code commander.CVisible}
+     * Protobuf type {@code commander.NVisual}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.CVisible)
-        commander.Command.CVisibleOrBuilder {
+        // @@protoc_insertion_point(builder_implements:commander.NVisual)
+        commander.Command.NVisualOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return commander.Command.internal_static_commander_CVisible_descriptor;
+        return commander.Command.internal_static_commander_NVisual_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_CVisible_fieldAccessorTable
+        return commander.Command.internal_static_commander_NVisual_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                commander.Command.CVisible.class, commander.Command.CVisible.Builder.class);
+                commander.Command.NVisual.class, commander.Command.NVisual.Builder.class);
       }
 
-      // Construct using commander.Command.CVisible.newBuilder()
+      // Construct using commander.Command.NVisual.newBuilder()
       private Builder() {
 
       }
@@ -15732,27 +7903,27 @@ public final class Command {
 
         priority_ = 0;
 
-        x_ = 0D;
+        x_ = 0F;
 
-        y_ = 0D;
+        y_ = 0F;
 
-        width_ = 0D;
+        width_ = 0F;
 
-        height_ = 0D;
+        height_ = 0F;
 
-        scaleX_ = 0D;
+        scaleX_ = 0F;
 
-        scaleY_ = 0D;
+        scaleY_ = 0F;
 
-        anchorX_ = 0D;
+        anchorX_ = 0F;
 
-        anchorY_ = 0D;
+        anchorY_ = 0F;
 
-        if (actionsBuilder_ == null) {
-          actions_ = java.util.Collections.emptyList();
+        if (clipsBuilder_ == null) {
+          clips_ = java.util.Collections.emptyList();
         } else {
-          actions_ = null;
-          actionsBuilder_.clear();
+          clips_ = null;
+          clipsBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
@@ -15761,17 +7932,17 @@ public final class Command {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return commander.Command.internal_static_commander_CVisible_descriptor;
+        return commander.Command.internal_static_commander_NVisual_descriptor;
       }
 
       @java.lang.Override
-      public commander.Command.CVisible getDefaultInstanceForType() {
-        return commander.Command.CVisible.getDefaultInstance();
+      public commander.Command.NVisual getDefaultInstanceForType() {
+        return commander.Command.NVisual.getDefaultInstance();
       }
 
       @java.lang.Override
-      public commander.Command.CVisible build() {
-        commander.Command.CVisible result = buildPartial();
+      public commander.Command.NVisual build() {
+        commander.Command.NVisual result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -15779,8 +7950,8 @@ public final class Command {
       }
 
       @java.lang.Override
-      public commander.Command.CVisible buildPartial() {
-        commander.Command.CVisible result = new commander.Command.CVisible(this);
+      public commander.Command.NVisual buildPartial() {
+        commander.Command.NVisual result = new commander.Command.NVisual(this);
         int from_bitField0_ = bitField0_;
         result.current_ = current_;
         result.priority_ = priority_;
@@ -15792,14 +7963,14 @@ public final class Command {
         result.scaleY_ = scaleY_;
         result.anchorX_ = anchorX_;
         result.anchorY_ = anchorY_;
-        if (actionsBuilder_ == null) {
+        if (clipsBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
-            actions_ = java.util.Collections.unmodifiableList(actions_);
+            clips_ = java.util.Collections.unmodifiableList(clips_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.actions_ = actions_;
+          result.clips_ = clips_;
         } else {
-          result.actions_ = actionsBuilder_.build();
+          result.clips_ = clipsBuilder_.build();
         }
         onBuilt();
         return result;
@@ -15839,69 +8010,69 @@ public final class Command {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.CVisible) {
-          return mergeFrom((commander.Command.CVisible)other);
+        if (other instanceof commander.Command.NVisual) {
+          return mergeFrom((commander.Command.NVisual)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(commander.Command.CVisible other) {
-        if (other == commander.Command.CVisible.getDefaultInstance()) return this;
+      public Builder mergeFrom(commander.Command.NVisual other) {
+        if (other == commander.Command.NVisual.getDefaultInstance()) return this;
         if (other.current_ != 0) {
           setCurrentValue(other.getCurrentValue());
         }
         if (other.getPriority() != 0) {
           setPriority(other.getPriority());
         }
-        if (other.getX() != 0D) {
+        if (other.getX() != 0F) {
           setX(other.getX());
         }
-        if (other.getY() != 0D) {
+        if (other.getY() != 0F) {
           setY(other.getY());
         }
-        if (other.getWidth() != 0D) {
+        if (other.getWidth() != 0F) {
           setWidth(other.getWidth());
         }
-        if (other.getHeight() != 0D) {
+        if (other.getHeight() != 0F) {
           setHeight(other.getHeight());
         }
-        if (other.getScaleX() != 0D) {
+        if (other.getScaleX() != 0F) {
           setScaleX(other.getScaleX());
         }
-        if (other.getScaleY() != 0D) {
+        if (other.getScaleY() != 0F) {
           setScaleY(other.getScaleY());
         }
-        if (other.getAnchorX() != 0D) {
+        if (other.getAnchorX() != 0F) {
           setAnchorX(other.getAnchorX());
         }
-        if (other.getAnchorY() != 0D) {
+        if (other.getAnchorY() != 0F) {
           setAnchorY(other.getAnchorY());
         }
-        if (actionsBuilder_ == null) {
-          if (!other.actions_.isEmpty()) {
-            if (actions_.isEmpty()) {
-              actions_ = other.actions_;
+        if (clipsBuilder_ == null) {
+          if (!other.clips_.isEmpty()) {
+            if (clips_.isEmpty()) {
+              clips_ = other.clips_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureActionsIsMutable();
-              actions_.addAll(other.actions_);
+              ensureClipsIsMutable();
+              clips_.addAll(other.clips_);
             }
             onChanged();
           }
         } else {
-          if (!other.actions_.isEmpty()) {
-            if (actionsBuilder_.isEmpty()) {
-              actionsBuilder_.dispose();
-              actionsBuilder_ = null;
-              actions_ = other.actions_;
+          if (!other.clips_.isEmpty()) {
+            if (clipsBuilder_.isEmpty()) {
+              clipsBuilder_.dispose();
+              clipsBuilder_ = null;
+              clips_ = other.clips_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              actionsBuilder_ = 
+              clipsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getActionsFieldBuilder() : null;
+                   getClipsFieldBuilder() : null;
             } else {
-              actionsBuilder_.addAllMessages(other.actions_);
+              clipsBuilder_.addAllMessages(other.clips_);
             }
           }
         }
@@ -15941,56 +8112,56 @@ public final class Command {
 
                 break;
               } // case 16
-              case 25: {
-                x_ = input.readDouble();
+              case 29: {
+                x_ = input.readFloat();
 
                 break;
-              } // case 25
-              case 33: {
-                y_ = input.readDouble();
+              } // case 29
+              case 37: {
+                y_ = input.readFloat();
 
                 break;
-              } // case 33
-              case 41: {
-                width_ = input.readDouble();
+              } // case 37
+              case 45: {
+                width_ = input.readFloat();
 
                 break;
-              } // case 41
-              case 49: {
-                height_ = input.readDouble();
+              } // case 45
+              case 53: {
+                height_ = input.readFloat();
 
                 break;
-              } // case 49
-              case 57: {
-                scaleX_ = input.readDouble();
+              } // case 53
+              case 61: {
+                scaleX_ = input.readFloat();
 
                 break;
-              } // case 57
-              case 65: {
-                scaleY_ = input.readDouble();
+              } // case 61
+              case 69: {
+                scaleY_ = input.readFloat();
 
                 break;
-              } // case 65
-              case 73: {
-                anchorX_ = input.readDouble();
+              } // case 69
+              case 77: {
+                anchorX_ = input.readFloat();
 
                 break;
-              } // case 73
-              case 81: {
-                anchorY_ = input.readDouble();
+              } // case 77
+              case 85: {
+                anchorY_ = input.readFloat();
 
                 break;
-              } // case 81
+              } // case 85
               case 90: {
-                commander.Command.CAction m =
+                commander.Command.NClip m =
                     input.readMessage(
-                        commander.Command.CAction.parser(),
+                        commander.Command.NClip.parser(),
                         extensionRegistry);
-                if (actionsBuilder_ == null) {
-                  ensureActionsIsMutable();
-                  actions_.add(m);
+                if (clipsBuilder_ == null) {
+                  ensureClipsIsMutable();
+                  clips_.add(m);
                 } else {
-                  actionsBuilder_.addMessage(m);
+                  clipsBuilder_.addMessage(m);
                 }
                 break;
               } // case 90
@@ -16013,14 +8184,14 @@ public final class Command {
 
       private int current_ = 0;
       /**
-       * <code>.commander.CActionType current = 1;</code>
+       * <code>.commander.NClipType current = 1;</code>
        * @return The enum numeric value on the wire for current.
        */
       @java.lang.Override public int getCurrentValue() {
         return current_;
       }
       /**
-       * <code>.commander.CActionType current = 1;</code>
+       * <code>.commander.NClipType current = 1;</code>
        * @param value The enum numeric value on the wire for current to set.
        * @return This builder for chaining.
        */
@@ -16031,21 +8202,21 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.commander.CActionType current = 1;</code>
+       * <code>.commander.NClipType current = 1;</code>
        * @return The current.
        */
       @java.lang.Override
-      public commander.Command.CActionType getCurrent() {
+      public commander.Command.NClipType getCurrent() {
         @SuppressWarnings("deprecation")
-        commander.Command.CActionType result = commander.Command.CActionType.valueOf(current_);
-        return result == null ? commander.Command.CActionType.UNRECOGNIZED : result;
+        commander.Command.NClipType result = commander.Command.NClipType.valueOf(current_);
+        return result == null ? commander.Command.NClipType.UNRECOGNIZED : result;
       }
       /**
-       * <code>.commander.CActionType current = 1;</code>
+       * <code>.commander.NClipType current = 1;</code>
        * @param value The current to set.
        * @return This builder for chaining.
        */
-      public Builder setCurrent(commander.Command.CActionType value) {
+      public Builder setCurrent(commander.Command.NClipType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -16055,7 +8226,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.commander.CActionType current = 1;</code>
+       * <code>.commander.NClipType current = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearCurrent() {
@@ -16096,492 +8267,492 @@ public final class Command {
         return this;
       }
 
-      private double x_ ;
+      private float x_ ;
       /**
-       * <code>double x = 3;</code>
+       * <code>float x = 3;</code>
        * @return The x.
        */
       @java.lang.Override
-      public double getX() {
+      public float getX() {
         return x_;
       }
       /**
-       * <code>double x = 3;</code>
+       * <code>float x = 3;</code>
        * @param value The x to set.
        * @return This builder for chaining.
        */
-      public Builder setX(double value) {
+      public Builder setX(float value) {
         
         x_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double x = 3;</code>
+       * <code>float x = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearX() {
         
-        x_ = 0D;
+        x_ = 0F;
         onChanged();
         return this;
       }
 
-      private double y_ ;
+      private float y_ ;
       /**
-       * <code>double y = 4;</code>
+       * <code>float y = 4;</code>
        * @return The y.
        */
       @java.lang.Override
-      public double getY() {
+      public float getY() {
         return y_;
       }
       /**
-       * <code>double y = 4;</code>
+       * <code>float y = 4;</code>
        * @param value The y to set.
        * @return This builder for chaining.
        */
-      public Builder setY(double value) {
+      public Builder setY(float value) {
         
         y_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double y = 4;</code>
+       * <code>float y = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearY() {
         
-        y_ = 0D;
+        y_ = 0F;
         onChanged();
         return this;
       }
 
-      private double width_ ;
+      private float width_ ;
       /**
-       * <code>double width = 5;</code>
+       * <code>float width = 5;</code>
        * @return The width.
        */
       @java.lang.Override
-      public double getWidth() {
+      public float getWidth() {
         return width_;
       }
       /**
-       * <code>double width = 5;</code>
+       * <code>float width = 5;</code>
        * @param value The width to set.
        * @return This builder for chaining.
        */
-      public Builder setWidth(double value) {
+      public Builder setWidth(float value) {
         
         width_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double width = 5;</code>
+       * <code>float width = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearWidth() {
         
-        width_ = 0D;
+        width_ = 0F;
         onChanged();
         return this;
       }
 
-      private double height_ ;
+      private float height_ ;
       /**
-       * <code>double height = 6;</code>
+       * <code>float height = 6;</code>
        * @return The height.
        */
       @java.lang.Override
-      public double getHeight() {
+      public float getHeight() {
         return height_;
       }
       /**
-       * <code>double height = 6;</code>
+       * <code>float height = 6;</code>
        * @param value The height to set.
        * @return This builder for chaining.
        */
-      public Builder setHeight(double value) {
+      public Builder setHeight(float value) {
         
         height_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double height = 6;</code>
+       * <code>float height = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearHeight() {
         
-        height_ = 0D;
+        height_ = 0F;
         onChanged();
         return this;
       }
 
-      private double scaleX_ ;
+      private float scaleX_ ;
       /**
-       * <code>double scaleX = 7;</code>
+       * <code>float scaleX = 7;</code>
        * @return The scaleX.
        */
       @java.lang.Override
-      public double getScaleX() {
+      public float getScaleX() {
         return scaleX_;
       }
       /**
-       * <code>double scaleX = 7;</code>
+       * <code>float scaleX = 7;</code>
        * @param value The scaleX to set.
        * @return This builder for chaining.
        */
-      public Builder setScaleX(double value) {
+      public Builder setScaleX(float value) {
         
         scaleX_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double scaleX = 7;</code>
+       * <code>float scaleX = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearScaleX() {
         
-        scaleX_ = 0D;
+        scaleX_ = 0F;
         onChanged();
         return this;
       }
 
-      private double scaleY_ ;
+      private float scaleY_ ;
       /**
-       * <code>double scaleY = 8;</code>
+       * <code>float scaleY = 8;</code>
        * @return The scaleY.
        */
       @java.lang.Override
-      public double getScaleY() {
+      public float getScaleY() {
         return scaleY_;
       }
       /**
-       * <code>double scaleY = 8;</code>
+       * <code>float scaleY = 8;</code>
        * @param value The scaleY to set.
        * @return This builder for chaining.
        */
-      public Builder setScaleY(double value) {
+      public Builder setScaleY(float value) {
         
         scaleY_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double scaleY = 8;</code>
+       * <code>float scaleY = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearScaleY() {
         
-        scaleY_ = 0D;
+        scaleY_ = 0F;
         onChanged();
         return this;
       }
 
-      private double anchorX_ ;
+      private float anchorX_ ;
       /**
-       * <code>double anchorX = 9;</code>
+       * <code>float anchorX = 9;</code>
        * @return The anchorX.
        */
       @java.lang.Override
-      public double getAnchorX() {
+      public float getAnchorX() {
         return anchorX_;
       }
       /**
-       * <code>double anchorX = 9;</code>
+       * <code>float anchorX = 9;</code>
        * @param value The anchorX to set.
        * @return This builder for chaining.
        */
-      public Builder setAnchorX(double value) {
+      public Builder setAnchorX(float value) {
         
         anchorX_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double anchorX = 9;</code>
+       * <code>float anchorX = 9;</code>
        * @return This builder for chaining.
        */
       public Builder clearAnchorX() {
         
-        anchorX_ = 0D;
+        anchorX_ = 0F;
         onChanged();
         return this;
       }
 
-      private double anchorY_ ;
+      private float anchorY_ ;
       /**
-       * <code>double anchorY = 10;</code>
+       * <code>float anchorY = 10;</code>
        * @return The anchorY.
        */
       @java.lang.Override
-      public double getAnchorY() {
+      public float getAnchorY() {
         return anchorY_;
       }
       /**
-       * <code>double anchorY = 10;</code>
+       * <code>float anchorY = 10;</code>
        * @param value The anchorY to set.
        * @return This builder for chaining.
        */
-      public Builder setAnchorY(double value) {
+      public Builder setAnchorY(float value) {
         
         anchorY_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double anchorY = 10;</code>
+       * <code>float anchorY = 10;</code>
        * @return This builder for chaining.
        */
       public Builder clearAnchorY() {
         
-        anchorY_ = 0D;
+        anchorY_ = 0F;
         onChanged();
         return this;
       }
 
-      private java.util.List<commander.Command.CAction> actions_ =
+      private java.util.List<commander.Command.NClip> clips_ =
         java.util.Collections.emptyList();
-      private void ensureActionsIsMutable() {
+      private void ensureClipsIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          actions_ = new java.util.ArrayList<commander.Command.CAction>(actions_);
+          clips_ = new java.util.ArrayList<commander.Command.NClip>(clips_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          commander.Command.CAction, commander.Command.CAction.Builder, commander.Command.CActionOrBuilder> actionsBuilder_;
+          commander.Command.NClip, commander.Command.NClip.Builder, commander.Command.NClipOrBuilder> clipsBuilder_;
 
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public java.util.List<commander.Command.CAction> getActionsList() {
-        if (actionsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(actions_);
+      public java.util.List<commander.Command.NClip> getClipsList() {
+        if (clipsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(clips_);
         } else {
-          return actionsBuilder_.getMessageList();
+          return clipsBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public int getActionsCount() {
-        if (actionsBuilder_ == null) {
-          return actions_.size();
+      public int getClipsCount() {
+        if (clipsBuilder_ == null) {
+          return clips_.size();
         } else {
-          return actionsBuilder_.getCount();
+          return clipsBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public commander.Command.CAction getActions(int index) {
-        if (actionsBuilder_ == null) {
-          return actions_.get(index);
+      public commander.Command.NClip getClips(int index) {
+        if (clipsBuilder_ == null) {
+          return clips_.get(index);
         } else {
-          return actionsBuilder_.getMessage(index);
+          return clipsBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public Builder setActions(
-          int index, commander.Command.CAction value) {
-        if (actionsBuilder_ == null) {
+      public Builder setClips(
+          int index, commander.Command.NClip value) {
+        if (clipsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureActionsIsMutable();
-          actions_.set(index, value);
+          ensureClipsIsMutable();
+          clips_.set(index, value);
           onChanged();
         } else {
-          actionsBuilder_.setMessage(index, value);
+          clipsBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public Builder setActions(
-          int index, commander.Command.CAction.Builder builderForValue) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
-          actions_.set(index, builderForValue.build());
+      public Builder setClips(
+          int index, commander.Command.NClip.Builder builderForValue) {
+        if (clipsBuilder_ == null) {
+          ensureClipsIsMutable();
+          clips_.set(index, builderForValue.build());
           onChanged();
         } else {
-          actionsBuilder_.setMessage(index, builderForValue.build());
+          clipsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public Builder addActions(commander.Command.CAction value) {
-        if (actionsBuilder_ == null) {
+      public Builder addClips(commander.Command.NClip value) {
+        if (clipsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureActionsIsMutable();
-          actions_.add(value);
+          ensureClipsIsMutable();
+          clips_.add(value);
           onChanged();
         } else {
-          actionsBuilder_.addMessage(value);
+          clipsBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public Builder addActions(
-          int index, commander.Command.CAction value) {
-        if (actionsBuilder_ == null) {
+      public Builder addClips(
+          int index, commander.Command.NClip value) {
+        if (clipsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureActionsIsMutable();
-          actions_.add(index, value);
+          ensureClipsIsMutable();
+          clips_.add(index, value);
           onChanged();
         } else {
-          actionsBuilder_.addMessage(index, value);
+          clipsBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public Builder addActions(
-          commander.Command.CAction.Builder builderForValue) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
-          actions_.add(builderForValue.build());
+      public Builder addClips(
+          commander.Command.NClip.Builder builderForValue) {
+        if (clipsBuilder_ == null) {
+          ensureClipsIsMutable();
+          clips_.add(builderForValue.build());
           onChanged();
         } else {
-          actionsBuilder_.addMessage(builderForValue.build());
+          clipsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public Builder addActions(
-          int index, commander.Command.CAction.Builder builderForValue) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
-          actions_.add(index, builderForValue.build());
+      public Builder addClips(
+          int index, commander.Command.NClip.Builder builderForValue) {
+        if (clipsBuilder_ == null) {
+          ensureClipsIsMutable();
+          clips_.add(index, builderForValue.build());
           onChanged();
         } else {
-          actionsBuilder_.addMessage(index, builderForValue.build());
+          clipsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public Builder addAllActions(
-          java.lang.Iterable<? extends commander.Command.CAction> values) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
+      public Builder addAllClips(
+          java.lang.Iterable<? extends commander.Command.NClip> values) {
+        if (clipsBuilder_ == null) {
+          ensureClipsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, actions_);
+              values, clips_);
           onChanged();
         } else {
-          actionsBuilder_.addAllMessages(values);
+          clipsBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public Builder clearActions() {
-        if (actionsBuilder_ == null) {
-          actions_ = java.util.Collections.emptyList();
+      public Builder clearClips() {
+        if (clipsBuilder_ == null) {
+          clips_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          actionsBuilder_.clear();
+          clipsBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public Builder removeActions(int index) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
-          actions_.remove(index);
+      public Builder removeClips(int index) {
+        if (clipsBuilder_ == null) {
+          ensureClipsIsMutable();
+          clips_.remove(index);
           onChanged();
         } else {
-          actionsBuilder_.remove(index);
+          clipsBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public commander.Command.CAction.Builder getActionsBuilder(
+      public commander.Command.NClip.Builder getClipsBuilder(
           int index) {
-        return getActionsFieldBuilder().getBuilder(index);
+        return getClipsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public commander.Command.CActionOrBuilder getActionsOrBuilder(
+      public commander.Command.NClipOrBuilder getClipsOrBuilder(
           int index) {
-        if (actionsBuilder_ == null) {
-          return actions_.get(index);  } else {
-          return actionsBuilder_.getMessageOrBuilder(index);
+        if (clipsBuilder_ == null) {
+          return clips_.get(index);  } else {
+          return clipsBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public java.util.List<? extends commander.Command.CActionOrBuilder> 
-           getActionsOrBuilderList() {
-        if (actionsBuilder_ != null) {
-          return actionsBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends commander.Command.NClipOrBuilder> 
+           getClipsOrBuilderList() {
+        if (clipsBuilder_ != null) {
+          return clipsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(actions_);
+          return java.util.Collections.unmodifiableList(clips_);
         }
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public commander.Command.CAction.Builder addActionsBuilder() {
-        return getActionsFieldBuilder().addBuilder(
-            commander.Command.CAction.getDefaultInstance());
+      public commander.Command.NClip.Builder addClipsBuilder() {
+        return getClipsFieldBuilder().addBuilder(
+            commander.Command.NClip.getDefaultInstance());
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public commander.Command.CAction.Builder addActionsBuilder(
+      public commander.Command.NClip.Builder addClipsBuilder(
           int index) {
-        return getActionsFieldBuilder().addBuilder(
-            index, commander.Command.CAction.getDefaultInstance());
+        return getClipsFieldBuilder().addBuilder(
+            index, commander.Command.NClip.getDefaultInstance());
       }
       /**
-       * <code>repeated .commander.CAction actions = 11;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
-      public java.util.List<commander.Command.CAction.Builder> 
-           getActionsBuilderList() {
-        return getActionsFieldBuilder().getBuilderList();
+      public java.util.List<commander.Command.NClip.Builder> 
+           getClipsBuilderList() {
+        return getClipsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          commander.Command.CAction, commander.Command.CAction.Builder, commander.Command.CActionOrBuilder> 
-          getActionsFieldBuilder() {
-        if (actionsBuilder_ == null) {
-          actionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              commander.Command.CAction, commander.Command.CAction.Builder, commander.Command.CActionOrBuilder>(
-                  actions_,
+          commander.Command.NClip, commander.Command.NClip.Builder, commander.Command.NClipOrBuilder> 
+          getClipsFieldBuilder() {
+        if (clipsBuilder_ == null) {
+          clipsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              commander.Command.NClip, commander.Command.NClip.Builder, commander.Command.NClipOrBuilder>(
+                  clips_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
-          actions_ = null;
+          clips_ = null;
         }
-        return actionsBuilder_;
+        return clipsBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -16596,23 +8767,23 @@ public final class Command {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:commander.CVisible)
+      // @@protoc_insertion_point(builder_scope:commander.NVisual)
     }
 
-    // @@protoc_insertion_point(class_scope:commander.CVisible)
-    private static final commander.Command.CVisible DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:commander.NVisual)
+    private static final commander.Command.NVisual DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new commander.Command.CVisible();
+      DEFAULT_INSTANCE = new commander.Command.NVisual();
     }
 
-    public static commander.Command.CVisible getDefaultInstance() {
+    public static commander.Command.NVisual getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<CVisible>
-        PARSER = new com.google.protobuf.AbstractParser<CVisible>() {
+    private static final com.google.protobuf.Parser<NVisual>
+        PARSER = new com.google.protobuf.AbstractParser<NVisual>() {
       @java.lang.Override
-      public CVisible parsePartialFrom(
+      public NVisual parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -16631,24 +8802,24 @@ public final class Command {
       }
     };
 
-    public static com.google.protobuf.Parser<CVisible> parser() {
+    public static com.google.protobuf.Parser<NVisual> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<CVisible> getParserForType() {
+    public com.google.protobuf.Parser<NVisual> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public commander.Command.CVisible getDefaultInstanceForType() {
+    public commander.Command.NVisual getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface CActionOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.CAction)
+  public interface NClipOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:commander.NClip)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -16664,70 +8835,82 @@ public final class Command {
         getPathBytes();
 
     /**
-     * <code>double tileSizeX = 2;</code>
-     * @return The tileSizeX.
+     * <code>float x = 2;</code>
+     * @return The x.
      */
-    double getTileSizeX();
+    float getX();
 
     /**
-     * <code>double tileSizeY = 3;</code>
-     * @return The tileSizeY.
+     * <code>float y = 3;</code>
+     * @return The y.
      */
-    double getTileSizeY();
+    float getY();
 
     /**
-     * <code>repeated uint32 indices = 4;</code>
+     * <code>float width = 4;</code>
+     * @return The width.
+     */
+    float getWidth();
+
+    /**
+     * <code>float height = 5;</code>
+     * @return The height.
+     */
+    float getHeight();
+
+    /**
+     * <code>repeated uint32 indices = 6;</code>
      * @return A list containing the indices.
      */
     java.util.List<java.lang.Integer> getIndicesList();
     /**
-     * <code>repeated uint32 indices = 4;</code>
+     * <code>repeated uint32 indices = 6;</code>
      * @return The count of indices.
      */
     int getIndicesCount();
     /**
-     * <code>repeated uint32 indices = 4;</code>
+     * <code>repeated uint32 indices = 6;</code>
      * @param index The index of the element to return.
      * @return The indices at the given index.
      */
     int getIndices(int index);
 
     /**
-     * <code>double stepTime = 5;</code>
+     * <code>float stepTime = 7;</code>
      * @return The stepTime.
      */
-    double getStepTime();
+    float getStepTime();
 
     /**
-     * <code>.commander.CActionType type = 6;</code>
+     * <code>.commander.NClipType type = 8;</code>
      * @return The enum numeric value on the wire for type.
      */
     int getTypeValue();
     /**
-     * <code>.commander.CActionType type = 6;</code>
+     * <code>.commander.NClipType type = 8;</code>
      * @return The type.
      */
-    commander.Command.CActionType getType();
+    commander.Command.NClipType getType();
 
     /**
-     * <code>bool repeat = 7;</code>
+     * <code>bool repeat = 9;</code>
      * @return The repeat.
      */
     boolean getRepeat();
   }
   /**
-   * Protobuf type {@code commander.CAction}
+   * Protobuf type {@code commander.NClip}
    */
-  public static final class CAction extends
+  public static final class NClip extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.CAction)
-      CActionOrBuilder {
+      // @@protoc_insertion_point(message_implements:commander.NClip)
+      NClipOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use CAction.newBuilder() to construct.
-    private CAction(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use NClip.newBuilder() to construct.
+    private NClip(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private CAction() {
+    private NClip() {
       path_ = "";
       indices_ = emptyIntList();
       type_ = 0;
@@ -16737,7 +8920,7 @@ public final class Command {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new CAction();
+      return new NClip();
     }
 
     @java.lang.Override
@@ -16747,15 +8930,15 @@ public final class Command {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return commander.Command.internal_static_commander_CAction_descriptor;
+      return commander.Command.internal_static_commander_NClip_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_CAction_fieldAccessorTable
+      return commander.Command.internal_static_commander_NClip_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              commander.Command.CAction.class, commander.Command.CAction.Builder.class);
+              commander.Command.NClip.class, commander.Command.NClip.Builder.class);
     }
 
     public static final int PATH_FIELD_NUMBER = 1;
@@ -16796,32 +8979,54 @@ public final class Command {
       }
     }
 
-    public static final int TILESIZEX_FIELD_NUMBER = 2;
-    private double tileSizeX_;
+    public static final int X_FIELD_NUMBER = 2;
+    private float x_;
     /**
-     * <code>double tileSizeX = 2;</code>
-     * @return The tileSizeX.
+     * <code>float x = 2;</code>
+     * @return The x.
      */
     @java.lang.Override
-    public double getTileSizeX() {
-      return tileSizeX_;
+    public float getX() {
+      return x_;
     }
 
-    public static final int TILESIZEY_FIELD_NUMBER = 3;
-    private double tileSizeY_;
+    public static final int Y_FIELD_NUMBER = 3;
+    private float y_;
     /**
-     * <code>double tileSizeY = 3;</code>
-     * @return The tileSizeY.
+     * <code>float y = 3;</code>
+     * @return The y.
      */
     @java.lang.Override
-    public double getTileSizeY() {
-      return tileSizeY_;
+    public float getY() {
+      return y_;
     }
 
-    public static final int INDICES_FIELD_NUMBER = 4;
+    public static final int WIDTH_FIELD_NUMBER = 4;
+    private float width_;
+    /**
+     * <code>float width = 4;</code>
+     * @return The width.
+     */
+    @java.lang.Override
+    public float getWidth() {
+      return width_;
+    }
+
+    public static final int HEIGHT_FIELD_NUMBER = 5;
+    private float height_;
+    /**
+     * <code>float height = 5;</code>
+     * @return The height.
+     */
+    @java.lang.Override
+    public float getHeight() {
+      return height_;
+    }
+
+    public static final int INDICES_FIELD_NUMBER = 6;
     private com.google.protobuf.Internal.IntList indices_;
     /**
-     * <code>repeated uint32 indices = 4;</code>
+     * <code>repeated uint32 indices = 6;</code>
      * @return A list containing the indices.
      */
     @java.lang.Override
@@ -16830,14 +9035,14 @@ public final class Command {
       return indices_;
     }
     /**
-     * <code>repeated uint32 indices = 4;</code>
+     * <code>repeated uint32 indices = 6;</code>
      * @return The count of indices.
      */
     public int getIndicesCount() {
       return indices_.size();
     }
     /**
-     * <code>repeated uint32 indices = 4;</code>
+     * <code>repeated uint32 indices = 6;</code>
      * @param index The index of the element to return.
      * @return The indices at the given index.
      */
@@ -16846,40 +9051,40 @@ public final class Command {
     }
     private int indicesMemoizedSerializedSize = -1;
 
-    public static final int STEPTIME_FIELD_NUMBER = 5;
-    private double stepTime_;
+    public static final int STEPTIME_FIELD_NUMBER = 7;
+    private float stepTime_;
     /**
-     * <code>double stepTime = 5;</code>
+     * <code>float stepTime = 7;</code>
      * @return The stepTime.
      */
     @java.lang.Override
-    public double getStepTime() {
+    public float getStepTime() {
       return stepTime_;
     }
 
-    public static final int TYPE_FIELD_NUMBER = 6;
+    public static final int TYPE_FIELD_NUMBER = 8;
     private int type_;
     /**
-     * <code>.commander.CActionType type = 6;</code>
+     * <code>.commander.NClipType type = 8;</code>
      * @return The enum numeric value on the wire for type.
      */
     @java.lang.Override public int getTypeValue() {
       return type_;
     }
     /**
-     * <code>.commander.CActionType type = 6;</code>
+     * <code>.commander.NClipType type = 8;</code>
      * @return The type.
      */
-    @java.lang.Override public commander.Command.CActionType getType() {
+    @java.lang.Override public commander.Command.NClipType getType() {
       @SuppressWarnings("deprecation")
-      commander.Command.CActionType result = commander.Command.CActionType.valueOf(type_);
-      return result == null ? commander.Command.CActionType.UNRECOGNIZED : result;
+      commander.Command.NClipType result = commander.Command.NClipType.valueOf(type_);
+      return result == null ? commander.Command.NClipType.UNRECOGNIZED : result;
     }
 
-    public static final int REPEAT_FIELD_NUMBER = 7;
+    public static final int REPEAT_FIELD_NUMBER = 9;
     private boolean repeat_;
     /**
-     * <code>bool repeat = 7;</code>
+     * <code>bool repeat = 9;</code>
      * @return The repeat.
      */
     @java.lang.Override
@@ -16905,27 +9110,33 @@ public final class Command {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, path_);
       }
-      if (java.lang.Double.doubleToRawLongBits(tileSizeX_) != 0) {
-        output.writeDouble(2, tileSizeX_);
+      if (java.lang.Float.floatToRawIntBits(x_) != 0) {
+        output.writeFloat(2, x_);
       }
-      if (java.lang.Double.doubleToRawLongBits(tileSizeY_) != 0) {
-        output.writeDouble(3, tileSizeY_);
+      if (java.lang.Float.floatToRawIntBits(y_) != 0) {
+        output.writeFloat(3, y_);
+      }
+      if (java.lang.Float.floatToRawIntBits(width_) != 0) {
+        output.writeFloat(4, width_);
+      }
+      if (java.lang.Float.floatToRawIntBits(height_) != 0) {
+        output.writeFloat(5, height_);
       }
       if (getIndicesList().size() > 0) {
-        output.writeUInt32NoTag(34);
+        output.writeUInt32NoTag(50);
         output.writeUInt32NoTag(indicesMemoizedSerializedSize);
       }
       for (int i = 0; i < indices_.size(); i++) {
         output.writeUInt32NoTag(indices_.getInt(i));
       }
-      if (java.lang.Double.doubleToRawLongBits(stepTime_) != 0) {
-        output.writeDouble(5, stepTime_);
+      if (java.lang.Float.floatToRawIntBits(stepTime_) != 0) {
+        output.writeFloat(7, stepTime_);
       }
-      if (type_ != commander.Command.CActionType.idle.getNumber()) {
-        output.writeEnum(6, type_);
+      if (type_ != commander.Command.NClipType.idle.getNumber()) {
+        output.writeEnum(8, type_);
       }
       if (repeat_ != false) {
-        output.writeBool(7, repeat_);
+        output.writeBool(9, repeat_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -16939,13 +9150,21 @@ public final class Command {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, path_);
       }
-      if (java.lang.Double.doubleToRawLongBits(tileSizeX_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(x_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, tileSizeX_);
+          .computeFloatSize(2, x_);
       }
-      if (java.lang.Double.doubleToRawLongBits(tileSizeY_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(y_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, tileSizeY_);
+          .computeFloatSize(3, y_);
+      }
+      if (java.lang.Float.floatToRawIntBits(width_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(4, width_);
+      }
+      if (java.lang.Float.floatToRawIntBits(height_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(5, height_);
       }
       {
         int dataSize = 0;
@@ -16961,17 +9180,17 @@ public final class Command {
         }
         indicesMemoizedSerializedSize = dataSize;
       }
-      if (java.lang.Double.doubleToRawLongBits(stepTime_) != 0) {
+      if (java.lang.Float.floatToRawIntBits(stepTime_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(5, stepTime_);
+          .computeFloatSize(7, stepTime_);
       }
-      if (type_ != commander.Command.CActionType.idle.getNumber()) {
+      if (type_ != commander.Command.NClipType.idle.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(6, type_);
+          .computeEnumSize(8, type_);
       }
       if (repeat_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(7, repeat_);
+          .computeBoolSize(9, repeat_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -16983,23 +9202,29 @@ public final class Command {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof commander.Command.CAction)) {
+      if (!(obj instanceof commander.Command.NClip)) {
         return super.equals(obj);
       }
-      commander.Command.CAction other = (commander.Command.CAction) obj;
+      commander.Command.NClip other = (commander.Command.NClip) obj;
 
       if (!getPath()
           .equals(other.getPath())) return false;
-      if (java.lang.Double.doubleToLongBits(getTileSizeX())
-          != java.lang.Double.doubleToLongBits(
-              other.getTileSizeX())) return false;
-      if (java.lang.Double.doubleToLongBits(getTileSizeY())
-          != java.lang.Double.doubleToLongBits(
-              other.getTileSizeY())) return false;
+      if (java.lang.Float.floatToIntBits(getX())
+          != java.lang.Float.floatToIntBits(
+              other.getX())) return false;
+      if (java.lang.Float.floatToIntBits(getY())
+          != java.lang.Float.floatToIntBits(
+              other.getY())) return false;
+      if (java.lang.Float.floatToIntBits(getWidth())
+          != java.lang.Float.floatToIntBits(
+              other.getWidth())) return false;
+      if (java.lang.Float.floatToIntBits(getHeight())
+          != java.lang.Float.floatToIntBits(
+              other.getHeight())) return false;
       if (!getIndicesList()
           .equals(other.getIndicesList())) return false;
-      if (java.lang.Double.doubleToLongBits(getStepTime())
-          != java.lang.Double.doubleToLongBits(
+      if (java.lang.Float.floatToIntBits(getStepTime())
+          != java.lang.Float.floatToIntBits(
               other.getStepTime())) return false;
       if (type_ != other.type_) return false;
       if (getRepeat()
@@ -17017,19 +9242,25 @@ public final class Command {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + PATH_FIELD_NUMBER;
       hash = (53 * hash) + getPath().hashCode();
-      hash = (37 * hash) + TILESIZEX_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getTileSizeX()));
-      hash = (37 * hash) + TILESIZEY_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getTileSizeY()));
+      hash = (37 * hash) + X_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getX());
+      hash = (37 * hash) + Y_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getY());
+      hash = (37 * hash) + WIDTH_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getWidth());
+      hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getHeight());
       if (getIndicesCount() > 0) {
         hash = (37 * hash) + INDICES_FIELD_NUMBER;
         hash = (53 * hash) + getIndicesList().hashCode();
       }
       hash = (37 * hash) + STEPTIME_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getStepTime()));
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getStepTime());
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + type_;
       hash = (37 * hash) + REPEAT_FIELD_NUMBER;
@@ -17040,69 +9271,69 @@ public final class Command {
       return hash;
     }
 
-    public static commander.Command.CAction parseFrom(
+    public static commander.Command.NClip parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CAction parseFrom(
+    public static commander.Command.NClip parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CAction parseFrom(
+    public static commander.Command.NClip parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CAction parseFrom(
+    public static commander.Command.NClip parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CAction parseFrom(byte[] data)
+    public static commander.Command.NClip parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CAction parseFrom(
+    public static commander.Command.NClip parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CAction parseFrom(java.io.InputStream input)
+    public static commander.Command.NClip parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.CAction parseFrom(
+    public static commander.Command.NClip parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.CAction parseDelimitedFrom(java.io.InputStream input)
+    public static commander.Command.NClip parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static commander.Command.CAction parseDelimitedFrom(
+    public static commander.Command.NClip parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.CAction parseFrom(
+    public static commander.Command.NClip parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.CAction parseFrom(
+    public static commander.Command.NClip parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -17115,7 +9346,7 @@ public final class Command {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(commander.Command.CAction prototype) {
+    public static Builder newBuilder(commander.Command.NClip prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -17131,26 +9362,26 @@ public final class Command {
       return builder;
     }
     /**
-     * Protobuf type {@code commander.CAction}
+     * Protobuf type {@code commander.NClip}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.CAction)
-        commander.Command.CActionOrBuilder {
+        // @@protoc_insertion_point(builder_implements:commander.NClip)
+        commander.Command.NClipOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return commander.Command.internal_static_commander_CAction_descriptor;
+        return commander.Command.internal_static_commander_NClip_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_CAction_fieldAccessorTable
+        return commander.Command.internal_static_commander_NClip_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                commander.Command.CAction.class, commander.Command.CAction.Builder.class);
+                commander.Command.NClip.class, commander.Command.NClip.Builder.class);
       }
 
-      // Construct using commander.Command.CAction.newBuilder()
+      // Construct using commander.Command.NClip.newBuilder()
       private Builder() {
 
       }
@@ -17165,13 +9396,17 @@ public final class Command {
         super.clear();
         path_ = "";
 
-        tileSizeX_ = 0D;
+        x_ = 0F;
 
-        tileSizeY_ = 0D;
+        y_ = 0F;
+
+        width_ = 0F;
+
+        height_ = 0F;
 
         indices_ = emptyIntList();
         bitField0_ = (bitField0_ & ~0x00000001);
-        stepTime_ = 0D;
+        stepTime_ = 0F;
 
         type_ = 0;
 
@@ -17183,17 +9418,17 @@ public final class Command {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return commander.Command.internal_static_commander_CAction_descriptor;
+        return commander.Command.internal_static_commander_NClip_descriptor;
       }
 
       @java.lang.Override
-      public commander.Command.CAction getDefaultInstanceForType() {
-        return commander.Command.CAction.getDefaultInstance();
+      public commander.Command.NClip getDefaultInstanceForType() {
+        return commander.Command.NClip.getDefaultInstance();
       }
 
       @java.lang.Override
-      public commander.Command.CAction build() {
-        commander.Command.CAction result = buildPartial();
+      public commander.Command.NClip build() {
+        commander.Command.NClip result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -17201,12 +9436,14 @@ public final class Command {
       }
 
       @java.lang.Override
-      public commander.Command.CAction buildPartial() {
-        commander.Command.CAction result = new commander.Command.CAction(this);
+      public commander.Command.NClip buildPartial() {
+        commander.Command.NClip result = new commander.Command.NClip(this);
         int from_bitField0_ = bitField0_;
         result.path_ = path_;
-        result.tileSizeX_ = tileSizeX_;
-        result.tileSizeY_ = tileSizeY_;
+        result.x_ = x_;
+        result.y_ = y_;
+        result.width_ = width_;
+        result.height_ = height_;
         if (((bitField0_ & 0x00000001) != 0)) {
           indices_.makeImmutable();
           bitField0_ = (bitField0_ & ~0x00000001);
@@ -17253,25 +9490,31 @@ public final class Command {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.CAction) {
-          return mergeFrom((commander.Command.CAction)other);
+        if (other instanceof commander.Command.NClip) {
+          return mergeFrom((commander.Command.NClip)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(commander.Command.CAction other) {
-        if (other == commander.Command.CAction.getDefaultInstance()) return this;
+      public Builder mergeFrom(commander.Command.NClip other) {
+        if (other == commander.Command.NClip.getDefaultInstance()) return this;
         if (!other.getPath().isEmpty()) {
           path_ = other.path_;
           onChanged();
         }
-        if (other.getTileSizeX() != 0D) {
-          setTileSizeX(other.getTileSizeX());
+        if (other.getX() != 0F) {
+          setX(other.getX());
         }
-        if (other.getTileSizeY() != 0D) {
-          setTileSizeY(other.getTileSizeY());
+        if (other.getY() != 0F) {
+          setY(other.getY());
+        }
+        if (other.getWidth() != 0F) {
+          setWidth(other.getWidth());
+        }
+        if (other.getHeight() != 0F) {
+          setHeight(other.getHeight());
         }
         if (!other.indices_.isEmpty()) {
           if (indices_.isEmpty()) {
@@ -17283,7 +9526,7 @@ public final class Command {
           }
           onChanged();
         }
-        if (other.getStepTime() != 0D) {
+        if (other.getStepTime() != 0F) {
           setStepTime(other.getStepTime());
         }
         if (other.type_ != 0) {
@@ -17323,23 +9566,33 @@ public final class Command {
 
                 break;
               } // case 10
-              case 17: {
-                tileSizeX_ = input.readDouble();
+              case 21: {
+                x_ = input.readFloat();
 
                 break;
-              } // case 17
-              case 25: {
-                tileSizeY_ = input.readDouble();
+              } // case 21
+              case 29: {
+                y_ = input.readFloat();
 
                 break;
-              } // case 25
-              case 32: {
+              } // case 29
+              case 37: {
+                width_ = input.readFloat();
+
+                break;
+              } // case 37
+              case 45: {
+                height_ = input.readFloat();
+
+                break;
+              } // case 45
+              case 48: {
                 int v = input.readUInt32();
                 ensureIndicesIsMutable();
                 indices_.addInt(v);
                 break;
-              } // case 32
-              case 34: {
+              } // case 48
+              case 50: {
                 int length = input.readRawVarint32();
                 int limit = input.pushLimit(length);
                 ensureIndicesIsMutable();
@@ -17348,22 +9601,22 @@ public final class Command {
                 }
                 input.popLimit(limit);
                 break;
-              } // case 34
-              case 41: {
-                stepTime_ = input.readDouble();
+              } // case 50
+              case 61: {
+                stepTime_ = input.readFloat();
 
                 break;
-              } // case 41
-              case 48: {
+              } // case 61
+              case 64: {
                 type_ = input.readEnum();
 
                 break;
-              } // case 48
-              case 56: {
+              } // case 64
+              case 72: {
                 repeat_ = input.readBool();
 
                 break;
-              } // case 56
+              } // case 72
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -17457,64 +9710,126 @@ public final class Command {
         return this;
       }
 
-      private double tileSizeX_ ;
+      private float x_ ;
       /**
-       * <code>double tileSizeX = 2;</code>
-       * @return The tileSizeX.
+       * <code>float x = 2;</code>
+       * @return The x.
        */
       @java.lang.Override
-      public double getTileSizeX() {
-        return tileSizeX_;
+      public float getX() {
+        return x_;
       }
       /**
-       * <code>double tileSizeX = 2;</code>
-       * @param value The tileSizeX to set.
+       * <code>float x = 2;</code>
+       * @param value The x to set.
        * @return This builder for chaining.
        */
-      public Builder setTileSizeX(double value) {
+      public Builder setX(float value) {
         
-        tileSizeX_ = value;
+        x_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double tileSizeX = 2;</code>
+       * <code>float x = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearTileSizeX() {
+      public Builder clearX() {
         
-        tileSizeX_ = 0D;
+        x_ = 0F;
         onChanged();
         return this;
       }
 
-      private double tileSizeY_ ;
+      private float y_ ;
       /**
-       * <code>double tileSizeY = 3;</code>
-       * @return The tileSizeY.
+       * <code>float y = 3;</code>
+       * @return The y.
        */
       @java.lang.Override
-      public double getTileSizeY() {
-        return tileSizeY_;
+      public float getY() {
+        return y_;
       }
       /**
-       * <code>double tileSizeY = 3;</code>
-       * @param value The tileSizeY to set.
+       * <code>float y = 3;</code>
+       * @param value The y to set.
        * @return This builder for chaining.
        */
-      public Builder setTileSizeY(double value) {
+      public Builder setY(float value) {
         
-        tileSizeY_ = value;
+        y_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double tileSizeY = 3;</code>
+       * <code>float y = 3;</code>
        * @return This builder for chaining.
        */
-      public Builder clearTileSizeY() {
+      public Builder clearY() {
         
-        tileSizeY_ = 0D;
+        y_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float width_ ;
+      /**
+       * <code>float width = 4;</code>
+       * @return The width.
+       */
+      @java.lang.Override
+      public float getWidth() {
+        return width_;
+      }
+      /**
+       * <code>float width = 4;</code>
+       * @param value The width to set.
+       * @return This builder for chaining.
+       */
+      public Builder setWidth(float value) {
+        
+        width_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float width = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearWidth() {
+        
+        width_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float height_ ;
+      /**
+       * <code>float height = 5;</code>
+       * @return The height.
+       */
+      @java.lang.Override
+      public float getHeight() {
+        return height_;
+      }
+      /**
+       * <code>float height = 5;</code>
+       * @param value The height to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHeight(float value) {
+        
+        height_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>float height = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearHeight() {
+        
+        height_ = 0F;
         onChanged();
         return this;
       }
@@ -17527,7 +9842,7 @@ public final class Command {
          }
       }
       /**
-       * <code>repeated uint32 indices = 4;</code>
+       * <code>repeated uint32 indices = 6;</code>
        * @return A list containing the indices.
        */
       public java.util.List<java.lang.Integer>
@@ -17536,14 +9851,14 @@ public final class Command {
                  java.util.Collections.unmodifiableList(indices_) : indices_;
       }
       /**
-       * <code>repeated uint32 indices = 4;</code>
+       * <code>repeated uint32 indices = 6;</code>
        * @return The count of indices.
        */
       public int getIndicesCount() {
         return indices_.size();
       }
       /**
-       * <code>repeated uint32 indices = 4;</code>
+       * <code>repeated uint32 indices = 6;</code>
        * @param index The index of the element to return.
        * @return The indices at the given index.
        */
@@ -17551,7 +9866,7 @@ public final class Command {
         return indices_.getInt(index);
       }
       /**
-       * <code>repeated uint32 indices = 4;</code>
+       * <code>repeated uint32 indices = 6;</code>
        * @param index The index to set the value at.
        * @param value The indices to set.
        * @return This builder for chaining.
@@ -17564,7 +9879,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated uint32 indices = 4;</code>
+       * <code>repeated uint32 indices = 6;</code>
        * @param value The indices to add.
        * @return This builder for chaining.
        */
@@ -17575,7 +9890,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated uint32 indices = 4;</code>
+       * <code>repeated uint32 indices = 6;</code>
        * @param values The indices to add.
        * @return This builder for chaining.
        */
@@ -17588,7 +9903,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated uint32 indices = 4;</code>
+       * <code>repeated uint32 indices = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearIndices() {
@@ -17598,47 +9913,47 @@ public final class Command {
         return this;
       }
 
-      private double stepTime_ ;
+      private float stepTime_ ;
       /**
-       * <code>double stepTime = 5;</code>
+       * <code>float stepTime = 7;</code>
        * @return The stepTime.
        */
       @java.lang.Override
-      public double getStepTime() {
+      public float getStepTime() {
         return stepTime_;
       }
       /**
-       * <code>double stepTime = 5;</code>
+       * <code>float stepTime = 7;</code>
        * @param value The stepTime to set.
        * @return This builder for chaining.
        */
-      public Builder setStepTime(double value) {
+      public Builder setStepTime(float value) {
         
         stepTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double stepTime = 5;</code>
+       * <code>float stepTime = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearStepTime() {
         
-        stepTime_ = 0D;
+        stepTime_ = 0F;
         onChanged();
         return this;
       }
 
       private int type_ = 0;
       /**
-       * <code>.commander.CActionType type = 6;</code>
+       * <code>.commander.NClipType type = 8;</code>
        * @return The enum numeric value on the wire for type.
        */
       @java.lang.Override public int getTypeValue() {
         return type_;
       }
       /**
-       * <code>.commander.CActionType type = 6;</code>
+       * <code>.commander.NClipType type = 8;</code>
        * @param value The enum numeric value on the wire for type to set.
        * @return This builder for chaining.
        */
@@ -17649,21 +9964,21 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.commander.CActionType type = 6;</code>
+       * <code>.commander.NClipType type = 8;</code>
        * @return The type.
        */
       @java.lang.Override
-      public commander.Command.CActionType getType() {
+      public commander.Command.NClipType getType() {
         @SuppressWarnings("deprecation")
-        commander.Command.CActionType result = commander.Command.CActionType.valueOf(type_);
-        return result == null ? commander.Command.CActionType.UNRECOGNIZED : result;
+        commander.Command.NClipType result = commander.Command.NClipType.valueOf(type_);
+        return result == null ? commander.Command.NClipType.UNRECOGNIZED : result;
       }
       /**
-       * <code>.commander.CActionType type = 6;</code>
+       * <code>.commander.NClipType type = 8;</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
-      public Builder setType(commander.Command.CActionType value) {
+      public Builder setType(commander.Command.NClipType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -17673,7 +9988,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.commander.CActionType type = 6;</code>
+       * <code>.commander.NClipType type = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearType() {
@@ -17685,7 +10000,7 @@ public final class Command {
 
       private boolean repeat_ ;
       /**
-       * <code>bool repeat = 7;</code>
+       * <code>bool repeat = 9;</code>
        * @return The repeat.
        */
       @java.lang.Override
@@ -17693,7 +10008,7 @@ public final class Command {
         return repeat_;
       }
       /**
-       * <code>bool repeat = 7;</code>
+       * <code>bool repeat = 9;</code>
        * @param value The repeat to set.
        * @return This builder for chaining.
        */
@@ -17704,7 +10019,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>bool repeat = 7;</code>
+       * <code>bool repeat = 9;</code>
        * @return This builder for chaining.
        */
       public Builder clearRepeat() {
@@ -17726,23 +10041,23 @@ public final class Command {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:commander.CAction)
+      // @@protoc_insertion_point(builder_scope:commander.NClip)
     }
 
-    // @@protoc_insertion_point(class_scope:commander.CAction)
-    private static final commander.Command.CAction DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:commander.NClip)
+    private static final commander.Command.NClip DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new commander.Command.CAction();
+      DEFAULT_INSTANCE = new commander.Command.NClip();
     }
 
-    public static commander.Command.CAction getDefaultInstance() {
+    public static commander.Command.NClip getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<CAction>
-        PARSER = new com.google.protobuf.AbstractParser<CAction>() {
+    private static final com.google.protobuf.Parser<NClip>
+        PARSER = new com.google.protobuf.AbstractParser<NClip>() {
       @java.lang.Override
-      public CAction parsePartialFrom(
+      public NClip parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -17761,24 +10076,24 @@ public final class Command {
       }
     };
 
-    public static com.google.protobuf.Parser<CAction> parser() {
+    public static com.google.protobuf.Parser<NClip> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<CAction> getParserForType() {
+    public com.google.protobuf.Parser<NClip> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public commander.Command.CAction getDefaultInstanceForType() {
+    public commander.Command.NClip getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface CPhysicalOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:commander.CPhysical)
+  public interface NBodyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:commander.NBody)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -17911,18 +10226,18 @@ public final class Command {
     boolean getPassableBottom();
   }
   /**
-   * Protobuf type {@code commander.CPhysical}
+   * Protobuf type {@code commander.NBody}
    */
-  public static final class CPhysical extends
+  public static final class NBody extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:commander.CPhysical)
-      CPhysicalOrBuilder {
+      // @@protoc_insertion_point(message_implements:commander.NBody)
+      NBodyOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use CPhysical.newBuilder() to construct.
-    private CPhysical(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use NBody.newBuilder() to construct.
+    private NBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private CPhysical() {
+    private NBody() {
       type_ = 0;
       shape_ = 0;
       floats_ = emptyFloatList();
@@ -17932,7 +10247,7 @@ public final class Command {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new CPhysical();
+      return new NBody();
     }
 
     @java.lang.Override
@@ -17942,15 +10257,15 @@ public final class Command {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return commander.Command.internal_static_commander_CPhysical_descriptor;
+      return commander.Command.internal_static_commander_NBody_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return commander.Command.internal_static_commander_CPhysical_fieldAccessorTable
+      return commander.Command.internal_static_commander_NBody_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              commander.Command.CPhysical.class, commander.Command.CPhysical.Builder.class);
+              commander.Command.NBody.class, commander.Command.NBody.Builder.class);
     }
 
     public static final int TYPE_FIELD_NUMBER = 1;
@@ -18355,10 +10670,10 @@ public final class Command {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof commander.Command.CPhysical)) {
+      if (!(obj instanceof commander.Command.NBody)) {
         return super.equals(obj);
       }
-      commander.Command.CPhysical other = (commander.Command.CPhysical) obj;
+      commander.Command.NBody other = (commander.Command.NBody) obj;
 
       if (type_ != other.type_) return false;
       if (shape_ != other.shape_) return false;
@@ -18469,69 +10784,69 @@ public final class Command {
       return hash;
     }
 
-    public static commander.Command.CPhysical parseFrom(
+    public static commander.Command.NBody parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CPhysical parseFrom(
+    public static commander.Command.NBody parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CPhysical parseFrom(
+    public static commander.Command.NBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CPhysical parseFrom(
+    public static commander.Command.NBody parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CPhysical parseFrom(byte[] data)
+    public static commander.Command.NBody parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static commander.Command.CPhysical parseFrom(
+    public static commander.Command.NBody parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static commander.Command.CPhysical parseFrom(java.io.InputStream input)
+    public static commander.Command.NBody parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.CPhysical parseFrom(
+    public static commander.Command.NBody parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.CPhysical parseDelimitedFrom(java.io.InputStream input)
+    public static commander.Command.NBody parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static commander.Command.CPhysical parseDelimitedFrom(
+    public static commander.Command.NBody parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static commander.Command.CPhysical parseFrom(
+    public static commander.Command.NBody parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static commander.Command.CPhysical parseFrom(
+    public static commander.Command.NBody parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -18544,7 +10859,7 @@ public final class Command {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(commander.Command.CPhysical prototype) {
+    public static Builder newBuilder(commander.Command.NBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -18560,26 +10875,26 @@ public final class Command {
       return builder;
     }
     /**
-     * Protobuf type {@code commander.CPhysical}
+     * Protobuf type {@code commander.NBody}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:commander.CPhysical)
-        commander.Command.CPhysicalOrBuilder {
+        // @@protoc_insertion_point(builder_implements:commander.NBody)
+        commander.Command.NBodyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return commander.Command.internal_static_commander_CPhysical_descriptor;
+        return commander.Command.internal_static_commander_NBody_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return commander.Command.internal_static_commander_CPhysical_fieldAccessorTable
+        return commander.Command.internal_static_commander_NBody_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                commander.Command.CPhysical.class, commander.Command.CPhysical.Builder.class);
+                commander.Command.NBody.class, commander.Command.NBody.Builder.class);
       }
 
-      // Construct using commander.Command.CPhysical.newBuilder()
+      // Construct using commander.Command.NBody.newBuilder()
       private Builder() {
 
       }
@@ -18634,17 +10949,17 @@ public final class Command {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return commander.Command.internal_static_commander_CPhysical_descriptor;
+        return commander.Command.internal_static_commander_NBody_descriptor;
       }
 
       @java.lang.Override
-      public commander.Command.CPhysical getDefaultInstanceForType() {
-        return commander.Command.CPhysical.getDefaultInstance();
+      public commander.Command.NBody getDefaultInstanceForType() {
+        return commander.Command.NBody.getDefaultInstance();
       }
 
       @java.lang.Override
-      public commander.Command.CPhysical build() {
-        commander.Command.CPhysical result = buildPartial();
+      public commander.Command.NBody build() {
+        commander.Command.NBody result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -18652,8 +10967,8 @@ public final class Command {
       }
 
       @java.lang.Override
-      public commander.Command.CPhysical buildPartial() {
-        commander.Command.CPhysical result = new commander.Command.CPhysical(this);
+      public commander.Command.NBody buildPartial() {
+        commander.Command.NBody result = new commander.Command.NBody(this);
         int from_bitField0_ = bitField0_;
         result.type_ = type_;
         result.shape_ = shape_;
@@ -18715,16 +11030,16 @@ public final class Command {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof commander.Command.CPhysical) {
-          return mergeFrom((commander.Command.CPhysical)other);
+        if (other instanceof commander.Command.NBody) {
+          return mergeFrom((commander.Command.NBody)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(commander.Command.CPhysical other) {
-        if (other == commander.Command.CPhysical.getDefaultInstance()) return this;
+      public Builder mergeFrom(commander.Command.NBody other) {
+        if (other == commander.Command.NBody.getDefaultInstance()) return this;
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
         }
@@ -19594,23 +11909,23 @@ public final class Command {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:commander.CPhysical)
+      // @@protoc_insertion_point(builder_scope:commander.NBody)
     }
 
-    // @@protoc_insertion_point(class_scope:commander.CPhysical)
-    private static final commander.Command.CPhysical DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:commander.NBody)
+    private static final commander.Command.NBody DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new commander.Command.CPhysical();
+      DEFAULT_INSTANCE = new commander.Command.NBody();
     }
 
-    public static commander.Command.CPhysical getDefaultInstance() {
+    public static commander.Command.NBody getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<CPhysical>
-        PARSER = new com.google.protobuf.AbstractParser<CPhysical>() {
+    private static final com.google.protobuf.Parser<NBody>
+        PARSER = new com.google.protobuf.AbstractParser<NBody>() {
       @java.lang.Override
-      public CPhysical parsePartialFrom(
+      public NBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -19629,17 +11944,17 @@ public final class Command {
       }
     };
 
-    public static com.google.protobuf.Parser<CPhysical> parser() {
+    public static com.google.protobuf.Parser<NBody> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<CPhysical> getParserForType() {
+    public com.google.protobuf.Parser<NBody> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public commander.Command.CPhysical getDefaultInstanceForType() {
+    public commander.Command.NBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -19651,85 +11966,40 @@ public final class Command {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_commander_QueryInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_EventInfo_descriptor;
+    internal_static_commander_NEvent_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_EventInfo_fieldAccessorTable;
+      internal_static_commander_NEvent_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_KeyInfo_descriptor;
+    internal_static_commander_NStageInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_KeyInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_AckInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_AckInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_DirectionalInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_DirectionalInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_ButtonInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_ButtonInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_TabInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_TabInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_ObjectPosition_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_ObjectPosition_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_QueryResult_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_QueryResult_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_CmdInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_CmdInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_ContactInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_ContactInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_CStageInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_CStageInfo_fieldAccessorTable;
+      internal_static_commander_NStageInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_commander_Cmd_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_commander_Cmd_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_CObject_descriptor;
+    internal_static_commander_NObject_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_CObject_fieldAccessorTable;
+      internal_static_commander_NObject_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_CVisible_descriptor;
+    internal_static_commander_NVisual_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_CVisible_fieldAccessorTable;
+      internal_static_commander_NVisual_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_CAction_descriptor;
+    internal_static_commander_NClip_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_CAction_fieldAccessorTable;
+      internal_static_commander_NClip_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_commander_CPhysical_descriptor;
+    internal_static_commander_NBody_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_commander_CPhysical_fieldAccessorTable;
+      internal_static_commander_NBody_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -19742,94 +12012,70 @@ public final class Command {
       "\n\rcommand.proto\022\tcommander\"l\n\tQueryInfo\022" +
       "\013\n\003qid\030\001 \001(\r\022\n\n\002ax\030\002 \001(\002\022\n\n\002ay\030\003 \001(\002\022\n\n\002" +
       "bx\030\004 \001(\002\022\n\n\002by\030\005 \001(\002\022\013\n\003max\030\006 \001(\r\022\025\n\rtra" +
-      "ckableOnly\030\007 \001(\010\"_\n\tEventInfo\022\n\n\002id\030\001 \001(" +
-      "\r\022\014\n\004info\030\002 \001(\t\022\r\n\005event\030\003 \001(\t\022\t\n\001x\030\004 \001(" +
-      "\002\022\t\n\001y\030\005 \001(\002\022\023\n\013isCompleted\030\006 \001(\010\"*\n\007Key" +
-      "Info\022\014\n\004name\030\001 \001(\t\022\021\n\tisPressed\030\002 \001(\010\"%\n" +
-      "\007AckInfo\022\014\n\004info\030\001 \001(\t\022\014\n\004code\030\002 \001(\r\"\223\001\n" +
-      "\017DirectionalInfo\022$\n\003iid\030\001 \001(\0162\027.commande" +
-      "r.TouchInputId\0225\n\tdirection\030\002 \001(\0162\".comm" +
-      "ander.JoystickMoveDirectional\022\021\n\tintensi" +
-      "ty\030\003 \001(\001\022\020\n\010radAngle\030\004 \001(\001\"Y\n\nButtonInfo" +
-      "\022$\n\003iid\030\001 \001(\0162\027.commander.TouchInputId\022%" +
-      "\n\005event\030\002 \001(\0162\026.commander.ActionEvent\"l\n" +
-      "\007TabInfo\022$\n\003iid\030\001 \001(\0162\027.commander.TouchI" +
-      "nputId\022%\n\005event\030\002 \001(\0162\026.commander.Action" +
-      "Event\022\t\n\001x\030\003 \001(\001\022\t\n\001y\030\004 \001(\001\"2\n\016ObjectPos" +
-      "ition\022\n\n\002id\030\001 \001(\r\022\t\n\001x\030\002 \001(\001\022\t\n\001y\030\003 \001(\001\"" +
-      "C\n\013QueryResult\022\013\n\003qid\030\001 \001(\r\022\'\n\004objs\030\002 \003(" +
-      "\0132\031.commander.ObjectPosition\"\366\002\n\007CmdInfo" +
-      "\022\035\n\004head\030\001 \001(\0162\017.commander.Head\022\'\n\007conta" +
-      "ct\030\002 \001(\0132\026.commander.ContactInfo\022#\n\005even" +
-      "t\030\003 \001(\0132\024.commander.EventInfo\022\037\n\003key\030\004 \001" +
-      "(\0132\022.commander.KeyInfo\022\037\n\003ack\030\005 \001(\0132\022.co" +
-      "mmander.AckInfo\022/\n\013directional\030\006 \001(\0132\032.c" +
-      "ommander.DirectionalInfo\022%\n\006button\030\007 \001(\013" +
-      "2\025.commander.ButtonInfo\022\037\n\003tab\030\010 \001(\0132\022.c" +
-      "ommander.TabInfo\022&\n\006result\030\t \001(\0132\026.comma" +
-      "nder.QueryResult\022\033\n\003cmd\030\n \001(\0132\016.commande" +
-      "r.Cmd\"\234\001\n\013ContactInfo\022\013\n\003id1\030\001 \001(\r\022\013\n\003id" +
-      "2\030\002 \001(\r\022\r\n\005info1\030\003 \001(\t\022\r\n\005info2\030\004 \001(\t\022\t\n" +
-      "\001x\030\007 \001(\002\022\t\n\001y\030\010 \001(\002\022\n\n\002x1\030\t \001(\002\022\n\n\002y1\030\n " +
-      "\001(\002\022\n\n\002x2\030\013 \001(\002\022\n\n\002y2\030\014 \001(\002\022\017\n\007isEnded\030\r" +
-      " \001(\010\"\303\002\n\nCStageInfo\022\022\n\nbackground\030\001 \001(\t\022" +
-      "\020\n\010gravityX\030\002 \001(\001\022\020\n\010gravityY\030\003 \001(\001\022\r\n\005w" +
-      "idth\030\004 \001(\001\022\016\n\006height\030\005 \001(\001\022\r\n\005debug\030\006 \001(" +
-      "\010\022=\n\024joystickDirectionals\030\007 \001(\0162\037.comman" +
-      "der.JoystickDirectionals\022\031\n\021joystickPrec" +
-      "ision\030\010 \001(\r\022\'\n\007button1\030\t \001(\0162\026.commander" +
-      ".ActionEvent\022\'\n\007button2\030\n \001(\0162\026.commande" +
-      "r.ActionEvent\022#\n\003tab\030\013 \001(\0162\026.commander.A" +
-      "ctionEvent\"4\n\003Cmd\022\014\n\004ints\030\002 \003(\005\022\016\n\006float" +
-      "s\030\003 \003(\002\022\017\n\007strings\030\004 \003(\t\"\241\001\n\007CObject\022\n\n\002" +
-      "id\030\001 \001(\r\022+\n\010physical\030\002 \001(\0132\024.commander.C" +
-      "PhysicalH\000\210\001\001\022)\n\007visible\030\003 \001(\0132\023.command" +
-      "er.CVisibleH\001\210\001\001\022\013\n\003tid\030\004 \001(\r\022\014\n\004info\030\005 " +
-      "\001(\tB\013\n\t_physicalB\n\n\010_visible\"\341\001\n\010CVisibl" +
-      "e\022\'\n\007current\030\001 \001(\0162\026.commander.CActionTy" +
-      "pe\022\020\n\010priority\030\002 \001(\r\022\t\n\001x\030\003 \001(\001\022\t\n\001y\030\004 \001" +
-      "(\001\022\r\n\005width\030\005 \001(\001\022\016\n\006height\030\006 \001(\001\022\016\n\006sca" +
-      "leX\030\007 \001(\001\022\016\n\006scaleY\030\010 \001(\001\022\017\n\007anchorX\030\t \001" +
-      "(\001\022\017\n\007anchorY\030\n \001(\001\022#\n\007actions\030\013 \003(\0132\022.c" +
-      "ommander.CAction\"\226\001\n\007CAction\022\014\n\004path\030\001 \001" +
-      "(\t\022\021\n\ttileSizeX\030\002 \001(\001\022\021\n\ttileSizeY\030\003 \001(\001" +
-      "\022\017\n\007indices\030\004 \003(\r\022\020\n\010stepTime\030\005 \001(\001\022$\n\004t" +
-      "ype\030\006 \001(\0162\026.commander.CActionType\022\016\n\006rep" +
-      "eat\030\007 \001(\010\"\362\002\n\tCPhysical\022!\n\004type\030\001 \001(\0162\023." +
-      "commander.BodyType\022#\n\005shape\030\002 \001(\0162\024.comm" +
-      "ander.BodyShape\022\t\n\001x\030\003 \001(\002\022\t\n\001y\030\004 \001(\002\022\r\n" +
-      "\005width\030\005 \001(\002\022\016\n\006height\030\006 \001(\002\022\023\n\013restitut" +
-      "ion\030\007 \001(\002\022\020\n\010friction\030\010 \001(\002\022\017\n\007density\030\t" +
-      " \001(\002\022\r\n\005angle\030\n \001(\002\022\020\n\010isSensor\030\013 \001(\010\022\024\n" +
-      "\014categoryBits\030\014 \001(\r\022\020\n\010maskBits\030\r \001(\r\022\025\n" +
-      "\rfixedRotation\030\016 \001(\010\022\021\n\ttrackable\030\017 \001(\010\022" +
-      "\025\n\rcontactReport\030\020 \001(\010\022\016\n\006floats\030\021 \003(\002\022\026" +
-      "\n\016passableBottom\030\022 \001(\010*\251\001\n\004Head\022\007\n\003cmd\020\000" +
-      "\022\013\n\005stage\020\200\376\003\022\013\n\005query\020\204\376\003\022\r\n\007cobject\020\206\376" +
-      "\003\022\r\n\007contact\020\360\341\003\022\013\n\005event\020\361\341\003\022\t\n\003key\020\362\341\003" +
-      "\022\t\n\003ack\020\363\341\003\022\021\n\013directional\020\364\341\003\022\014\n\006button" +
-      "\020\365\341\003\022\t\n\003tab\020\366\341\003\022\021\n\013queryresult\020\367\341\003*V\n\tBo" +
-      "dyShape\022\r\n\trectangle\020\000\022\t\n\005actor\020\001\022\n\n\006cir" +
-      "cle\020\002\022\014\n\010triangle\020\003\022\010\n\004edge\020\004\022\013\n\007polygon" +
-      "\020\005*>\n\010BodyType\022\016\n\nstaticBody\020\000\022\021\n\rkinema" +
-      "ticBody\020\001\022\017\n\013dynamicBody\020\002*\254\001\n\027JoystickM" +
-      "oveDirectional\022\013\n\007MOVE_UP\020\000\022\020\n\014MOVE_UP_L" +
-      "EFT\020\001\022\021\n\rMOVE_UP_RIGHT\020\002\022\016\n\nMOVE_RIGHT\020\003" +
-      "\022\r\n\tMOVE_DOWN\020\004\022\023\n\017MOVE_DOWN_RIGHT\020\005\022\022\n\016" +
-      "MOVE_DOWN_LEFT\020\006\022\r\n\tMOVE_LEFT\020\007\022\010\n\004IDLE\020" +
-      "\010*e\n\013ActionEvent\022\010\n\004DOWN\020\000\022\006\n\002UP\020\001\022\010\n\004MO" +
-      "VE\020\002\022\010\n\004NONE\020\003\022\013\n\007UP_DOWN\020\004\022\r\n\tDOWN_MOVE" +
-      "\020\005\022\007\n\003ALL\020\006\022\013\n\007UP_MOVE\020\007*S\n\014TouchInputId" +
-      "\022\021\n\rjoystickInput\020\000\022\020\n\014button1Input\020\001\022\020\n" +
-      "\014button2Input\020\002\022\014\n\010tabInput\020\003*G\n\024Joystic" +
-      "kDirectionals\022\010\n\004none\020\000\022\007\n\003all\020\001\022\016\n\nhori" +
-      "zontal\020\002\022\014\n\010vertical\020\003*\334\001\n\013CActionType\022\010" +
-      "\n\004idle\020\000\022\007\n\003run\020\001\022\010\n\004jump\020\002\022\007\n\003hit\020\003\022\010\n\004" +
-      "fall\020\004\022\014\n\010wallJump\020\005\022\016\n\ndoubleJump\020\006\022\013\n\007" +
-      "hitSide\020\007\022\n\n\006hitTop\020\010\022\007\n\003off\020\t\022\006\n\002on\020\n\022\t" +
-      "\n\005blink\020\013\022\013\n\007hitLeft\020\014\022\014\n\010hitRight\020\r\022\r\n\t" +
-      "hitBottom\020\016\022\014\n\010noChange\020\017\022\t\n\005tiles\020\020\022\007\n\003" +
-      "svg\020\021b\006proto3"
+      "ckableOnly\030\007 \001(\010\"7\n\006NEvent\022\014\n\004ints\030\002 \003(\005" +
+      "\022\016\n\006floats\030\003 \003(\002\022\017\n\007strings\030\004 \003(\t\"\215\003\n\nNS" +
+      "tageInfo\022\n\n\002sn\030\001 \001(\r\022\022\n\nbackground\030\002 \001(\t" +
+      "\022\020\n\010gravityX\030\003 \001(\002\022\020\n\010gravityY\030\004 \001(\002\022\r\n\005" +
+      "width\030\005 \001(\002\022\016\n\006height\030\006 \001(\002\022\r\n\005debug\030\007 \001" +
+      "(\010\022=\n\024joystickDirectionals\030\010 \001(\0162\037.comma" +
+      "nder.JoystickDirectionals\022\031\n\021joystickPre" +
+      "cision\030\t \001(\r\022\'\n\007button1\030\n \001(\0162\026.commande" +
+      "r.TouchMotion\022\'\n\007button2\030\013 \001(\0162\026.command" +
+      "er.TouchMotion\022#\n\003tap\030\014 \001(\0162\026.commander." +
+      "TouchMotion\022\032\n\022tapMinMoveDistance\030\r \001(\002\022" +
+      " \n\030distanceTrackingInternal\030\016 \001(\002\"O\n\003Cmd" +
+      "\022\n\n\002sn\030\001 \001(\r\022\014\n\004ints\030\002 \003(\005\022\016\n\006floats\030\003 \003" +
+      "(\002\022\017\n\007strings\030\004 \003(\t\022\r\n\005bytes\030\005 \003(\014\"\236\001\n\007N" +
+      "Object\022\n\n\002sn\030\001 \001(\r\022\n\n\002id\030\002 \001(\005\022#\n\004body\030\003" +
+      " \001(\0132\020.commander.NBodyH\000\210\001\001\022\'\n\006visual\030\004 " +
+      "\001(\0132\022.commander.NVisualH\001\210\001\001\022\013\n\003tid\030\005 \001(" +
+      "\r\022\014\n\004info\030\006 \001(\tB\007\n\005_bodyB\t\n\007_visual\"\332\001\n\007" +
+      "NVisual\022%\n\007current\030\001 \001(\0162\024.commander.NCl" +
+      "ipType\022\020\n\010priority\030\002 \001(\r\022\t\n\001x\030\003 \001(\002\022\t\n\001y" +
+      "\030\004 \001(\002\022\r\n\005width\030\005 \001(\002\022\016\n\006height\030\006 \001(\002\022\016\n" +
+      "\006scaleX\030\007 \001(\002\022\016\n\006scaleY\030\010 \001(\002\022\017\n\007anchorX" +
+      "\030\t \001(\002\022\017\n\007anchorY\030\n \001(\002\022\037\n\005clips\030\013 \003(\0132\020" +
+      ".commander.NClip\"\241\001\n\005NClip\022\014\n\004path\030\001 \001(\t" +
+      "\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\r\n\005width\030\004 \001(\002\022\016\n" +
+      "\006height\030\005 \001(\002\022\017\n\007indices\030\006 \003(\r\022\020\n\010stepTi" +
+      "me\030\007 \001(\002\022\"\n\004type\030\010 \001(\0162\024.commander.NClip" +
+      "Type\022\016\n\006repeat\030\t \001(\010\"\356\002\n\005NBody\022!\n\004type\030\001" +
+      " \001(\0162\023.commander.BodyType\022#\n\005shape\030\002 \001(\016" +
+      "2\024.commander.BodyShape\022\t\n\001x\030\003 \001(\002\022\t\n\001y\030\004" +
+      " \001(\002\022\r\n\005width\030\005 \001(\002\022\016\n\006height\030\006 \001(\002\022\023\n\013r" +
+      "estitution\030\007 \001(\002\022\020\n\010friction\030\010 \001(\002\022\017\n\007de" +
+      "nsity\030\t \001(\002\022\r\n\005angle\030\n \001(\002\022\020\n\010isSensor\030\013" +
+      " \001(\010\022\024\n\014categoryBits\030\014 \001(\r\022\020\n\010maskBits\030\r" +
+      " \001(\r\022\025\n\rfixedRotation\030\016 \001(\010\022\021\n\ttrackable" +
+      "\030\017 \001(\010\022\025\n\rcontactReport\030\020 \001(\010\022\016\n\006floats\030" +
+      "\021 \003(\002\022\026\n\016passableBottom\030\022 \001(\010*\302\001\n\004Head\022\007" +
+      "\n\003cmd\020\000\022\013\n\005stage\020\200\376\003\022\013\n\005query\020\204\376\003\022\014\n\006obj" +
+      "ect\020\206\376\003\022\r\n\007contact\020\360\341\003\022\013\n\005event\020\361\341\003\022\t\n\003k" +
+      "ey\020\362\341\003\022\t\n\003ack\020\363\341\003\022\021\n\013directional\020\364\341\003\022\014\n\006" +
+      "button\020\365\341\003\022\t\n\003tap\020\366\341\003\022\021\n\013queryresult\020\367\341\003" +
+      "\022\013\n\005error\020\370\341\003\022\013\n\005relay\020\371\341\003*V\n\tBodyShape\022" +
+      "\r\n\trectangle\020\000\022\t\n\005actor\020\001\022\n\n\006circle\020\002\022\014\n" +
+      "\010triangle\020\003\022\010\n\004edge\020\004\022\013\n\007polygon\020\005*>\n\010Bo" +
+      "dyType\022\016\n\nstaticBody\020\000\022\021\n\rkinematicBody\020" +
+      "\001\022\017\n\013dynamicBody\020\002*\254\001\n\027JoystickMoveDirec" +
+      "tional\022\013\n\007MOVE_UP\020\000\022\020\n\014MOVE_UP_LEFT\020\001\022\021\n" +
+      "\rMOVE_UP_RIGHT\020\002\022\016\n\nMOVE_RIGHT\020\003\022\r\n\tMOVE" +
+      "_DOWN\020\004\022\023\n\017MOVE_DOWN_RIGHT\020\005\022\022\n\016MOVE_DOW" +
+      "N_LEFT\020\006\022\r\n\tMOVE_LEFT\020\007\022\010\n\004IDLE\020\010*I\n\013Tou" +
+      "chMotion\022\010\n\004NONE\020\000\022\010\n\004DOWN\020\001\022\010\n\004MOVE\020\002\022\006" +
+      "\n\002UP\020\004\022\013\n\007DOWN_UP\020\005\022\007\n\003ALL\020\007*S\n\014TouchInp" +
+      "utId\022\021\n\rjoystickInput\020\000\022\020\n\014button1Input\020" +
+      "\001\022\020\n\014button2Input\020\002\022\014\n\010tapInput\020\003*G\n\024Joy" +
+      "stickDirectionals\022\010\n\004none\020\000\022\007\n\003all\020\001\022\016\n\n" +
+      "horizontal\020\002\022\014\n\010vertical\020\003*\252\002\n\tNClipType" +
+      "\022\010\n\004idle\020\000\022\007\n\003run\020\001\022\010\n\004jump\020\002\022\007\n\003hit\020\003\022\010" +
+      "\n\004fall\020\004\022\014\n\010wallJump\020\005\022\016\n\ndoubleJump\020\006\022\013" +
+      "\n\007hitSide\020\007\022\n\n\006hitTop\020\010\022\007\n\003off\020\t\022\006\n\002on\020\n" +
+      "\022\t\n\005blink\020\013\022\013\n\007hitLeft\020\014\022\014\n\010hitRight\020\r\022\r" +
+      "\n\thitBottom\020\016\022\014\n\010noChange\020\017\022\t\n\005tiles\020\020\022\007" +
+      "\n\003svg\020\021\022\006\n\002t0\020\022\022\006\n\002t1\020\023\022\006\n\002t2\020\024\022\006\n\002t3\020\025\022" +
+      "\006\n\002t4\020\026\022\006\n\002t5\020\027\022\006\n\002t6\020\030\022\006\n\002t7\020\031\022\006\n\002t8\020\032\022" +
+      "\006\n\002t9\020\033b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -19841,101 +12087,47 @@ public final class Command {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_commander_QueryInfo_descriptor,
         new java.lang.String[] { "Qid", "Ax", "Ay", "Bx", "By", "Max", "TrackableOnly", });
-    internal_static_commander_EventInfo_descriptor =
+    internal_static_commander_NEvent_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_commander_EventInfo_fieldAccessorTable = new
+    internal_static_commander_NEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_EventInfo_descriptor,
-        new java.lang.String[] { "Id", "Info", "Event", "X", "Y", "IsCompleted", });
-    internal_static_commander_KeyInfo_descriptor =
+        internal_static_commander_NEvent_descriptor,
+        new java.lang.String[] { "Ints", "Floats", "Strings", });
+    internal_static_commander_NStageInfo_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_commander_KeyInfo_fieldAccessorTable = new
+    internal_static_commander_NStageInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_KeyInfo_descriptor,
-        new java.lang.String[] { "Name", "IsPressed", });
-    internal_static_commander_AckInfo_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_commander_AckInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_AckInfo_descriptor,
-        new java.lang.String[] { "Info", "Code", });
-    internal_static_commander_DirectionalInfo_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_commander_DirectionalInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_DirectionalInfo_descriptor,
-        new java.lang.String[] { "Iid", "Direction", "Intensity", "RadAngle", });
-    internal_static_commander_ButtonInfo_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_commander_ButtonInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_ButtonInfo_descriptor,
-        new java.lang.String[] { "Iid", "Event", });
-    internal_static_commander_TabInfo_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_commander_TabInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_TabInfo_descriptor,
-        new java.lang.String[] { "Iid", "Event", "X", "Y", });
-    internal_static_commander_ObjectPosition_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_commander_ObjectPosition_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_ObjectPosition_descriptor,
-        new java.lang.String[] { "Id", "X", "Y", });
-    internal_static_commander_QueryResult_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_commander_QueryResult_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_QueryResult_descriptor,
-        new java.lang.String[] { "Qid", "Objs", });
-    internal_static_commander_CmdInfo_descriptor =
-      getDescriptor().getMessageTypes().get(9);
-    internal_static_commander_CmdInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_CmdInfo_descriptor,
-        new java.lang.String[] { "Head", "Contact", "Event", "Key", "Ack", "Directional", "Button", "Tab", "Result", "Cmd", });
-    internal_static_commander_ContactInfo_descriptor =
-      getDescriptor().getMessageTypes().get(10);
-    internal_static_commander_ContactInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_ContactInfo_descriptor,
-        new java.lang.String[] { "Id1", "Id2", "Info1", "Info2", "X", "Y", "X1", "Y1", "X2", "Y2", "IsEnded", });
-    internal_static_commander_CStageInfo_descriptor =
-      getDescriptor().getMessageTypes().get(11);
-    internal_static_commander_CStageInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_CStageInfo_descriptor,
-        new java.lang.String[] { "Background", "GravityX", "GravityY", "Width", "Height", "Debug", "JoystickDirectionals", "JoystickPrecision", "Button1", "Button2", "Tab", });
+        internal_static_commander_NStageInfo_descriptor,
+        new java.lang.String[] { "Sn", "Background", "GravityX", "GravityY", "Width", "Height", "Debug", "JoystickDirectionals", "JoystickPrecision", "Button1", "Button2", "Tap", "TapMinMoveDistance", "DistanceTrackingInternal", });
     internal_static_commander_Cmd_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_commander_Cmd_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_commander_Cmd_descriptor,
-        new java.lang.String[] { "Ints", "Floats", "Strings", });
-    internal_static_commander_CObject_descriptor =
-      getDescriptor().getMessageTypes().get(13);
-    internal_static_commander_CObject_fieldAccessorTable = new
+        new java.lang.String[] { "Sn", "Ints", "Floats", "Strings", "Bytes", });
+    internal_static_commander_NObject_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_commander_NObject_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_CObject_descriptor,
-        new java.lang.String[] { "Id", "Physical", "Visible", "Tid", "Info", "Physical", "Visible", });
-    internal_static_commander_CVisible_descriptor =
-      getDescriptor().getMessageTypes().get(14);
-    internal_static_commander_CVisible_fieldAccessorTable = new
+        internal_static_commander_NObject_descriptor,
+        new java.lang.String[] { "Sn", "Id", "Body", "Visual", "Tid", "Info", "Body", "Visual", });
+    internal_static_commander_NVisual_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_commander_NVisual_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_CVisible_descriptor,
-        new java.lang.String[] { "Current", "Priority", "X", "Y", "Width", "Height", "ScaleX", "ScaleY", "AnchorX", "AnchorY", "Actions", });
-    internal_static_commander_CAction_descriptor =
-      getDescriptor().getMessageTypes().get(15);
-    internal_static_commander_CAction_fieldAccessorTable = new
+        internal_static_commander_NVisual_descriptor,
+        new java.lang.String[] { "Current", "Priority", "X", "Y", "Width", "Height", "ScaleX", "ScaleY", "AnchorX", "AnchorY", "Clips", });
+    internal_static_commander_NClip_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_commander_NClip_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_CAction_descriptor,
-        new java.lang.String[] { "Path", "TileSizeX", "TileSizeY", "Indices", "StepTime", "Type", "Repeat", });
-    internal_static_commander_CPhysical_descriptor =
-      getDescriptor().getMessageTypes().get(16);
-    internal_static_commander_CPhysical_fieldAccessorTable = new
+        internal_static_commander_NClip_descriptor,
+        new java.lang.String[] { "Path", "X", "Y", "Width", "Height", "Indices", "StepTime", "Type", "Repeat", });
+    internal_static_commander_NBody_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_commander_NBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_commander_CPhysical_descriptor,
+        internal_static_commander_NBody_descriptor,
         new java.lang.String[] { "Type", "Shape", "X", "Y", "Width", "Height", "Restitution", "Friction", "Density", "Angle", "IsSensor", "CategoryBits", "MaskBits", "FixedRotation", "Trackable", "ContactReport", "Floats", "PassableBottom", });
   }
 

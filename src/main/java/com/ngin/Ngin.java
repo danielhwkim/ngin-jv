@@ -14,6 +14,7 @@ import java.nio.ByteOrder;
 import java.io.FileReader;
 import java.util.EventListener;
 import java.util.Scanner;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import commander.*;
 import commander.Command.*;
@@ -25,18 +26,16 @@ public class Ngin {
     Socket socket;
     PrintStream out;
     InputStream in;
+    float precision = 3;
 
-    double width = 12;
-    double height = 12;
-    double margin = 3;
     int gid = 100;
     Recv receiver;
+    LinkedBlockingQueue<NEvent> queue = new LinkedBlockingQueue<>();
 
     public Ngin() throws IOException {
         File file = new File(".ngin");
         Scanner reader = new Scanner(file);
         String conf = reader.nextLine();
-        //System.out.println();
         reader.close();
         String[] confs = conf.split(":");
         host = confs[0];
@@ -46,22 +45,11 @@ public class Ngin {
         socket = new Socket(host, port);
         out = new PrintStream( socket.getOutputStream() );
         in = socket.getInputStream();
-        /*
-        out.close();
-        in.close();
-        socket.close();
-        socket = new Socket(host, port);
-        out = new PrintStream( socket.getOutputStream() );
-        in = socket.getInputStream();*/
-        receiver = new Recv(in);
-    }
-
-    public void setEventHandler(EventHandler eventHandler) {
-        receiver.handler = eventHandler;
+        receiver = new Recv(in, queue);
+        receiver.start();
     }
 
     public void close() throws IOException {
-        // Close our streams
         in.close();
         out.close();
         socket.close();
@@ -77,52 +65,47 @@ public class Ngin {
         out.flush();
     }
 
-    public int receiveAck() throws IOException {
-        return receiver.receiveAck();
-    }
-
-    public void sendStage(CStageInfo.Builder builder) throws IOException  {
+    public RemoteAction sendStageWait(NStageInfo.Builder builder) throws IOException, InterruptedException  {
+        RemoteAction action = receiver.addRemoteAction();
+        builder.setSn(action.sn);
+        System.out.println(String.format("sendStageWait(%d)", action.sn));
         send(Head.stage, builder.build().toByteArray());
-        //receiveAck();        
+        action.lock();
+        return action;
+    }
+
+    public void sendStage(NStageInfo.Builder builder) throws IOException  {
+        send(Head.stage, builder.build().toByteArray());      
+    }
+
+    public RemoteAction sendCmdWait(Cmd.Builder builder) throws IOException, InterruptedException {
+        RemoteAction action = receiver.addRemoteAction();
+        builder.setSn(action.sn);
+        System.out.println(String.format("sendCmdWait(%d)", action.sn));
+        send(Head.cmd, builder.build().toByteArray());
+        action.lock();
+        return action;
     }
 
     public void sendCmd(Cmd.Builder builder) throws IOException {
         send(Head.cmd, builder.build().toByteArray());
     }
 
-    public void sendCObj(CObject.Builder builder) throws IOException {
-        send(Head.cobject, builder.build().toByteArray());
+    public RemoteAction sendObjWait(NObject.Builder builder) throws IOException, InterruptedException {
+        RemoteAction action = receiver.addRemoteAction();
+        builder.setSn(action.sn);
+        System.out.println(String.format("sendObjWait(%d)", action.sn));
+        send(Head.object, builder.build().toByteArray());
+        action.lock();
+        return action;
     }
 
-    /*
-    public void sendCmd(Cmd.Builder builder, boolean needsAck) throws IOException {
-        send(Head.cmd, builder.build().toByteArray());
-
-        if (needsAck) {
-            receiveAck();
-        }
+    public void sendObj(NObject.Builder builder) throws IOException {
+        send(Head.object, builder.build().toByteArray());
     }
 
-    public void sendCObj(CObject.Builder builder, boolean needsAck) throws IOException {
-        send(Head.cobject, builder.build().toByteArray());
-
-        if (needsAck) {
-            receiveAck();
-        }        
-    } 
-
-    public void sendCmd(Cmd.Builder builder) throws IOException {
-        sendCmd(builder, false);
-    }
-
-    public void sendCObj(CObject.Builder builder) throws IOException {
-        sendCObj(builder, false);      
-    }*/
-
-
-
-    public CStageInfo.Builder stageBuilder(float width, float height) {
-        CStageInfo.Builder c = CStageInfo.newBuilder();
+    public NStageInfo.Builder stageBuilder(float width, float height) {
+        NStageInfo.Builder c = NStageInfo.newBuilder();
         c.setBackground("Blue");
         c.setGravityX(0);
         c.setGravityY(0);
@@ -131,16 +114,16 @@ public class Ngin {
         c.setDebug(true);
         c.setJoystickDirectionals(JoystickDirectionals.none);
         c.setJoystickPrecision(3);
-        c.setButton1(ActionEvent.DOWN);
-        c.setButton2(ActionEvent.DOWN);
+        c.setButton1(TouchMotion.DOWN);
+        c.setButton2(TouchMotion.DOWN);
         return c;
     }
 
-    public CObject.Builder tilesBuilder(String path, float tileSize, float width, float height, Iterable<Integer> data) {
-        CObject.Builder c = CObject.newBuilder();
+    public NObject.Builder tilesBuilder(String path, float tileWidth, float tileHeight, float width, float height, Iterable<Integer> data) {
+        NObject.Builder c = NObject.newBuilder();
         c.setTid(0);
-        CVisible.Builder v = c.getVisibleBuilder();
-        v.setCurrent(CActionType.tiles);
+        NVisual.Builder v = c.getVisualBuilder();
+        v.setCurrent(NClipType.tiles);
         v.setPriority(0);
         v.setX(0);
         v.setY(0);
@@ -150,28 +133,28 @@ public class Ngin {
         v.setScaleY(1);
         v.setAnchorX(0);
         v.setAnchorY(0);
-        CAction.Builder a = CAction.newBuilder();
+        NClip.Builder a = NClip.newBuilder();
         a.addAllIndices(data);
         a.setPath(path);
-        a.setStepTime(200/1000);
-        a.setTileSizeX(tileSize);
-        a.setTileSizeY(tileSize);
+        a.setStepTime(0.5f);
+        a.setWidth(tileWidth);
+        a.setHeight(tileHeight);
         a.setRepeat(false);
-        a.setType(CActionType.tiles);
-        v.addActions(a);
+        a.setType(NClipType.tiles);
+        v.addClips(a);
         return c;
     }
 
-    public CObject.Builder objBuilder(int id, String info) {
-        CObject.Builder c = CObject.newBuilder();
+    public NObject.Builder objBuilder(int id, String info) {
+        NObject.Builder c = NObject.newBuilder();
         c.setTid(0);
         c.setId(id);
         c.setInfo(info);
         return c;
     }
 
-    public CPhysical.Builder physicalBuilder(BodyShape shape, float x, float y) {
-        CPhysical.Builder p = CPhysical.newBuilder();
+    public NBody.Builder bodyBuilder(BodyShape shape, float x, float y) {
+        NBody.Builder p = NBody.newBuilder();
         p.setX(x);
         p.setY(y);
         p.setWidth(0);
@@ -192,9 +175,9 @@ public class Ngin {
         return p;
     }
 
-    public CVisible.Builder visibleBuilder(CAction.Builder[] builders) {
-        CVisible.Builder v = CVisible.newBuilder();
-        v.setCurrent(CActionType.idle);
+    public NVisual.Builder visualBuilder(NClip.Builder[] builders) {
+        NVisual.Builder v = NVisual.newBuilder();
+        v.setCurrent(NClipType.idle);
         v.setPriority(0);
         v.setX(0);
         v.setY(0);
@@ -202,33 +185,37 @@ public class Ngin {
         v.setHeight(1);
         v.setScaleX(1);
         v.setScaleY(1);
-        v.setAnchorX(0.5);
-        v.setAnchorY(0.5);
+        v.setAnchorX(0.5f);
+        v.setAnchorY(0.5f);
         for (int i=0; i<builders.length; i++) {
-            v.addActions(builders[i]);
+            v.addClips(builders[i]);
         }
         return v;
     }
 
-    public CAction.Builder actionBuilder(String path, float tileSize, Iterable<Integer> indices, CActionType type, boolean repeat) {
-        CAction.Builder a = CAction.newBuilder();
+    public NClip.Builder clipBuilder(String path, float width, float height, Iterable<Integer> indices, NClipType type, boolean repeat) {
+        NClip.Builder a = NClip.newBuilder();
         a.addAllIndices(indices);
         a.setPath(path);
-        a.setStepTime(200./1000.);
-        a.setTileSizeX(tileSize);
-        a.setTileSizeY(tileSize);
+        a.setStepTime(0.5f);
+        a.setX(0f);
+        a.setY(0f);
+        a.setWidth(width);
+        a.setHeight(height);
         a.setRepeat(false);
         a.setType(type);
         a.setRepeat(repeat);
         return a;
     }
 
-    public CAction.Builder actionBuilder(String path, float tileSize, Iterable<Integer> indices) {
-        return actionBuilder(path, tileSize, indices, CActionType.idle, true);
+    public NClip.Builder clipBuilder(String path, float width, float height, Iterable<Integer> indices) {
+        return clipBuilder(path, width, height, indices, NClipType.idle, true);
     }
 
-    public void mainLoop() throws IOException {
-        receiver.eventLoop();
+    public void mainLoop(EventHandler handler) throws IOException, InterruptedException {
+        while (!handler.completed) {
+            handler.handle(queue.take());
+        }
     }
 
     public void follow(int id) throws IOException {
@@ -254,36 +241,36 @@ public class Ngin {
     }
 
 
-    public Cmd getObjInfo(int id) throws IOException {
+    public NObjectInfo getObjInfo(int id) throws IOException, InterruptedException {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("objinfo");
         c.addInts(id);
-        sendCmd(c);
-        return receiver.receiveCmd();
+        RemoteAction action = sendCmdWait(c);
+        return new NObjectInfo(action.event);
     }
 
-    public void setActionType(int id, CActionType type, boolean isFlipHorizonal) throws IOException {
+    public void setClipType(int id, NClipType type, boolean isFlipHorizonal) throws IOException {
         Cmd.Builder c = Cmd.newBuilder();
-        c.addStrings("actionType");
+        c.addStrings("clipType");
         c.addInts(id);
         c.addInts(isFlipHorizonal? 1:0);
         c.addInts(type.getNumber());                
         sendCmd(c);
     }
 
-    public void setActionType(int id, CActionType type) throws IOException {
-        setActionType(id, type, false);
+    public void setClipType(int id, NClipType type) throws IOException {
+        setClipType(id, type, false);
     }
     
-    public Cmd linearTo(int id, float x, float y, float speed) throws IOException {
+    public NEvent linearTo(int id, float x, float y, float speed) throws IOException, InterruptedException {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("linearTo");
         c.addInts(id);
         c.addFloats(x);
         c.addFloats(y);
         c.addFloats(speed);
-        sendCmd(c);
-        return receiver.receiveCmd();        
+        RemoteAction action = sendCmdWait(c);
+        return action.event;        
     }
 
     public void forward(int id, float angle, float speed) throws IOException {

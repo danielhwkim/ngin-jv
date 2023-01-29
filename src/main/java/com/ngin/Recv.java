@@ -4,45 +4,62 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.BlockingQueue;
 
 import commander.Command.*;
 
-public class Recv {
+public class Recv extends Thread {
     InputStream in;
-    boolean returnAck = false;
-    boolean returnCmd = false;
-    EventHandler handler;
+    Set<RemoteAction> remoteActions = new HashSet<>();
+    BlockingQueue<NEvent> q;
+    boolean running = true;
 
-    Recv(InputStream inputStream) {
+    Recv(InputStream inputStream, BlockingQueue<NEvent> queue) {
         in = inputStream;
-        handler = new EventHandler();
+        q = queue;
     }
 
-    public int receiveAck() throws IOException {
-        returnAck = true;
-        CmdInfo info = eventLoop();
-        returnAck = false;
-
-        AckInfo ackInfo = info.getAck();
-
-        System.out.println("code:" + ackInfo.getCode());
-        return ackInfo.getCode();      
+    public RemoteAction addRemoteAction() throws InterruptedException {
+        RemoteAction action = new RemoteAction();
+        remoteActions.add(action);
+        return action;
     }
 
-    public Cmd receiveCmd() throws IOException {
-        returnCmd = true;
-        CmdInfo info = eventLoop();
-        returnCmd = false;
-        
-        Cmd cmd = info.getCmd();
+    public RemoteAction getRemoteAction(int sn) {
+        for (RemoteAction action : remoteActions) {
+            if (action.sn == sn) {
+                return action;
+            }
+        }
+        return null;
+    }
 
-        //System.out.println("cmd:" + cmd);
-        return cmd;      
-    }    
+    public boolean processRemoteAction(NEvent event) {
+        RemoteAction action = getRemoteAction(event.getInts(1));
+        if (action != null) {
+            remoteActions.remove(action);
+            action.event = event;
+            action.unlock();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void run()  {
+        try {
+            eventLoop();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }   
     
     
-    CmdInfo eventLoop() throws IOException {
-        while (true) {
+    void eventLoop() throws IOException {
+        while (running) {
             int code = -1;
             ByteBuffer bufLen = ByteBuffer.allocate(4).order(ByteOrder.nativeOrder());            
             in.read(bufLen.array(), 0, 4);
@@ -54,36 +71,29 @@ public class Recv {
             int off = 0;
             byte[] bufBytes = bufData.array();
             while(off < len) {
-                int count = in.read(bufBytes, off, len);
+                int count = in.read(bufBytes, off, len-off);
                 if (count < 0) continue;
                 off += count;
             }
             //System.out.println("data:" + bufData.array());
     
-            CmdInfo cmdInfo = CmdInfo.parseFrom(bufData);
-            //System.out.println("data:" + cmdInfo);
+            NEvent event = NEvent.parseFrom(bufData);
+            //System.out.println("data:" + NEvent);
+            int head = event.getInts(0);
     
-            switch(cmdInfo.getHead()) {
-                case ack:
-                    if (returnAck) {
-                        return cmdInfo;
-                    } else {
-                        AckInfo ackInfo = cmdInfo.getAck();
-
-                        System.out.println("Unexpected ACK:" + ackInfo.getCode());
+            switch(head) {
+                case Head.ack_VALUE:
+                    if (!processRemoteAction(event)) {
+                        System.out.println("Unexpected ACK:" + event);
                     }
                     break;
-                case cmd:
-                    if (returnCmd) {
-                        return cmdInfo;
-                    } else {
-                        Cmd cmd = cmdInfo.getCmd();
-
-                        System.out.println("Unexpected CMD:" + cmd);
-                    }                
+                case Head.cmd_VALUE:
+                    if (!processRemoteAction(event)) {
+                        System.out.println("Unexpected CMD:" + event);
+                    }                    
                     break;
                 default:
-                    handler.handle(cmdInfo);
+                    q.add(event);
                     break;
             }
         }
