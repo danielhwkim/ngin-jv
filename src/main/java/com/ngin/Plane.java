@@ -30,7 +30,7 @@ public class Plane {
 
             JSONObject obj = new JSONObject(str);
             Double tileWidth = obj.getDouble("tilewidth");
-            Double tileHeight = obj.getDouble("tilehegith");            
+            Double tileHeight = obj.getDouble("tileheight");            
             JSONObject layer = obj.getJSONArray("layers").getJSONObject(0);
             //System.out.println(layer);
             JSONArray data = layer.getJSONArray("data");
