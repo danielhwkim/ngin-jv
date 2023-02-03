@@ -157,8 +157,8 @@ public class Ngin {
         NBody.Builder p = NBody.newBuilder();
         p.setX(x);
         p.setY(y);
-        p.setWidth(0);
-        p.setHeight(0);
+        p.setWidth(1f);
+        p.setHeight(1f);
         p.setRestitution(0);
         p.setFriction(0);
         p.setDensity(0);

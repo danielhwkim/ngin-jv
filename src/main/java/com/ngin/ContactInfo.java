@@ -3,7 +3,7 @@ package com.ngin;
 import commander.Command.NEvent;
 
 public class ContactInfo {
-    boolean is_ended;
+    boolean isEnded;
     String info1;
     String info2;
     int id1;
@@ -16,7 +16,7 @@ public class ContactInfo {
     float y2;
 
     ContactInfo(NEvent c) {
-        is_ended = c.getInts(1) == 1;
+        isEnded = c.getInts(1) == 1;
         info1 = c.getStrings(0);
         info2 = c.getStrings(1);
         id1 = c.getInts(2);
@@ -29,6 +29,6 @@ public class ContactInfo {
         y2 = c.getFloats(5);
     }
     public String toString() {
-        return String.format("ContactInfo %s (x:%f, y:%f) (%s, id:%d, x:%f, y:%f) (%s, id:%d, x:%f, y:%f)", (is_ended)? "Ended":"Begun", x, y, info1, id1, x1, y1, info2, id2, x2, y2);
+        return String.format("ContactInfo %s (x:%f, y:%f) (%s, id:%d, x:%f, y:%f) (%s, id:%d, x:%f, y:%f)", (isEnded)? "Ended":"Begun", x, y, info1, id1, x1, y1, info2, id2, x2, y2);
     }
 }

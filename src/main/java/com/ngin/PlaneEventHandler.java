@@ -13,12 +13,7 @@ public class PlaneEventHandler extends EventHandler {
     Ngin nx;       
     boolean keyDownLeft = false;
     boolean keyDownRight = false;
-    Set<Integer> actor_contacts = new HashSet<>();
-    
-    int actorJumpCount = 0;
-    int dynamicId = 1000;
-    boolean facingLeft = false;  
-    boolean ready = false;      
+    int dynamicId = 1000; 
     PlaneEventHandler(Ngin ngin) {
         nx = ngin;
     }

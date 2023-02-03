@@ -9,8 +9,10 @@ import java.util.Scanner;
 import org.json.*;
 
 import commander.Command.BodyShape;
+import commander.Command.BodyType;
 import commander.Command.JoystickDirectionals;
 import commander.Command.NClip;
+import commander.Command.NClipType;
 import commander.Command.NObject;
 import commander.Command.NStageInfo;
 import commander.Command.NBody;
@@ -33,7 +35,7 @@ public class Game {
         try
         {
             Ngin nx = new Ngin();
-            File file = new File("./data/planes0.tmj");
+            File file = new File("./data/level03.json");
             Scanner scan = new Scanner(file);
             String str = new String();
             while (scan.hasNext())
@@ -41,9 +43,9 @@ public class Game {
             scan.close();
 
             JSONObject obj = new JSONObject(str);
-
-            JSONObject tileslayer = obj.getJSONArray("layers").getJSONObject(0);
-            JSONObject objlayer = obj.getJSONArray("layers").getJSONObject(1);
+            JSONArray layers = obj.getJSONArray("layers");
+            JSONObject tileslayer = layers.getJSONObject(0);
+            JSONObject objlayer = layers.getJSONObject(1);
             JSONArray data = tileslayer.getJSONArray("data");
             Double tileWidth = obj.getDouble("tilewidth");
             Double tileHeight = obj.getDouble("tileheight");
@@ -53,9 +55,10 @@ public class Game {
             int height = obj.getInt("height");            
 
             NStageInfo.Builder builder = nx.stageBuilder(width, height);
-            builder.setBackground("Blue");
+            builder.setBackground("Yellow");
             builder.setGravityX(0);
             builder.setGravityY(60);
+            builder.setDebug(false);
             builder.setJoystickDirectionals(JoystickDirectionals.horizontal);
             nx.sendStageWait(builder);
 
@@ -64,7 +67,7 @@ public class Game {
             for(int i=0; i<data.length(); i++) {
                 tileList.add(data.getInt(i));
             }
-            nx.sendObjWait(nx.tilesBuilder("kenney_pixelshmup/tiles_packed.png", tileWidth.floatValue(), tileHeight.floatValue(), width, height, tileList));
+            nx.sendObjWait(nx.tilesBuilder("Terrain/Terrain (16x16).png", tileWidth.floatValue(), tileHeight.floatValue(), width, height, tileList));
             JSONArray objs = objlayer.getJSONArray("objects");
 
             for (int i=0; i<objs.length(); i++) {
@@ -72,49 +75,136 @@ public class Game {
                 int id = o.getInt("id") + 100;
                 o.put("id", id);
                 convInfo(o, tileWidth);
-                double x = o.getDouble("x");
-                double y = o.getDouble("y");
+                float x = (float) o.getDouble("x");
+                float y = (float) o.getDouble("y");
                 String name = o.getString("name"); 
-                double w = o.getDouble("width");
-                double h = o.getDouble("height");                                               
+                float w = (float) o.getDouble("width");
+                float h = (float) o.getDouble("height");
+
+                switch(name){
+                    case "Apple":
+                    case "Bananas":
+                    case "Cherries":
+                    case "Kiwi":
+                    case "Orange":
+                    case "Pineapple":
+                    case "Strawberry":
+                    {
+                        NObject.Builder ob = nx.objBuilder(id, "fruit");
+                        NBody.Builder bb = nx.bodyBuilder(BodyShape.circle, x, y);
+                        bb.setType(BodyType.staticBody);
+                        bb.setIsSensor(true);
+                        NClip.Builder[] cbs = new NClip.Builder[2];
+                        List<Integer> list = new ArrayList<>();              
+                        cbs[0] = nx.clipBuilder("Items/Fruits/" + name + ".png", 32, 32, list);
+                        cbs[0].setStepTime(0.05f);
+                        cbs[1] = nx.clipBuilder("Items/Fruits/Collected.png", 32, 32, list, NClipType.hit, false);
+                        cbs[1].setStepTime(0.05f);
+                        NVisual.Builder vb = nx.visualBuilder(cbs);
+                        vb.setScaleX(2f);
+                        vb.setScaleY(2f);
+                        ob.setBody(bb);
+                        ob.setVisual(vb);
+                        nx.sendObj(ob);                        
+                    }
+                    break;
+                    case "hero":
+                    {
+                        id = 100;
+                        o.put("id", id);
+                        w = 2;
+                        h = 2;
+                        String character = "Mask Dude";
+
+                        NObject.Builder ob = nx.objBuilder(id, name);
+                        NBody.Builder bb = nx.bodyBuilder(BodyShape.polygon, x, y);
+                        bb.setWidth(w);
+                        bb.setHeight(h);
+
+                        float hx = w/4;
+                        float hy = h/2;
+                        float d = hx/4;
+                        bb.addFloats(-hx);
+                        bb.addFloats(-hy + d);
+                        bb.addFloats(-hx + d);
+                        bb.addFloats(-hy);
+
+                        bb.addFloats(hx - d);
+                        bb.addFloats(-hy);
+                        bb.addFloats(hx);
+                        bb.addFloats(-hy +d);
+
+                        bb.addFloats(hx);
+                        bb.addFloats(hy - d -d);
+                        bb.addFloats(hx - d);
+                        bb.addFloats(hy - d);
+
+                        bb.addFloats(-hx +d);
+                        bb.addFloats(hy - d);
+                        bb.addFloats(-hx);
+                        bb.addFloats(hy -d -d);
+
+                        bb.setType(BodyType.dynamicBody);
+
+                        NClip.Builder[] cbs = new NClip.Builder[7];
+                        List<Integer> list = new ArrayList<>();              
+                        cbs[0] = nx.clipBuilder("Main Characters/" + character +"/Idle (32x32).png", 32, 32, list, NClipType.idle, true);
+                        cbs[0].setStepTime(0.05f);
+                        cbs[1] = nx.clipBuilder("Main Characters/" + character +"/Run (32x32).png", 32, 32, list, NClipType.run, true);
+                        cbs[1].setStepTime(0.05f);
+                        cbs[2] = nx.clipBuilder("Main Characters/" + character +"/Jump (32x32).png", 32, 32, list, NClipType.jump, true);
+                        cbs[2].setStepTime(0.05f);
+                        cbs[3] = nx.clipBuilder("Main Characters/" + character +"/Hit (32x32).png", 32, 32, list, NClipType.hit, false);
+                        cbs[3].setStepTime(0.05f);
+                        cbs[4] = nx.clipBuilder("Main Characters/" + character +"/Fall (32x32).png", 32, 32, list, NClipType.fall, true);
+                        cbs[4].setStepTime(0.05f);
+                        cbs[5] = nx.clipBuilder("Main Characters/" + character +"/Wall Jump (32x32).png", 32, 32, list, NClipType.wallJump, false);
+                        cbs[5].setStepTime(0.05f);
+                        cbs[6] = nx.clipBuilder("Main Characters/" + character +"/Double Jump (32x32).png", 32, 32, list, NClipType.doubleJump, false);
+                        cbs[6].setStepTime(0.05f);                                                                                                                        
+                        NVisual.Builder vb = nx.visualBuilder(cbs);
+                        vb.setWidth(w);
+                        vb.setHeight(h);
+                        vb.setY(-0.13f);
+                        ob.setBody(bb);
+                        ob.setVisual(vb);
+                        nx.sendObj(ob);
+                    }
+                    break;
+                    case "floor":
+                    {
+                        NObject.Builder ob = nx.objBuilder(id, name);
+                        NBody.Builder bb = nx.bodyBuilder(BodyShape.rectangle, x, y);
+                        bb.setType(BodyType.staticBody);
+                        bb.setWidth(w);
+                        bb.setHeight(h);
+                        ob.setBody(bb);
+                        nx.sendObj(ob);    
+                    }
+                    break;
+                    case "Trampoline":
+                    {
+                        NObject.Builder ob = nx.objBuilder(id, name);
+                        NBody.Builder bb = nx.bodyBuilder(BodyShape.rectangle, x, y);
+                        bb.setType(BodyType.staticBody);
+                        bb.setIsSensor(true);
+                        NClip.Builder[] cbs = new NClip.Builder[2];
+                        List<Integer> list = new ArrayList<>();              
+                        cbs[0] = nx.clipBuilder("Traps/Trampoline/Idle.png", 28, 28, list);
+                        cbs[0].setStepTime(0.05f);
+                        cbs[1] = nx.clipBuilder("Traps/Trampoline/Jump (28x28).png", 28, 28, list, NClipType.hit, false);
+                        cbs[1].setStepTime(0.05f);
+                        NVisual.Builder vb = nx.visualBuilder(cbs);
+                        vb.setWidth(1.7f);
+                        vb.setHeight(1.7f);
+                        vb.setY(-0.4f);
+                        ob.setBody(bb);
+                        ob.setVisual(vb);
+                        nx.sendObj(ob);     
+                    }
+                    break;
+                }
             }
-            /*
-            NObject.Builder hero = nx.objBuilder(100, "hero");
-            NBody.Builder heroBody = nx.bodyBuilder(BodyShape.circle, 11, 11);
-            //heroBody.setAngle((float)1.5);
-            heroBody.setWidth(2);
-            heroBody.setHeight(2);
-            NClip.Builder[] heroAs = new NClip.Builder[1];
-            List<Integer> heroTileList = new ArrayList<>();
-            heroTileList.add(1);
-            heroAs[0] = nx.clipBuilder("kenney_pixelshmup/ships_packed.png", 32, 32, heroTileList);
-            NVisual.Builder heroV = nx.visualBuilder(heroAs);
-            heroV.setWidth(2);
-            heroV.setHeight(2);
-            hero.setBody(heroBody);
-            hero.setVisual(heroV);
-            nx.sendObjWait(hero);
-
-            nx.follow(100);
-            nx.forward(100, 0, 5);
-
-            NObject.Builder enemy = nx.objBuilder(200, "enemy");
-            NBody.Builder enemyBody = nx.bodyBuilder(BodyShape.circle, 11, 0);
-            enemyBody.setWidth(2);
-            enemyBody.setHeight(2);
-            NClip.Builder[] enemyAs = new NClip.Builder[1];
-            List<Integer> enemyTileList = new ArrayList<>();
-            enemyTileList.add(10);                
-            enemyAs[0] = nx.clipBuilder("kenney_pixelshmup/ships_packed.png", 32, 32, enemyTileList);
-            NVisual.Builder enemyV = nx.visualBuilder(enemyAs);
-            enemyV.setWidth(2);
-            enemyV.setHeight(2);
-            enemy.setBody(enemyBody);
-            enemy.setVisual(enemyV);
-            nx.sendObjWait(enemy);                  
-
-            nx.forward(200, 0, 5);
-            nx.angular(200, 1);*/
 
             nx.mainLoop(new GameEventHandler(nx));
         }
