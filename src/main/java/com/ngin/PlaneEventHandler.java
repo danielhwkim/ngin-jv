@@ -10,12 +10,12 @@ import java.lang.Math;
 import commander.Command.*;
 
 public class PlaneEventHandler extends EventHandler {
-    Ngin nx;       
+    Nx nx;       
     boolean keyDownLeft = false;
     boolean keyDownRight = false;
     int dynamicId = 1000; 
-    PlaneEventHandler(Ngin ngin) {
-        nx = ngin;
+    PlaneEventHandler(Nx n) {
+        nx = n;
     }
 
     @Override

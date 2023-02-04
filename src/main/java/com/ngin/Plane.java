@@ -20,7 +20,7 @@ public class Plane {
     public void run() {
         try
         {
-            Ngin nx = new Ngin();
+            Nx nx = new Nx();
             File file = new File("./data/planes0.tmj");
             Scanner scan = new Scanner(file);
             String str = new String();

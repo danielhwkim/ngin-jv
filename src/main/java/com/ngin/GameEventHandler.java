@@ -10,7 +10,7 @@ import java.lang.Math;
 import commander.Command.*;
 
 public class GameEventHandler extends EventHandler {
-    Ngin nx;       
+    Nx nx;       
     boolean keyDownLeft = false;
     boolean keyDownRight = false;
     Set<Integer> heroContacts = new HashSet<>();
@@ -21,8 +21,8 @@ public class GameEventHandler extends EventHandler {
     boolean ready = false;
     int heroId = 100;
 
-    GameEventHandler(Ngin ngin) {
-        nx = ngin;
+    GameEventHandler(Nx n) {
+        nx = n;
     }
 
     @Override

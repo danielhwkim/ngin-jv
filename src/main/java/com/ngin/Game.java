@@ -34,7 +34,7 @@ public class Game {
     public void run() {
         try
         {
-            Ngin nx = new Ngin();
+            Nx nx = new Nx();
             File file = new File("./data/level03.json");
             Scanner scan = new Scanner(file);
             String str = new String();
