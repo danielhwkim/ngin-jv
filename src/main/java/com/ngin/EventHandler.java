@@ -14,25 +14,25 @@ public class EventHandler {
 
         switch(head) {
             case Head.key_VALUE:
-                keyHandler(new KeyInfo(info));
+                onKey(new KeyInfo(info));
                 break;
             case Head.contact_VALUE:
-                contactHandler(new ContactInfo(info));
+                onContact(new ContactInfo(info));
                 break;
             case Head.event_VALUE:
-                eventHandler(new EventInfo(info));
+                onEvent(new EventInfo(info));
                 break;
             case Head.tap_VALUE:
-                tapHandler(new TapInfo(info));
+                onTap(new TapInfo(info));
                 break;
             case Head.directional_VALUE:
-                directionalHandler(new DirectionalInfo(info));
+                onDirectional(new DirectionalInfo(info));
                 break;
             case Head.button_VALUE:
-                buttonHandler(new ButtonInfo(info));
+                onButton(new ButtonInfo(info));
                 break;
             case Head.queryresult_VALUE:
-                queryResultHandler(new QueryResultInfo(info));
+                onQueryResult(new QueryResultInfo(info));
                 break;
             default:
                 unexpected(info.toString());       
@@ -40,25 +40,25 @@ public class EventHandler {
         }
     }
 
-    public void keyHandler(KeyInfo info) throws IOException, InterruptedException {
+    public void onKey(KeyInfo info) throws IOException, InterruptedException {
         unexpected(info.toString());
     }
-    public void contactHandler(ContactInfo info) throws IOException, InterruptedException {
+    public void onContact(ContactInfo info) throws IOException, InterruptedException {
         unexpected(info.toString());
     }
-    public void eventHandler(EventInfo info) throws IOException {
+    public void onEvent(EventInfo info) throws IOException {
         unexpected(info.toString());
     }
-    public void tapHandler(TapInfo info) throws IOException {
+    public void onTap(TapInfo info) throws IOException {
         unexpected(info.toString());
     }    
-    public void directionalHandler(DirectionalInfo info) throws IOException {
+    public void onDirectional(DirectionalInfo info) throws IOException {
         unexpected(info.toString());
     }
-    public void buttonHandler(ButtonInfo info) throws IOException, InterruptedException {
+    public void onButton(ButtonInfo info) throws IOException, InterruptedException {
         unexpected(info.toString());
     }
-    public void queryResultHandler(QueryResultInfo info) throws IOException, InterruptedException {
+    public void onQueryResult(QueryResultInfo info) throws IOException, InterruptedException {
         unexpected(info.toString());
     }    
 }

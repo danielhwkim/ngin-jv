@@ -1064,232 +1064,40 @@ public final class Command {
   public enum NClipType
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>idle = 0;</code>
+     * <code>loop = 0;</code>
      */
-    idle(0),
+    loop(0),
     /**
-     * <code>run = 1;</code>
+     * <code>once = 1;</code>
      */
-    run(1),
+    once(1),
     /**
-     * <code>jump = 2;</code>
+     * <code>tiles = 2;</code>
      */
-    jump(2),
+    tiles(2),
     /**
-     * <code>hit = 3;</code>
+     * <code>svg = 3;</code>
      */
-    hit(3),
-    /**
-     * <code>fall = 4;</code>
-     */
-    fall(4),
-    /**
-     * <code>wallJump = 5;</code>
-     */
-    wallJump(5),
-    /**
-     * <code>doubleJump = 6;</code>
-     */
-    doubleJump(6),
-    /**
-     * <code>hitSide = 7;</code>
-     */
-    hitSide(7),
-    /**
-     * <code>hitTop = 8;</code>
-     */
-    hitTop(8),
-    /**
-     * <code>off = 9;</code>
-     */
-    off(9),
-    /**
-     * <code>on = 10;</code>
-     */
-    on(10),
-    /**
-     * <code>blink = 11;</code>
-     */
-    blink(11),
-    /**
-     * <code>hitLeft = 12;</code>
-     */
-    hitLeft(12),
-    /**
-     * <code>hitRight = 13;</code>
-     */
-    hitRight(13),
-    /**
-     * <code>hitBottom = 14;</code>
-     */
-    hitBottom(14),
-    /**
-     * <code>noChange = 15;</code>
-     */
-    noChange(15),
-    /**
-     * <code>tiles = 16;</code>
-     */
-    tiles(16),
-    /**
-     * <code>svg = 17;</code>
-     */
-    svg(17),
-    /**
-     * <code>t0 = 18;</code>
-     */
-    t0(18),
-    /**
-     * <code>t1 = 19;</code>
-     */
-    t1(19),
-    /**
-     * <code>t2 = 20;</code>
-     */
-    t2(20),
-    /**
-     * <code>t3 = 21;</code>
-     */
-    t3(21),
-    /**
-     * <code>t4 = 22;</code>
-     */
-    t4(22),
-    /**
-     * <code>t5 = 23;</code>
-     */
-    t5(23),
-    /**
-     * <code>t6 = 24;</code>
-     */
-    t6(24),
-    /**
-     * <code>t7 = 25;</code>
-     */
-    t7(25),
-    /**
-     * <code>t8 = 26;</code>
-     */
-    t8(26),
-    /**
-     * <code>t9 = 27;</code>
-     */
-    t9(27),
+    svg(3),
     UNRECOGNIZED(-1),
     ;
 
     /**
-     * <code>idle = 0;</code>
+     * <code>loop = 0;</code>
      */
-    public static final int idle_VALUE = 0;
+    public static final int loop_VALUE = 0;
     /**
-     * <code>run = 1;</code>
+     * <code>once = 1;</code>
      */
-    public static final int run_VALUE = 1;
+    public static final int once_VALUE = 1;
     /**
-     * <code>jump = 2;</code>
+     * <code>tiles = 2;</code>
      */
-    public static final int jump_VALUE = 2;
+    public static final int tiles_VALUE = 2;
     /**
-     * <code>hit = 3;</code>
+     * <code>svg = 3;</code>
      */
-    public static final int hit_VALUE = 3;
-    /**
-     * <code>fall = 4;</code>
-     */
-    public static final int fall_VALUE = 4;
-    /**
-     * <code>wallJump = 5;</code>
-     */
-    public static final int wallJump_VALUE = 5;
-    /**
-     * <code>doubleJump = 6;</code>
-     */
-    public static final int doubleJump_VALUE = 6;
-    /**
-     * <code>hitSide = 7;</code>
-     */
-    public static final int hitSide_VALUE = 7;
-    /**
-     * <code>hitTop = 8;</code>
-     */
-    public static final int hitTop_VALUE = 8;
-    /**
-     * <code>off = 9;</code>
-     */
-    public static final int off_VALUE = 9;
-    /**
-     * <code>on = 10;</code>
-     */
-    public static final int on_VALUE = 10;
-    /**
-     * <code>blink = 11;</code>
-     */
-    public static final int blink_VALUE = 11;
-    /**
-     * <code>hitLeft = 12;</code>
-     */
-    public static final int hitLeft_VALUE = 12;
-    /**
-     * <code>hitRight = 13;</code>
-     */
-    public static final int hitRight_VALUE = 13;
-    /**
-     * <code>hitBottom = 14;</code>
-     */
-    public static final int hitBottom_VALUE = 14;
-    /**
-     * <code>noChange = 15;</code>
-     */
-    public static final int noChange_VALUE = 15;
-    /**
-     * <code>tiles = 16;</code>
-     */
-    public static final int tiles_VALUE = 16;
-    /**
-     * <code>svg = 17;</code>
-     */
-    public static final int svg_VALUE = 17;
-    /**
-     * <code>t0 = 18;</code>
-     */
-    public static final int t0_VALUE = 18;
-    /**
-     * <code>t1 = 19;</code>
-     */
-    public static final int t1_VALUE = 19;
-    /**
-     * <code>t2 = 20;</code>
-     */
-    public static final int t2_VALUE = 20;
-    /**
-     * <code>t3 = 21;</code>
-     */
-    public static final int t3_VALUE = 21;
-    /**
-     * <code>t4 = 22;</code>
-     */
-    public static final int t4_VALUE = 22;
-    /**
-     * <code>t5 = 23;</code>
-     */
-    public static final int t5_VALUE = 23;
-    /**
-     * <code>t6 = 24;</code>
-     */
-    public static final int t6_VALUE = 24;
-    /**
-     * <code>t7 = 25;</code>
-     */
-    public static final int t7_VALUE = 25;
-    /**
-     * <code>t8 = 26;</code>
-     */
-    public static final int t8_VALUE = 26;
-    /**
-     * <code>t9 = 27;</code>
-     */
-    public static final int t9_VALUE = 27;
+    public static final int svg_VALUE = 3;
 
 
     public final int getNumber() {
@@ -1316,34 +1124,10 @@ public final class Command {
      */
     public static NClipType forNumber(int value) {
       switch (value) {
-        case 0: return idle;
-        case 1: return run;
-        case 2: return jump;
-        case 3: return hit;
-        case 4: return fall;
-        case 5: return wallJump;
-        case 6: return doubleJump;
-        case 7: return hitSide;
-        case 8: return hitTop;
-        case 9: return off;
-        case 10: return on;
-        case 11: return blink;
-        case 12: return hitLeft;
-        case 13: return hitRight;
-        case 14: return hitBottom;
-        case 15: return noChange;
-        case 16: return tiles;
-        case 17: return svg;
-        case 18: return t0;
-        case 19: return t1;
-        case 20: return t2;
-        case 21: return t3;
-        case 22: return t4;
-        case 23: return t5;
-        case 24: return t6;
-        case 25: return t7;
-        case 26: return t8;
-        case 27: return t9;
+        case 0: return loop;
+        case 1: return once;
+        case 2: return tiles;
+        case 3: return svg;
         default: return null;
       }
     }
@@ -2304,58 +2088,58 @@ public final class Command {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated int32 ints = 2;</code>
+     * <code>repeated int32 ints = 1;</code>
      * @return A list containing the ints.
      */
     java.util.List<java.lang.Integer> getIntsList();
     /**
-     * <code>repeated int32 ints = 2;</code>
+     * <code>repeated int32 ints = 1;</code>
      * @return The count of ints.
      */
     int getIntsCount();
     /**
-     * <code>repeated int32 ints = 2;</code>
+     * <code>repeated int32 ints = 1;</code>
      * @param index The index of the element to return.
      * @return The ints at the given index.
      */
     int getInts(int index);
 
     /**
-     * <code>repeated float floats = 3;</code>
+     * <code>repeated float floats = 2;</code>
      * @return A list containing the floats.
      */
     java.util.List<java.lang.Float> getFloatsList();
     /**
-     * <code>repeated float floats = 3;</code>
+     * <code>repeated float floats = 2;</code>
      * @return The count of floats.
      */
     int getFloatsCount();
     /**
-     * <code>repeated float floats = 3;</code>
+     * <code>repeated float floats = 2;</code>
      * @param index The index of the element to return.
      * @return The floats at the given index.
      */
     float getFloats(int index);
 
     /**
-     * <code>repeated string strings = 4;</code>
+     * <code>repeated string strings = 3;</code>
      * @return A list containing the strings.
      */
     java.util.List<java.lang.String>
         getStringsList();
     /**
-     * <code>repeated string strings = 4;</code>
+     * <code>repeated string strings = 3;</code>
      * @return The count of strings.
      */
     int getStringsCount();
     /**
-     * <code>repeated string strings = 4;</code>
+     * <code>repeated string strings = 3;</code>
      * @param index The index of the element to return.
      * @return The strings at the given index.
      */
     java.lang.String getStrings(int index);
     /**
-     * <code>repeated string strings = 4;</code>
+     * <code>repeated string strings = 3;</code>
      * @param index The index of the value to return.
      * @return The bytes of the strings at the given index.
      */
@@ -2405,10 +2189,10 @@ public final class Command {
               commander.Command.NEvent.class, commander.Command.NEvent.Builder.class);
     }
 
-    public static final int INTS_FIELD_NUMBER = 2;
+    public static final int INTS_FIELD_NUMBER = 1;
     private com.google.protobuf.Internal.IntList ints_;
     /**
-     * <code>repeated int32 ints = 2;</code>
+     * <code>repeated int32 ints = 1;</code>
      * @return A list containing the ints.
      */
     @java.lang.Override
@@ -2417,14 +2201,14 @@ public final class Command {
       return ints_;
     }
     /**
-     * <code>repeated int32 ints = 2;</code>
+     * <code>repeated int32 ints = 1;</code>
      * @return The count of ints.
      */
     public int getIntsCount() {
       return ints_.size();
     }
     /**
-     * <code>repeated int32 ints = 2;</code>
+     * <code>repeated int32 ints = 1;</code>
      * @param index The index of the element to return.
      * @return The ints at the given index.
      */
@@ -2433,10 +2217,10 @@ public final class Command {
     }
     private int intsMemoizedSerializedSize = -1;
 
-    public static final int FLOATS_FIELD_NUMBER = 3;
+    public static final int FLOATS_FIELD_NUMBER = 2;
     private com.google.protobuf.Internal.FloatList floats_;
     /**
-     * <code>repeated float floats = 3;</code>
+     * <code>repeated float floats = 2;</code>
      * @return A list containing the floats.
      */
     @java.lang.Override
@@ -2445,14 +2229,14 @@ public final class Command {
       return floats_;
     }
     /**
-     * <code>repeated float floats = 3;</code>
+     * <code>repeated float floats = 2;</code>
      * @return The count of floats.
      */
     public int getFloatsCount() {
       return floats_.size();
     }
     /**
-     * <code>repeated float floats = 3;</code>
+     * <code>repeated float floats = 2;</code>
      * @param index The index of the element to return.
      * @return The floats at the given index.
      */
@@ -2461,10 +2245,10 @@ public final class Command {
     }
     private int floatsMemoizedSerializedSize = -1;
 
-    public static final int STRINGS_FIELD_NUMBER = 4;
+    public static final int STRINGS_FIELD_NUMBER = 3;
     private com.google.protobuf.LazyStringList strings_;
     /**
-     * <code>repeated string strings = 4;</code>
+     * <code>repeated string strings = 3;</code>
      * @return A list containing the strings.
      */
     public com.google.protobuf.ProtocolStringList
@@ -2472,14 +2256,14 @@ public final class Command {
       return strings_;
     }
     /**
-     * <code>repeated string strings = 4;</code>
+     * <code>repeated string strings = 3;</code>
      * @return The count of strings.
      */
     public int getStringsCount() {
       return strings_.size();
     }
     /**
-     * <code>repeated string strings = 4;</code>
+     * <code>repeated string strings = 3;</code>
      * @param index The index of the element to return.
      * @return The strings at the given index.
      */
@@ -2487,7 +2271,7 @@ public final class Command {
       return strings_.get(index);
     }
     /**
-     * <code>repeated string strings = 4;</code>
+     * <code>repeated string strings = 3;</code>
      * @param index The index of the value to return.
      * @return The bytes of the strings at the given index.
      */
@@ -2512,21 +2296,21 @@ public final class Command {
                         throws java.io.IOException {
       getSerializedSize();
       if (getIntsList().size() > 0) {
-        output.writeUInt32NoTag(18);
+        output.writeUInt32NoTag(10);
         output.writeUInt32NoTag(intsMemoizedSerializedSize);
       }
       for (int i = 0; i < ints_.size(); i++) {
         output.writeInt32NoTag(ints_.getInt(i));
       }
       if (getFloatsList().size() > 0) {
-        output.writeUInt32NoTag(26);
+        output.writeUInt32NoTag(18);
         output.writeUInt32NoTag(floatsMemoizedSerializedSize);
       }
       for (int i = 0; i < floats_.size(); i++) {
         output.writeFloatNoTag(floats_.getFloat(i));
       }
       for (int i = 0; i < strings_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, strings_.getRaw(i));
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, strings_.getRaw(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2894,13 +2678,13 @@ public final class Command {
               case 0:
                 done = true;
                 break;
-              case 16: {
+              case 8: {
                 int v = input.readInt32();
                 ensureIntsIsMutable();
                 ints_.addInt(v);
                 break;
-              } // case 16
-              case 18: {
+              } // case 8
+              case 10: {
                 int length = input.readRawVarint32();
                 int limit = input.pushLimit(length);
                 ensureIntsIsMutable();
@@ -2909,14 +2693,14 @@ public final class Command {
                 }
                 input.popLimit(limit);
                 break;
-              } // case 18
-              case 29: {
+              } // case 10
+              case 21: {
                 float v = input.readFloat();
                 ensureFloatsIsMutable();
                 floats_.addFloat(v);
                 break;
-              } // case 29
-              case 26: {
+              } // case 21
+              case 18: {
                 int length = input.readRawVarint32();
                 int limit = input.pushLimit(length);
                 ensureFloatsIsMutable();
@@ -2925,13 +2709,13 @@ public final class Command {
                 }
                 input.popLimit(limit);
                 break;
-              } // case 26
-              case 34: {
+              } // case 18
+              case 26: {
                 java.lang.String s = input.readStringRequireUtf8();
                 ensureStringsIsMutable();
                 strings_.add(s);
                 break;
-              } // case 34
+              } // case 26
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -2957,7 +2741,7 @@ public final class Command {
          }
       }
       /**
-       * <code>repeated int32 ints = 2;</code>
+       * <code>repeated int32 ints = 1;</code>
        * @return A list containing the ints.
        */
       public java.util.List<java.lang.Integer>
@@ -2966,14 +2750,14 @@ public final class Command {
                  java.util.Collections.unmodifiableList(ints_) : ints_;
       }
       /**
-       * <code>repeated int32 ints = 2;</code>
+       * <code>repeated int32 ints = 1;</code>
        * @return The count of ints.
        */
       public int getIntsCount() {
         return ints_.size();
       }
       /**
-       * <code>repeated int32 ints = 2;</code>
+       * <code>repeated int32 ints = 1;</code>
        * @param index The index of the element to return.
        * @return The ints at the given index.
        */
@@ -2981,7 +2765,7 @@ public final class Command {
         return ints_.getInt(index);
       }
       /**
-       * <code>repeated int32 ints = 2;</code>
+       * <code>repeated int32 ints = 1;</code>
        * @param index The index to set the value at.
        * @param value The ints to set.
        * @return This builder for chaining.
@@ -2994,7 +2778,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated int32 ints = 2;</code>
+       * <code>repeated int32 ints = 1;</code>
        * @param value The ints to add.
        * @return This builder for chaining.
        */
@@ -3005,7 +2789,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated int32 ints = 2;</code>
+       * <code>repeated int32 ints = 1;</code>
        * @param values The ints to add.
        * @return This builder for chaining.
        */
@@ -3018,7 +2802,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated int32 ints = 2;</code>
+       * <code>repeated int32 ints = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearInts() {
@@ -3036,7 +2820,7 @@ public final class Command {
          }
       }
       /**
-       * <code>repeated float floats = 3;</code>
+       * <code>repeated float floats = 2;</code>
        * @return A list containing the floats.
        */
       public java.util.List<java.lang.Float>
@@ -3045,14 +2829,14 @@ public final class Command {
                  java.util.Collections.unmodifiableList(floats_) : floats_;
       }
       /**
-       * <code>repeated float floats = 3;</code>
+       * <code>repeated float floats = 2;</code>
        * @return The count of floats.
        */
       public int getFloatsCount() {
         return floats_.size();
       }
       /**
-       * <code>repeated float floats = 3;</code>
+       * <code>repeated float floats = 2;</code>
        * @param index The index of the element to return.
        * @return The floats at the given index.
        */
@@ -3060,7 +2844,7 @@ public final class Command {
         return floats_.getFloat(index);
       }
       /**
-       * <code>repeated float floats = 3;</code>
+       * <code>repeated float floats = 2;</code>
        * @param index The index to set the value at.
        * @param value The floats to set.
        * @return This builder for chaining.
@@ -3073,7 +2857,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated float floats = 3;</code>
+       * <code>repeated float floats = 2;</code>
        * @param value The floats to add.
        * @return This builder for chaining.
        */
@@ -3084,7 +2868,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated float floats = 3;</code>
+       * <code>repeated float floats = 2;</code>
        * @param values The floats to add.
        * @return This builder for chaining.
        */
@@ -3097,7 +2881,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated float floats = 3;</code>
+       * <code>repeated float floats = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearFloats() {
@@ -3115,7 +2899,7 @@ public final class Command {
          }
       }
       /**
-       * <code>repeated string strings = 4;</code>
+       * <code>repeated string strings = 3;</code>
        * @return A list containing the strings.
        */
       public com.google.protobuf.ProtocolStringList
@@ -3123,14 +2907,14 @@ public final class Command {
         return strings_.getUnmodifiableView();
       }
       /**
-       * <code>repeated string strings = 4;</code>
+       * <code>repeated string strings = 3;</code>
        * @return The count of strings.
        */
       public int getStringsCount() {
         return strings_.size();
       }
       /**
-       * <code>repeated string strings = 4;</code>
+       * <code>repeated string strings = 3;</code>
        * @param index The index of the element to return.
        * @return The strings at the given index.
        */
@@ -3138,7 +2922,7 @@ public final class Command {
         return strings_.get(index);
       }
       /**
-       * <code>repeated string strings = 4;</code>
+       * <code>repeated string strings = 3;</code>
        * @param index The index of the value to return.
        * @return The bytes of the strings at the given index.
        */
@@ -3147,7 +2931,7 @@ public final class Command {
         return strings_.getByteString(index);
       }
       /**
-       * <code>repeated string strings = 4;</code>
+       * <code>repeated string strings = 3;</code>
        * @param index The index to set the value at.
        * @param value The strings to set.
        * @return This builder for chaining.
@@ -3163,7 +2947,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated string strings = 4;</code>
+       * <code>repeated string strings = 3;</code>
        * @param value The strings to add.
        * @return This builder for chaining.
        */
@@ -3178,7 +2962,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated string strings = 4;</code>
+       * <code>repeated string strings = 3;</code>
        * @param values The strings to add.
        * @return This builder for chaining.
        */
@@ -3191,7 +2975,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated string strings = 4;</code>
+       * <code>repeated string strings = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearStrings() {
@@ -3201,7 +2985,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated string strings = 4;</code>
+       * <code>repeated string strings = 3;</code>
        * @param value The bytes of the strings to add.
        * @return This builder for chaining.
        */
@@ -7296,90 +7080,79 @@ public final class Command {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.commander.NClipType current = 1;</code>
-     * @return The enum numeric value on the wire for current.
-     */
-    int getCurrentValue();
-    /**
-     * <code>.commander.NClipType current = 1;</code>
-     * @return The current.
-     */
-    commander.Command.NClipType getCurrent();
-
-    /**
-     * <code>uint32 priority = 2;</code>
+     * <code>int32 priority = 1;</code>
      * @return The priority.
      */
     int getPriority();
 
     /**
-     * <code>float x = 3;</code>
+     * <code>float x = 2;</code>
      * @return The x.
      */
     float getX();
 
     /**
-     * <code>float y = 4;</code>
+     * <code>float y = 3;</code>
      * @return The y.
      */
     float getY();
 
     /**
-     * <code>float width = 5;</code>
+     * <code>float width = 4;</code>
      * @return The width.
      */
     float getWidth();
 
     /**
-     * <code>float height = 6;</code>
+     * <code>float height = 5;</code>
      * @return The height.
      */
     float getHeight();
 
     /**
-     * <code>float scaleX = 7;</code>
+     * <code>float scaleX = 6;</code>
      * @return The scaleX.
      */
     float getScaleX();
 
     /**
-     * <code>float scaleY = 8;</code>
+     * <code>float scaleY = 7;</code>
      * @return The scaleY.
      */
     float getScaleY();
 
     /**
-     * <code>float anchorX = 9;</code>
+     * <code>float anchorX = 8;</code>
      * @return The anchorX.
      */
     float getAnchorX();
 
     /**
-     * <code>float anchorY = 10;</code>
+     * <code>float anchorY = 9;</code>
      * @return The anchorY.
      */
     float getAnchorY();
 
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     java.util.List<commander.Command.NClip> 
         getClipsList();
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     commander.Command.NClip getClips(int index);
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     int getClipsCount();
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     java.util.List<? extends commander.Command.NClipOrBuilder> 
         getClipsOrBuilderList();
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     commander.Command.NClipOrBuilder getClipsOrBuilder(
         int index);
@@ -7397,7 +7170,6 @@ public final class Command {
       super(builder);
     }
     private NVisual() {
-      current_ = 0;
       clips_ = java.util.Collections.emptyList();
     }
 
@@ -7426,29 +7198,10 @@ public final class Command {
               commander.Command.NVisual.class, commander.Command.NVisual.Builder.class);
     }
 
-    public static final int CURRENT_FIELD_NUMBER = 1;
-    private int current_;
-    /**
-     * <code>.commander.NClipType current = 1;</code>
-     * @return The enum numeric value on the wire for current.
-     */
-    @java.lang.Override public int getCurrentValue() {
-      return current_;
-    }
-    /**
-     * <code>.commander.NClipType current = 1;</code>
-     * @return The current.
-     */
-    @java.lang.Override public commander.Command.NClipType getCurrent() {
-      @SuppressWarnings("deprecation")
-      commander.Command.NClipType result = commander.Command.NClipType.valueOf(current_);
-      return result == null ? commander.Command.NClipType.UNRECOGNIZED : result;
-    }
-
-    public static final int PRIORITY_FIELD_NUMBER = 2;
+    public static final int PRIORITY_FIELD_NUMBER = 1;
     private int priority_;
     /**
-     * <code>uint32 priority = 2;</code>
+     * <code>int32 priority = 1;</code>
      * @return The priority.
      */
     @java.lang.Override
@@ -7456,10 +7209,10 @@ public final class Command {
       return priority_;
     }
 
-    public static final int X_FIELD_NUMBER = 3;
+    public static final int X_FIELD_NUMBER = 2;
     private float x_;
     /**
-     * <code>float x = 3;</code>
+     * <code>float x = 2;</code>
      * @return The x.
      */
     @java.lang.Override
@@ -7467,10 +7220,10 @@ public final class Command {
       return x_;
     }
 
-    public static final int Y_FIELD_NUMBER = 4;
+    public static final int Y_FIELD_NUMBER = 3;
     private float y_;
     /**
-     * <code>float y = 4;</code>
+     * <code>float y = 3;</code>
      * @return The y.
      */
     @java.lang.Override
@@ -7478,10 +7231,10 @@ public final class Command {
       return y_;
     }
 
-    public static final int WIDTH_FIELD_NUMBER = 5;
+    public static final int WIDTH_FIELD_NUMBER = 4;
     private float width_;
     /**
-     * <code>float width = 5;</code>
+     * <code>float width = 4;</code>
      * @return The width.
      */
     @java.lang.Override
@@ -7489,10 +7242,10 @@ public final class Command {
       return width_;
     }
 
-    public static final int HEIGHT_FIELD_NUMBER = 6;
+    public static final int HEIGHT_FIELD_NUMBER = 5;
     private float height_;
     /**
-     * <code>float height = 6;</code>
+     * <code>float height = 5;</code>
      * @return The height.
      */
     @java.lang.Override
@@ -7500,10 +7253,10 @@ public final class Command {
       return height_;
     }
 
-    public static final int SCALEX_FIELD_NUMBER = 7;
+    public static final int SCALEX_FIELD_NUMBER = 6;
     private float scaleX_;
     /**
-     * <code>float scaleX = 7;</code>
+     * <code>float scaleX = 6;</code>
      * @return The scaleX.
      */
     @java.lang.Override
@@ -7511,10 +7264,10 @@ public final class Command {
       return scaleX_;
     }
 
-    public static final int SCALEY_FIELD_NUMBER = 8;
+    public static final int SCALEY_FIELD_NUMBER = 7;
     private float scaleY_;
     /**
-     * <code>float scaleY = 8;</code>
+     * <code>float scaleY = 7;</code>
      * @return The scaleY.
      */
     @java.lang.Override
@@ -7522,10 +7275,10 @@ public final class Command {
       return scaleY_;
     }
 
-    public static final int ANCHORX_FIELD_NUMBER = 9;
+    public static final int ANCHORX_FIELD_NUMBER = 8;
     private float anchorX_;
     /**
-     * <code>float anchorX = 9;</code>
+     * <code>float anchorX = 8;</code>
      * @return The anchorX.
      */
     @java.lang.Override
@@ -7533,10 +7286,10 @@ public final class Command {
       return anchorX_;
     }
 
-    public static final int ANCHORY_FIELD_NUMBER = 10;
+    public static final int ANCHORY_FIELD_NUMBER = 9;
     private float anchorY_;
     /**
-     * <code>float anchorY = 10;</code>
+     * <code>float anchorY = 9;</code>
      * @return The anchorY.
      */
     @java.lang.Override
@@ -7544,17 +7297,17 @@ public final class Command {
       return anchorY_;
     }
 
-    public static final int CLIPS_FIELD_NUMBER = 11;
+    public static final int CLIPS_FIELD_NUMBER = 10;
     private java.util.List<commander.Command.NClip> clips_;
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     @java.lang.Override
     public java.util.List<commander.Command.NClip> getClipsList() {
       return clips_;
     }
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     @java.lang.Override
     public java.util.List<? extends commander.Command.NClipOrBuilder> 
@@ -7562,21 +7315,21 @@ public final class Command {
       return clips_;
     }
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     @java.lang.Override
     public int getClipsCount() {
       return clips_.size();
     }
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     @java.lang.Override
     public commander.Command.NClip getClips(int index) {
       return clips_.get(index);
     }
     /**
-     * <code>repeated .commander.NClip clips = 11;</code>
+     * <code>repeated .commander.NClip clips = 10;</code>
      */
     @java.lang.Override
     public commander.Command.NClipOrBuilder getClipsOrBuilder(
@@ -7598,38 +7351,35 @@ public final class Command {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (current_ != commander.Command.NClipType.idle.getNumber()) {
-        output.writeEnum(1, current_);
-      }
       if (priority_ != 0) {
-        output.writeUInt32(2, priority_);
+        output.writeInt32(1, priority_);
       }
       if (java.lang.Float.floatToRawIntBits(x_) != 0) {
-        output.writeFloat(3, x_);
+        output.writeFloat(2, x_);
       }
       if (java.lang.Float.floatToRawIntBits(y_) != 0) {
-        output.writeFloat(4, y_);
+        output.writeFloat(3, y_);
       }
       if (java.lang.Float.floatToRawIntBits(width_) != 0) {
-        output.writeFloat(5, width_);
+        output.writeFloat(4, width_);
       }
       if (java.lang.Float.floatToRawIntBits(height_) != 0) {
-        output.writeFloat(6, height_);
+        output.writeFloat(5, height_);
       }
       if (java.lang.Float.floatToRawIntBits(scaleX_) != 0) {
-        output.writeFloat(7, scaleX_);
+        output.writeFloat(6, scaleX_);
       }
       if (java.lang.Float.floatToRawIntBits(scaleY_) != 0) {
-        output.writeFloat(8, scaleY_);
+        output.writeFloat(7, scaleY_);
       }
       if (java.lang.Float.floatToRawIntBits(anchorX_) != 0) {
-        output.writeFloat(9, anchorX_);
+        output.writeFloat(8, anchorX_);
       }
       if (java.lang.Float.floatToRawIntBits(anchorY_) != 0) {
-        output.writeFloat(10, anchorY_);
+        output.writeFloat(9, anchorY_);
       }
       for (int i = 0; i < clips_.size(); i++) {
-        output.writeMessage(11, clips_.get(i));
+        output.writeMessage(10, clips_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -7640,49 +7390,45 @@ public final class Command {
       if (size != -1) return size;
 
       size = 0;
-      if (current_ != commander.Command.NClipType.idle.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, current_);
-      }
       if (priority_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, priority_);
+          .computeInt32Size(1, priority_);
       }
       if (java.lang.Float.floatToRawIntBits(x_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(3, x_);
+          .computeFloatSize(2, x_);
       }
       if (java.lang.Float.floatToRawIntBits(y_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(4, y_);
+          .computeFloatSize(3, y_);
       }
       if (java.lang.Float.floatToRawIntBits(width_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(5, width_);
+          .computeFloatSize(4, width_);
       }
       if (java.lang.Float.floatToRawIntBits(height_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(6, height_);
+          .computeFloatSize(5, height_);
       }
       if (java.lang.Float.floatToRawIntBits(scaleX_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(7, scaleX_);
+          .computeFloatSize(6, scaleX_);
       }
       if (java.lang.Float.floatToRawIntBits(scaleY_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(8, scaleY_);
+          .computeFloatSize(7, scaleY_);
       }
       if (java.lang.Float.floatToRawIntBits(anchorX_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(9, anchorX_);
+          .computeFloatSize(8, anchorX_);
       }
       if (java.lang.Float.floatToRawIntBits(anchorY_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(10, anchorY_);
+          .computeFloatSize(9, anchorY_);
       }
       for (int i = 0; i < clips_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, clips_.get(i));
+          .computeMessageSize(10, clips_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -7699,7 +7445,6 @@ public final class Command {
       }
       commander.Command.NVisual other = (commander.Command.NVisual) obj;
 
-      if (current_ != other.current_) return false;
       if (getPriority()
           != other.getPriority()) return false;
       if (java.lang.Float.floatToIntBits(getX())
@@ -7739,8 +7484,6 @@ public final class Command {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CURRENT_FIELD_NUMBER;
-      hash = (53 * hash) + current_;
       hash = (37 * hash) + PRIORITY_FIELD_NUMBER;
       hash = (53 * hash) + getPriority();
       hash = (37 * hash) + X_FIELD_NUMBER;
@@ -7899,8 +7642,6 @@ public final class Command {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        current_ = 0;
-
         priority_ = 0;
 
         x_ = 0F;
@@ -7953,7 +7694,6 @@ public final class Command {
       public commander.Command.NVisual buildPartial() {
         commander.Command.NVisual result = new commander.Command.NVisual(this);
         int from_bitField0_ = bitField0_;
-        result.current_ = current_;
         result.priority_ = priority_;
         result.x_ = x_;
         result.y_ = y_;
@@ -8020,9 +7760,6 @@ public final class Command {
 
       public Builder mergeFrom(commander.Command.NVisual other) {
         if (other == commander.Command.NVisual.getDefaultInstance()) return this;
-        if (other.current_ != 0) {
-          setCurrentValue(other.getCurrentValue());
-        }
         if (other.getPriority() != 0) {
           setPriority(other.getPriority());
         }
@@ -8103,56 +7840,51 @@ public final class Command {
                 done = true;
                 break;
               case 8: {
-                current_ = input.readEnum();
+                priority_ = input.readInt32();
 
                 break;
               } // case 8
-              case 16: {
-                priority_ = input.readUInt32();
+              case 21: {
+                x_ = input.readFloat();
 
                 break;
-              } // case 16
+              } // case 21
               case 29: {
-                x_ = input.readFloat();
+                y_ = input.readFloat();
 
                 break;
               } // case 29
               case 37: {
-                y_ = input.readFloat();
+                width_ = input.readFloat();
 
                 break;
               } // case 37
               case 45: {
-                width_ = input.readFloat();
+                height_ = input.readFloat();
 
                 break;
               } // case 45
               case 53: {
-                height_ = input.readFloat();
+                scaleX_ = input.readFloat();
 
                 break;
               } // case 53
               case 61: {
-                scaleX_ = input.readFloat();
+                scaleY_ = input.readFloat();
 
                 break;
               } // case 61
               case 69: {
-                scaleY_ = input.readFloat();
+                anchorX_ = input.readFloat();
 
                 break;
               } // case 69
               case 77: {
-                anchorX_ = input.readFloat();
-
-                break;
-              } // case 77
-              case 85: {
                 anchorY_ = input.readFloat();
 
                 break;
-              } // case 85
-              case 90: {
+              } // case 77
+              case 82: {
                 commander.Command.NClip m =
                     input.readMessage(
                         commander.Command.NClip.parser(),
@@ -8164,7 +7896,7 @@ public final class Command {
                   clipsBuilder_.addMessage(m);
                 }
                 break;
-              } // case 90
+              } // case 82
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -8182,63 +7914,9 @@ public final class Command {
       }
       private int bitField0_;
 
-      private int current_ = 0;
-      /**
-       * <code>.commander.NClipType current = 1;</code>
-       * @return The enum numeric value on the wire for current.
-       */
-      @java.lang.Override public int getCurrentValue() {
-        return current_;
-      }
-      /**
-       * <code>.commander.NClipType current = 1;</code>
-       * @param value The enum numeric value on the wire for current to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCurrentValue(int value) {
-        
-        current_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.NClipType current = 1;</code>
-       * @return The current.
-       */
-      @java.lang.Override
-      public commander.Command.NClipType getCurrent() {
-        @SuppressWarnings("deprecation")
-        commander.Command.NClipType result = commander.Command.NClipType.valueOf(current_);
-        return result == null ? commander.Command.NClipType.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.commander.NClipType current = 1;</code>
-       * @param value The current to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCurrent(commander.Command.NClipType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        current_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.commander.NClipType current = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCurrent() {
-        
-        current_ = 0;
-        onChanged();
-        return this;
-      }
-
       private int priority_ ;
       /**
-       * <code>uint32 priority = 2;</code>
+       * <code>int32 priority = 1;</code>
        * @return The priority.
        */
       @java.lang.Override
@@ -8246,7 +7924,7 @@ public final class Command {
         return priority_;
       }
       /**
-       * <code>uint32 priority = 2;</code>
+       * <code>int32 priority = 1;</code>
        * @param value The priority to set.
        * @return This builder for chaining.
        */
@@ -8257,7 +7935,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>uint32 priority = 2;</code>
+       * <code>int32 priority = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearPriority() {
@@ -8269,7 +7947,7 @@ public final class Command {
 
       private float x_ ;
       /**
-       * <code>float x = 3;</code>
+       * <code>float x = 2;</code>
        * @return The x.
        */
       @java.lang.Override
@@ -8277,7 +7955,7 @@ public final class Command {
         return x_;
       }
       /**
-       * <code>float x = 3;</code>
+       * <code>float x = 2;</code>
        * @param value The x to set.
        * @return This builder for chaining.
        */
@@ -8288,7 +7966,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float x = 3;</code>
+       * <code>float x = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearX() {
@@ -8300,7 +7978,7 @@ public final class Command {
 
       private float y_ ;
       /**
-       * <code>float y = 4;</code>
+       * <code>float y = 3;</code>
        * @return The y.
        */
       @java.lang.Override
@@ -8308,7 +7986,7 @@ public final class Command {
         return y_;
       }
       /**
-       * <code>float y = 4;</code>
+       * <code>float y = 3;</code>
        * @param value The y to set.
        * @return This builder for chaining.
        */
@@ -8319,7 +7997,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float y = 4;</code>
+       * <code>float y = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearY() {
@@ -8331,7 +8009,7 @@ public final class Command {
 
       private float width_ ;
       /**
-       * <code>float width = 5;</code>
+       * <code>float width = 4;</code>
        * @return The width.
        */
       @java.lang.Override
@@ -8339,7 +8017,7 @@ public final class Command {
         return width_;
       }
       /**
-       * <code>float width = 5;</code>
+       * <code>float width = 4;</code>
        * @param value The width to set.
        * @return This builder for chaining.
        */
@@ -8350,7 +8028,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float width = 5;</code>
+       * <code>float width = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearWidth() {
@@ -8362,7 +8040,7 @@ public final class Command {
 
       private float height_ ;
       /**
-       * <code>float height = 6;</code>
+       * <code>float height = 5;</code>
        * @return The height.
        */
       @java.lang.Override
@@ -8370,7 +8048,7 @@ public final class Command {
         return height_;
       }
       /**
-       * <code>float height = 6;</code>
+       * <code>float height = 5;</code>
        * @param value The height to set.
        * @return This builder for chaining.
        */
@@ -8381,7 +8059,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float height = 6;</code>
+       * <code>float height = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearHeight() {
@@ -8393,7 +8071,7 @@ public final class Command {
 
       private float scaleX_ ;
       /**
-       * <code>float scaleX = 7;</code>
+       * <code>float scaleX = 6;</code>
        * @return The scaleX.
        */
       @java.lang.Override
@@ -8401,7 +8079,7 @@ public final class Command {
         return scaleX_;
       }
       /**
-       * <code>float scaleX = 7;</code>
+       * <code>float scaleX = 6;</code>
        * @param value The scaleX to set.
        * @return This builder for chaining.
        */
@@ -8412,7 +8090,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float scaleX = 7;</code>
+       * <code>float scaleX = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearScaleX() {
@@ -8424,7 +8102,7 @@ public final class Command {
 
       private float scaleY_ ;
       /**
-       * <code>float scaleY = 8;</code>
+       * <code>float scaleY = 7;</code>
        * @return The scaleY.
        */
       @java.lang.Override
@@ -8432,7 +8110,7 @@ public final class Command {
         return scaleY_;
       }
       /**
-       * <code>float scaleY = 8;</code>
+       * <code>float scaleY = 7;</code>
        * @param value The scaleY to set.
        * @return This builder for chaining.
        */
@@ -8443,7 +8121,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float scaleY = 8;</code>
+       * <code>float scaleY = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearScaleY() {
@@ -8455,7 +8133,7 @@ public final class Command {
 
       private float anchorX_ ;
       /**
-       * <code>float anchorX = 9;</code>
+       * <code>float anchorX = 8;</code>
        * @return The anchorX.
        */
       @java.lang.Override
@@ -8463,7 +8141,7 @@ public final class Command {
         return anchorX_;
       }
       /**
-       * <code>float anchorX = 9;</code>
+       * <code>float anchorX = 8;</code>
        * @param value The anchorX to set.
        * @return This builder for chaining.
        */
@@ -8474,7 +8152,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float anchorX = 9;</code>
+       * <code>float anchorX = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearAnchorX() {
@@ -8486,7 +8164,7 @@ public final class Command {
 
       private float anchorY_ ;
       /**
-       * <code>float anchorY = 10;</code>
+       * <code>float anchorY = 9;</code>
        * @return The anchorY.
        */
       @java.lang.Override
@@ -8494,7 +8172,7 @@ public final class Command {
         return anchorY_;
       }
       /**
-       * <code>float anchorY = 10;</code>
+       * <code>float anchorY = 9;</code>
        * @param value The anchorY to set.
        * @return This builder for chaining.
        */
@@ -8505,7 +8183,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float anchorY = 10;</code>
+       * <code>float anchorY = 9;</code>
        * @return This builder for chaining.
        */
       public Builder clearAnchorY() {
@@ -8528,7 +8206,7 @@ public final class Command {
           commander.Command.NClip, commander.Command.NClip.Builder, commander.Command.NClipOrBuilder> clipsBuilder_;
 
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public java.util.List<commander.Command.NClip> getClipsList() {
         if (clipsBuilder_ == null) {
@@ -8538,7 +8216,7 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public int getClipsCount() {
         if (clipsBuilder_ == null) {
@@ -8548,7 +8226,7 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public commander.Command.NClip getClips(int index) {
         if (clipsBuilder_ == null) {
@@ -8558,7 +8236,7 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public Builder setClips(
           int index, commander.Command.NClip value) {
@@ -8575,7 +8253,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public Builder setClips(
           int index, commander.Command.NClip.Builder builderForValue) {
@@ -8589,7 +8267,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public Builder addClips(commander.Command.NClip value) {
         if (clipsBuilder_ == null) {
@@ -8605,7 +8283,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public Builder addClips(
           int index, commander.Command.NClip value) {
@@ -8622,7 +8300,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public Builder addClips(
           commander.Command.NClip.Builder builderForValue) {
@@ -8636,7 +8314,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public Builder addClips(
           int index, commander.Command.NClip.Builder builderForValue) {
@@ -8650,7 +8328,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public Builder addAllClips(
           java.lang.Iterable<? extends commander.Command.NClip> values) {
@@ -8665,7 +8343,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public Builder clearClips() {
         if (clipsBuilder_ == null) {
@@ -8678,7 +8356,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public Builder removeClips(int index) {
         if (clipsBuilder_ == null) {
@@ -8691,14 +8369,14 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public commander.Command.NClip.Builder getClipsBuilder(
           int index) {
         return getClipsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public commander.Command.NClipOrBuilder getClipsOrBuilder(
           int index) {
@@ -8708,7 +8386,7 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public java.util.List<? extends commander.Command.NClipOrBuilder> 
            getClipsOrBuilderList() {
@@ -8719,14 +8397,14 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public commander.Command.NClip.Builder addClipsBuilder() {
         return getClipsFieldBuilder().addBuilder(
             commander.Command.NClip.getDefaultInstance());
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public commander.Command.NClip.Builder addClipsBuilder(
           int index) {
@@ -8734,7 +8412,7 @@ public final class Command {
             index, commander.Command.NClip.getDefaultInstance());
       }
       /**
-       * <code>repeated .commander.NClip clips = 11;</code>
+       * <code>repeated .commander.NClip clips = 10;</code>
        */
       public java.util.List<commander.Command.NClip.Builder> 
            getClipsBuilderList() {
@@ -8823,16 +8501,16 @@ public final class Command {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string path = 1;</code>
-     * @return The path.
+     * <code>string data = 1;</code>
+     * @return The data.
      */
-    java.lang.String getPath();
+    java.lang.String getData();
     /**
-     * <code>string path = 1;</code>
-     * @return The bytes for path.
+     * <code>string data = 1;</code>
+     * @return The bytes for data.
      */
     com.google.protobuf.ByteString
-        getPathBytes();
+        getDataBytes();
 
     /**
      * <code>float x = 2;</code>
@@ -8859,44 +8537,38 @@ public final class Command {
     float getHeight();
 
     /**
-     * <code>repeated uint32 indices = 6;</code>
-     * @return A list containing the indices.
-     */
-    java.util.List<java.lang.Integer> getIndicesList();
-    /**
-     * <code>repeated uint32 indices = 6;</code>
-     * @return The count of indices.
-     */
-    int getIndicesCount();
-    /**
-     * <code>repeated uint32 indices = 6;</code>
-     * @param index The index of the element to return.
-     * @return The indices at the given index.
-     */
-    int getIndices(int index);
-
-    /**
-     * <code>float stepTime = 7;</code>
+     * <code>float stepTime = 6;</code>
      * @return The stepTime.
      */
     float getStepTime();
 
     /**
-     * <code>.commander.NClipType type = 8;</code>
+     * <code>.commander.NClipType type = 7;</code>
      * @return The enum numeric value on the wire for type.
      */
     int getTypeValue();
     /**
-     * <code>.commander.NClipType type = 8;</code>
+     * <code>.commander.NClipType type = 7;</code>
      * @return The type.
      */
     commander.Command.NClipType getType();
 
     /**
-     * <code>bool repeat = 9;</code>
-     * @return The repeat.
+     * <code>repeated uint32 indices = 8;</code>
+     * @return A list containing the indices.
      */
-    boolean getRepeat();
+    java.util.List<java.lang.Integer> getIndicesList();
+    /**
+     * <code>repeated uint32 indices = 8;</code>
+     * @return The count of indices.
+     */
+    int getIndicesCount();
+    /**
+     * <code>repeated uint32 indices = 8;</code>
+     * @param index The index of the element to return.
+     * @return The indices at the given index.
+     */
+    int getIndices(int index);
   }
   /**
    * Protobuf type {@code commander.NClip}
@@ -8911,9 +8583,9 @@ public final class Command {
       super(builder);
     }
     private NClip() {
-      path_ = "";
-      indices_ = emptyIntList();
+      data_ = "";
       type_ = 0;
+      indices_ = emptyIntList();
     }
 
     @java.lang.Override
@@ -8941,38 +8613,38 @@ public final class Command {
               commander.Command.NClip.class, commander.Command.NClip.Builder.class);
     }
 
-    public static final int PATH_FIELD_NUMBER = 1;
-    private volatile java.lang.Object path_;
+    public static final int DATA_FIELD_NUMBER = 1;
+    private volatile java.lang.Object data_;
     /**
-     * <code>string path = 1;</code>
-     * @return The path.
+     * <code>string data = 1;</code>
+     * @return The data.
      */
     @java.lang.Override
-    public java.lang.String getPath() {
-      java.lang.Object ref = path_;
+    public java.lang.String getData() {
+      java.lang.Object ref = data_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        path_ = s;
+        data_ = s;
         return s;
       }
     }
     /**
-     * <code>string path = 1;</code>
-     * @return The bytes for path.
+     * <code>string data = 1;</code>
+     * @return The bytes for data.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getPathBytes() {
-      java.lang.Object ref = path_;
+        getDataBytes() {
+      java.lang.Object ref = data_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        path_ = b;
+        data_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -9023,38 +8695,10 @@ public final class Command {
       return height_;
     }
 
-    public static final int INDICES_FIELD_NUMBER = 6;
-    private com.google.protobuf.Internal.IntList indices_;
-    /**
-     * <code>repeated uint32 indices = 6;</code>
-     * @return A list containing the indices.
-     */
-    @java.lang.Override
-    public java.util.List<java.lang.Integer>
-        getIndicesList() {
-      return indices_;
-    }
-    /**
-     * <code>repeated uint32 indices = 6;</code>
-     * @return The count of indices.
-     */
-    public int getIndicesCount() {
-      return indices_.size();
-    }
-    /**
-     * <code>repeated uint32 indices = 6;</code>
-     * @param index The index of the element to return.
-     * @return The indices at the given index.
-     */
-    public int getIndices(int index) {
-      return indices_.getInt(index);
-    }
-    private int indicesMemoizedSerializedSize = -1;
-
-    public static final int STEPTIME_FIELD_NUMBER = 7;
+    public static final int STEPTIME_FIELD_NUMBER = 6;
     private float stepTime_;
     /**
-     * <code>float stepTime = 7;</code>
+     * <code>float stepTime = 6;</code>
      * @return The stepTime.
      */
     @java.lang.Override
@@ -9062,17 +8706,17 @@ public final class Command {
       return stepTime_;
     }
 
-    public static final int TYPE_FIELD_NUMBER = 8;
+    public static final int TYPE_FIELD_NUMBER = 7;
     private int type_;
     /**
-     * <code>.commander.NClipType type = 8;</code>
+     * <code>.commander.NClipType type = 7;</code>
      * @return The enum numeric value on the wire for type.
      */
     @java.lang.Override public int getTypeValue() {
       return type_;
     }
     /**
-     * <code>.commander.NClipType type = 8;</code>
+     * <code>.commander.NClipType type = 7;</code>
      * @return The type.
      */
     @java.lang.Override public commander.Command.NClipType getType() {
@@ -9081,16 +8725,33 @@ public final class Command {
       return result == null ? commander.Command.NClipType.UNRECOGNIZED : result;
     }
 
-    public static final int REPEAT_FIELD_NUMBER = 9;
-    private boolean repeat_;
+    public static final int INDICES_FIELD_NUMBER = 8;
+    private com.google.protobuf.Internal.IntList indices_;
     /**
-     * <code>bool repeat = 9;</code>
-     * @return The repeat.
+     * <code>repeated uint32 indices = 8;</code>
+     * @return A list containing the indices.
      */
     @java.lang.Override
-    public boolean getRepeat() {
-      return repeat_;
+    public java.util.List<java.lang.Integer>
+        getIndicesList() {
+      return indices_;
     }
+    /**
+     * <code>repeated uint32 indices = 8;</code>
+     * @return The count of indices.
+     */
+    public int getIndicesCount() {
+      return indices_.size();
+    }
+    /**
+     * <code>repeated uint32 indices = 8;</code>
+     * @param index The index of the element to return.
+     * @return The indices at the given index.
+     */
+    public int getIndices(int index) {
+      return indices_.getInt(index);
+    }
+    private int indicesMemoizedSerializedSize = -1;
 
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
@@ -9107,8 +8768,8 @@ public final class Command {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, path_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(data_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, data_);
       }
       if (java.lang.Float.floatToRawIntBits(x_) != 0) {
         output.writeFloat(2, x_);
@@ -9122,21 +8783,18 @@ public final class Command {
       if (java.lang.Float.floatToRawIntBits(height_) != 0) {
         output.writeFloat(5, height_);
       }
+      if (java.lang.Float.floatToRawIntBits(stepTime_) != 0) {
+        output.writeFloat(6, stepTime_);
+      }
+      if (type_ != commander.Command.NClipType.loop.getNumber()) {
+        output.writeEnum(7, type_);
+      }
       if (getIndicesList().size() > 0) {
-        output.writeUInt32NoTag(50);
+        output.writeUInt32NoTag(66);
         output.writeUInt32NoTag(indicesMemoizedSerializedSize);
       }
       for (int i = 0; i < indices_.size(); i++) {
         output.writeUInt32NoTag(indices_.getInt(i));
-      }
-      if (java.lang.Float.floatToRawIntBits(stepTime_) != 0) {
-        output.writeFloat(7, stepTime_);
-      }
-      if (type_ != commander.Command.NClipType.idle.getNumber()) {
-        output.writeEnum(8, type_);
-      }
-      if (repeat_ != false) {
-        output.writeBool(9, repeat_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -9147,8 +8805,8 @@ public final class Command {
       if (size != -1) return size;
 
       size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, path_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(data_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, data_);
       }
       if (java.lang.Float.floatToRawIntBits(x_) != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -9166,6 +8824,14 @@ public final class Command {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(5, height_);
       }
+      if (java.lang.Float.floatToRawIntBits(stepTime_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(6, stepTime_);
+      }
+      if (type_ != commander.Command.NClipType.loop.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(7, type_);
+      }
       {
         int dataSize = 0;
         for (int i = 0; i < indices_.size(); i++) {
@@ -9179,18 +8845,6 @@ public final class Command {
               .computeInt32SizeNoTag(dataSize);
         }
         indicesMemoizedSerializedSize = dataSize;
-      }
-      if (java.lang.Float.floatToRawIntBits(stepTime_) != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(7, stepTime_);
-      }
-      if (type_ != commander.Command.NClipType.idle.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(8, type_);
-      }
-      if (repeat_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(9, repeat_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -9207,8 +8861,8 @@ public final class Command {
       }
       commander.Command.NClip other = (commander.Command.NClip) obj;
 
-      if (!getPath()
-          .equals(other.getPath())) return false;
+      if (!getData()
+          .equals(other.getData())) return false;
       if (java.lang.Float.floatToIntBits(getX())
           != java.lang.Float.floatToIntBits(
               other.getX())) return false;
@@ -9221,14 +8875,12 @@ public final class Command {
       if (java.lang.Float.floatToIntBits(getHeight())
           != java.lang.Float.floatToIntBits(
               other.getHeight())) return false;
-      if (!getIndicesList()
-          .equals(other.getIndicesList())) return false;
       if (java.lang.Float.floatToIntBits(getStepTime())
           != java.lang.Float.floatToIntBits(
               other.getStepTime())) return false;
       if (type_ != other.type_) return false;
-      if (getRepeat()
-          != other.getRepeat()) return false;
+      if (!getIndicesList()
+          .equals(other.getIndicesList())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -9240,8 +8892,8 @@ public final class Command {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + PATH_FIELD_NUMBER;
-      hash = (53 * hash) + getPath().hashCode();
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getData().hashCode();
       hash = (37 * hash) + X_FIELD_NUMBER;
       hash = (53 * hash) + java.lang.Float.floatToIntBits(
           getX());
@@ -9254,18 +8906,15 @@ public final class Command {
       hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
       hash = (53 * hash) + java.lang.Float.floatToIntBits(
           getHeight());
-      if (getIndicesCount() > 0) {
-        hash = (37 * hash) + INDICES_FIELD_NUMBER;
-        hash = (53 * hash) + getIndicesList().hashCode();
-      }
       hash = (37 * hash) + STEPTIME_FIELD_NUMBER;
       hash = (53 * hash) + java.lang.Float.floatToIntBits(
           getStepTime());
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + type_;
-      hash = (37 * hash) + REPEAT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getRepeat());
+      if (getIndicesCount() > 0) {
+        hash = (37 * hash) + INDICES_FIELD_NUMBER;
+        hash = (53 * hash) + getIndicesList().hashCode();
+      }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -9394,7 +9043,7 @@ public final class Command {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        path_ = "";
+        data_ = "";
 
         x_ = 0F;
 
@@ -9404,14 +9053,12 @@ public final class Command {
 
         height_ = 0F;
 
-        indices_ = emptyIntList();
-        bitField0_ = (bitField0_ & ~0x00000001);
         stepTime_ = 0F;
 
         type_ = 0;
 
-        repeat_ = false;
-
+        indices_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -9439,19 +9086,18 @@ public final class Command {
       public commander.Command.NClip buildPartial() {
         commander.Command.NClip result = new commander.Command.NClip(this);
         int from_bitField0_ = bitField0_;
-        result.path_ = path_;
+        result.data_ = data_;
         result.x_ = x_;
         result.y_ = y_;
         result.width_ = width_;
         result.height_ = height_;
+        result.stepTime_ = stepTime_;
+        result.type_ = type_;
         if (((bitField0_ & 0x00000001) != 0)) {
           indices_.makeImmutable();
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.indices_ = indices_;
-        result.stepTime_ = stepTime_;
-        result.type_ = type_;
-        result.repeat_ = repeat_;
         onBuilt();
         return result;
       }
@@ -9500,8 +9146,8 @@ public final class Command {
 
       public Builder mergeFrom(commander.Command.NClip other) {
         if (other == commander.Command.NClip.getDefaultInstance()) return this;
-        if (!other.getPath().isEmpty()) {
-          path_ = other.path_;
+        if (!other.getData().isEmpty()) {
+          data_ = other.data_;
           onChanged();
         }
         if (other.getX() != 0F) {
@@ -9516,6 +9162,12 @@ public final class Command {
         if (other.getHeight() != 0F) {
           setHeight(other.getHeight());
         }
+        if (other.getStepTime() != 0F) {
+          setStepTime(other.getStepTime());
+        }
+        if (other.type_ != 0) {
+          setTypeValue(other.getTypeValue());
+        }
         if (!other.indices_.isEmpty()) {
           if (indices_.isEmpty()) {
             indices_ = other.indices_;
@@ -9525,15 +9177,6 @@ public final class Command {
             indices_.addAll(other.indices_);
           }
           onChanged();
-        }
-        if (other.getStepTime() != 0F) {
-          setStepTime(other.getStepTime());
-        }
-        if (other.type_ != 0) {
-          setTypeValue(other.getTypeValue());
-        }
-        if (other.getRepeat() != false) {
-          setRepeat(other.getRepeat());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -9562,7 +9205,7 @@ public final class Command {
                 done = true;
                 break;
               case 10: {
-                path_ = input.readStringRequireUtf8();
+                data_ = input.readStringRequireUtf8();
 
                 break;
               } // case 10
@@ -9586,13 +9229,23 @@ public final class Command {
 
                 break;
               } // case 45
-              case 48: {
+              case 53: {
+                stepTime_ = input.readFloat();
+
+                break;
+              } // case 53
+              case 56: {
+                type_ = input.readEnum();
+
+                break;
+              } // case 56
+              case 64: {
                 int v = input.readUInt32();
                 ensureIndicesIsMutable();
                 indices_.addInt(v);
                 break;
-              } // case 48
-              case 50: {
+              } // case 64
+              case 66: {
                 int length = input.readRawVarint32();
                 int limit = input.pushLimit(length);
                 ensureIndicesIsMutable();
@@ -9601,22 +9254,7 @@ public final class Command {
                 }
                 input.popLimit(limit);
                 break;
-              } // case 50
-              case 61: {
-                stepTime_ = input.readFloat();
-
-                break;
-              } // case 61
-              case 64: {
-                type_ = input.readEnum();
-
-                break;
-              } // case 64
-              case 72: {
-                repeat_ = input.readBool();
-
-                break;
-              } // case 72
+              } // case 66
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -9634,78 +9272,78 @@ public final class Command {
       }
       private int bitField0_;
 
-      private java.lang.Object path_ = "";
+      private java.lang.Object data_ = "";
       /**
-       * <code>string path = 1;</code>
-       * @return The path.
+       * <code>string data = 1;</code>
+       * @return The data.
        */
-      public java.lang.String getPath() {
-        java.lang.Object ref = path_;
+      public java.lang.String getData() {
+        java.lang.Object ref = data_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          path_ = s;
+          data_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string path = 1;</code>
-       * @return The bytes for path.
+       * <code>string data = 1;</code>
+       * @return The bytes for data.
        */
       public com.google.protobuf.ByteString
-          getPathBytes() {
-        java.lang.Object ref = path_;
+          getDataBytes() {
+        java.lang.Object ref = data_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          path_ = b;
+          data_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string path = 1;</code>
-       * @param value The path to set.
+       * <code>string data = 1;</code>
+       * @param value The data to set.
        * @return This builder for chaining.
        */
-      public Builder setPath(
+      public Builder setData(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        path_ = value;
+        data_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string path = 1;</code>
+       * <code>string data = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearPath() {
+      public Builder clearData() {
         
-        path_ = getDefaultInstance().getPath();
+        data_ = getDefaultInstance().getData();
         onChanged();
         return this;
       }
       /**
-       * <code>string path = 1;</code>
-       * @param value The bytes for path to set.
+       * <code>string data = 1;</code>
+       * @param value The bytes for data to set.
        * @return This builder for chaining.
        */
-      public Builder setPathBytes(
+      public Builder setDataBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        path_ = value;
+        data_ = value;
         onChanged();
         return this;
       }
@@ -9834,88 +9472,9 @@ public final class Command {
         return this;
       }
 
-      private com.google.protobuf.Internal.IntList indices_ = emptyIntList();
-      private void ensureIndicesIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          indices_ = mutableCopy(indices_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-      /**
-       * <code>repeated uint32 indices = 6;</code>
-       * @return A list containing the indices.
-       */
-      public java.util.List<java.lang.Integer>
-          getIndicesList() {
-        return ((bitField0_ & 0x00000001) != 0) ?
-                 java.util.Collections.unmodifiableList(indices_) : indices_;
-      }
-      /**
-       * <code>repeated uint32 indices = 6;</code>
-       * @return The count of indices.
-       */
-      public int getIndicesCount() {
-        return indices_.size();
-      }
-      /**
-       * <code>repeated uint32 indices = 6;</code>
-       * @param index The index of the element to return.
-       * @return The indices at the given index.
-       */
-      public int getIndices(int index) {
-        return indices_.getInt(index);
-      }
-      /**
-       * <code>repeated uint32 indices = 6;</code>
-       * @param index The index to set the value at.
-       * @param value The indices to set.
-       * @return This builder for chaining.
-       */
-      public Builder setIndices(
-          int index, int value) {
-        ensureIndicesIsMutable();
-        indices_.setInt(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 indices = 6;</code>
-       * @param value The indices to add.
-       * @return This builder for chaining.
-       */
-      public Builder addIndices(int value) {
-        ensureIndicesIsMutable();
-        indices_.addInt(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 indices = 6;</code>
-       * @param values The indices to add.
-       * @return This builder for chaining.
-       */
-      public Builder addAllIndices(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureIndicesIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, indices_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 indices = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearIndices() {
-        indices_ = emptyIntList();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-
       private float stepTime_ ;
       /**
-       * <code>float stepTime = 7;</code>
+       * <code>float stepTime = 6;</code>
        * @return The stepTime.
        */
       @java.lang.Override
@@ -9923,7 +9482,7 @@ public final class Command {
         return stepTime_;
       }
       /**
-       * <code>float stepTime = 7;</code>
+       * <code>float stepTime = 6;</code>
        * @param value The stepTime to set.
        * @return This builder for chaining.
        */
@@ -9934,7 +9493,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float stepTime = 7;</code>
+       * <code>float stepTime = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearStepTime() {
@@ -9946,14 +9505,14 @@ public final class Command {
 
       private int type_ = 0;
       /**
-       * <code>.commander.NClipType type = 8;</code>
+       * <code>.commander.NClipType type = 7;</code>
        * @return The enum numeric value on the wire for type.
        */
       @java.lang.Override public int getTypeValue() {
         return type_;
       }
       /**
-       * <code>.commander.NClipType type = 8;</code>
+       * <code>.commander.NClipType type = 7;</code>
        * @param value The enum numeric value on the wire for type to set.
        * @return This builder for chaining.
        */
@@ -9964,7 +9523,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.commander.NClipType type = 8;</code>
+       * <code>.commander.NClipType type = 7;</code>
        * @return The type.
        */
       @java.lang.Override
@@ -9974,7 +9533,7 @@ public final class Command {
         return result == null ? commander.Command.NClipType.UNRECOGNIZED : result;
       }
       /**
-       * <code>.commander.NClipType type = 8;</code>
+       * <code>.commander.NClipType type = 7;</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
@@ -9988,7 +9547,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.commander.NClipType type = 8;</code>
+       * <code>.commander.NClipType type = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearType() {
@@ -9998,33 +9557,81 @@ public final class Command {
         return this;
       }
 
-      private boolean repeat_ ;
-      /**
-       * <code>bool repeat = 9;</code>
-       * @return The repeat.
-       */
-      @java.lang.Override
-      public boolean getRepeat() {
-        return repeat_;
+      private com.google.protobuf.Internal.IntList indices_ = emptyIntList();
+      private void ensureIndicesIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          indices_ = mutableCopy(indices_);
+          bitField0_ |= 0x00000001;
+         }
       }
       /**
-       * <code>bool repeat = 9;</code>
-       * @param value The repeat to set.
+       * <code>repeated uint32 indices = 8;</code>
+       * @return A list containing the indices.
+       */
+      public java.util.List<java.lang.Integer>
+          getIndicesList() {
+        return ((bitField0_ & 0x00000001) != 0) ?
+                 java.util.Collections.unmodifiableList(indices_) : indices_;
+      }
+      /**
+       * <code>repeated uint32 indices = 8;</code>
+       * @return The count of indices.
+       */
+      public int getIndicesCount() {
+        return indices_.size();
+      }
+      /**
+       * <code>repeated uint32 indices = 8;</code>
+       * @param index The index of the element to return.
+       * @return The indices at the given index.
+       */
+      public int getIndices(int index) {
+        return indices_.getInt(index);
+      }
+      /**
+       * <code>repeated uint32 indices = 8;</code>
+       * @param index The index to set the value at.
+       * @param value The indices to set.
        * @return This builder for chaining.
        */
-      public Builder setRepeat(boolean value) {
-        
-        repeat_ = value;
+      public Builder setIndices(
+          int index, int value) {
+        ensureIndicesIsMutable();
+        indices_.setInt(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>bool repeat = 9;</code>
+       * <code>repeated uint32 indices = 8;</code>
+       * @param value The indices to add.
        * @return This builder for chaining.
        */
-      public Builder clearRepeat() {
-        
-        repeat_ = false;
+      public Builder addIndices(int value) {
+        ensureIndicesIsMutable();
+        indices_.addInt(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 indices = 8;</code>
+       * @param values The indices to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllIndices(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureIndicesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, indices_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 indices = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIndices() {
+        indices_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -12012,8 +11619,8 @@ public final class Command {
       "\n\rcommand.proto\022\tcommander\"l\n\tQueryInfo\022" +
       "\013\n\003qid\030\001 \001(\r\022\n\n\002ax\030\002 \001(\002\022\n\n\002ay\030\003 \001(\002\022\n\n\002" +
       "bx\030\004 \001(\002\022\n\n\002by\030\005 \001(\002\022\013\n\003max\030\006 \001(\r\022\025\n\rtra" +
-      "ckableOnly\030\007 \001(\010\"7\n\006NEvent\022\014\n\004ints\030\002 \003(\005" +
-      "\022\016\n\006floats\030\003 \003(\002\022\017\n\007strings\030\004 \003(\t\"\215\003\n\nNS" +
+      "ckableOnly\030\007 \001(\010\"7\n\006NEvent\022\014\n\004ints\030\001 \003(\005" +
+      "\022\016\n\006floats\030\002 \003(\002\022\017\n\007strings\030\003 \003(\t\"\215\003\n\nNS" +
       "tageInfo\022\n\n\002sn\030\001 \001(\r\022\022\n\nbackground\030\002 \001(\t" +
       "\022\020\n\010gravityX\030\003 \001(\002\022\020\n\010gravityY\030\004 \001(\002\022\r\n\005" +
       "width\030\005 \001(\002\022\016\n\006height\030\006 \001(\002\022\r\n\005debug\030\007 \001" +
@@ -12029,53 +11636,45 @@ public final class Command {
       "Object\022\n\n\002sn\030\001 \001(\r\022\n\n\002id\030\002 \001(\005\022#\n\004body\030\003" +
       " \001(\0132\020.commander.NBodyH\000\210\001\001\022\'\n\006visual\030\004 " +
       "\001(\0132\022.commander.NVisualH\001\210\001\001\022\013\n\003tid\030\005 \001(" +
-      "\r\022\014\n\004info\030\006 \001(\tB\007\n\005_bodyB\t\n\007_visual\"\332\001\n\007" +
-      "NVisual\022%\n\007current\030\001 \001(\0162\024.commander.NCl" +
-      "ipType\022\020\n\010priority\030\002 \001(\r\022\t\n\001x\030\003 \001(\002\022\t\n\001y" +
-      "\030\004 \001(\002\022\r\n\005width\030\005 \001(\002\022\016\n\006height\030\006 \001(\002\022\016\n" +
-      "\006scaleX\030\007 \001(\002\022\016\n\006scaleY\030\010 \001(\002\022\017\n\007anchorX" +
-      "\030\t \001(\002\022\017\n\007anchorY\030\n \001(\002\022\037\n\005clips\030\013 \003(\0132\020" +
-      ".commander.NClip\"\241\001\n\005NClip\022\014\n\004path\030\001 \001(\t" +
-      "\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\r\n\005width\030\004 \001(\002\022\016\n" +
-      "\006height\030\005 \001(\002\022\017\n\007indices\030\006 \003(\r\022\020\n\010stepTi" +
-      "me\030\007 \001(\002\022\"\n\004type\030\010 \001(\0162\024.commander.NClip" +
-      "Type\022\016\n\006repeat\030\t \001(\010\"\356\002\n\005NBody\022!\n\004type\030\001" +
-      " \001(\0162\023.commander.BodyType\022#\n\005shape\030\002 \001(\016" +
-      "2\024.commander.BodyShape\022\t\n\001x\030\003 \001(\002\022\t\n\001y\030\004" +
-      " \001(\002\022\r\n\005width\030\005 \001(\002\022\016\n\006height\030\006 \001(\002\022\023\n\013r" +
-      "estitution\030\007 \001(\002\022\020\n\010friction\030\010 \001(\002\022\017\n\007de" +
-      "nsity\030\t \001(\002\022\r\n\005angle\030\n \001(\002\022\020\n\010isSensor\030\013" +
-      " \001(\010\022\024\n\014categoryBits\030\014 \001(\r\022\020\n\010maskBits\030\r" +
-      " \001(\r\022\025\n\rfixedRotation\030\016 \001(\010\022\021\n\ttrackable" +
-      "\030\017 \001(\010\022\025\n\rcontactReport\030\020 \001(\010\022\016\n\006floats\030" +
-      "\021 \003(\002\022\026\n\016passableBottom\030\022 \001(\010*\302\001\n\004Head\022\007" +
-      "\n\003cmd\020\000\022\013\n\005stage\020\200\376\003\022\013\n\005query\020\204\376\003\022\014\n\006obj" +
-      "ect\020\206\376\003\022\r\n\007contact\020\360\341\003\022\013\n\005event\020\361\341\003\022\t\n\003k" +
-      "ey\020\362\341\003\022\t\n\003ack\020\363\341\003\022\021\n\013directional\020\364\341\003\022\014\n\006" +
-      "button\020\365\341\003\022\t\n\003tap\020\366\341\003\022\021\n\013queryresult\020\367\341\003" +
-      "\022\013\n\005error\020\370\341\003\022\013\n\005relay\020\371\341\003*V\n\tBodyShape\022" +
-      "\r\n\trectangle\020\000\022\t\n\005actor\020\001\022\n\n\006circle\020\002\022\014\n" +
-      "\010triangle\020\003\022\010\n\004edge\020\004\022\013\n\007polygon\020\005*>\n\010Bo" +
-      "dyType\022\016\n\nstaticBody\020\000\022\021\n\rkinematicBody\020" +
-      "\001\022\017\n\013dynamicBody\020\002*\254\001\n\027JoystickMoveDirec" +
-      "tional\022\013\n\007MOVE_UP\020\000\022\020\n\014MOVE_UP_LEFT\020\001\022\021\n" +
-      "\rMOVE_UP_RIGHT\020\002\022\016\n\nMOVE_RIGHT\020\003\022\r\n\tMOVE" +
-      "_DOWN\020\004\022\023\n\017MOVE_DOWN_RIGHT\020\005\022\022\n\016MOVE_DOW" +
-      "N_LEFT\020\006\022\r\n\tMOVE_LEFT\020\007\022\010\n\004IDLE\020\010*I\n\013Tou" +
-      "chMotion\022\010\n\004NONE\020\000\022\010\n\004DOWN\020\001\022\010\n\004MOVE\020\002\022\006" +
-      "\n\002UP\020\004\022\013\n\007DOWN_UP\020\005\022\007\n\003ALL\020\007*S\n\014TouchInp" +
-      "utId\022\021\n\rjoystickInput\020\000\022\020\n\014button1Input\020" +
-      "\001\022\020\n\014button2Input\020\002\022\014\n\010tapInput\020\003*G\n\024Joy" +
-      "stickDirectionals\022\010\n\004none\020\000\022\007\n\003all\020\001\022\016\n\n" +
-      "horizontal\020\002\022\014\n\010vertical\020\003*\252\002\n\tNClipType" +
-      "\022\010\n\004idle\020\000\022\007\n\003run\020\001\022\010\n\004jump\020\002\022\007\n\003hit\020\003\022\010" +
-      "\n\004fall\020\004\022\014\n\010wallJump\020\005\022\016\n\ndoubleJump\020\006\022\013" +
-      "\n\007hitSide\020\007\022\n\n\006hitTop\020\010\022\007\n\003off\020\t\022\006\n\002on\020\n" +
-      "\022\t\n\005blink\020\013\022\013\n\007hitLeft\020\014\022\014\n\010hitRight\020\r\022\r" +
-      "\n\thitBottom\020\016\022\014\n\010noChange\020\017\022\t\n\005tiles\020\020\022\007" +
-      "\n\003svg\020\021\022\006\n\002t0\020\022\022\006\n\002t1\020\023\022\006\n\002t2\020\024\022\006\n\002t3\020\025\022" +
-      "\006\n\002t4\020\026\022\006\n\002t5\020\027\022\006\n\002t6\020\030\022\006\n\002t7\020\031\022\006\n\002t8\020\032\022" +
-      "\006\n\002t9\020\033b\006proto3"
+      "\r\022\014\n\004info\030\006 \001(\tB\007\n\005_bodyB\t\n\007_visual\"\263\001\n\007" +
+      "NVisual\022\020\n\010priority\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n\001" +
+      "y\030\003 \001(\002\022\r\n\005width\030\004 \001(\002\022\016\n\006height\030\005 \001(\002\022\016" +
+      "\n\006scaleX\030\006 \001(\002\022\016\n\006scaleY\030\007 \001(\002\022\017\n\007anchor" +
+      "X\030\010 \001(\002\022\017\n\007anchorY\030\t \001(\002\022\037\n\005clips\030\n \003(\0132" +
+      "\020.commander.NClip\"\221\001\n\005NClip\022\014\n\004data\030\001 \001(" +
+      "\t\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\r\n\005width\030\004 \001(\002\022\016" +
+      "\n\006height\030\005 \001(\002\022\020\n\010stepTime\030\006 \001(\002\022\"\n\004type" +
+      "\030\007 \001(\0162\024.commander.NClipType\022\017\n\007indices\030" +
+      "\010 \003(\r\"\356\002\n\005NBody\022!\n\004type\030\001 \001(\0162\023.commande" +
+      "r.BodyType\022#\n\005shape\030\002 \001(\0162\024.commander.Bo" +
+      "dyShape\022\t\n\001x\030\003 \001(\002\022\t\n\001y\030\004 \001(\002\022\r\n\005width\030\005" +
+      " \001(\002\022\016\n\006height\030\006 \001(\002\022\023\n\013restitution\030\007 \001(" +
+      "\002\022\020\n\010friction\030\010 \001(\002\022\017\n\007density\030\t \001(\002\022\r\n\005" +
+      "angle\030\n \001(\002\022\020\n\010isSensor\030\013 \001(\010\022\024\n\014categor" +
+      "yBits\030\014 \001(\r\022\020\n\010maskBits\030\r \001(\r\022\025\n\rfixedRo" +
+      "tation\030\016 \001(\010\022\021\n\ttrackable\030\017 \001(\010\022\025\n\rconta" +
+      "ctReport\030\020 \001(\010\022\016\n\006floats\030\021 \003(\002\022\026\n\016passab" +
+      "leBottom\030\022 \001(\010*\302\001\n\004Head\022\007\n\003cmd\020\000\022\013\n\005stag" +
+      "e\020\200\376\003\022\013\n\005query\020\204\376\003\022\014\n\006object\020\206\376\003\022\r\n\007cont" +
+      "act\020\360\341\003\022\013\n\005event\020\361\341\003\022\t\n\003key\020\362\341\003\022\t\n\003ack\020\363" +
+      "\341\003\022\021\n\013directional\020\364\341\003\022\014\n\006button\020\365\341\003\022\t\n\003t" +
+      "ap\020\366\341\003\022\021\n\013queryresult\020\367\341\003\022\013\n\005error\020\370\341\003\022\013" +
+      "\n\005relay\020\371\341\003*V\n\tBodyShape\022\r\n\trectangle\020\000\022" +
+      "\t\n\005actor\020\001\022\n\n\006circle\020\002\022\014\n\010triangle\020\003\022\010\n\004" +
+      "edge\020\004\022\013\n\007polygon\020\005*>\n\010BodyType\022\016\n\nstati" +
+      "cBody\020\000\022\021\n\rkinematicBody\020\001\022\017\n\013dynamicBod" +
+      "y\020\002*\254\001\n\027JoystickMoveDirectional\022\013\n\007MOVE_" +
+      "UP\020\000\022\020\n\014MOVE_UP_LEFT\020\001\022\021\n\rMOVE_UP_RIGHT\020" +
+      "\002\022\016\n\nMOVE_RIGHT\020\003\022\r\n\tMOVE_DOWN\020\004\022\023\n\017MOVE" +
+      "_DOWN_RIGHT\020\005\022\022\n\016MOVE_DOWN_LEFT\020\006\022\r\n\tMOV" +
+      "E_LEFT\020\007\022\010\n\004IDLE\020\010*I\n\013TouchMotion\022\010\n\004NON" +
+      "E\020\000\022\010\n\004DOWN\020\001\022\010\n\004MOVE\020\002\022\006\n\002UP\020\004\022\013\n\007DOWN_" +
+      "UP\020\005\022\007\n\003ALL\020\007*S\n\014TouchInputId\022\021\n\rjoystic" +
+      "kInput\020\000\022\020\n\014button1Input\020\001\022\020\n\014button2Inp" +
+      "ut\020\002\022\014\n\010tapInput\020\003*G\n\024JoystickDirectiona" +
+      "ls\022\010\n\004none\020\000\022\007\n\003all\020\001\022\016\n\nhorizontal\020\002\022\014\n" +
+      "\010vertical\020\003*3\n\tNClipType\022\010\n\004loop\020\000\022\010\n\004on" +
+      "ce\020\001\022\t\n\005tiles\020\002\022\007\n\003svg\020\003b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -12116,13 +11715,13 @@ public final class Command {
     internal_static_commander_NVisual_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_commander_NVisual_descriptor,
-        new java.lang.String[] { "Current", "Priority", "X", "Y", "Width", "Height", "ScaleX", "ScaleY", "AnchorX", "AnchorY", "Clips", });
+        new java.lang.String[] { "Priority", "X", "Y", "Width", "Height", "ScaleX", "ScaleY", "AnchorX", "AnchorY", "Clips", });
     internal_static_commander_NClip_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_commander_NClip_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_commander_NClip_descriptor,
-        new java.lang.String[] { "Path", "X", "Y", "Width", "Height", "Indices", "StepTime", "Type", "Repeat", });
+        new java.lang.String[] { "Data", "X", "Y", "Width", "Height", "StepTime", "Type", "Indices", });
     internal_static_commander_NBody_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_commander_NBody_fieldAccessorTable = new

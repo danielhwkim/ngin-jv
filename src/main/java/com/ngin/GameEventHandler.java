@@ -9,6 +9,17 @@ import java.lang.Math;
 
 import commander.Command.*;
 
+class HeroAction {
+    static final int NOCHANGE = -1;
+    static final int IDLE=0;
+    static final int RUN=1;
+    static final int JUMP=2;
+    static final int HIT=3;
+    static final int FALL=4;
+    static final int WALLJUMP=5;
+    static final int DOUBLEJUMP=6;
+}
+
 public class GameEventHandler extends EventHandler {
     Nx nx;       
     boolean keyDownLeft = false;
@@ -26,16 +37,16 @@ public class GameEventHandler extends EventHandler {
     }
 
     @Override
-    public void contactHandler(ContactInfo contact) throws IOException, InterruptedException {
+    public void onContact(ContactInfo contact) throws IOException, InterruptedException {
         if (contact.info1.equals("hero")) {
             if (contact.info2.equals("floor") || contact.info2.equals("bar")) {
                 if (!contact.isEnded) {
                     if (contact.y < 0) {
                         if (heroContacts.isEmpty()) {
                             if (keyDownLeft || keyDownRight) {
-                                nx.setClipType(contact.id1, NClipType.run, facingLeft);
+                                nx.setClipIndex(contact.id1, HeroAction.RUN, facingLeft);
                             } else {
-                                nx.setClipType(contact.id1, NClipType.idle, facingLeft);
+                                nx.setClipIndex(contact.id1, HeroAction.IDLE, facingLeft);
                             }
                             heroJumpCount = 0;
                         }
@@ -48,7 +59,7 @@ public class GameEventHandler extends EventHandler {
                 }
             } else if (contact.info2.equals("fruit")) {
                 if (!contact.isEnded) {
-                    nx.setClipType(contact.id2, NClipType.hit, facingLeft);
+                    nx.setClipIndex(contact.id2, 1, facingLeft);
                 }
             } else if (contact.info2.equals("box")) {
                 if (!contact.isEnded) {
@@ -58,14 +69,14 @@ public class GameEventHandler extends EventHandler {
                     if (math.abs(contact.y) > math.abs(contact.x)):
                     obj = self.objs[contact.id2]
                     obj.count += 1
-                    self.nx.set_clip_type(contact.id2, NClipType.hit, self.facingLeft)
+                    self.nx.set_clip_type(contact.id2, HeroAction.HIT, self.facingLeft)
                   if (contact.y < 0):
                     self.hero_jump_count = 0
                     self.nx.lineary(contact.id1, -20)*/
                 }                
             } else if (contact.info2.equals("Trampoline")) {
                 if (!contact.isEnded) {
-                    nx.setClipType(contact.id2, NClipType.hit, facingLeft);
+                    nx.setClipIndex(contact.id2, 1, facingLeft);
                     nx.lineary(contact.id1, -30);
                     heroJumpCount = 0;
                 }                
@@ -74,24 +85,24 @@ public class GameEventHandler extends EventHandler {
     }    
     
     @Override
-    public void eventHandler(EventInfo event) throws IOException {
+    public void onEvent(EventInfo event) throws IOException {
         if (!event.completed) return;
 
         switch (event.info) {
         case "Trampoline":
-            nx.setClipType(event.id, NClipType.idle);
+            nx.setClipIndex(event.id, HeroAction.IDLE);
             break;
         case "fruit":
             nx.remove(event.id);
             break;
         case "hero":
-            nx.setClipType(event.id, NClipType.jump, facingLeft);
+            nx.setClipIndex(event.id, HeroAction.JUMP, facingLeft);
             break;
         }
     }
 
     @Override
-    public void keyHandler(KeyInfo c) throws IOException, InterruptedException {
+    public void onKey(KeyInfo c) throws IOException, InterruptedException {
         if (!c.isPressed) {
             switch (c.name) {
             case "Arrow Left":
@@ -100,16 +111,16 @@ public class GameEventHandler extends EventHandler {
                     facingLeft = false;
                     nx.constx(heroId, 7);
                     if (!heroContacts.isEmpty()) {
-                        nx.setClipType(heroId, NClipType.run, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.RUN, facingLeft);
                     } else {
-                        nx.setClipType(heroId, NClipType.noChange, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.NOCHANGE, facingLeft);
                     }
                 } else {
                     nx.constx(heroId, 0);
                     if (!heroContacts.isEmpty()) {
-                        nx.setClipType(heroId, NClipType.idle, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.IDLE, facingLeft);
                     } else {
-                        nx.setClipType(heroId, NClipType.noChange, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.NOCHANGE, facingLeft);
                     }
                 } 
             break;					
@@ -119,16 +130,16 @@ public class GameEventHandler extends EventHandler {
                     facingLeft = true;
                     nx.constx(heroId, -7);
                     if (!heroContacts.isEmpty()) {
-                        nx.setClipType(heroId, NClipType.run, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.RUN, facingLeft);
                     } else {
-                        nx.setClipType(heroId, NClipType.noChange, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.NOCHANGE, facingLeft);
                     }
                 } else {
                     nx.constx(heroId, 0);
                     if (!heroContacts.isEmpty()) {
-                        nx.setClipType(heroId, NClipType.idle, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.IDLE, facingLeft);
                     } else {
-                        nx.setClipType(heroId, NClipType.noChange, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.NOCHANGE, facingLeft);
                     }
                 }             
             break;
@@ -141,12 +152,12 @@ public class GameEventHandler extends EventHandler {
                     facingLeft = true;
                     nx.constx(heroId, -7);
                     if (!heroContacts.isEmpty()) {
-                        nx.setClipType(heroId, NClipType.run, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.RUN, facingLeft);
                     } else {
-                        nx.setClipType(heroId, NClipType.noChange, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.NOCHANGE, facingLeft);
                     }
                 } else {
-                    nx.setClipType(heroId, NClipType.noChange, facingLeft);
+                    nx.setClipIndex(heroId, HeroAction.NOCHANGE, facingLeft);
                 }
                 break;					
             case "Arrow Right":
@@ -155,22 +166,22 @@ public class GameEventHandler extends EventHandler {
                     facingLeft = false;
                     nx.constx(heroId, 7);
                     if (!heroContacts.isEmpty()) {
-                        nx.setClipType(heroId, NClipType.run, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.RUN, facingLeft);
                     } else {
-                        nx.setClipType(heroId, NClipType.noChange, facingLeft);
+                        nx.setClipIndex(heroId, HeroAction.NOCHANGE, facingLeft);
                     }
                 } else {
-                    nx.setClipType(heroId, NClipType.noChange, facingLeft);
+                    nx.setClipIndex(heroId, HeroAction.NOCHANGE, facingLeft);
                 }
                 break;	
             case "Arrow Up":	
                 if (!heroContacts.isEmpty()) {
                     nx.lineary(heroId, -20);
-                    nx.setClipType(heroId, NClipType.jump, facingLeft);
+                    nx.setClipIndex(heroId, HeroAction.JUMP, facingLeft);
                     heroJumpCount = 0;
                 } else if (heroJumpCount < 1) {
                     nx.lineary(heroId, -20);
-                    nx.setClipType(heroId, NClipType.doubleJump, facingLeft);
+                    nx.setClipIndex(heroId, HeroAction.DOUBLEJUMP, facingLeft);
                     heroJumpCount = 1;
                 }
                 break;
@@ -179,7 +190,7 @@ public class GameEventHandler extends EventHandler {
     }
 
     @Override
-    public void directionalHandler(DirectionalInfo info) throws IOException {
+    public void onDirectional(DirectionalInfo info) throws IOException {
         switch(info.directional) {
             case JoystickMoveDirectional.MOVE_LEFT_VALUE:
               break;
@@ -191,7 +202,7 @@ public class GameEventHandler extends EventHandler {
     }
 
     @Override
-    public void buttonHandler(ButtonInfo info) throws IOException, InterruptedException {
+    public void onButton(ButtonInfo info) throws IOException, InterruptedException {
     }
 
 }

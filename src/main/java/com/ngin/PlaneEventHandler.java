@@ -19,7 +19,7 @@ public class PlaneEventHandler extends EventHandler {
     }
 
     @Override
-    public void contactHandler(ContactInfo contact) throws IOException, InterruptedException {
+    public void onContact(ContactInfo contact) throws IOException, InterruptedException {
         if (contact.info2.equals("missile")) {
             nx.remove(contact.id2);
 
@@ -38,7 +38,7 @@ public class PlaneEventHandler extends EventHandler {
     }    
     
     @Override
-    public void eventHandler(EventInfo event) throws IOException {
+    public void onEvent(EventInfo event) throws IOException {
         if (event.info.equals("missile")) {
             nx.remove(event.id);
         }
@@ -73,7 +73,7 @@ public class PlaneEventHandler extends EventHandler {
 
         NObject.Builder obj = nx.objBuilder(newId, "missile");
 
-        NBody.Builder p = nx.bodyBuilder(BodyShape.rectangle,(float)(info.x + 2*Math.sin(info.angle)), (float)(info.y - 2*Math.cos(info.angle)));
+        NBody.Builder p = nx.bodyBuilder(BodyShape.rectangle,(float)(info.x -0.5 + 2*Math.sin(info.angle)), (float)(info.y -0.5 - 2*Math.cos(info.angle)));
         p.setAngle(info.angle);
         obj.setBody(p);
 
@@ -94,7 +94,7 @@ public class PlaneEventHandler extends EventHandler {
     }
 
     @Override
-    public void keyHandler(KeyInfo c) throws IOException, InterruptedException {
+    public void onKey(KeyInfo c) throws IOException, InterruptedException {
         if (!c.isPressed) {
             switch (c.name) {
             case "Arrow Left":
@@ -132,7 +132,7 @@ public class PlaneEventHandler extends EventHandler {
     }
 
     @Override
-    public void directionalHandler(DirectionalInfo info) throws IOException {
+    public void onDirectional(DirectionalInfo info) throws IOException {
         switch(info.directional) {
             case JoystickMoveDirectional.MOVE_LEFT_VALUE:
               goLeft();
@@ -147,7 +147,7 @@ public class PlaneEventHandler extends EventHandler {
     }
 
     @Override
-    public void buttonHandler(ButtonInfo info) throws IOException, InterruptedException {
+    public void onButton(ButtonInfo info) throws IOException, InterruptedException {
         missile();
     }
 

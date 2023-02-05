@@ -62,7 +62,7 @@ public class Nx extends Ngin {
         c.setGravityY(0);
         c.setWidth(width);
         c.setHeight(height);
-        c.setDebug(true);
+        c.setDebug(false);
         c.setJoystickDirectionals(JoystickDirectionals.none);
         c.setJoystickPrecision(3);
         c.setButton1(TouchMotion.DOWN);
@@ -70,11 +70,10 @@ public class Nx extends Ngin {
         return c;
     }
 
-    public NObject.Builder tilesBuilder(String path, float tileWidth, float tileHeight, float width, float height, Iterable<Integer> data) {
+    public NObject.Builder tilesBuilder(String data, float tileWidth, float tileHeight, float width, float height, Iterable<Integer> indices) {
         NObject.Builder c = NObject.newBuilder();
         c.setTid(0);
         NVisual.Builder v = c.getVisualBuilder();
-        v.setCurrent(NClipType.tiles);
         v.setPriority(0);
         v.setX(0);
         v.setY(0);
@@ -85,12 +84,11 @@ public class Nx extends Ngin {
         v.setAnchorX(0);
         v.setAnchorY(0);
         NClip.Builder a = NClip.newBuilder();
-        a.addAllIndices(data);
-        a.setPath(path);
+        a.addAllIndices(indices);
+        a.setData(data);
         a.setStepTime(0.5f);
         a.setWidth(tileWidth);
         a.setHeight(tileHeight);
-        a.setRepeat(false);
         a.setType(NClipType.tiles);
         v.addClips(a);
         return c;
@@ -128,7 +126,6 @@ public class Nx extends Ngin {
 
     public NVisual.Builder visualBuilder(NClip.Builder[] builders) {
         NVisual.Builder v = NVisual.newBuilder();
-        v.setCurrent(NClipType.idle);
         v.setPriority(0);
         v.setX(0);
         v.setY(0);
@@ -146,7 +143,6 @@ public class Nx extends Ngin {
 
     public NVisual.Builder visualBuilder(Iterable<NClip> values) {
         NVisual.Builder v = NVisual.newBuilder();
-        v.setCurrent(NClipType.idle);
         v.setPriority(0);
         v.setX(0);
         v.setY(0);
@@ -164,23 +160,21 @@ public class Nx extends Ngin {
         return v;
     }    
 
-    public NClip.Builder clipBuilder(String path, float width, float height, Iterable<Integer> indices, NClipType type, boolean repeat) {
+    public NClip.Builder clipBuilder(String data, float width, float height, Iterable<Integer> indices, NClipType type, float stepTime) {
         NClip.Builder a = NClip.newBuilder();
         a.addAllIndices(indices);
-        a.setPath(path);
-        a.setStepTime(0.5f);
+        a.setData(data);
+        a.setStepTime(stepTime);
         a.setX(0f);
         a.setY(0f);
         a.setWidth(width);
         a.setHeight(height);
-        a.setRepeat(false);
         a.setType(type);
-        a.setRepeat(repeat);
         return a;
     }
 
     public NClip.Builder clipBuilder(String path, float width, float height, Iterable<Integer> indices) {
-        return clipBuilder(path, width, height, indices, NClipType.idle, true);
+        return clipBuilder(path, width, height, indices, NClipType.loop, 0.05f);
     }
 
     public void mainLoop(EventHandler handler) throws IOException, InterruptedException {
@@ -220,17 +214,17 @@ public class Nx extends Ngin {
         return new NObjectInfo(action.event);
     }
 
-    public void setClipType(int id, NClipType type, boolean isFlipHorizonal) throws IOException {
+    public void setClipIndex(int id, int index, boolean isFlipHorizonal) throws IOException {
         Cmd.Builder c = Cmd.newBuilder();
-        c.addStrings("clipType");
+        c.addStrings("clipIndex");
         c.addInts(id);
-        c.addInts(isFlipHorizonal? 1:0);
-        c.addInts(type.getNumber());                
+        c.addInts(index);
+        c.addInts(isFlipHorizonal? 1:0);        
         sendCmd(c);
     }
 
-    public void setClipType(int id, NClipType type) throws IOException {
-        setClipType(id, type, false);
+    public void setClipIndex(int id, int index) throws IOException {
+        setClipIndex(id, index, false);
     }
     
     public NEvent linearTo(int id, float x, float y, float speed) throws IOException, InterruptedException {
