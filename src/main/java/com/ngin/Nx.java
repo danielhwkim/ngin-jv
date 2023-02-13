@@ -55,6 +55,26 @@ public class Nx extends Ngin {
         send(Head.object, builder.build().toByteArray());
     }
 
+    public void sendTransform(Transform transform, int id, float time, String type) throws IOException {
+        Cmd.Builder c = transform.builder(id, time, type, false);
+        sendCmd(c);
+    }
+    
+    public void sendTransformWait(Transform transform, int id, float time, String type) throws IOException, InterruptedException {
+        Cmd.Builder c = transform.builder(id, time, type, true);
+        sendCmdWait(c);
+    }  
+
+    public void sendTransform(Transform transform, int id, float time) throws IOException {
+        Cmd.Builder c = transform.builder(id, time, "easeInOut", false);
+        sendCmd(c);
+    }
+    
+    public void sendTransformWait(Transform transform, int id, float time) throws IOException, InterruptedException {
+        Cmd.Builder c = transform.builder(id, time, "easeInOut", true);
+        sendCmdWait(c);
+    }      
+
     public NStageInfo.Builder stageBuilder(float width, float height) {
         NStageInfo.Builder c = NStageInfo.newBuilder();
         c.setBackground("Blue");
