@@ -23,19 +23,12 @@ import commander.Command.NObject.Builder;
 public class Match3 {
     Nx nx;
 
-    List<String> fruits = Arrays.asList("Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi");
+    String[] fruits = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
 
     void addFruit(int id, String name, float x, float y) throws IOException {
-        Builder o = nx.objBuilder(id, "fruit");
-        
-        NClip.Builder[] cs = new NClip.Builder[1];
-        cs[0] = nx.clipBuilder("Items/Fruits/" + name + ".png", 32f, 32f, new ArrayList<Integer>());
-        cs[0].setStepTime(0.05f);
-        NVisual.Builder v = nx.visualBuilder(cs);
-        v.setX(0.5f + x);
-        v.setY(0.5f + y);
-        o.setVisual(v);
-        nx.sendObj(o);   
+        NClip.Builder[] cs = {nx.clipBuilder("Items/Fruits/" + name + ".png", 32f, 32f, 0.05f)};
+        NVisual.Builder v = nx.visualBuilder(cs, 0.5f + x, 0.5f + y);
+        nx.sendObj(nx.objBuilder(id, "fruit").setVisual(v));   
     }
     
     
@@ -47,24 +40,23 @@ public class Match3 {
             float height = 10;
 
             NStageInfo.Builder builder = nx.stageBuilder(width, height);
-            builder.setBackground("");
             builder.setTap(TouchMotion.ALL);
             //builder.setJoystickDirectionals(JoystickDirectionals.horizontal);
             //builder.setDebug(false);
             nx.sendStageWait(builder);
-            int size = fruits.size();
+
             Random rand = new Random();
 
             int[][] table = new int[(int)height][(int)width];
-            addFruit(100, fruits.get(5), 1, 1);
-            Transform t = new Transform();
-            nx.sendTransformWait(t.setTranslating(4,7).setScaling(3, 3).setRotating((float)Math.PI*2), 100, 1);
+            //addFruit(100, fruits[5], 1, 1);
+            //Transform t = new Transform();
+            //nx.sendTransformWait(t.setTranslating(4,7).setScaling(3, 3).setRotating((float)Math.PI*2), 100, 1);
 
-            /* for (int y = 0; y<height; y++) {
+            for (int y = 0; y<height; y++) {
                 for (int x =0; x<width; x++) {
-                    int index = rand.nextInt(size);
+                    int index = rand.nextInt(fruits.length);
                     table[y][x] = index;
-                    addFruit(y*10+x, fruits.get(index), x, y);
+                    addFruit(y*10+x, fruits[index], x, y);
                 }
             }
 
@@ -72,7 +64,7 @@ public class Match3 {
                 for (int x =0; x<width; x++) {
                     System.out.println(table[y][x]);
                 }
-            }  */
+            }
 
           
             

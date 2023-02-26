@@ -13,11 +13,11 @@ public class Answer {
             for (int j=0; j<12; j++) {
                 for (int i=0; i<12; i++) {
                     if (i<j) {
-                        nc.relay(Arrays.asList("input"), Arrays.asList(i, j), Floats.asList());
+                        nc.relay(Arrays.asList("input"), Arrays.asList(i, j), null);
                     }
                 }
             }
-            nc.relay(Arrays.asList("submit"), Ints.asList(), Floats.asList());
+            nc.relay(Arrays.asList("submit"), null, null);
         }
         catch( Exception e )    
         {

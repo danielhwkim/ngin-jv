@@ -72,7 +72,7 @@ public class Ngin {
     public RemoteAction sendCmdWait(Cmd.Builder builder) throws IOException, InterruptedException {
         RemoteAction action = receiver.addRemoteAction();
         builder.setSn(action.sn);
-        System.out.println(String.format("sendCmdWait(%d)", action.sn));
+        //System.out.println(String.format("sendCmdWait(%d)", action.sn));
         send(Head.cmd, builder.build().toByteArray());
         action.lock();
         return action;

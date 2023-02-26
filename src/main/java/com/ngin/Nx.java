@@ -27,13 +27,12 @@ public class Nx extends Ngin {
         super();
     }
 
-    public RemoteAction sendStageWait(NStageInfo.Builder builder) throws IOException, InterruptedException  {
+    public void sendStageWait(NStageInfo.Builder builder) throws IOException, InterruptedException  {
         RemoteAction action = receiver.addRemoteAction();
         builder.setSn(action.sn);
         System.out.println(String.format("sendStageWait(%d)", action.sn));
         send(Head.stage, builder.build().toByteArray());
         action.lock();
-        return action;
     }
 
     public void sendStage(NStageInfo.Builder builder) throws IOException  {
@@ -77,7 +76,7 @@ public class Nx extends Ngin {
 
     public NStageInfo.Builder stageBuilder(float width, float height) {
         NStageInfo.Builder c = NStageInfo.newBuilder();
-        c.setBackground("Blue");
+        c.setBackground("");
         c.setGravityX(0);
         c.setGravityY(0);
         c.setWidth(width);
@@ -143,12 +142,12 @@ public class Nx extends Ngin {
         p.setShape(shape);
         return p;
     }
-
-    public NVisual.Builder visualBuilder(NClip.Builder[] builders) {
+    
+    public NVisual.Builder visualBuilder(NClip.Builder[] builders, float x, float y) {
         NVisual.Builder v = NVisual.newBuilder();
         v.setPriority(0);
-        v.setX(0);
-        v.setY(0);
+        v.setX(x);
+        v.setY(y);
         v.setWidth(1);
         v.setHeight(1);
         v.setScaleX(1);
@@ -161,11 +160,15 @@ public class Nx extends Ngin {
         return v;
     }
 
-    public NVisual.Builder visualBuilder(Iterable<NClip> values) {
+    public NVisual.Builder visualBuilder(NClip.Builder[] builders) {
+        return visualBuilder(builders, 0, 0);
+    }
+
+    public NVisual.Builder visualBuilder(Iterable<NClip> values, float x, float y) {
         NVisual.Builder v = NVisual.newBuilder();
         v.setPriority(0);
-        v.setX(0);
-        v.setY(0);
+        v.setX(x);
+        v.setY(y);
         v.setWidth(1);
         v.setHeight(1);
         v.setScaleX(1);
@@ -173,16 +176,18 @@ public class Nx extends Ngin {
         v.setAnchorX(0.5f);
         v.setAnchorY(0.5f);
         v.addAllClips(values);
-        /*
-        for (int i=0; i<builders.length; i++) {
-            v.addClips(builders[i]);
-        }*/
         return v;
+    }
+
+    public NVisual.Builder visualBuilder(Iterable<NClip> builders) {
+        return visualBuilder(builders, 0, 0);
     }    
 
     public NClip.Builder clipBuilder(String data, float width, float height, Iterable<Integer> indices, NClipType type, float stepTime) {
         NClip.Builder a = NClip.newBuilder();
-        a.addAllIndices(indices);
+        if (indices != null) {
+            a.addAllIndices(indices);
+        }
         a.setData(data);
         a.setStepTime(stepTime);
         a.setX(0f);
@@ -196,6 +201,15 @@ public class Nx extends Ngin {
     public NClip.Builder clipBuilder(String path, float width, float height, Iterable<Integer> indices) {
         return clipBuilder(path, width, height, indices, NClipType.loop, 0.05f);
     }
+
+    public NClip.Builder clipBuilder(String path, float width, float height) {
+        return clipBuilder(path, width, height, null, NClipType.loop, 0.05f);
+    }
+
+    public NClip.Builder clipBuilder(String path, float width, float height, float stepTime) {
+        return clipBuilder(path, width, height, null, NClipType.loop, stepTime);
+    }    
+
 
     public void mainLoop(EventHandler handler) throws IOException, InterruptedException {
         while (!handler.completed) {
@@ -247,7 +261,7 @@ public class Nx extends Ngin {
         setClipIndex(id, index, false);
     }
     
-    public NEvent linearTo(int id, float x, float y, float speed) throws IOException, InterruptedException {
+    public NObjectInfo linearTo(int id, float x, float y, float speed) throws IOException, InterruptedException {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("linearTo");
         c.addInts(id);
@@ -255,7 +269,7 @@ public class Nx extends Ngin {
         c.addFloats(y);
         c.addFloats(speed);
         RemoteAction action = sendCmdWait(c);
-        return action.event;        
+        return new NObjectInfo(action.event);
     }
 
     public void forward(int id, float angle, float speed) throws IOException {

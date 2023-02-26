@@ -8,8 +8,8 @@ public class Match3EventHandler extends EventHandler {
     float x_old;
     float y_old;
     int[][] table;
-    List<String> fruits;
-    Match3EventHandler(Nx n, int[][] t, List<String> f) {
+    String[] fruits;
+    Match3EventHandler(Nx n, int[][] t, String[] f) {
         nx = n;
         table = t;
         fruits = f;
@@ -26,7 +26,7 @@ public class Match3EventHandler extends EventHandler {
             int x = (int)Math.floor(info.x);
             int y = (int)Math.floor(info.y);
             int oid = y*10 + x;
-            System.out.println(fruits.get(table[y][x]));
+            System.out.println(fruits[table[y][x]]);
             //nx.remove(y*10 + x);
             //nx.linearTo(oid, x, y+1, 5);
 
