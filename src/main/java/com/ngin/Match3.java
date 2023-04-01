@@ -41,8 +41,6 @@ public class Match3 {
 
             NStageInfo.Builder builder = nx.stageBuilder(width, height);
             builder.setTap(TouchMotion.ALL);
-            //builder.setJoystickDirectionals(JoystickDirectionals.horizontal);
-            //builder.setDebug(false);
             nx.sendStageWait(builder);
 
             Random rand = new Random();
@@ -69,7 +67,7 @@ public class Match3 {
           
             
 
-            nx.mainLoop(new Match3EventHandler(nx, table, fruits));
+            nx.runEventLoop(new Match3EventHandler(nx, table, fruits));
         }
         catch( Exception e )
         {

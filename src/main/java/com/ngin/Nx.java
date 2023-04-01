@@ -211,7 +211,7 @@ public class Nx extends Ngin {
     }    
 
 
-    public void mainLoop(EventHandler handler) throws IOException, InterruptedException {
+    public void runEventLoop(EventHandler handler) throws IOException, InterruptedException {
         while (!handler.completed) {
             handler.handle(queue.take());
         }

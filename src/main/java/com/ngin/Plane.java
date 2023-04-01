@@ -86,7 +86,7 @@ public class Plane {
             nx.forward(200, 0, 5);
             nx.angular(200, 1);
 
-            nx.mainLoop(new PlaneEventHandler(nx));
+            nx.runEventLoop(new PlaneEventHandler(nx));
         }
         catch( Exception e )
         {
