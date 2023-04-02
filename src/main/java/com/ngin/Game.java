@@ -195,7 +195,7 @@ public class Game {
                 }
             }
 
-            nx.eventLoop(new GameEventHandler(nx));
+            nx.runEventLoop(new GameEventHandler(nx));
         }
         catch( Exception e )
         {
