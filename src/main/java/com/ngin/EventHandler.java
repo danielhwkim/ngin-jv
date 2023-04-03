@@ -49,7 +49,7 @@ public class EventHandler {
     public void onEvent(EventInfo info) throws IOException {
         unexpected(info.toString());
     }
-    public void onTap(TapInfo info) throws IOException {
+    public void onTap(TapInfo info) throws IOException, InterruptedException {
         unexpected(info.toString());
     }    
     public void onDirectional(DirectionalInfo info) throws IOException {

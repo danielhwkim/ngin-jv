@@ -11,6 +11,8 @@ public class Transform {
     float sy;
     boolean rotating = false;
     float a;
+    boolean opacity = false;
+    float o;
 
     public Transform setTranslating(float x, float y) {
         this.tx = x;
@@ -30,6 +32,12 @@ public class Transform {
         this.a = a;
         this.rotating = true;
         return this;
+    }
+
+    public Transform setOpacity(float o) {
+      this.o = o;
+      this.opacity = true;
+      return this;
     }
 
     Cmd.Builder builder(int id, float time, String type, boolean needAck) {
@@ -63,6 +71,14 @@ public class Transform {
         if (this.rotating) {
           c.addInts(1);
           c.addFloats(this.a);
+        } else {
+          c.addInts(0);
+          c.addFloats(0);
+        }
+
+        if (this.opacity) {
+          c.addInts(1);
+          c.addFloats(this.o);
         } else {
           c.addInts(0);
           c.addFloats(0);

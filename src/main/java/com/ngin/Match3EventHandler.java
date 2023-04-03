@@ -7,8 +7,7 @@ import commander.Command.TouchMotion;
 
 public class Match3EventHandler extends EventHandler {
     Nx nx;
-    float x;
-    float y;
+    int id;
     int[][] table;
     String[] fruits;
     Match3EventHandler(Nx n, int[][] t, String[] f) {
@@ -18,14 +17,15 @@ public class Match3EventHandler extends EventHandler {
     }
 
     @Override
-    public void onTap(TapInfo info) throws IOException {
+    public void onTap(TapInfo info) throws IOException, InterruptedException {
         if (info.event == TouchMotion.DOWN_VALUE) {
-            x = info.x;
-            y = info.y;
             int xn = (int)Math.floor(info.x);
             int yn = (int)Math.floor(info.y);
+            id = yn*10+xn;
 
             System.out.println(fruits[table[yn][xn]]);
+        } else if (info.event == TouchMotion.MOVE_VALUE) { 
+            nx.sendTransform(new Transform().setTranslating(info.x, info.y), id, 0);
         }
     }
     
