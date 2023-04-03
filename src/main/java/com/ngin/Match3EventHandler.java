@@ -7,7 +7,8 @@ import commander.Command.TouchMotion;
 
 public class Match3EventHandler extends EventHandler {
     Nx nx;
-    float x, y;
+    float x;
+    float y;
     int[][] table;
     String[] fruits;
     Match3EventHandler(Nx n, int[][] t, String[] f) {
