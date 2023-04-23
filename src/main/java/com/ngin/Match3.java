@@ -32,7 +32,7 @@ public class Match3 extends EventHandler {
     Item[][] items;
 
     Item itemOrigin;
-    Vec2 posOrigin;    
+    Vec2 posOrigin;
 
     final String[] fruits = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
 
@@ -53,6 +53,7 @@ public class Match3 extends EventHandler {
     class Vec2 {
         float x;
         float y;
+
         Vec2(float f0, float f1) {
             x = f0;
             y = f1;
@@ -61,20 +62,78 @@ public class Match3 extends EventHandler {
         int xFloored() {
             return (int)Math.floor(x);
         }
+
         int yFloored() {
             return (int)Math.floor(y);
-        }        
+        }
+
+        double distanceSquared(float x2, float y2) {
+            double dx = x2 - x;
+            double dy = y2 - y;
+            return dx*dx + dy*dy;
+        }
+    }
+
+    enum MoveType {
+        IDLE,
+        USER,
+        AUTO
+    }
+
+    MoveType moveType = MoveType.IDLE;
+
+    void move(int x, int y, int dx, int dy) throws IOException {
+        int x2 = x + dx;
+        int y2 = y + dy;
+        float time = 0.3f;
+
+        if (x2 >= 0 && x2 < width && y2 >= 0 && y2 < height) {
+            Item itemOther = items[x2][y2];
+            nx.sendTransform(new Transform().setTranslating(x + 0.5f, y + 0.5f), itemOther.id, time);
+            nx.sendTransform(new Transform().setTranslating(x2 + 0.5f, y2 + 0.5f), itemOrigin.id, time);
+            items[x2][y2] = itemOrigin;
+            items[x][y] = itemOther;
+        } else {
+            nx.sendTransform(new Transform().setTranslating(x + 0.5f, y + 0.5f), itemOrigin.id, time);
+        }
     }
 
     @Override
     public void onTap(TapInfo info) throws IOException, InterruptedException {
-        if (info.event == TouchMotion.DOWN_VALUE) {
+        if (info.event == TouchMotion.DOWN_VALUE && moveType == MoveType.IDLE) {
+            moveType = MoveType.USER;
             posOrigin = new Vec2(info.x, info.y);
             itemOrigin = items[posOrigin.xFloored()][posOrigin.yFloored()];
-        } else if (info.event == TouchMotion.MOVE_VALUE) { 
-            nx.sendTransform(new Transform().setTranslating(info.x, info.y), itemOrigin.id, 0);
+        } else if (info.event == TouchMotion.MOVE_VALUE && moveType == MoveType.USER) {
+            double dx = info.x - posOrigin.x;
+            double dy = info.y - posOrigin.y;
+            double dx2 = dx*dx;
+            double dy2 = dy*dy;
+
+            if (dx2 + dy2 < 0.5*0.5) {
+                nx.sendTransform(new Transform().setTranslating(info.x, info.y), itemOrigin.id, 0);
+            } else {
+                moveType = MoveType.AUTO;
+
+                if (dx2 > dy2) {
+                    if (dx>0) {
+                        move(posOrigin.xFloored(), posOrigin.yFloored(), 1, 0);
+                    } else {
+                        move(posOrigin.xFloored(), posOrigin.yFloored(), -1, 0);                        
+                    }
+                } else {
+                    if (dy>0) {
+                        move(posOrigin.xFloored(), posOrigin.yFloored(), 0, 1);                        
+                    } else {
+                        move(posOrigin.xFloored(), posOrigin.yFloored(), 0, -1);                        
+                    }                    
+                }
+            }
         } else {
-            nx.sendTransform(new Transform().setTranslating(posOrigin.xFloored() + 0.5f, posOrigin.yFloored() + 0.5f), itemOrigin.id, 0);            
+            if (moveType == MoveType.USER) {
+                nx.sendTransform(new Transform().setTranslating(posOrigin.xFloored() + 0.5f, posOrigin.yFloored() + 0.5f), itemOrigin.id, 0); 
+            }
+            moveType = MoveType.IDLE;           
         }
     }
     
