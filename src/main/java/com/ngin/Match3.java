@@ -19,8 +19,12 @@ import commander.Command.NBody;
 import commander.Command.NVisual;
 import commander.Command.TouchMotion;
 import commander.Command.NObject.Builder;
+import java.io.IOException;
+import java.util.List;
 
-public class Match3 {
+import commander.Command.TouchMotion;
+
+public class Match3 extends EventHandler {
     Nx nx;
 
     String[] fruits = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
@@ -30,7 +34,40 @@ public class Match3 {
         NVisual.Builder v = nx.visualBuilder(cs, 0.5f + x, 0.5f + y);
         nx.sendObj(nx.objBuilder(id, "fruit").setVisual(v));   
     }
-    
+
+    int id;
+    Vec2 ori;
+    int[][] table;
+
+    class Vec2 {
+        float x;
+        float y;
+        Vec2(float f0, float f1) {
+            x = f0;
+            y = f1;
+        }
+
+        int xFloored() {
+            return (int)Math.floor(x);
+        }
+        int yFloored() {
+            return (int)Math.floor(y);
+        }        
+    }
+
+    @Override
+    public void onTap(TapInfo info) throws IOException, InterruptedException {
+        if (info.event == TouchMotion.DOWN_VALUE) {
+            ori = new Vec2(info.x, info.y);
+            id = ori.yFloored()*10+ori.xFloored();
+
+            //System.out.println(fruits[table[y][x]]);
+        } else if (info.event == TouchMotion.MOVE_VALUE) { 
+            nx.sendTransform(new Transform().setTranslating(info.x, info.y), id, 0);
+        } else {
+            nx.sendTransform(new Transform().setTranslating(ori.xFloored() + 0.5f, ori.yFloored() + 0.5f), id, 0);            
+        }
+    }
     
     public void run() {
         try
@@ -45,10 +82,7 @@ public class Match3 {
 
             Random rand = new Random();
 
-            int[][] table = new int[(int)height][(int)width];
-            //addFruit(100, fruits[5], 1, 1);
-            //Transform t = new Transform();
-            //nx.sendTransformWait(t.setTranslating(4,7).setScaling(3, 3).setRotating((float)Math.PI*2), 100, 1);
+            table = new int[(int)height][(int)width];
 
             for (int y = 0; y<height; y++) {
                 for (int x =0; x<width; x++) {
@@ -64,14 +98,11 @@ public class Match3 {
                 }
             }
 
-          
-            
-
-            nx.runEventLoop(new Match3EventHandler(nx, table, fruits));
+            nx.runEventLoop(this);
         }
         catch( Exception e )
         {
             e.printStackTrace();
         }
-    }
+    }    
 }
