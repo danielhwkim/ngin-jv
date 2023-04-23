@@ -27,7 +27,14 @@ import commander.Command.TouchMotion;
 public class Match3 extends EventHandler {
     Nx nx;
 
-    String[] fruits = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
+    float width = 5;
+    float height = 10;    
+    Item[][] items;
+
+    Item itemOrigin;
+    Vec2 posOrigin;    
+
+    final String[] fruits = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
 
     void addFruit(int id, String name, float x, float y) throws IOException {
         NClip.Builder[] cs = {nx.clipBuilder("Items/Fruits/" + name + ".png", 32f, 32f, 0.05f)};
@@ -35,10 +42,14 @@ public class Match3 extends EventHandler {
         nx.sendObj(nx.objBuilder(id, "fruit").setVisual(v));   
     }
 
-    int id;
-    Vec2 ori;
-    int[][] table;
-
+    class Item {
+        int fruit;
+        int id;
+        Item(int fruitId, int objId) {
+            fruit = fruitId;
+            id = objId;
+        }
+    }
     class Vec2 {
         float x;
         float y;
@@ -58,14 +69,12 @@ public class Match3 extends EventHandler {
     @Override
     public void onTap(TapInfo info) throws IOException, InterruptedException {
         if (info.event == TouchMotion.DOWN_VALUE) {
-            ori = new Vec2(info.x, info.y);
-            id = ori.yFloored()*10+ori.xFloored();
-
-            //System.out.println(fruits[table[y][x]]);
+            posOrigin = new Vec2(info.x, info.y);
+            itemOrigin = items[posOrigin.xFloored()][posOrigin.yFloored()];
         } else if (info.event == TouchMotion.MOVE_VALUE) { 
-            nx.sendTransform(new Transform().setTranslating(info.x, info.y), id, 0);
+            nx.sendTransform(new Transform().setTranslating(info.x, info.y), itemOrigin.id, 0);
         } else {
-            nx.sendTransform(new Transform().setTranslating(ori.xFloored() + 0.5f, ori.yFloored() + 0.5f), id, 0);            
+            nx.sendTransform(new Transform().setTranslating(posOrigin.xFloored() + 0.5f, posOrigin.yFloored() + 0.5f), itemOrigin.id, 0);            
         }
     }
     
@@ -73,8 +82,7 @@ public class Match3 extends EventHandler {
         try
         {
             nx = new Nx();
-            float width = 5;
-            float height = 10;
+
 
             NStageInfo.Builder builder = nx.stageBuilder(width, height);
             builder.setTap(TouchMotion.ALL);
@@ -82,19 +90,15 @@ public class Match3 extends EventHandler {
 
             Random rand = new Random();
 
-            table = new int[(int)height][(int)width];
+            items = new Item[(int)width][(int)height];
 
-            for (int y = 0; y<height; y++) {
-                for (int x =0; x<width; x++) {
-                    int index = rand.nextInt(fruits.length);
-                    table[y][x] = index;
-                    addFruit(y*10+x, fruits[index], x, y);
-                }
-            }
-
-            for (int y = 0; y<height; y++) {
-                for (int x =0; x<width; x++) {
-                    System.out.println(table[y][x]);
+            
+            for (int x =0; x<width; x++) {
+                for (int y = 0; y<height; y++) {
+                    int fruit = rand.nextInt(fruits.length);
+                    int id = x*100 + y;
+                    items[x][y] = new Item(fruit, id);
+                    addFruit(id, fruits[fruit], x, y);
                 }
             }
 
