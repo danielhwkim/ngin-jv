@@ -18,6 +18,8 @@ import java.util.EventListener;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import com.ngin.Transform.AckType;
+
 import commander.*;
 import commander.Command.*;
 
@@ -55,24 +57,34 @@ public class Nx extends Ngin {
     }
 
     public void sendTransform(Transform transform, int id, float time, String type) throws IOException {
-        Cmd.Builder c = transform.builder(id, time, type, false);
+        Cmd.Builder c = transform.builder(id, time, type, AckType.NONE);
         sendCmd(c);
     }
     
     public void sendTransformWait(Transform transform, int id, float time, String type) throws IOException, InterruptedException {
-        Cmd.Builder c = transform.builder(id, time, type, true);
+        Cmd.Builder c = transform.builder(id, time, type, AckType.ACK);
         sendCmdWait(c);
-    }  
+    }
+
+    public void sendTransformEvent(Transform transform, int id, float time, String type) throws IOException, InterruptedException {
+        Cmd.Builder c = transform.builder(id, time, type, AckType.EVENT);
+        sendCmdWait(c);
+    }      
 
     public void sendTransform(Transform transform, int id, float time) throws IOException {
-        Cmd.Builder c = transform.builder(id, time, "easeInOut", false);
+        Cmd.Builder c = transform.builder(id, time, "easeInOut", AckType.NONE);
         sendCmd(c);
     }
     
     public void sendTransformWait(Transform transform, int id, float time) throws IOException, InterruptedException {
-        Cmd.Builder c = transform.builder(id, time, "easeInOut", true);
+        Cmd.Builder c = transform.builder(id, time, "easeInOut", AckType.ACK);
         sendCmdWait(c);
-    }      
+    }
+
+    public void sendTransformEvent(Transform transform, int id, float time) throws IOException {
+        Cmd.Builder c = transform.builder(id, time, "easeInOut", AckType.EVENT);
+        sendCmd(c);
+    }
 
     public NStageInfo.Builder stageBuilder(float width, float height) {
         NStageInfo.Builder c = NStageInfo.newBuilder();

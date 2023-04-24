@@ -3,6 +3,12 @@ package com.ngin;
 import commander.Command.Cmd;
 
 public class Transform {
+    enum AckType{
+      NONE,
+      ACK,
+      EVENT
+    }
+
     boolean translating = false;
     float tx;
     float ty;
@@ -40,12 +46,12 @@ public class Transform {
       return this;
     }
 
-    Cmd.Builder builder(int id, float time, String type, boolean needAck) {
+    Cmd.Builder builder(int id, float time, String type, AckType ackType) {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("transform");
         c.addStrings(type);
         c.addInts(id);
-        c.addInts(needAck? 1:0);
+        c.addInts(ackType == AckType.ACK?1:((ackType == AckType.EVENT)?2:0));
         c.addFloats(time);
     
         if (this.translating) {
@@ -88,6 +94,6 @@ public class Transform {
     }
 
     Cmd.Builder builder(int id, float time) {
-        return builder(id, time, "easeInOut", false);
+        return builder(id, time, "easeInOut", AckType.NONE);
     }
 }

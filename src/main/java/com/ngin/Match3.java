@@ -31,8 +31,8 @@ public class Match3 extends EventHandler {
     float height = 10;    
     Item[][] items;
 
-    Item itemOrigin;
     Vec2 posOrigin;
+    Int2 other;
 
     final String[] fruits = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
 
@@ -48,6 +48,32 @@ public class Match3 extends EventHandler {
         Item(int fruitId, int objId) {
             fruit = fruitId;
             id = objId;
+        }
+    }
+
+    Item getItem(Int2 int2) {
+        return items[int2.x][int2.y];
+    }
+
+    void setItem(Int2 int2, Item item) {
+        items[int2.x][int2.y] = item;
+    }
+
+    class Int2 {
+        int x;
+        int y;
+        Int2(int i0, int i1) {
+            x = i0;
+            y = i1;
+        }
+
+        Int2 add(Int2 int2) {
+            return new Int2(x+int2.x, y+int2.y);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Int2(%d, %d)", x, y);
         }
     }
     class Vec2 {
@@ -67,6 +93,10 @@ public class Match3 extends EventHandler {
             return (int)Math.floor(y);
         }
 
+        Int2 floor() {
+            return new Int2(xFloored(), yFloored());
+        }
+
         double distanceSquared(float x2, float y2) {
             double dx = x2 - x;
             double dy = y2 - y;
@@ -82,19 +112,34 @@ public class Match3 extends EventHandler {
 
     MoveType moveType = MoveType.IDLE;
 
-    void move(int x, int y, int dx, int dy) throws IOException {
-        int x2 = x + dx;
-        int y2 = y + dy;
+    void move(Int2 d) throws IOException {
+        Int2 origin = posOrigin.floor();
+        other = origin.add(d);
         float time = 0.3f;
 
-        if (x2 >= 0 && x2 < width && y2 >= 0 && y2 < height) {
-            Item itemOther = items[x2][y2];
-            nx.sendTransform(new Transform().setTranslating(x + 0.5f, y + 0.5f), itemOther.id, time);
-            nx.sendTransform(new Transform().setTranslating(x2 + 0.5f, y2 + 0.5f), itemOrigin.id, time);
-            items[x2][y2] = itemOrigin;
-            items[x][y] = itemOther;
+        if (other.x >= 0 && other.x < width && other.y >= 0 && other.y < height) {
+            Item itemOrigin = getItem(origin);
+            Item itemOther = getItem(other);
+            nx.sendTransform(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), itemOther.id, time);
+            nx.sendTransformEvent(new Transform().setTranslating(other.x + 0.5f, other.y + 0.5f), itemOrigin.id, time);
+
+            setItem(other, itemOrigin);
+            setItem(origin, itemOther);
         } else {
-            nx.sendTransform(new Transform().setTranslating(x + 0.5f, y + 0.5f), itemOrigin.id, time);
+            other = null;            
+            nx.sendTransformEvent(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), getItem(origin).id, time);
+        }
+    }
+
+    @Override
+    public void onEvent(EventInfo info) throws IOException {
+        if (moveType == MoveType.AUTO) {
+            if (other != null) {
+                Int2 origin = posOrigin.floor();
+                System.out.println(origin);
+                System.out.println(other);                
+            }
+            moveType = MoveType.IDLE;
         }
     }
 
@@ -103,7 +148,6 @@ public class Match3 extends EventHandler {
         if (info.event == TouchMotion.DOWN_VALUE && moveType == MoveType.IDLE) {
             moveType = MoveType.USER;
             posOrigin = new Vec2(info.x, info.y);
-            itemOrigin = items[posOrigin.xFloored()][posOrigin.yFloored()];
         } else if (info.event == TouchMotion.MOVE_VALUE && moveType == MoveType.USER) {
             double dx = info.x - posOrigin.x;
             double dy = info.y - posOrigin.y;
@@ -111,29 +155,29 @@ public class Match3 extends EventHandler {
             double dy2 = dy*dy;
 
             if (dx2 + dy2 < 0.5*0.5) {
-                nx.sendTransform(new Transform().setTranslating(info.x, info.y), itemOrigin.id, 0);
+                nx.sendTransform(new Transform().setTranslating(info.x, info.y), getItem(posOrigin.floor()).id, 0);
             } else {
                 moveType = MoveType.AUTO;
 
                 if (dx2 > dy2) {
                     if (dx>0) {
-                        move(posOrigin.xFloored(), posOrigin.yFloored(), 1, 0);
+                        move(new Int2(1, 0));
                     } else {
-                        move(posOrigin.xFloored(), posOrigin.yFloored(), -1, 0);                        
+                        move(new Int2(-1, 0));                        
                     }
                 } else {
                     if (dy>0) {
-                        move(posOrigin.xFloored(), posOrigin.yFloored(), 0, 1);                        
+                        move(new Int2(0, 1));                        
                     } else {
-                        move(posOrigin.xFloored(), posOrigin.yFloored(), 0, -1);                        
+                        move(new Int2(0, -1));                        
                     }                    
                 }
             }
         } else {
             if (moveType == MoveType.USER) {
-                nx.sendTransform(new Transform().setTranslating(posOrigin.xFloored() + 0.5f, posOrigin.yFloored() + 0.5f), itemOrigin.id, 0); 
-            }
-            moveType = MoveType.IDLE;           
+                nx.sendTransform(new Transform().setTranslating(posOrigin.xFloored() + 0.5f, posOrigin.yFloored() + 0.5f), getItem(posOrigin.floor()).id, 0); 
+                moveType = MoveType.IDLE;
+            }      
         }
     }
     
