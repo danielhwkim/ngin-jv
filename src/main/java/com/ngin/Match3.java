@@ -26,38 +26,75 @@ import commander.Command.TouchMotion;
 
 public class Match3 extends EventHandler {
     Nx nx;
-
-    float width = 5;
-    float height = 10;    
-    Item[][] items;
+ 
+    Board board;
 
     Vec2 posOrigin;
     Int2 other;
 
-    final String[] fruits = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
+    final String[] fruitNames = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
 
-    void addFruit(int id, String name, float x, float y) throws IOException {
-        NClip.Builder[] cs = {nx.clipBuilder("Items/Fruits/" + name + ".png", 32f, 32f, 0.05f)};
-        NVisual.Builder v = nx.visualBuilder(cs, 0.5f + x, 0.5f + y);
-        nx.sendObj(nx.objBuilder(id, "fruit").setVisual(v));   
+    void addFruit(Item item) throws IOException {
+        NClip.Builder[] cs = {nx.clipBuilder("Items/Fruits/" + fruitNames[item.fruit] + ".png", 32f, 32f, 0.05f)};
+        NVisual.Builder v = nx.visualBuilder(cs, 0.5f + item.pos.x, 0.5f + item.pos.y);
+        nx.sendObj(nx.objBuilder(item.id, "fruit").setVisual(v));   
     }
 
     class Item {
         int fruit;
         int id;
-        Item(int fruitId, int objId) {
+        Int2 pos;
+
+        Item(Int2 p, int fruitId, int objId) {
+            pos = p;
             fruit = fruitId;
             id = objId;
         }
+
+        @Override
+        public String toString() {
+            return String.format("%s [%d] %s", fruitNames[fruit], id, pos.toString());
+        }
     }
 
-    Item getItem(Int2 int2) {
-        return items[int2.x][int2.y];
+    class Board {
+        private Item[][] items;
+        int width;
+        int height;
+
+        Board(int w, int h) {
+            width = w;
+            height = h;
+            items = new Item[width][height];
+        }
+
+        Item get(int x, int y) {
+            return items[x][y];
+        }
+
+        Item get(Int2 pos) {
+            return get(pos.x, pos.y);
+        }
+
+        void set(Item item) {
+            items[item.pos.x][item.pos.y] = item;
+        }
+        
+        void exchange(Int2 i1, Int2 i2) {
+            Item item1 = get(i1);
+            Item item2 = get(i2);
+            item1.pos = i2;
+            item2.pos = i1;
+            set(item1);
+            set(item2);
+        }
+
+        boolean inside(Int2 pos) {
+            return pos.x >= 0 && pos.x < width && pos.y >= 0 && pos.y < height;
+        }
     }
 
-    void setItem(Int2 int2, Item item) {
-        items[int2.x][int2.y] = item;
-    }
+
 
     class Int2 {
         int x;
@@ -74,8 +111,9 @@ public class Match3 extends EventHandler {
         @Override
         public String toString() {
             return String.format("Int2(%d, %d)", x, y);
-        }
+        }      
     }
+
     class Vec2 {
         float x;
         float y;
@@ -102,6 +140,11 @@ public class Match3 extends EventHandler {
             double dy = y2 - y;
             return dx*dx + dy*dy;
         }
+
+        @Override
+        public String toString() {
+            return String.format("[%f, %f]", x, y);
+        }
     }
 
     enum MoveType {
@@ -112,23 +155,43 @@ public class Match3 extends EventHandler {
 
     MoveType moveType = MoveType.IDLE;
 
+
+
     void move(Int2 d) throws IOException {
         Int2 origin = posOrigin.floor();
         other = origin.add(d);
         float time = 0.3f;
 
-        if (other.x >= 0 && other.x < width && other.y >= 0 && other.y < height) {
-            Item itemOrigin = getItem(origin);
-            Item itemOther = getItem(other);
-            nx.sendTransform(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), itemOther.id, time);
-            nx.sendTransformEvent(new Transform().setTranslating(other.x + 0.5f, other.y + 0.5f), itemOrigin.id, time);
-
-            setItem(other, itemOrigin);
-            setItem(origin, itemOther);
+        if (board.inside(other)) {
+            nx.sendTransform(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), board.get(other).id, time);
+            nx.sendTransformEvent(new Transform().setTranslating(other.x + 0.5f, other.y + 0.5f), board.get(origin).id, time);
+            board.exchange(origin, other);
         } else {
             other = null;            
-            nx.sendTransformEvent(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), getItem(origin).id, time);
+            nx.sendTransformEvent(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), board.get(origin).id, time);
         }
+    }
+
+    int countFruits(Int2 ori, int fruit, Int2 d) {
+        int count = 0;
+        Int2 pos = ori.add(d);
+        while(board.inside(pos) && board.get(pos).fruit == fruit) {
+            count += 1;            
+            pos = pos.add(d);
+        }
+        return count;
+    }
+
+    void checkFruits(Item item) {
+        Int2 pos = item.pos;
+        int fruit = item.fruit;
+
+        int left = countFruits(pos, fruit, new Int2(-1, 0));
+        int right = countFruits(pos, fruit, new Int2(1, 0));
+        int up = countFruits(pos, fruit, new Int2(0, -1));
+        int down = countFruits(pos, fruit, new Int2(0, 1));
+
+        System.out.println(String.format("%s left:%d, right:%d, up:%d, down:%d", item.toString(), left, right, up, down));
     }
 
     @Override
@@ -137,7 +200,14 @@ public class Match3 extends EventHandler {
             if (other != null) {
                 Int2 origin = posOrigin.floor();
                 System.out.println(origin);
-                System.out.println(other);                
+                System.out.println(other);
+                Item i1 = board.get(origin);
+                Item i2 = board.get(other);
+
+                if (i1.fruit != i2.fruit) {
+                    checkFruits(i1);
+                    checkFruits(i2);
+                }
             }
             moveType = MoveType.IDLE;
         }
@@ -146,8 +216,10 @@ public class Match3 extends EventHandler {
     @Override
     public void onTap(TapInfo info) throws IOException, InterruptedException {
         if (info.event == TouchMotion.DOWN_VALUE && moveType == MoveType.IDLE) {
-            moveType = MoveType.USER;
             posOrigin = new Vec2(info.x, info.y);
+            if (board.inside(posOrigin.floor())) {
+                moveType = MoveType.USER;
+            }
         } else if (info.event == TouchMotion.MOVE_VALUE && moveType == MoveType.USER) {
             double dx = info.x - posOrigin.x;
             double dy = info.y - posOrigin.y;
@@ -155,7 +227,7 @@ public class Match3 extends EventHandler {
             double dy2 = dy*dy;
 
             if (dx2 + dy2 < 0.5*0.5) {
-                nx.sendTransform(new Transform().setTranslating(info.x, info.y), getItem(posOrigin.floor()).id, 0);
+                nx.sendTransform(new Transform().setTranslating(info.x, info.y), board.get(posOrigin.floor()).id, 0);
             } else {
                 moveType = MoveType.AUTO;
 
@@ -175,7 +247,7 @@ public class Match3 extends EventHandler {
             }
         } else {
             if (moveType == MoveType.USER) {
-                nx.sendTransform(new Transform().setTranslating(posOrigin.xFloored() + 0.5f, posOrigin.yFloored() + 0.5f), getItem(posOrigin.floor()).id, 0); 
+                nx.sendTransform(new Transform().setTranslating(posOrigin.xFloored() + 0.5f, posOrigin.yFloored() + 0.5f), board.get(posOrigin.floor()).id, 0); 
                 moveType = MoveType.IDLE;
             }      
         }
@@ -185,7 +257,8 @@ public class Match3 extends EventHandler {
         try
         {
             nx = new Nx();
-
+            float width = 5;
+            float height = 10;   
 
             NStageInfo.Builder builder = nx.stageBuilder(width, height);
             builder.setTap(TouchMotion.ALL);
@@ -193,15 +266,15 @@ public class Match3 extends EventHandler {
 
             Random rand = new Random();
 
-            items = new Item[(int)width][(int)height];
+            board = new Board((int)width, (int)height);
 
             
             for (int x =0; x<width; x++) {
                 for (int y = 0; y<height; y++) {
-                    int fruit = rand.nextInt(fruits.length);
-                    int id = x*100 + y;
-                    items[x][y] = new Item(fruit, id);
-                    addFruit(id, fruits[fruit], x, y);
+                    int fruit = rand.nextInt(fruitNames.length);
+                    Item item = new Item(new Int2(x, y), fruit, x*100 + y);
+                    board.set(item);
+                    addFruit(item);
                 }
             }
 
