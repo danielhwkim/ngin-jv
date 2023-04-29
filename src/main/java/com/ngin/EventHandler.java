@@ -46,7 +46,7 @@ public class EventHandler {
     public void onContact(ContactInfo info) throws IOException, InterruptedException {
         unexpected(info.toString());
     }
-    public void onEvent(EventInfo info) throws IOException {
+    public void onEvent(EventInfo info) throws IOException, InterruptedException {
         unexpected(info.toString());
     }
     public void onTap(TapInfo info) throws IOException, InterruptedException {

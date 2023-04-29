@@ -220,6 +220,10 @@ public class Nx extends Ngin {
 
     public NClip.Builder clipBuilder(String path, float width, float height, float stepTime) {
         return clipBuilder(path, width, height, null, NClipType.loop, stepTime);
+    }
+
+    public NClip.Builder clipBuilder(String path, float width, float height, NClipType type, float stepTime) {
+        return clipBuilder(path, width, height, null, type, stepTime);
     }    
 
 
@@ -272,6 +276,46 @@ public class Nx extends Ngin {
     public void setClipIndex(int id, int index) throws IOException {
         setClipIndex(id, index, false);
     }
+
+    public void playClip(int id, int index, int nextIndex, boolean isFlipHorizonal, boolean needAck) throws IOException, InterruptedException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("playClip");
+        c.addInts(id);
+        c.addInts(index);
+        c.addInts(nextIndex);        
+        c.addInts(isFlipHorizonal? 1:0);
+        if (needAck) {
+            sendCmdWait(c);
+        } else {
+            sendCmd(c);
+        }
+    }
+
+    public void playClip(int id, int index, int nextIndex, boolean isFlipHorizonal) throws IOException, InterruptedException {
+        playClip(id, index, nextIndex, isFlipHorizonal, false);
+    }
+
+    public void playClipWait(int id, int index, int nextIndex, boolean isFlipHorizonal) throws IOException, InterruptedException {
+        playClip(id, index, nextIndex, isFlipHorizonal, true);
+    }
+
+    public void playClip(int id, int index, int nextIndex) throws IOException, InterruptedException {
+        playClip(id, index, nextIndex, false, false);
+    }
+
+    public void playClipWait(int id, int index, int nextIndex) throws IOException, InterruptedException {
+        playClip(id, index, nextIndex, false, true);
+    }
+    
+    public void playClip(int id, int index) throws IOException, InterruptedException {
+        playClip(id, index, index, false, false);
+    }
+
+    public void playClipWait(int id, int index) throws IOException, InterruptedException {
+        playClip(id, index, index, false, true);
+    }
+
+
     
     public NObjectInfo linearTo(int id, float x, float y, float speed) throws IOException, InterruptedException {
         Cmd.Builder c = Cmd.newBuilder();

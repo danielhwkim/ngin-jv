@@ -7086,73 +7086,79 @@ public final class Command {
     int getPriority();
 
     /**
-     * <code>float x = 2;</code>
+     * <code>int32 current = 2;</code>
+     * @return The current.
+     */
+    int getCurrent();
+
+    /**
+     * <code>float x = 3;</code>
      * @return The x.
      */
     float getX();
 
     /**
-     * <code>float y = 3;</code>
+     * <code>float y = 4;</code>
      * @return The y.
      */
     float getY();
 
     /**
-     * <code>float width = 4;</code>
+     * <code>float width = 5;</code>
      * @return The width.
      */
     float getWidth();
 
     /**
-     * <code>float height = 5;</code>
+     * <code>float height = 6;</code>
      * @return The height.
      */
     float getHeight();
 
     /**
-     * <code>float scaleX = 6;</code>
+     * <code>float scaleX = 7;</code>
      * @return The scaleX.
      */
     float getScaleX();
 
     /**
-     * <code>float scaleY = 7;</code>
+     * <code>float scaleY = 8;</code>
      * @return The scaleY.
      */
     float getScaleY();
 
     /**
-     * <code>float anchorX = 8;</code>
+     * <code>float anchorX = 9;</code>
      * @return The anchorX.
      */
     float getAnchorX();
 
     /**
-     * <code>float anchorY = 9;</code>
+     * <code>float anchorY = 10;</code>
      * @return The anchorY.
      */
     float getAnchorY();
 
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     java.util.List<commander.Command.NClip> 
         getClipsList();
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     commander.Command.NClip getClips(int index);
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     int getClipsCount();
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     java.util.List<? extends commander.Command.NClipOrBuilder> 
         getClipsOrBuilderList();
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     commander.Command.NClipOrBuilder getClipsOrBuilder(
         int index);
@@ -7209,10 +7215,21 @@ public final class Command {
       return priority_;
     }
 
-    public static final int X_FIELD_NUMBER = 2;
+    public static final int CURRENT_FIELD_NUMBER = 2;
+    private int current_;
+    /**
+     * <code>int32 current = 2;</code>
+     * @return The current.
+     */
+    @java.lang.Override
+    public int getCurrent() {
+      return current_;
+    }
+
+    public static final int X_FIELD_NUMBER = 3;
     private float x_;
     /**
-     * <code>float x = 2;</code>
+     * <code>float x = 3;</code>
      * @return The x.
      */
     @java.lang.Override
@@ -7220,10 +7237,10 @@ public final class Command {
       return x_;
     }
 
-    public static final int Y_FIELD_NUMBER = 3;
+    public static final int Y_FIELD_NUMBER = 4;
     private float y_;
     /**
-     * <code>float y = 3;</code>
+     * <code>float y = 4;</code>
      * @return The y.
      */
     @java.lang.Override
@@ -7231,10 +7248,10 @@ public final class Command {
       return y_;
     }
 
-    public static final int WIDTH_FIELD_NUMBER = 4;
+    public static final int WIDTH_FIELD_NUMBER = 5;
     private float width_;
     /**
-     * <code>float width = 4;</code>
+     * <code>float width = 5;</code>
      * @return The width.
      */
     @java.lang.Override
@@ -7242,10 +7259,10 @@ public final class Command {
       return width_;
     }
 
-    public static final int HEIGHT_FIELD_NUMBER = 5;
+    public static final int HEIGHT_FIELD_NUMBER = 6;
     private float height_;
     /**
-     * <code>float height = 5;</code>
+     * <code>float height = 6;</code>
      * @return The height.
      */
     @java.lang.Override
@@ -7253,10 +7270,10 @@ public final class Command {
       return height_;
     }
 
-    public static final int SCALEX_FIELD_NUMBER = 6;
+    public static final int SCALEX_FIELD_NUMBER = 7;
     private float scaleX_;
     /**
-     * <code>float scaleX = 6;</code>
+     * <code>float scaleX = 7;</code>
      * @return The scaleX.
      */
     @java.lang.Override
@@ -7264,10 +7281,10 @@ public final class Command {
       return scaleX_;
     }
 
-    public static final int SCALEY_FIELD_NUMBER = 7;
+    public static final int SCALEY_FIELD_NUMBER = 8;
     private float scaleY_;
     /**
-     * <code>float scaleY = 7;</code>
+     * <code>float scaleY = 8;</code>
      * @return The scaleY.
      */
     @java.lang.Override
@@ -7275,10 +7292,10 @@ public final class Command {
       return scaleY_;
     }
 
-    public static final int ANCHORX_FIELD_NUMBER = 8;
+    public static final int ANCHORX_FIELD_NUMBER = 9;
     private float anchorX_;
     /**
-     * <code>float anchorX = 8;</code>
+     * <code>float anchorX = 9;</code>
      * @return The anchorX.
      */
     @java.lang.Override
@@ -7286,10 +7303,10 @@ public final class Command {
       return anchorX_;
     }
 
-    public static final int ANCHORY_FIELD_NUMBER = 9;
+    public static final int ANCHORY_FIELD_NUMBER = 10;
     private float anchorY_;
     /**
-     * <code>float anchorY = 9;</code>
+     * <code>float anchorY = 10;</code>
      * @return The anchorY.
      */
     @java.lang.Override
@@ -7297,17 +7314,17 @@ public final class Command {
       return anchorY_;
     }
 
-    public static final int CLIPS_FIELD_NUMBER = 10;
+    public static final int CLIPS_FIELD_NUMBER = 11;
     private java.util.List<commander.Command.NClip> clips_;
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
     public java.util.List<commander.Command.NClip> getClipsList() {
       return clips_;
     }
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
     public java.util.List<? extends commander.Command.NClipOrBuilder> 
@@ -7315,21 +7332,21 @@ public final class Command {
       return clips_;
     }
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
     public int getClipsCount() {
       return clips_.size();
     }
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
     public commander.Command.NClip getClips(int index) {
       return clips_.get(index);
     }
     /**
-     * <code>repeated .commander.NClip clips = 10;</code>
+     * <code>repeated .commander.NClip clips = 11;</code>
      */
     @java.lang.Override
     public commander.Command.NClipOrBuilder getClipsOrBuilder(
@@ -7354,32 +7371,35 @@ public final class Command {
       if (priority_ != 0) {
         output.writeInt32(1, priority_);
       }
+      if (current_ != 0) {
+        output.writeInt32(2, current_);
+      }
       if (java.lang.Float.floatToRawIntBits(x_) != 0) {
-        output.writeFloat(2, x_);
+        output.writeFloat(3, x_);
       }
       if (java.lang.Float.floatToRawIntBits(y_) != 0) {
-        output.writeFloat(3, y_);
+        output.writeFloat(4, y_);
       }
       if (java.lang.Float.floatToRawIntBits(width_) != 0) {
-        output.writeFloat(4, width_);
+        output.writeFloat(5, width_);
       }
       if (java.lang.Float.floatToRawIntBits(height_) != 0) {
-        output.writeFloat(5, height_);
+        output.writeFloat(6, height_);
       }
       if (java.lang.Float.floatToRawIntBits(scaleX_) != 0) {
-        output.writeFloat(6, scaleX_);
+        output.writeFloat(7, scaleX_);
       }
       if (java.lang.Float.floatToRawIntBits(scaleY_) != 0) {
-        output.writeFloat(7, scaleY_);
+        output.writeFloat(8, scaleY_);
       }
       if (java.lang.Float.floatToRawIntBits(anchorX_) != 0) {
-        output.writeFloat(8, anchorX_);
+        output.writeFloat(9, anchorX_);
       }
       if (java.lang.Float.floatToRawIntBits(anchorY_) != 0) {
-        output.writeFloat(9, anchorY_);
+        output.writeFloat(10, anchorY_);
       }
       for (int i = 0; i < clips_.size(); i++) {
-        output.writeMessage(10, clips_.get(i));
+        output.writeMessage(11, clips_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -7394,41 +7414,45 @@ public final class Command {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, priority_);
       }
+      if (current_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, current_);
+      }
       if (java.lang.Float.floatToRawIntBits(x_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(2, x_);
+          .computeFloatSize(3, x_);
       }
       if (java.lang.Float.floatToRawIntBits(y_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(3, y_);
+          .computeFloatSize(4, y_);
       }
       if (java.lang.Float.floatToRawIntBits(width_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(4, width_);
+          .computeFloatSize(5, width_);
       }
       if (java.lang.Float.floatToRawIntBits(height_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(5, height_);
+          .computeFloatSize(6, height_);
       }
       if (java.lang.Float.floatToRawIntBits(scaleX_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(6, scaleX_);
+          .computeFloatSize(7, scaleX_);
       }
       if (java.lang.Float.floatToRawIntBits(scaleY_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(7, scaleY_);
+          .computeFloatSize(8, scaleY_);
       }
       if (java.lang.Float.floatToRawIntBits(anchorX_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(8, anchorX_);
+          .computeFloatSize(9, anchorX_);
       }
       if (java.lang.Float.floatToRawIntBits(anchorY_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(9, anchorY_);
+          .computeFloatSize(10, anchorY_);
       }
       for (int i = 0; i < clips_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, clips_.get(i));
+          .computeMessageSize(11, clips_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -7447,6 +7471,8 @@ public final class Command {
 
       if (getPriority()
           != other.getPriority()) return false;
+      if (getCurrent()
+          != other.getCurrent()) return false;
       if (java.lang.Float.floatToIntBits(getX())
           != java.lang.Float.floatToIntBits(
               other.getX())) return false;
@@ -7486,6 +7512,8 @@ public final class Command {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + PRIORITY_FIELD_NUMBER;
       hash = (53 * hash) + getPriority();
+      hash = (37 * hash) + CURRENT_FIELD_NUMBER;
+      hash = (53 * hash) + getCurrent();
       hash = (37 * hash) + X_FIELD_NUMBER;
       hash = (53 * hash) + java.lang.Float.floatToIntBits(
           getX());
@@ -7644,6 +7672,8 @@ public final class Command {
         super.clear();
         priority_ = 0;
 
+        current_ = 0;
+
         x_ = 0F;
 
         y_ = 0F;
@@ -7695,6 +7725,7 @@ public final class Command {
         commander.Command.NVisual result = new commander.Command.NVisual(this);
         int from_bitField0_ = bitField0_;
         result.priority_ = priority_;
+        result.current_ = current_;
         result.x_ = x_;
         result.y_ = y_;
         result.width_ = width_;
@@ -7762,6 +7793,9 @@ public final class Command {
         if (other == commander.Command.NVisual.getDefaultInstance()) return this;
         if (other.getPriority() != 0) {
           setPriority(other.getPriority());
+        }
+        if (other.getCurrent() != 0) {
+          setCurrent(other.getCurrent());
         }
         if (other.getX() != 0F) {
           setX(other.getX());
@@ -7844,47 +7878,52 @@ public final class Command {
 
                 break;
               } // case 8
-              case 21: {
-                x_ = input.readFloat();
+              case 16: {
+                current_ = input.readInt32();
 
                 break;
-              } // case 21
+              } // case 16
               case 29: {
-                y_ = input.readFloat();
+                x_ = input.readFloat();
 
                 break;
               } // case 29
               case 37: {
-                width_ = input.readFloat();
+                y_ = input.readFloat();
 
                 break;
               } // case 37
               case 45: {
-                height_ = input.readFloat();
+                width_ = input.readFloat();
 
                 break;
               } // case 45
               case 53: {
-                scaleX_ = input.readFloat();
+                height_ = input.readFloat();
 
                 break;
               } // case 53
               case 61: {
-                scaleY_ = input.readFloat();
+                scaleX_ = input.readFloat();
 
                 break;
               } // case 61
               case 69: {
-                anchorX_ = input.readFloat();
+                scaleY_ = input.readFloat();
 
                 break;
               } // case 69
               case 77: {
-                anchorY_ = input.readFloat();
+                anchorX_ = input.readFloat();
 
                 break;
               } // case 77
-              case 82: {
+              case 85: {
+                anchorY_ = input.readFloat();
+
+                break;
+              } // case 85
+              case 90: {
                 commander.Command.NClip m =
                     input.readMessage(
                         commander.Command.NClip.parser(),
@@ -7896,7 +7935,7 @@ public final class Command {
                   clipsBuilder_.addMessage(m);
                 }
                 break;
-              } // case 82
+              } // case 90
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -7945,9 +7984,40 @@ public final class Command {
         return this;
       }
 
+      private int current_ ;
+      /**
+       * <code>int32 current = 2;</code>
+       * @return The current.
+       */
+      @java.lang.Override
+      public int getCurrent() {
+        return current_;
+      }
+      /**
+       * <code>int32 current = 2;</code>
+       * @param value The current to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCurrent(int value) {
+        
+        current_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 current = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCurrent() {
+        
+        current_ = 0;
+        onChanged();
+        return this;
+      }
+
       private float x_ ;
       /**
-       * <code>float x = 2;</code>
+       * <code>float x = 3;</code>
        * @return The x.
        */
       @java.lang.Override
@@ -7955,7 +8025,7 @@ public final class Command {
         return x_;
       }
       /**
-       * <code>float x = 2;</code>
+       * <code>float x = 3;</code>
        * @param value The x to set.
        * @return This builder for chaining.
        */
@@ -7966,7 +8036,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float x = 2;</code>
+       * <code>float x = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearX() {
@@ -7978,7 +8048,7 @@ public final class Command {
 
       private float y_ ;
       /**
-       * <code>float y = 3;</code>
+       * <code>float y = 4;</code>
        * @return The y.
        */
       @java.lang.Override
@@ -7986,7 +8056,7 @@ public final class Command {
         return y_;
       }
       /**
-       * <code>float y = 3;</code>
+       * <code>float y = 4;</code>
        * @param value The y to set.
        * @return This builder for chaining.
        */
@@ -7997,7 +8067,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float y = 3;</code>
+       * <code>float y = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearY() {
@@ -8009,7 +8079,7 @@ public final class Command {
 
       private float width_ ;
       /**
-       * <code>float width = 4;</code>
+       * <code>float width = 5;</code>
        * @return The width.
        */
       @java.lang.Override
@@ -8017,7 +8087,7 @@ public final class Command {
         return width_;
       }
       /**
-       * <code>float width = 4;</code>
+       * <code>float width = 5;</code>
        * @param value The width to set.
        * @return This builder for chaining.
        */
@@ -8028,7 +8098,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float width = 4;</code>
+       * <code>float width = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearWidth() {
@@ -8040,7 +8110,7 @@ public final class Command {
 
       private float height_ ;
       /**
-       * <code>float height = 5;</code>
+       * <code>float height = 6;</code>
        * @return The height.
        */
       @java.lang.Override
@@ -8048,7 +8118,7 @@ public final class Command {
         return height_;
       }
       /**
-       * <code>float height = 5;</code>
+       * <code>float height = 6;</code>
        * @param value The height to set.
        * @return This builder for chaining.
        */
@@ -8059,7 +8129,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float height = 5;</code>
+       * <code>float height = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearHeight() {
@@ -8071,7 +8141,7 @@ public final class Command {
 
       private float scaleX_ ;
       /**
-       * <code>float scaleX = 6;</code>
+       * <code>float scaleX = 7;</code>
        * @return The scaleX.
        */
       @java.lang.Override
@@ -8079,7 +8149,7 @@ public final class Command {
         return scaleX_;
       }
       /**
-       * <code>float scaleX = 6;</code>
+       * <code>float scaleX = 7;</code>
        * @param value The scaleX to set.
        * @return This builder for chaining.
        */
@@ -8090,7 +8160,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float scaleX = 6;</code>
+       * <code>float scaleX = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearScaleX() {
@@ -8102,7 +8172,7 @@ public final class Command {
 
       private float scaleY_ ;
       /**
-       * <code>float scaleY = 7;</code>
+       * <code>float scaleY = 8;</code>
        * @return The scaleY.
        */
       @java.lang.Override
@@ -8110,7 +8180,7 @@ public final class Command {
         return scaleY_;
       }
       /**
-       * <code>float scaleY = 7;</code>
+       * <code>float scaleY = 8;</code>
        * @param value The scaleY to set.
        * @return This builder for chaining.
        */
@@ -8121,7 +8191,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float scaleY = 7;</code>
+       * <code>float scaleY = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearScaleY() {
@@ -8133,7 +8203,7 @@ public final class Command {
 
       private float anchorX_ ;
       /**
-       * <code>float anchorX = 8;</code>
+       * <code>float anchorX = 9;</code>
        * @return The anchorX.
        */
       @java.lang.Override
@@ -8141,7 +8211,7 @@ public final class Command {
         return anchorX_;
       }
       /**
-       * <code>float anchorX = 8;</code>
+       * <code>float anchorX = 9;</code>
        * @param value The anchorX to set.
        * @return This builder for chaining.
        */
@@ -8152,7 +8222,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float anchorX = 8;</code>
+       * <code>float anchorX = 9;</code>
        * @return This builder for chaining.
        */
       public Builder clearAnchorX() {
@@ -8164,7 +8234,7 @@ public final class Command {
 
       private float anchorY_ ;
       /**
-       * <code>float anchorY = 9;</code>
+       * <code>float anchorY = 10;</code>
        * @return The anchorY.
        */
       @java.lang.Override
@@ -8172,7 +8242,7 @@ public final class Command {
         return anchorY_;
       }
       /**
-       * <code>float anchorY = 9;</code>
+       * <code>float anchorY = 10;</code>
        * @param value The anchorY to set.
        * @return This builder for chaining.
        */
@@ -8183,7 +8253,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>float anchorY = 9;</code>
+       * <code>float anchorY = 10;</code>
        * @return This builder for chaining.
        */
       public Builder clearAnchorY() {
@@ -8206,7 +8276,7 @@ public final class Command {
           commander.Command.NClip, commander.Command.NClip.Builder, commander.Command.NClipOrBuilder> clipsBuilder_;
 
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public java.util.List<commander.Command.NClip> getClipsList() {
         if (clipsBuilder_ == null) {
@@ -8216,7 +8286,7 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public int getClipsCount() {
         if (clipsBuilder_ == null) {
@@ -8226,7 +8296,7 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public commander.Command.NClip getClips(int index) {
         if (clipsBuilder_ == null) {
@@ -8236,7 +8306,7 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public Builder setClips(
           int index, commander.Command.NClip value) {
@@ -8253,7 +8323,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public Builder setClips(
           int index, commander.Command.NClip.Builder builderForValue) {
@@ -8267,7 +8337,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public Builder addClips(commander.Command.NClip value) {
         if (clipsBuilder_ == null) {
@@ -8283,7 +8353,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public Builder addClips(
           int index, commander.Command.NClip value) {
@@ -8300,7 +8370,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public Builder addClips(
           commander.Command.NClip.Builder builderForValue) {
@@ -8314,7 +8384,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public Builder addClips(
           int index, commander.Command.NClip.Builder builderForValue) {
@@ -8328,7 +8398,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public Builder addAllClips(
           java.lang.Iterable<? extends commander.Command.NClip> values) {
@@ -8343,7 +8413,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public Builder clearClips() {
         if (clipsBuilder_ == null) {
@@ -8356,7 +8426,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public Builder removeClips(int index) {
         if (clipsBuilder_ == null) {
@@ -8369,14 +8439,14 @@ public final class Command {
         return this;
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public commander.Command.NClip.Builder getClipsBuilder(
           int index) {
         return getClipsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public commander.Command.NClipOrBuilder getClipsOrBuilder(
           int index) {
@@ -8386,7 +8456,7 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public java.util.List<? extends commander.Command.NClipOrBuilder> 
            getClipsOrBuilderList() {
@@ -8397,14 +8467,14 @@ public final class Command {
         }
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public commander.Command.NClip.Builder addClipsBuilder() {
         return getClipsFieldBuilder().addBuilder(
             commander.Command.NClip.getDefaultInstance());
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public commander.Command.NClip.Builder addClipsBuilder(
           int index) {
@@ -8412,7 +8482,7 @@ public final class Command {
             index, commander.Command.NClip.getDefaultInstance());
       }
       /**
-       * <code>repeated .commander.NClip clips = 10;</code>
+       * <code>repeated .commander.NClip clips = 11;</code>
        */
       public java.util.List<commander.Command.NClip.Builder> 
            getClipsBuilderList() {
@@ -11636,45 +11706,46 @@ public final class Command {
       "Object\022\n\n\002sn\030\001 \001(\r\022\n\n\002id\030\002 \001(\005\022#\n\004body\030\003" +
       " \001(\0132\020.commander.NBodyH\000\210\001\001\022\'\n\006visual\030\004 " +
       "\001(\0132\022.commander.NVisualH\001\210\001\001\022\013\n\003tid\030\005 \001(" +
-      "\r\022\014\n\004info\030\006 \001(\tB\007\n\005_bodyB\t\n\007_visual\"\263\001\n\007" +
-      "NVisual\022\020\n\010priority\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n\001" +
-      "y\030\003 \001(\002\022\r\n\005width\030\004 \001(\002\022\016\n\006height\030\005 \001(\002\022\016" +
-      "\n\006scaleX\030\006 \001(\002\022\016\n\006scaleY\030\007 \001(\002\022\017\n\007anchor" +
-      "X\030\010 \001(\002\022\017\n\007anchorY\030\t \001(\002\022\037\n\005clips\030\n \003(\0132" +
-      "\020.commander.NClip\"\221\001\n\005NClip\022\014\n\004data\030\001 \001(" +
-      "\t\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\r\n\005width\030\004 \001(\002\022\016" +
-      "\n\006height\030\005 \001(\002\022\020\n\010stepTime\030\006 \001(\002\022\"\n\004type" +
-      "\030\007 \001(\0162\024.commander.NClipType\022\017\n\007indices\030" +
-      "\010 \003(\r\"\356\002\n\005NBody\022!\n\004type\030\001 \001(\0162\023.commande" +
-      "r.BodyType\022#\n\005shape\030\002 \001(\0162\024.commander.Bo" +
-      "dyShape\022\t\n\001x\030\003 \001(\002\022\t\n\001y\030\004 \001(\002\022\r\n\005width\030\005" +
-      " \001(\002\022\016\n\006height\030\006 \001(\002\022\023\n\013restitution\030\007 \001(" +
-      "\002\022\020\n\010friction\030\010 \001(\002\022\017\n\007density\030\t \001(\002\022\r\n\005" +
-      "angle\030\n \001(\002\022\020\n\010isSensor\030\013 \001(\010\022\024\n\014categor" +
-      "yBits\030\014 \001(\r\022\020\n\010maskBits\030\r \001(\r\022\025\n\rfixedRo" +
-      "tation\030\016 \001(\010\022\021\n\ttrackable\030\017 \001(\010\022\025\n\rconta" +
-      "ctReport\030\020 \001(\010\022\016\n\006floats\030\021 \003(\002\022\026\n\016passab" +
-      "leBottom\030\022 \001(\010*\302\001\n\004Head\022\007\n\003cmd\020\000\022\013\n\005stag" +
-      "e\020\200\376\003\022\013\n\005query\020\204\376\003\022\014\n\006object\020\206\376\003\022\r\n\007cont" +
-      "act\020\360\341\003\022\013\n\005event\020\361\341\003\022\t\n\003key\020\362\341\003\022\t\n\003ack\020\363" +
-      "\341\003\022\021\n\013directional\020\364\341\003\022\014\n\006button\020\365\341\003\022\t\n\003t" +
-      "ap\020\366\341\003\022\021\n\013queryresult\020\367\341\003\022\013\n\005error\020\370\341\003\022\013" +
-      "\n\005relay\020\371\341\003*V\n\tBodyShape\022\r\n\trectangle\020\000\022" +
-      "\t\n\005actor\020\001\022\n\n\006circle\020\002\022\014\n\010triangle\020\003\022\010\n\004" +
-      "edge\020\004\022\013\n\007polygon\020\005*>\n\010BodyType\022\016\n\nstati" +
-      "cBody\020\000\022\021\n\rkinematicBody\020\001\022\017\n\013dynamicBod" +
-      "y\020\002*\254\001\n\027JoystickMoveDirectional\022\013\n\007MOVE_" +
-      "UP\020\000\022\020\n\014MOVE_UP_LEFT\020\001\022\021\n\rMOVE_UP_RIGHT\020" +
-      "\002\022\016\n\nMOVE_RIGHT\020\003\022\r\n\tMOVE_DOWN\020\004\022\023\n\017MOVE" +
-      "_DOWN_RIGHT\020\005\022\022\n\016MOVE_DOWN_LEFT\020\006\022\r\n\tMOV" +
-      "E_LEFT\020\007\022\010\n\004IDLE\020\010*I\n\013TouchMotion\022\010\n\004NON" +
-      "E\020\000\022\010\n\004DOWN\020\001\022\010\n\004MOVE\020\002\022\006\n\002UP\020\004\022\013\n\007DOWN_" +
-      "UP\020\005\022\007\n\003ALL\020\007*S\n\014TouchInputId\022\021\n\rjoystic" +
-      "kInput\020\000\022\020\n\014button1Input\020\001\022\020\n\014button2Inp" +
-      "ut\020\002\022\014\n\010tapInput\020\003*G\n\024JoystickDirectiona" +
-      "ls\022\010\n\004none\020\000\022\007\n\003all\020\001\022\016\n\nhorizontal\020\002\022\014\n" +
-      "\010vertical\020\003*3\n\tNClipType\022\010\n\004loop\020\000\022\010\n\004on" +
-      "ce\020\001\022\t\n\005tiles\020\002\022\007\n\003svg\020\003b\006proto3"
+      "\r\022\014\n\004info\030\006 \001(\tB\007\n\005_bodyB\t\n\007_visual\"\304\001\n\007" +
+      "NVisual\022\020\n\010priority\030\001 \001(\005\022\017\n\007current\030\002 \001" +
+      "(\005\022\t\n\001x\030\003 \001(\002\022\t\n\001y\030\004 \001(\002\022\r\n\005width\030\005 \001(\002\022" +
+      "\016\n\006height\030\006 \001(\002\022\016\n\006scaleX\030\007 \001(\002\022\016\n\006scale" +
+      "Y\030\010 \001(\002\022\017\n\007anchorX\030\t \001(\002\022\017\n\007anchorY\030\n \001(" +
+      "\002\022\037\n\005clips\030\013 \003(\0132\020.commander.NClip\"\221\001\n\005N" +
+      "Clip\022\014\n\004data\030\001 \001(\t\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(\002" +
+      "\022\r\n\005width\030\004 \001(\002\022\016\n\006height\030\005 \001(\002\022\020\n\010stepT" +
+      "ime\030\006 \001(\002\022\"\n\004type\030\007 \001(\0162\024.commander.NCli" +
+      "pType\022\017\n\007indices\030\010 \003(\r\"\356\002\n\005NBody\022!\n\004type" +
+      "\030\001 \001(\0162\023.commander.BodyType\022#\n\005shape\030\002 \001" +
+      "(\0162\024.commander.BodyShape\022\t\n\001x\030\003 \001(\002\022\t\n\001y" +
+      "\030\004 \001(\002\022\r\n\005width\030\005 \001(\002\022\016\n\006height\030\006 \001(\002\022\023\n" +
+      "\013restitution\030\007 \001(\002\022\020\n\010friction\030\010 \001(\002\022\017\n\007" +
+      "density\030\t \001(\002\022\r\n\005angle\030\n \001(\002\022\020\n\010isSensor" +
+      "\030\013 \001(\010\022\024\n\014categoryBits\030\014 \001(\r\022\020\n\010maskBits" +
+      "\030\r \001(\r\022\025\n\rfixedRotation\030\016 \001(\010\022\021\n\ttrackab" +
+      "le\030\017 \001(\010\022\025\n\rcontactReport\030\020 \001(\010\022\016\n\006float" +
+      "s\030\021 \003(\002\022\026\n\016passableBottom\030\022 \001(\010*\302\001\n\004Head" +
+      "\022\007\n\003cmd\020\000\022\013\n\005stage\020\200\376\003\022\013\n\005query\020\204\376\003\022\014\n\006o" +
+      "bject\020\206\376\003\022\r\n\007contact\020\360\341\003\022\013\n\005event\020\361\341\003\022\t\n" +
+      "\003key\020\362\341\003\022\t\n\003ack\020\363\341\003\022\021\n\013directional\020\364\341\003\022\014" +
+      "\n\006button\020\365\341\003\022\t\n\003tap\020\366\341\003\022\021\n\013queryresult\020\367" +
+      "\341\003\022\013\n\005error\020\370\341\003\022\013\n\005relay\020\371\341\003*V\n\tBodyShap" +
+      "e\022\r\n\trectangle\020\000\022\t\n\005actor\020\001\022\n\n\006circle\020\002\022" +
+      "\014\n\010triangle\020\003\022\010\n\004edge\020\004\022\013\n\007polygon\020\005*>\n\010" +
+      "BodyType\022\016\n\nstaticBody\020\000\022\021\n\rkinematicBod" +
+      "y\020\001\022\017\n\013dynamicBody\020\002*\254\001\n\027JoystickMoveDir" +
+      "ectional\022\013\n\007MOVE_UP\020\000\022\020\n\014MOVE_UP_LEFT\020\001\022" +
+      "\021\n\rMOVE_UP_RIGHT\020\002\022\016\n\nMOVE_RIGHT\020\003\022\r\n\tMO" +
+      "VE_DOWN\020\004\022\023\n\017MOVE_DOWN_RIGHT\020\005\022\022\n\016MOVE_D" +
+      "OWN_LEFT\020\006\022\r\n\tMOVE_LEFT\020\007\022\010\n\004IDLE\020\010*I\n\013T" +
+      "ouchMotion\022\010\n\004NONE\020\000\022\010\n\004DOWN\020\001\022\010\n\004MOVE\020\002" +
+      "\022\006\n\002UP\020\004\022\013\n\007DOWN_UP\020\005\022\007\n\003ALL\020\007*S\n\014TouchI" +
+      "nputId\022\021\n\rjoystickInput\020\000\022\020\n\014button1Inpu" +
+      "t\020\001\022\020\n\014button2Input\020\002\022\014\n\010tapInput\020\003*G\n\024J" +
+      "oystickDirectionals\022\010\n\004none\020\000\022\007\n\003all\020\001\022\016" +
+      "\n\nhorizontal\020\002\022\014\n\010vertical\020\003*3\n\tNClipTyp" +
+      "e\022\010\n\004loop\020\000\022\010\n\004once\020\001\022\t\n\005tiles\020\002\022\007\n\003svg\020" +
+      "\003b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -11715,7 +11786,7 @@ public final class Command {
     internal_static_commander_NVisual_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_commander_NVisual_descriptor,
-        new java.lang.String[] { "Priority", "X", "Y", "Width", "Height", "ScaleX", "ScaleY", "AnchorX", "AnchorY", "Clips", });
+        new java.lang.String[] { "Priority", "Current", "X", "Y", "Width", "Height", "ScaleX", "ScaleY", "AnchorX", "AnchorY", "Clips", });
     internal_static_commander_NClip_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_commander_NClip_fieldAccessorTable = new

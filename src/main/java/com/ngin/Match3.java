@@ -13,6 +13,7 @@ import org.json.*;
 import commander.Command.BodyShape;
 import commander.Command.JoystickDirectionals;
 import commander.Command.NClip;
+import commander.Command.NClipType;
 import commander.Command.NObject;
 import commander.Command.NStageInfo;
 import commander.Command.NBody;
@@ -35,8 +36,15 @@ public class Match3 extends EventHandler {
     final String[] fruitNames = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
 
     void addFruit(Item item) throws IOException {
-        NClip.Builder[] cs = {nx.clipBuilder("Items/Fruits/" + fruitNames[item.fruit] + ".png", 32f, 32f, 0.05f)};
+        NClip.Builder[] cs = new NClip.Builder[fruitNames.length+1];
+
+        for (int i=0; i<fruitNames.length; i++) {
+            cs[i] = nx.clipBuilder("Items/Fruits/" + fruitNames[i] + ".png", 32f, 32f, 0.05f);
+        }
+
+        cs[fruitNames.length] = nx.clipBuilder("Items/Fruits/Collected.png", 32f, 32f, NClipType.once, 0.05f);
         NVisual.Builder v = nx.visualBuilder(cs, 0.5f + item.pos.x, 0.5f + item.pos.y);
+        v.setCurrent(item.fruit);
         nx.sendObj(nx.objBuilder(item.id, "fruit").setVisual(v));   
     }
 
@@ -44,6 +52,7 @@ public class Match3 extends EventHandler {
         int fruit;
         int id;
         Int2 pos;
+        boolean removed = false;
 
         Item(Int2 p, int fruitId, int objId) {
             pos = p;
@@ -182,7 +191,7 @@ public class Match3 extends EventHandler {
         return count;
     }
 
-    void checkFruits(Item item) {
+    void checkFruits(Item item) throws IOException, InterruptedException {
         Int2 pos = item.pos;
         int fruit = item.fruit;
 
@@ -192,10 +201,32 @@ public class Match3 extends EventHandler {
         int down = countFruits(pos, fruit, new Int2(0, 1));
 
         System.out.println(String.format("%s left:%d, right:%d, up:%d, down:%d", item.toString(), left, right, up, down));
+
+        if (left + right > 1) {
+            for (int i = pos.x-left; i <= pos.x+right; i++) {
+                Item m = board.get(i, pos.y);
+                if (!m.removed) {
+                    m.removed = true;
+                    nx.playClipWait(m.id, 1);
+                }
+
+            }
+        }
+
+        if (up + down > 1) {
+            for (int i = pos.y-up; i <= pos.y+down; i++) {
+                Item m = board.get(pos.x, i);
+                if (!m.removed) {
+                    m.removed = true;
+                    nx.playClipWait(m.id, 1);
+                }
+
+            }
+        }
     }
 
     @Override
-    public void onEvent(EventInfo info) throws IOException {
+    public void onEvent(EventInfo info) throws IOException, InterruptedException {
         if (moveType == MoveType.AUTO) {
             if (other != null) {
                 Int2 origin = posOrigin.floor();
