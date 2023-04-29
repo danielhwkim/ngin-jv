@@ -414,9 +414,10 @@ public class Nx extends Ngin {
         sendCmd(c);
     }      
 
-    public void timer(int id, float time) throws IOException {
+    public void timer(int id, float time, String name) throws IOException {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("timer");
+        c.addStrings(name);
         c.addInts(id);
         c.addFloats(time);                  
         sendCmd(c);
