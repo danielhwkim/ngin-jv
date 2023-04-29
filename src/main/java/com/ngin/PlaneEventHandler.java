@@ -90,7 +90,7 @@ public class PlaneEventHandler extends EventHandler {
         nx.sendObjWait(obj);
 
         nx.forward(newId, 0, 20);
-        nx.timer(newId, (float)0.7);
+        nx.timer(newId, (float)0.7, "missile");
     }
 
     @Override
