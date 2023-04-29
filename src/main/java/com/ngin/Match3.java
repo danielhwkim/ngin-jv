@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -68,6 +69,7 @@ public class Match3 extends EventHandler {
 
     class Board {
         private Item[][] items;
+
         int width;
         int height;
 
@@ -85,13 +87,25 @@ public class Match3 extends EventHandler {
             return get(pos.x, pos.y);
         }
 
+        Item remove(Int2 pos) {
+            Item m = get(pos.x, pos.y);
+            setNull(pos.x, pos.y);
+            return m;
+        }
+
         void set(Item item) {
+            assert items[item.pos.x][item.pos.y] == null;
             items[item.pos.x][item.pos.y] = item;
         }
+
+        void setNull(int x, int y) {
+            items[x][y] = null;
+        }
+
         
         void exchange(Int2 i1, Int2 i2) {
-            Item item1 = get(i1);
-            Item item2 = get(i2);
+            Item item1 = remove(i1);
+            Item item2 = remove(i2);
             item1.pos = i2;
             item2.pos = i1;
             set(item1);
@@ -100,6 +114,20 @@ public class Match3 extends EventHandler {
 
         boolean inside(Int2 pos) {
             return pos.x >= 0 && pos.x < width && pos.y >= 0 && pos.y < height;
+        }
+
+        @Override
+        public String toString() {
+            String str = "";
+            for (int i=0; i<height; i++) {
+                for (int j=0; j<width; j++) {
+                    Item m = get(j, i);
+                    str += (m != null)? fruitNames[m.fruit].charAt(0) :" ";
+                }
+                str += "\n";
+            }
+
+            return str;
         }
     }
 
@@ -184,14 +212,14 @@ public class Match3 extends EventHandler {
     int countFruits(Int2 ori, int fruit, Int2 d) {
         int count = 0;
         Int2 pos = ori.add(d);
-        while(board.inside(pos) && board.get(pos).fruit == fruit) {
+        while(board.inside(pos) && board.get(pos) != null && board.get(pos).fruit == fruit) {
             count += 1;            
             pos = pos.add(d);
         }
         return count;
     }
 
-    void checkFruits(Item item) throws IOException, InterruptedException {
+    boolean checkFruits(Item item) throws IOException, InterruptedException {
         Int2 pos = item.pos;
         int fruit = item.fruit;
 
@@ -199,6 +227,7 @@ public class Match3 extends EventHandler {
         int right = countFruits(pos, fruit, new Int2(1, 0));
         int up = countFruits(pos, fruit, new Int2(0, -1));
         int down = countFruits(pos, fruit, new Int2(0, 1));
+        boolean match = false;
 
         System.out.println(String.format("%s left:%d, right:%d, up:%d, down:%d", item.toString(), left, right, up, down));
 
@@ -207,7 +236,8 @@ public class Match3 extends EventHandler {
                 Item m = board.get(i, pos.y);
                 if (!m.removed) {
                     m.removed = true;
-                    nx.playClipWait(m.id, 1);
+                    nx.playClip(m.id, fruitNames.length);
+                    match = true;
                 }
 
             }
@@ -218,11 +248,13 @@ public class Match3 extends EventHandler {
                 Item m = board.get(pos.x, i);
                 if (!m.removed) {
                     m.removed = true;
-                    nx.playClipWait(m.id, 1);
+                    nx.playClip(m.id, fruitNames.length);
+                    match = true;
                 }
 
             }
         }
+        return match;
     }
 
     @Override
@@ -236,8 +268,48 @@ public class Match3 extends EventHandler {
                 Item i2 = board.get(other);
 
                 if (i1.fruit != i2.fruit) {
-                    checkFruits(i1);
-                    checkFruits(i2);
+                    if (checkFruits(i1) || checkFruits(i2)) {
+                        LinkedList<Item> list = new LinkedList<>();
+
+                        for (int i=0; i<board.width; i++) {
+                            int removes = 0;
+                            for (int j=board.height-1; j>=0; j--) {
+                                Item m = board.get(i, j);
+                                if (m == null) continue;
+                                assert m != null;
+                                if (m.removed) {
+                                    board.setNull(m.pos.x, m.pos.y);
+                                    removes += 1;
+                                    m.pos.y = -removes;
+                                    nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, -removes + 0.5f), m.id, 0);
+                                    list.add(m);
+                                } else if (removes>0) {
+                                    board.setNull(m.pos.x, m.pos.y);
+                                    m.pos.y += removes;
+                                    board.set(m);
+                                    nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, 0.2f*removes);
+                                }
+                            }
+
+                            while (!list.isEmpty()) {
+                                Item m = list.removeFirst();
+                                m.fruit = 1;
+                                m.removed = false;
+                                nx.playClip(m.id, 1);
+                                //System.out.println(m);
+                                m.pos.y += removes;
+                                board.set(m);
+                                nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, 0.2f*removes);
+                            }
+
+                        }
+
+
+
+
+
+                        System.out.println(board);
+                    }
                 }
             }
             moveType = MoveType.IDLE;
