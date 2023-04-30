@@ -317,9 +317,10 @@ public class Match3 extends EventHandler {
                     if (a.fruit == b.fruit || !findMatches()) {
                         exchange(a.pos, b.pos);
                         moveType = MoveType.IDLE;
+                    } else {
+                        nx.timer(0, 0.3f, "match");
+                        nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 1);                        
                     }
-                    nx.timer(0, 0.3f, "match");
-                    nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 1);
                 } else {
                     assert changes.size() == 0;
                     moveType = MoveType.IDLE;
@@ -329,8 +330,9 @@ public class Match3 extends EventHandler {
             int max = removeMatches();
             if (max > 0) {
                 nx.timer(0, 0.2f*max, "chain");
+            } else {
+                moveType = MoveType.IDLE;
             }
-            moveType = MoveType.IDLE;
         } else if (info.info.equals("chain")) {
             assert moveType == MoveType.AUTO;
             if (findMatches()) {
