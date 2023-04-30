@@ -1,38 +1,17 @@
 package com.ngin;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
-
-import org.json.*;
-
-import commander.Command.BodyShape;
-import commander.Command.JoystickDirectionals;
 import commander.Command.NClip;
 import commander.Command.NClipType;
-import commander.Command.NObject;
 import commander.Command.NStageInfo;
-import commander.Command.NBody;
 import commander.Command.NVisual;
 import commander.Command.TouchMotion;
-import commander.Command.NObject.Builder;
-import java.io.IOException;
-import java.util.List;
-
-import commander.Command.TouchMotion;
-
 public class Match3 extends EventHandler {
     Nx nx;
- 
     Board board;
-
     Vec2 posOrigin;
-    //Int2 other;
 
     final String[] fruitNames = {"Bananas", "Pineapple", "Cherries", "Orange"}; // "Apple", "Melon", "Strawberry", "Kiwi"};
 
@@ -340,6 +319,7 @@ public class Match3 extends EventHandler {
                         moveType = MoveType.IDLE;
                     }
                     nx.timer(0, 0.3f, "match");
+                    nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 1);
                 } else {
                     assert changes.size() == 0;
                     moveType = MoveType.IDLE;
@@ -355,7 +335,9 @@ public class Match3 extends EventHandler {
             assert moveType == MoveType.AUTO;
             if (findMatches()) {
                 nx.timer(0, 0.3f, "match");
+                nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 1);                
             } else {
+                nx.clipSync(fruitIds);
                 moveType = MoveType.IDLE;
             }
         }
@@ -400,6 +382,8 @@ public class Match3 extends EventHandler {
             }      
         }
     }
+
+    ArrayList<Integer> fruitIds;
     
     public void run() {
         try
@@ -415,12 +399,15 @@ public class Match3 extends EventHandler {
             Random rand = new Random();
 
             board = new Board((int)width, (int)height);
+            fruitIds = new ArrayList<Integer>();
 
             
             for (int x =0; x<width; x++) {
                 for (int y = 0; y<height; y++) {
                     int fruit = rand.nextInt(fruitNames.length);
-                    Item item = new Item(new Int2(x, y), fruit, x*100 + y);
+                    int id = x*100 + y;
+                    Item item = new Item(new Int2(x, y), fruit, id);
+                    fruitIds.add(id);
                     board.set(item);
                     addFruit(item);
                 }

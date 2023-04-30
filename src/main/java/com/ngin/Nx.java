@@ -14,6 +14,7 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.EventListener;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -419,7 +420,122 @@ public class Nx extends Ngin {
         c.addStrings("timer");
         c.addStrings(name);
         c.addInts(id);
-        c.addFloats(time);                  
+        c.addFloats(time);
+        sendCmd(c);
+    }
+    
+    public void audio(String cmd, String path) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("audio");
+        c.addStrings(cmd);
+        c.addStrings(path);        
+        sendCmd(c);
+    }
+
+    public void audioPlay(String path, float volume) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("audio");
+        c.addStrings("play");
+        c.addStrings(path);
+        c.addFloats(volume);        
+        sendCmd(c);
+    }
+
+    public void audioLoop(String path, float volume) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("audio");
+        c.addStrings("loop");
+        c.addStrings(path);
+        c.addFloats(volume);        
         sendCmd(c);
     }    
+
+    public void audioPool(String path, int maxPlayers) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("audio");
+        c.addStrings("pool");
+        c.addStrings(path);
+        c.addInts(maxPlayers);        
+        sendCmd(c);
+    }
+
+    public void bgmPlay(String path, float volume) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("bgm");
+        c.addStrings("play");
+        c.addStrings(path);
+        c.addFloats(volume);    
+        sendCmd(c);
+    }
+
+    public void bgmStop() throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("bgm");
+        c.addStrings("stop");
+        sendCmd(c);
+    }
+
+    public void bgmPause() throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("bgm");
+        c.addStrings("pause");
+        sendCmd(c);
+    }
+
+    public void bgmResume() throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("bgm");
+        c.addStrings("resume");
+        sendCmd(c);
+    }
+
+    public void bgmVolume(float volume) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("bgm");
+        c.addStrings("volume");
+        c.addFloats(volume);    
+        sendCmd(c);
+    }
+
+    public void audioCacheLoad(String[] pathes) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("audioCache");
+        c.addStrings("load");
+        c.addAllStrings(Arrays.asList(pathes));
+        sendCmd(c);
+    }
+
+    public void audioCacheClear() throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("audioCache");
+        c.addStrings("clear");
+        sendCmd(c);
+    }
+
+    public void audioCacheClear(String[] pathes) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("audioCache");
+        c.addStrings("clear");
+        c.addAllStrings(Arrays.asList(pathes));        
+        sendCmd(c);
+    }
+
+    public void distance(int id1, int id2) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("distance");
+        c.addInts(id1);
+        c.addInts(id2);        
+        sendCmd(c);
+    }
+
+    public void clipSync(Iterable<Integer> ints) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("clipSync");
+        c.addAllInts(ints);
+        /*
+        for (int i=0; i<ids.length; i++) {
+            c.addInts(ids[i]);
+        }*/
+        sendCmd(c);
+    }      
 }
