@@ -192,23 +192,24 @@ public class Match3 extends EventHandler {
 
     MoveType moveType = MoveType.IDLE;
 
+    final float exchangeTime = 0.3f;
 
+    void exchange(Int2 a, Int2 b) throws IOException {
+        changes.clear();
+        changes.addFirst(board.get(a));
+        changes.addFirst(board.get(b));
+        nx.sendTransform(new Transform().setTranslating(a.x + 0.5f, a.y + 0.5f), board.get(b).id, exchangeTime);
+        nx.sendTransformEvent(new Transform().setTranslating(b.x + 0.5f, b.y + 0.5f), board.get(a).id, exchangeTime);
+        board.exchange(a, b);
+    }
 
     void move(Int2 d) throws IOException {
         Int2 origin = posOrigin.floor();
         Int2 other = origin.add(d);
-        float time = 0.3f;
-
         if (board.inside(other)) {
-            changes.clear();
-            changes.addFirst(board.get(other));
-            changes.addFirst(board.get(origin));
-            nx.sendTransform(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), board.get(other).id, time);
-            nx.sendTransformEvent(new Transform().setTranslating(other.x + 0.5f, other.y + 0.5f), board.get(origin).id, time);
-            board.exchange(origin, other);
+            exchange(origin, other);
         } else {
-            other = null;            
-            nx.sendTransformEvent(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), board.get(origin).id, time);
+            nx.sendTransformEvent(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), board.get(origin).id, exchangeTime);
         }
     }
 
@@ -318,9 +319,6 @@ public class Match3 extends EventHandler {
 
         if (changes.size()>0) {
             System.out.println(changes);
-            if (changes.size() == 2) {
-                if (changes.get(0).fruit == changes.get(1).fruit) return false;
-            }
 
             for (Item item : changes) {
                 if (checkFruits(item)) found = true;
@@ -334,9 +332,16 @@ public class Match3 extends EventHandler {
         System.out.println(info);
         if (info.info.equals("transform")) {
             if (moveType == MoveType.AUTO) {
-                if (findMatches()) {
+                if (changes.size() == 2) {
+                    Item a = changes.get(0);
+                    Item b = changes.get(1);
+                    if (a.fruit == b.fruit || !findMatches()) {
+                        exchange(a.pos, b.pos);
+                        moveType = MoveType.IDLE;
+                    }
                     nx.timer(0, 0.3f, "match");
                 } else {
+                    assert changes.size() == 0;
                     moveType = MoveType.IDLE;
                 }
             }
