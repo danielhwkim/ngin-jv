@@ -1,13 +1,7 @@
 package com.ngin;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Random;
-import commander.Command.NClip;
-import commander.Command.NClipType;
-import commander.Command.NStageInfo;
-import commander.Command.NVisual;
-import commander.Command.TouchMotion;
+import java.util.*;
+import commander.Command.*;
 public class Match3 extends EventHandler {
     Nx nx;
     Board board;
