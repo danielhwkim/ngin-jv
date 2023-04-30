@@ -32,9 +32,9 @@ public class Match3 extends EventHandler {
     Board board;
 
     Vec2 posOrigin;
-    Int2 other;
+    //Int2 other;
 
-    final String[] fruitNames = {"Bananas", "Pineapple", "Cherries", "Orange", "Apple", "Melon", "Strawberry", "Kiwi"};
+    final String[] fruitNames = {"Bananas", "Pineapple", "Cherries", "Orange"}; // "Apple", "Melon", "Strawberry", "Kiwi"};
 
     void addFruit(Item item) throws IOException {
         NClip.Builder[] cs = new NClip.Builder[fruitNames.length+1];
@@ -196,10 +196,13 @@ public class Match3 extends EventHandler {
 
     void move(Int2 d) throws IOException {
         Int2 origin = posOrigin.floor();
-        other = origin.add(d);
+        Int2 other = origin.add(d);
         float time = 0.3f;
 
         if (board.inside(other)) {
+            changes.clear();
+            changes.addFirst(board.get(other));
+            changes.addFirst(board.get(origin));
             nx.sendTransform(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), board.get(other).id, time);
             nx.sendTransformEvent(new Transform().setTranslating(other.x + 0.5f, other.y + 0.5f), board.get(origin).id, time);
             board.exchange(origin, other);
@@ -257,70 +260,100 @@ public class Match3 extends EventHandler {
         return match;
     }
 
+    int removeMatches() throws IOException, InterruptedException {
+
+        LinkedList<Item> list = new LinkedList<>();
+        int maxRemoved = 0;
+
+        changes.clear();
+
+        for (int i=0; i<board.width; i++) {
+            int countRemoved = 0;
+            for (int j=board.height-1; j>=0; j--) {
+                Item m = board.get(i, j);
+                if (m == null) continue;
+                assert m != null;
+                if (m.removed) {
+                    board.setNull(m.pos.x, m.pos.y);
+                    countRemoved += 1;
+                    m.pos.y = -countRemoved;
+                    nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, -countRemoved + 0.5f), m.id, 0);
+                    list.add(m);
+                } else if (countRemoved>0) {
+                    board.setNull(m.pos.x, m.pos.y);
+                    m.pos.y += countRemoved;
+                    board.set(m);
+                    changes.addFirst(m);
+                    nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, 0.2f*countRemoved);
+                }
+            }
+
+            while (!list.isEmpty()) {
+                Item m = list.removeFirst();
+                Random rand = new Random();
+                int fruit = rand.nextInt(fruitNames.length);
+
+                m.fruit = fruit;
+                m.removed = false;
+                nx.playClip(m.id, fruit);
+                //System.out.println(m);
+                m.pos.y += countRemoved;
+                board.set(m);
+                changes.addFirst(m);                
+                nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, 0.2f*countRemoved);
+            }
+
+            if (countRemoved > maxRemoved) {
+                maxRemoved = countRemoved;
+            }
+        }
+        System.out.println(board);
+        return maxRemoved;
+    }
+
+    LinkedList<Item> changes = new LinkedList<>();
+
+    boolean findMatches() throws IOException, InterruptedException {
+        boolean found = false;
+
+        if (changes.size()>0) {
+            System.out.println(changes);
+            if (changes.size() == 2) {
+                if (changes.get(0).fruit == changes.get(1).fruit) return false;
+            }
+
+            for (Item item : changes) {
+                if (checkFruits(item)) found = true;
+            }
+        }
+        return found;
+    }
+
     @Override
     public void onEvent(EventInfo info) throws IOException, InterruptedException {
         System.out.println(info);
         if (info.info.equals("transform")) {
             if (moveType == MoveType.AUTO) {
-                if (other != null) {
-                    Int2 origin = posOrigin.floor();
-                    System.out.println(origin);
-                    System.out.println(other);
-                    Item i1 = board.get(origin);
-                    Item i2 = board.get(other);
-    
-                    if (i1.fruit != i2.fruit) {
-                        if (checkFruits(i1) || checkFruits(i2)) {
-                            nx.timer(0, 0.3f, "match");
-                            return;
-                        }
-                    }
+                if (findMatches()) {
+                    nx.timer(0, 0.3f, "match");
+                } else {
+                    moveType = MoveType.IDLE;
                 }
-                moveType = MoveType.IDLE;
             }
         } else if (info.info.equals("match")) {
-
-            LinkedList<Item> list = new LinkedList<>();
-    
-            for (int i=0; i<board.width; i++) {
-                int removes = 0;
-                for (int j=board.height-1; j>=0; j--) {
-                    Item m = board.get(i, j);
-                    if (m == null) continue;
-                    assert m != null;
-                    if (m.removed) {
-                        board.setNull(m.pos.x, m.pos.y);
-                        removes += 1;
-                        m.pos.y = -removes;
-                        nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, -removes + 0.5f), m.id, 0);
-                        list.add(m);
-                    } else if (removes>0) {
-                        board.setNull(m.pos.x, m.pos.y);
-                        m.pos.y += removes;
-                        board.set(m);
-                        nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, 0.2f*removes);
-                    }
-                }
-
-                while (!list.isEmpty()) {
-                    Item m = list.removeFirst();
-                    Random rand = new Random();
-                    int fruit = rand.nextInt(fruitNames.length);
-
-                    m.fruit = fruit;
-                    m.removed = false;
-                    nx.playClip(m.id, fruit);
-                    //System.out.println(m);
-                    m.pos.y += removes;
-                    board.set(m);
-                    nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, 0.2f*removes);
-                }
-
+            int max = removeMatches();
+            if (max > 0) {
+                nx.timer(0, 0.2f*max, "chain");
             }
-            System.out.println(board);
             moveType = MoveType.IDLE;
+        } else if (info.info.equals("chain")) {
+            assert moveType == MoveType.AUTO;
+            if (findMatches()) {
+                nx.timer(0, 0.3f, "match");
+            } else {
+                moveType = MoveType.IDLE;
+            }
         }
-
     }
 
     @Override
