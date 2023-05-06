@@ -7,6 +7,21 @@ public class Match3 extends EventHandler {
     Board board;
     Vec2 posOrigin;
 
+    enum MoveType {
+        IDLE,
+        USER,
+        AUTO
+    }
+
+    MoveType moveType = MoveType.IDLE;
+
+    static final float EXCHANGE_SEC = 0.3f;
+    static final float MOVEMENT_SEC = 0.2f;
+    static final float OFFSET_X = 0.5f;
+    static final float OFFSET_Y = 0.5f;
+
+    Random rand = new Random();
+
     final String[] fruitNames = {"Bananas", "Pineapple", "Cherries", "Orange"}; // "Apple", "Melon", "Strawberry", "Kiwi"};
 
     void addFruit(Item item) throws IOException {
@@ -41,6 +56,7 @@ public class Match3 extends EventHandler {
     }
 
     class Board {
+        private ArrayList<Integer> idList;
         private Item[][] items;
 
         int width;
@@ -50,6 +66,23 @@ public class Match3 extends EventHandler {
             width = w;
             height = h;
             items = new Item[width][height];
+            idList = new ArrayList<>();
+        }
+
+        void buildIdList() {
+            idList.clear();
+            for (int i=0; i<height; i++) {
+                for (int j=0; j<width; j++) {
+                    Item item = get(j, i);
+                    if (item != null) {
+                        idList.add(item.id);
+                    }
+                }
+            }
+        }
+
+        void syncClips() throws IOException {
+            nx.syncClips(idList);
         }
 
         Item get(int x, int y) {
@@ -91,16 +124,16 @@ public class Match3 extends EventHandler {
 
         @Override
         public String toString() {
-            String str = "";
+            StringBuilder str = new StringBuilder();
             for (int i=0; i<height; i++) {
                 for (int j=0; j<width; j++) {
                     Item m = get(j, i);
-                    str += (m != null)? fruitNames[m.fruit].charAt(0) :" ";
+                    str.append((m != null)? fruitNames[m.fruit].charAt(0) : ' ');
                 }
-                str += "\n";
+                str.append('\n');
             }
 
-            return str;
+            return str.toString();
         }
     }
 
@@ -157,22 +190,12 @@ public class Match3 extends EventHandler {
         }
     }
 
-    enum MoveType {
-        IDLE,
-        USER,
-        AUTO
-    }
-
-    MoveType moveType = MoveType.IDLE;
-
-    final float exchangeTime = 0.3f;
-
     void exchange(Int2 a, Int2 b) throws IOException {
         changes.clear();
         changes.addFirst(board.get(a));
         changes.addFirst(board.get(b));
-        nx.sendTransform(new Transform().setTranslating(a.x + 0.5f, a.y + 0.5f), board.get(b).id, exchangeTime);
-        nx.sendTransformEvent(new Transform().setTranslating(b.x + 0.5f, b.y + 0.5f), board.get(a).id, exchangeTime);
+        nx.sendTransform(new Transform().setTranslating(a.x + 0.5f, a.y + 0.5f), board.get(b).id, EXCHANGE_SEC);
+        nx.sendTransformEvent(new Transform().setTranslating(b.x + 0.5f, b.y + 0.5f), board.get(a).id, EXCHANGE_SEC);
         board.exchange(a, b);
     }
 
@@ -182,7 +205,7 @@ public class Match3 extends EventHandler {
         if (board.inside(other)) {
             exchange(origin, other);
         } else {
-            nx.sendTransformEvent(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), board.get(origin).id, exchangeTime);
+            nx.sendTransformEvent(new Transform().setTranslating(origin.x + 0.5f, origin.y + 0.5f), board.get(origin).id, EXCHANGE_SEC);
         }
     }
 
@@ -258,7 +281,7 @@ public class Match3 extends EventHandler {
                     m.pos.y += countRemoved;
                     board.set(m);
                     changes.addFirst(m);
-                    nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, 0.2f*countRemoved);
+                    nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, MOVEMENT_SEC*countRemoved);
                 }
             }
 
@@ -274,7 +297,7 @@ public class Match3 extends EventHandler {
                 m.pos.y += countRemoved;
                 board.set(m);
                 changes.addFirst(m);                
-                nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, 0.2f*countRemoved);
+                nx.sendTransform(new Transform().setTranslating(m.pos.x + 0.5f, m.pos.y + 0.5f), m.id, MOVEMENT_SEC*countRemoved);
             }
 
             if (countRemoved > maxRemoved) {
@@ -290,7 +313,7 @@ public class Match3 extends EventHandler {
     boolean findMatches() throws IOException, InterruptedException {
         boolean found = false;
 
-        if (changes.size()>0) {
+        if (!changes.isEmpty()) {
             System.out.println(changes);
 
             for (Item item : changes) {
@@ -312,28 +335,28 @@ public class Match3 extends EventHandler {
                         exchange(a.pos, b.pos);
                         moveType = MoveType.IDLE;
                     } else {
-                        nx.timer(0, 0.3f, "match");
+                        nx.timer(0, EXCHANGE_SEC, "match");
                         nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 1);                        
                     }
                 } else {
-                    assert changes.size() == 0;
+                    assert changes.isEmpty();
                     moveType = MoveType.IDLE;
                 }
             }
         } else if (info.info.equals("match")) {
             int max = removeMatches();
             if (max > 0) {
-                nx.timer(0, 0.2f*max, "chain");
+                nx.timer(0, MOVEMENT_SEC*max, "chain");
             } else {
                 moveType = MoveType.IDLE;
             }
         } else if (info.info.equals("chain")) {
             assert moveType == MoveType.AUTO;
             if (findMatches()) {
-                nx.timer(0, 0.3f, "match");
+                nx.timer(0, EXCHANGE_SEC, "match");
                 nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 1);                
             } else {
-                nx.clipSync(fruitIds);
+                board.syncClips();
                 moveType = MoveType.IDLE;
             }
         }
@@ -378,37 +401,31 @@ public class Match3 extends EventHandler {
             }      
         }
     }
-
-    ArrayList<Integer> fruitIds;
     
     public void run() {
         try
         {
             nx = new Nx();
             float width = 5;
-            float height = 10;   
+            float height = 10;
 
             NStageInfo.Builder builder = nx.stageBuilder(width, height);
             builder.setTap(TouchMotion.ALL);
             nx.sendStageWait(builder);
 
-            Random rand = new Random();
-
             board = new Board((int)width, (int)height);
-            fruitIds = new ArrayList<Integer>();
-
             
             for (int x =0; x<width; x++) {
                 for (int y = 0; y<height; y++) {
                     int fruit = rand.nextInt(fruitNames.length);
                     int id = x*100 + y;
                     Item item = new Item(new Int2(x, y), fruit, id);
-                    fruitIds.add(id);
                     board.set(item);
                     addFruit(item);
                 }
             }
 
+            board.buildIdList();
             nx.runEventLoop(this);
         }
         catch( Exception e )

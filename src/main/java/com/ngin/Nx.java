@@ -528,9 +528,9 @@ public class Nx extends Ngin {
         sendCmd(c);
     }
 
-    public void clipSync(Iterable<Integer> ints) throws IOException {
+    public void syncClips(Iterable<Integer> ints) throws IOException {
         Cmd.Builder c = Cmd.newBuilder();
-        c.addStrings("clipSync");
+        c.addStrings("syncClips");
         c.addAllInts(ints);
         /*
         for (int i=0; i<ids.length; i++) {
