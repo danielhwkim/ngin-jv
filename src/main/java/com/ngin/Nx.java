@@ -31,7 +31,7 @@ interface IntStringFuction {
 }
 
 interface VoidFuction {
-    void run();
+    void run() throws IOException, InterruptedException;
 }
 
 public class Nx extends Ngin {
@@ -814,7 +814,12 @@ public class Nx extends Ngin {
             v.setAnchorX(x);
             v.setAnchorY(y);
             return this;
-        }          
+        }
+
+        public Visible setCurrent(int value) {
+            v.setCurrent(value);
+            return this;
+        }
 
         public Visible addClip(String path, float width, float height, Iterable<Integer> indices) {
             v.addClips(clipBuilder(path, width, height, indices, NClipType.loop, defaultStepTime));

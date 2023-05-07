@@ -13,7 +13,7 @@ public class EventHandler {
         handlers.put(sn, method);
     }
 
-    public boolean processHandler(int sn) {
+    public boolean processHandler(int sn) throws IOException, InterruptedException {
         VoidFuction handler = handlers.get(sn);
         if (handler != null) {
             handler.run();

@@ -17,17 +17,16 @@ public class Match3 extends EventHandler {
 
         nx.new Stage(width, height).enableTap().enableDebug().sendWithAck();
         nx.new Visible(0.5f, 0.5f).addClip("Items/Fruits/Bananas.png", 32f, 32f).send(100, "fruit");
-        nx.timer(3, () -> {
-            try {
-                nx.new Visible(1.5f, 1.5f).addClip("Items/Fruits/Bananas.png", 32f, 32f).send(100, "fruit");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        nx.timer(1, () -> { 
+            nx.new Visible(1.5f, 1.5f).addClip("Items/Fruits/Bananas.png", 32f, 32f).sendWithAck(200, "fruit");
+            nx.new Transform().translate(5, 5).rotate((float)Math.PI*6).scale(2, 2).send(200, 2, () -> {
+                nx.new Transform().translate(1.5f, 1.5f).rotate(0).scale(1, 1).send(200, 2);
+            });
         });
 
         nx.runEventLoop(this);
     }
-    public static void main2( String[] args ) throws IOException, InterruptedException {
+    public static void main( String[] args ) throws IOException, InterruptedException {
         new Match3().run();
     }
 }

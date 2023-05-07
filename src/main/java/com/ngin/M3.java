@@ -1,6 +1,9 @@
 package com.ngin;
 import java.io.IOException;
 import java.util.*;
+
+import com.ngin.Nx.Visible;
+
 import commander.Command.*;
 public class M3 extends EventHandler {
     Nx nx;
@@ -25,16 +28,11 @@ public class M3 extends EventHandler {
     final String[] fruitNames = {"Bananas", "Pineapple", "Cherries", "Orange"}; // "Apple", "Melon", "Strawberry", "Kiwi"};
 
     void addFruit(Item item) throws IOException {
-        NClip.Builder[] cs = new NClip.Builder[fruitNames.length+1];
-
+        Visible obj = nx.new Visible(0.5f + item.pos.x, 0.5f + item.pos.y);
         for (int i=0; i<fruitNames.length; i++) {
-            cs[i] = nx.clipBuilder("Items/Fruits/" + fruitNames[i] + ".png", 32f, 32f, 0.05f);
+            obj.addClip("Items/Fruits/" + fruitNames[i] + ".png", 32f, 32f, 0.05f);
         }
-
-        cs[fruitNames.length] = nx.clipBuilder("Items/Fruits/Collected.png", 32f, 32f, NClipType.once, 0.05f);
-        NVisual.Builder v = nx.visualBuilder(cs, 0.5f + item.pos.x, 0.5f + item.pos.y);
-        v.setCurrent(item.fruit);
-        nx.sendObj(nx.objBuilder(item.id, "fruit").setVisual(v));   
+        obj.addClip("Items/Fruits/Collected.png", 32f, 32f, NClipType.once, 0.05f).setCurrent(item.fruit).send(item.id, "fruit");   
     }
 
     class Item {
@@ -190,31 +188,23 @@ public class M3 extends EventHandler {
         }
     }
 
-    void match() {
-        try {
-            int max;                                
-            max = removeMatches();
-            if (max > 0) {
-                nx.timer(MOVEMENT_SEC*max, () -> {
-                    assert moveType == MoveType.AUTO;
-                    try {
-                        if (findMatches()) {
-                            nx.timer(EXCHANGE_SEC,this::match);
-                            nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 0.1f);                
-                        } else {
-                            board.syncClips();
-                            moveType = MoveType.IDLE;
-                        }
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                });
-            } else {
-                moveType = MoveType.IDLE;
-            }                                
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+    void match() throws IOException, InterruptedException {
+        int max;                                
+        max = removeMatches();
+        if (max > 0) {
+            nx.timer(MOVEMENT_SEC*max, () -> {
+                assert moveType == MoveType.AUTO;
+                if (findMatches()) {
+                    nx.timer(EXCHANGE_SEC,this::match);
+                    nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 0.1f);                
+                } else {
+                    board.syncClips();
+                    moveType = MoveType.IDLE;
+                }
+            });
+        } else {
+            moveType = MoveType.IDLE;
+        }                                
     }
 
 
@@ -227,16 +217,12 @@ public class M3 extends EventHandler {
             if (moveType == MoveType.AUTO) {
                 Item aa = changes.get(0);
                 Item bb = changes.get(1);
-                try {
-                    if (aa.fruit == bb.fruit || !findMatches()) {
-                        exchange(aa.pos, bb.pos);
-                        moveType = MoveType.IDLE;
-                    } else {
-                        nx.timer(EXCHANGE_SEC, this::match);
-                        nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 0.1f);                        
-                    }
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
+                if (aa.fruit == bb.fruit || !findMatches()) {
+                    exchange(aa.pos, bb.pos);
+                    moveType = MoveType.IDLE;
+                } else {
+                    nx.timer(EXCHANGE_SEC, this::match);
+                    nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 0.1f);                        
                 }
             }
         });
@@ -335,13 +321,11 @@ public class M3 extends EventHandler {
 
             while (!list.isEmpty()) {
                 Item m = list.removeFirst();
-                Random rand = new Random();
                 int fruit = rand.nextInt(fruitNames.length);
 
                 m.fruit = fruit;
                 m.removed = false;
                 nx.playClip(m.id, fruit);
-                //System.out.println(m);
                 m.pos.y += countRemoved;
                 board.set(m);
                 changes.addFirst(m);                
@@ -413,35 +397,26 @@ public class M3 extends EventHandler {
         }
     }
     
-    public void run() {
-        try
-        {
-            nx = new Nx();
-            float width = 5;
-            float height = 10;
+    public void run() throws IOException, InterruptedException {
+        nx = new Nx();
+        float width = 5;
+        float height = 10;
 
-            NStageInfo.Builder builder = nx.stageBuilder(width, height);
-            builder.setTap(TouchMotion.ALL);
-            nx.sendStageWait(builder);
+        nx.new Stage(width, height).enableTap().enableDebug().sendWithAck();
 
-            board = new Board((int)width, (int)height);
-            
-            for (int x =0; x<width; x++) {
-                for (int y = 0; y<height; y++) {
-                    int fruit = rand.nextInt(fruitNames.length);
-                    int id = x*100 + y;
-                    Item item = new Item(new Int2(x, y), fruit, id);
-                    board.set(item);
-                    addFruit(item);
-                }
+        board = new Board((int)width, (int)height);
+        
+        for (int x =0; x<width; x++) {
+            for (int y = 0; y<height; y++) {
+                int fruit = rand.nextInt(fruitNames.length);
+                int id = x*100 + y;
+                Item item = new Item(new Int2(x, y), fruit, id);
+                board.set(item);
+                addFruit(item);
             }
+        }
 
-            board.buildIdList();
-            nx.runEventLoop(this);
-        }
-        catch( Exception e )
-        {
-            e.printStackTrace();
-        }
+        board.buildIdList();
+        nx.runEventLoop(this);
     }    
 }
