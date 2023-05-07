@@ -64,6 +64,6 @@ public class TapInfo {
     }
 
     public String toString() {
-        return String.format("TapInfo inputId:%s motion:%s (%f,%f)", touchInputId2String(inputId), touchMotion2String(motion), x, y);
+        return String.format("TapInfo motion:%s (x:%f, y:%f)", touchMotion2String(motion), x, y);
     }    
 }
