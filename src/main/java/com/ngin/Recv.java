@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
@@ -12,7 +13,7 @@ import commander.Command.*;
 
 public class Recv extends Thread {
     InputStream in;
-    Set<RemoteAction> remoteActions = new HashSet<>();
+    HashMap<Integer, RemoteAction> remoteActions = new HashMap<>();
     BlockingQueue<NEvent> q;
     boolean running = true;
 
@@ -23,23 +24,18 @@ public class Recv extends Thread {
 
     public RemoteAction addRemoteAction() throws InterruptedException {
         RemoteAction action = new RemoteAction();
-        remoteActions.add(action);
+        remoteActions.put(action.sn, action);
         return action;
     }
 
     public RemoteAction getRemoteAction(int sn) {
-        for (RemoteAction action : remoteActions) {
-            if (action.sn == sn) {
-                return action;
-            }
-        }
-        return null;
+        return remoteActions.get(sn);
     }
 
     public boolean processRemoteAction(NEvent event) {
         RemoteAction action = getRemoteAction(event.getInts(1));
         if (action != null) {
-            remoteActions.remove(action);
+            remoteActions.remove(action.sn);
             action.event = event;
             action.unlock();
             return true;

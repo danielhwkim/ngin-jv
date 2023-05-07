@@ -80,5 +80,5 @@ public class Ngin {
 
     public void sendCmd(Cmd.Builder builder) throws IOException {
         send(Head.cmd, builder.build().toByteArray());
-    }    
+    }
 }

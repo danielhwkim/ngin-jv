@@ -16,15 +16,26 @@ import java.nio.ByteOrder;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.EventListener;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.function.Consumer;
 
 import com.ngin.Transform.AckType;
 
 import commander.*;
 import commander.Command.*;
 
+interface IntStringFuction {
+    void run(int id, String info);
+}
+
+interface VoidFuction {
+    void run();
+}
+
 public class Nx extends Ngin {
+    EventHandler eventHandler;
 
     public Nx() throws IOException {
         super();
@@ -57,6 +68,7 @@ public class Nx extends Ngin {
         send(Head.object, builder.build().toByteArray());
     }
 
+    /*
     public void sendTransform(Transform transform, int id, float time, String type) throws IOException {
         Cmd.Builder c = transform.builder(id, time, type, AckType.NONE);
         sendCmd(c);
@@ -86,6 +98,8 @@ public class Nx extends Ngin {
         Cmd.Builder c = transform.builder(id, time, "easeInOut", AckType.EVENT);
         sendCmd(c);
     }
+    */
+
 
     public NStageInfo.Builder stageBuilder(float width, float height) {
         NStageInfo.Builder c = NStageInfo.newBuilder();
@@ -229,6 +243,7 @@ public class Nx extends Ngin {
 
 
     public void runEventLoop(EventHandler handler) throws IOException, InterruptedException {
+        eventHandler = handler;
         while (!handler.completed) {
             handler.handle(queue.take());
         }
@@ -423,6 +438,15 @@ public class Nx extends Ngin {
         c.addFloats(time);
         sendCmd(c);
     }
+
+    public void timer(float time, VoidFuction method) throws IOException {
+        Cmd.Builder c = Cmd.newBuilder();
+        c.addStrings("timer");
+        c.addFloats(time);
+        c.setSn(RemoteAction.getNewSn());
+        EventHandler.addHandler(c.getSn(), method);
+        sendCmd(c);
+    }    
     
     public void audio(String cmd, String path) throws IOException {
         Cmd.Builder c = Cmd.newBuilder();
@@ -537,5 +561,251 @@ public class Nx extends Ngin {
             c.addInts(ids[i]);
         }*/
         sendCmd(c);
-    }      
+    }
+
+    enum AckType{
+        NONE,
+        ACK,
+        EVENT
+    }
+    class Transform {
+        private boolean translating = false;
+        private float tx;
+        private float ty;
+        private boolean scaling = false;
+        private float sx;
+        private float sy;
+        private boolean rotating = false;
+        private float a;
+        private boolean opacity = false;
+        private float o;
+    
+        public Transform translate(float x, float y) {
+            this.tx = x;
+            this.ty = y;
+            this.translating = true;
+            return this;
+        }
+    
+        public Transform scale(float x, float y) {
+            this.sx = x;
+            this.sy = y;
+            this.scaling = true;
+            return this;
+        }
+    
+        public Transform rotate(float a) {
+            this.a = a;
+            this.rotating = true;
+            return this;
+        }
+    
+        public Transform setOpacity(float o) {
+          this.o = o;
+          this.opacity = true;
+          return this;
+        }
+    
+        private Cmd.Builder builder(int id, float time, String type, AckType ackType) {
+            Cmd.Builder c = Cmd.newBuilder();
+            c.addStrings("transform");
+            c.addStrings(type);
+            c.addInts(id);
+            c.addInts(ackType == AckType.ACK?1:((ackType == AckType.EVENT)?2:0));
+            c.addFloats(time);
+        
+            if (this.translating) {
+              c.addInts(1);
+              c.addFloats(this.tx);
+              c.addFloats(this.ty);
+            } else {
+              c.addInts(0);
+              c.addFloats(0);
+              c.addFloats(0);
+            }
+        
+            if (this.scaling) {
+              c.addInts(1);
+              c.addFloats(this.sx);
+              c.addFloats(this.sy);
+            } else {
+              c.addInts(0);
+              c.addFloats(0);
+              c.addFloats(0);
+            }
+        
+            if (this.rotating) {
+              c.addInts(1);
+              c.addFloats(this.a);
+            } else {
+              c.addInts(0);
+              c.addFloats(0);
+            }
+    
+            if (this.opacity) {
+              c.addInts(1);
+              c.addFloats(this.o);
+            } else {
+              c.addInts(0);
+              c.addFloats(0);
+            }
+        
+            return c;        
+        }
+    
+        Cmd.Builder builder(int id, float time) {
+            return builder(id, time, "easeInOut", AckType.NONE);
+        }
+
+        public void send(int id, float time, String type) throws IOException {
+            Cmd.Builder c = builder(id, time, type, AckType.NONE);
+            sendCmd(c);
+        }
+        
+        public void sendWithAck(int id, float time, String type) throws IOException, InterruptedException {
+            Cmd.Builder c = builder(id, time, type, AckType.ACK);
+            sendCmdWait(c);
+        }
+    
+        public void sendWithEvent(int id, float time, String type) throws IOException, InterruptedException {
+            Cmd.Builder c = builder(id, time, type, AckType.EVENT);
+            sendCmdWait(c);
+        }      
+    
+        public void send(int id, float time) throws IOException {
+            Cmd.Builder c = builder(id, time, "easeInOut", AckType.NONE);
+            sendCmd(c);
+        }
+        
+        public void sendWithAck(int id, float time) throws IOException, InterruptedException {
+            Cmd.Builder c = builder(id, time, "easeInOut", AckType.ACK);
+            sendCmdWait(c);
+        }
+    
+        public void sendWithEvent(int id, float time) throws IOException {
+            Cmd.Builder c = builder(id, time, "easeInOut", AckType.EVENT);
+            sendCmd(c);
+        }
+
+    
+        public void send(int id) throws IOException {
+            Cmd.Builder c = builder(id, 0, "easeInOut", AckType.NONE);
+            sendCmd(c);
+        }
+        
+        public void sendWithAck(int id) throws IOException, InterruptedException {
+            Cmd.Builder c = builder(id, 0, "easeInOut", AckType.ACK);
+            sendCmdWait(c);
+        }
+    
+        public void sendWithEvent(int id) throws IOException {
+            Cmd.Builder c = builder(id, 0, "easeInOut", AckType.EVENT);
+            sendCmd(c);
+        }
+    }
+
+    class Stage {
+        private NStageInfo.Builder builder;
+        Stage(float width, float height) {
+            builder = stageBuilder(width, height);
+        }
+
+        Stage enableDebug() {
+            builder.setDebug(true);
+            return this;
+        }
+
+        Stage enableTap() {
+            builder.setTap(TouchMotion.ALL);
+            return this;
+        }
+
+        Stage enableDebug(boolean value) {
+            builder.setDebug(value);
+            return this;
+        }   
+
+        void sendWithAck() throws IOException, InterruptedException {
+            sendStageWait(builder);
+        }
+
+        void send() throws IOException {
+            sendStage(builder);
+        }
+    }
+
+    static float defaultStepTime = 0.05f; 
+    class Visible {
+        private NVisual.Builder v;
+
+        Visible(float x, float y) {
+            v = NVisual.newBuilder();
+            v.setPriority(0);
+            v.setX(x);
+            v.setY(y);
+            v.setWidth(1);
+            v.setHeight(1);
+            v.setScaleX(1);
+            v.setScaleY(1);
+            v.setAnchorX(0.5f);
+            v.setAnchorY(0.5f);
+        }
+
+        public Visible setSize(float width, float height) {
+            v.setWidth(width);
+            v.setHeight(height);
+            return this;
+        }
+
+        public Visible setPriority(int value) {
+            v.setPriority(value);
+            return this;
+        }        
+
+        public Visible setPos(float x, float y) {
+            v.setX(x);
+            v.setY(y);
+            return this;
+        }
+
+        public Visible setScale(float x, float y) {
+            v.setScaleX(x);
+            v.setScaleY(y);
+            return this;
+        }
+
+        public Visible setAnchor(float x, float y) {
+            v.setAnchorX(x);
+            v.setAnchorY(y);
+            return this;
+        }          
+
+        public Visible addClip(String path, float width, float height, Iterable<Integer> indices) {
+            v.addClips(clipBuilder(path, width, height, indices, NClipType.loop, defaultStepTime));
+            return this;
+        }
+    
+        public Visible addClip(String path, float width, float height) {
+            v.addClips(clipBuilder(path, width, height, null, NClipType.loop, defaultStepTime));
+            return this;            
+        }
+    
+        public Visible addClip(String path, float width, float height, float stepTime) {
+            v.addClips(clipBuilder(path, width, height, null, NClipType.loop, stepTime));
+            return this;            
+        }
+    
+        public Visible addClip(String path, float width, float height, NClipType type, float stepTime) {
+            v.addClips(clipBuilder(path, width, height, null, type, stepTime));
+            return this;            
+        }        
+
+        void send(int id, String name) throws IOException {
+            sendObj(objBuilder(id, name).setVisual(v));   
+        }
+
+        void sendWithAck(int id, String name) throws IOException, InterruptedException {
+            sendObjWait(objBuilder(id, name).setVisual(v));   
+        }        
+    }
 }

@@ -4,7 +4,7 @@ public class App
 
 
 
-    public static void main( String[] args )
+    public static void main2( String[] args )
     {
 
         Stack.haha();
@@ -14,7 +14,7 @@ public class App
         //s.index = 4;
         System.out.println(s.remove());
 
-        new Match3().run();
+        new M3().run();
 
 
 

@@ -1,10 +1,27 @@
 package com.ngin;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.function.Consumer;
 
 import commander.Command.*;
 
 public class EventHandler {
     boolean completed = false;
+    static HashMap<Integer, VoidFuction> handlers = new HashMap<>();
+
+    static public void addHandler(int sn, VoidFuction method) {
+        handlers.put(sn, method);
+    }
+
+    public boolean processHandler(int sn) {
+        VoidFuction handler = handlers.get(sn);
+        if (handler != null) {
+            handler.run();
+            handlers.remove(sn);
+            return true;
+        }
+        return false;
+    }    
 
     protected void unexpected(String info) {
         System.out.println("Unexpected Event?:" + info);
@@ -20,7 +37,12 @@ public class EventHandler {
                 onContact(new ContactInfo(info));
                 break;
             case Head.event_VALUE:
-                onEvent(new EventInfo(info));
+                EventInfo event = new EventInfo(info);
+                if ("timeout".equals(event.type) && event.sn > 0) {
+                    processHandler(event.sn);
+                } else {
+                    onEvent(event);
+                }
                 break;
             case Head.tap_VALUE:
                 onTap(new TapInfo(info));
