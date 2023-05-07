@@ -35,7 +35,7 @@ interface VoidFuction {
 }
 
 public class Nx extends Ngin {
-    EventHandler eventHandler;
+    //EventHandler eventHandler;
 
     public Nx() throws IOException {
         super();
@@ -243,7 +243,7 @@ public class Nx extends Ngin {
 
 
     public void runEventLoop(EventHandler handler) throws IOException, InterruptedException {
-        eventHandler = handler;
+        //eventHandler = handler;
         while (!handler.completed) {
             handler.handle(queue.take());
         }
@@ -847,6 +847,14 @@ public class Nx extends Ngin {
 
         void sendWithAck(int id, String name) throws IOException, InterruptedException {
             sendObjWait(objBuilder(id, name).setVisual(v));   
+        }
+        
+        void send(int id) throws IOException {
+            send(id, "");
+        }
+
+        void sendWithAck(int id) throws IOException, InterruptedException {
+            sendWithAck(id, "");
         }        
     }
 }
