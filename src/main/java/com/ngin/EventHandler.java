@@ -38,7 +38,7 @@ public class EventHandler {
                 break;
             case Head.event_VALUE:
                 EventInfo event = new EventInfo(info);
-                if ("timeout".equals(event.type) && event.sn > 0) {
+                if ("callback".equals(event.type)) {
                     processHandler(event.sn);
                 } else {
                     onEvent(event);

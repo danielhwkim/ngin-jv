@@ -27,7 +27,7 @@ public class Match3 extends EventHandler {
 
         nx.runEventLoop(this);
     }
-    public static void main( String[] args ) throws IOException, InterruptedException {
+    public static void main2( String[] args ) throws IOException, InterruptedException {
         new Match3().run();
     }
 }

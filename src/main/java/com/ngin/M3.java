@@ -190,12 +190,56 @@ public class M3 extends EventHandler {
         }
     }
 
+    void match() {
+        try {
+            int max;                                
+            max = removeMatches();
+            if (max > 0) {
+                nx.timer(MOVEMENT_SEC*max, () -> {
+                    assert moveType == MoveType.AUTO;
+                    try {
+                        if (findMatches()) {
+                            nx.timer(EXCHANGE_SEC,this::match);
+                            nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 0.1f);                
+                        } else {
+                            board.syncClips();
+                            moveType = MoveType.IDLE;
+                        }
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+            } else {
+                moveType = MoveType.IDLE;
+            }                                
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     void exchange(Int2 a, Int2 b) throws IOException {
         changes.clear();
         changes.addFirst(board.get(a));
         changes.addFirst(board.get(b));
         nx.new Transform().translate(a.x + 0.5f, a.y + 0.5f).send(board.get(b).id, EXCHANGE_SEC);
-        nx.new Transform().translate(b.x + 0.5f, b.y + 0.5f).sendWithEvent(board.get(a).id, EXCHANGE_SEC);
+        nx.new Transform().translate(b.x + 0.5f, b.y + 0.5f).send(board.get(a).id, EXCHANGE_SEC, () -> {
+            if (moveType == MoveType.AUTO) {
+                Item aa = changes.get(0);
+                Item bb = changes.get(1);
+                try {
+                    if (aa.fruit == bb.fruit || !findMatches()) {
+                        exchange(aa.pos, bb.pos);
+                        moveType = MoveType.IDLE;
+                    } else {
+                        nx.timer(EXCHANGE_SEC, this::match);
+                        nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 0.1f);                        
+                    }
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         board.exchange(a, b);
     }
 
@@ -205,7 +249,11 @@ public class M3 extends EventHandler {
         if (board.inside(other)) {
             exchange(origin, other);
         } else {
-            nx.new Transform().translate(origin.x + 0.5f, origin.y + 0.5f).sendWithEvent(board.get(origin).id, EXCHANGE_SEC);
+            nx.new Transform().translate(origin.x + 0.5f, origin.y + 0.5f).send(board.get(origin).id, EXCHANGE_SEC, () -> {
+                if (moveType == MoveType.AUTO) {
+                        moveType = MoveType.IDLE;
+                }
+            });
         }
     }
 
@@ -323,44 +371,7 @@ public class M3 extends EventHandler {
         return found;
     }
 
-    @Override
-    public void onEvent(EventInfo info) throws IOException, InterruptedException {
-        System.out.println(info);
-        if (info.info.equals("transform")) {
-            if (moveType == MoveType.AUTO) {
-                if (changes.size() == 2) {
-                    Item a = changes.get(0);
-                    Item b = changes.get(1);
-                    if (a.fruit == b.fruit || !findMatches()) {
-                        exchange(a.pos, b.pos);
-                        moveType = MoveType.IDLE;
-                    } else {
-                        nx.timer(0, EXCHANGE_SEC, "match");
-                        nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 0.1f);                        
-                    }
-                } else {
-                    assert changes.isEmpty();
-                    moveType = MoveType.IDLE;
-                }
-            }
-        } else if (info.info.equals("match")) {
-            int max = removeMatches();
-            if (max > 0) {
-                nx.timer(0, MOVEMENT_SEC*max, "chain");
-            } else {
-                moveType = MoveType.IDLE;
-            }
-        } else if (info.info.equals("chain")) {
-            assert moveType == MoveType.AUTO;
-            if (findMatches()) {
-                nx.timer(0, EXCHANGE_SEC, "match");
-                nx.audioPlay("kenney_digitalaudio/powerUp7.mp3", 0.1f);                
-            } else {
-                board.syncClips();
-                moveType = MoveType.IDLE;
-            }
-        }
-    }
+
 
     @Override
     public void onTap(TapInfo info) throws IOException, InterruptedException {

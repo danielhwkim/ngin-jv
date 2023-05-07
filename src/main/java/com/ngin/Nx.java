@@ -566,7 +566,8 @@ public class Nx extends Ngin {
     enum AckType{
         NONE,
         ACK,
-        EVENT
+        EVENT,
+        CALLBACK
     }
     class Transform {
         private boolean translating = false;
@@ -611,7 +612,21 @@ public class Nx extends Ngin {
             c.addStrings("transform");
             c.addStrings(type);
             c.addInts(id);
-            c.addInts(ackType == AckType.ACK?1:((ackType == AckType.EVENT)?2:0));
+            switch(ackType) {
+                case NONE:
+                c.addInts(0);
+                break;
+                case ACK:
+                c.addInts(1);
+                break;                
+                case EVENT:
+                c.addInts(2);
+                break;                
+                case CALLBACK:
+                c.addInts(3);
+                break;
+            }
+
             c.addFloats(time);
         
             if (this.translating) {
@@ -661,6 +676,13 @@ public class Nx extends Ngin {
             Cmd.Builder c = builder(id, time, type, AckType.NONE);
             sendCmd(c);
         }
+
+        public void send(int id, float time, String type, VoidFuction method) throws IOException {
+            Cmd.Builder c = builder(id, time, type, AckType.CALLBACK);
+            c.setSn(RemoteAction.getNewSn());
+            EventHandler.addHandler(c.getSn(), method);
+            sendCmd(c);
+        }        
         
         public void sendWithAck(int id, float time, String type) throws IOException, InterruptedException {
             Cmd.Builder c = builder(id, time, type, AckType.ACK);
@@ -676,6 +698,13 @@ public class Nx extends Ngin {
             Cmd.Builder c = builder(id, time, "easeInOut", AckType.NONE);
             sendCmd(c);
         }
+
+        public void send(int id, float time, VoidFuction method) throws IOException {
+            Cmd.Builder c = builder(id, time, "easeInOut", AckType.CALLBACK);
+            c.setSn(RemoteAction.getNewSn());
+            EventHandler.addHandler(c.getSn(), method);            
+            sendCmd(c);
+        }        
         
         public void sendWithAck(int id, float time) throws IOException, InterruptedException {
             Cmd.Builder c = builder(id, time, "easeInOut", AckType.ACK);
@@ -692,6 +721,13 @@ public class Nx extends Ngin {
             Cmd.Builder c = builder(id, 0, "easeInOut", AckType.NONE);
             sendCmd(c);
         }
+
+        public void send(int id, VoidFuction method) throws IOException {
+            Cmd.Builder c = builder(id, 0, "easeInOut", AckType.CALLBACK);
+            c.setSn(RemoteAction.getNewSn());
+            EventHandler.addHandler(c.getSn(), method);            
+            sendCmd(c);
+        }        
         
         public void sendWithAck(int id) throws IOException, InterruptedException {
             Cmd.Builder c = builder(id, 0, "easeInOut", AckType.ACK);
