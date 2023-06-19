@@ -1,6 +1,7 @@
 package com.ngin;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import commander.Command.*;
 
@@ -587,6 +588,14 @@ public class Nx extends Ngin {
             this.translating = true;
             return this;
         }
+
+        public Transform translate(Vector2 v) {
+            return translate(v.x, v.y);
+        }
+
+        public Vector2 getTranslate() {
+            return new Vector2(tx, ty);
+        }
     
         public Transform scale(float x, float y) {
             this.sx = x;
@@ -594,19 +603,35 @@ public class Nx extends Ngin {
             this.scaling = true;
             return this;
         }
+
+        public Transform scale(Vector2 v) {
+            return scale(v.x, v.y);
+        }
+
+        public Vector2 getScale() {
+            return new Vector2(sx, sy);
+        }
     
         public Transform rotate(float a) {
             this.a = a;
             this.rotating = true;
             return this;
         }
-    
+
+        public float getRotate() {
+            return a;
+        }
+
         public Transform setOpacity(float o) {
           this.o = o;
           this.opacity = true;
           return this;
         }
-    
+
+        public float getOpacitye() {
+            return this.o;
+        }
+
         private Cmd.Builder builder(int id, float time, String type, AckType ackType) {
             Cmd.Builder c = Cmd.newBuilder();
             c.addStrings("transform");
@@ -770,9 +795,29 @@ public class Nx extends Ngin {
         }
     }
 
+    class Vector2 {
+        float x, y;
+
+        Vector2(double xd, double yd) {
+            x = (float) xd;
+            y = (float) yd;
+        }
+
+        Vector2(float xf, float yf) {
+            x = xf;
+            y = yf;
+        }
+
+        public Vector2 add(Vector2 v) {
+            x += v.x;
+            y += v.y;
+            return this;
+        }
+    }
+
     static float defaultStepTime = 0.05f; 
     class Visible {
-        public NVisual.Builder v;
+        private NVisual.Builder v;
 
         Visible(float x, float y) {
             v = NVisual.newBuilder();
@@ -787,10 +832,22 @@ public class Nx extends Ngin {
             v.setAnchorY(0.5f);
         }
 
+        Visible(Vector2 v) {
+            this((float)v.x, (float)v.y);
+        }
+
         public Visible setSize(float width, float height) {
             v.setWidth(width);
             v.setHeight(height);
             return this;
+        }
+
+        public Visible setSize(Vector2 v) {
+            return setSize(v.x, v.y);
+        }
+
+        public Vector2 getSize() {
+            return new Vector2(v.getWidth(), v.getHeight());
         }
 
         public Visible setPriority(int value) {
@@ -804,16 +861,40 @@ public class Nx extends Ngin {
             return this;
         }
 
+        public Visible setPos(Vector2 v) {
+            return setPos(v.x, v.y);
+        }
+
+        public Vector2 getPos() {
+            return new Vector2(v.getX(), v.getY());
+        }
+
         public Visible setScale(float x, float y) {
             v.setScaleX(x);
             v.setScaleY(y);
             return this;
         }
 
+        public Visible setScale(Vector2 v) {
+            return setScale(v.x, v.y);
+        }
+
+        public Vector2 getScale() {
+            return new Vector2(v.getScaleX(), v.getScaleY());
+        }
+                
         public Visible setAnchor(float x, float y) {
             v.setAnchorX(x);
             v.setAnchorY(y);
             return this;
+        }
+
+        public Visible setAnchor(Vector2 v) {
+            return setAnchor(v.x, v.y);
+        }
+
+        public Vector2 getAnchor() {
+            return new Vector2(v.getAnchorX(), v.getAnchorY());
         }
 
         public Visible setCurrent(int value) {
@@ -839,6 +920,31 @@ public class Nx extends Ngin {
         public Visible addClip(String path, float width, float height, NClipType type, float stepTime) {
             v.addClips(clipBuilder(path, width, height, null, type, stepTime));
             return this;            
+        }
+
+        public Visible addClip(String path, float width, float height, Iterable<Integer> indices, NClipType type, float stepTime) {
+            v.addClips(clipBuilder(path, width, height, indices, type, stepTime));
+            return this;            
+        }
+
+        public Visible addClip(String path, Vector2 v, Iterable<Integer> indices) {
+            return addClip(path, v.x, v.y, indices, NClipType.loop, defaultStepTime);
+        }
+    
+        public Visible addClip(String path, Vector2 v) {
+            return addClip(path, v.x, v.y, null, NClipType.loop, defaultStepTime);         
+        }
+    
+        public Visible addClip(String path, Vector2 v, float stepTime) {
+            return addClip(path, v.x, v.y, null, NClipType.loop, defaultStepTime);         
+        }
+    
+        public Visible addClip(String path, Vector2 v, NClipType type, float stepTime) {
+            return addClip(path, v.x, v.y, null, NClipType.loop, defaultStepTime);       
+        }
+
+        public Visible addClip(String path, Vector2 v, Iterable<Integer> indices, NClipType type, float stepTime) {
+            return addClip(path, v.x, v.y, indices, NClipType.loop, defaultStepTime);      
         }        
 
         public Visible send(int id, String name) throws IOException {

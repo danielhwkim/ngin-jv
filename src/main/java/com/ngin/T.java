@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.common.collect.HashMultimap;
+import com.ngin.Nx.Vector2;
 import com.ngin.Nx.Visible;
 
 public class T extends EventHandler {
@@ -35,8 +36,10 @@ public class T extends EventHandler {
 
         for (int i : m.keySet()) {
             Visible v = m.get(i);
-            v.setPos(v.v.getX(), v.v.getY()+10);
-            nx.new Transform().translate(v.v.getX(), v.v.getY()).send(i, 2.5f);
+            Vector2 v2 = v.getPos().add(nx.new Vector2(0, 10));
+
+            v.setPos(v2);
+            nx.new Transform().translate(v2).send(i, 2.5f);
         }        
 
         nx.runEventLoop(this);
