@@ -1,29 +1,7 @@
 package com.ngin;
 
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.lang.reflect.Constructor;
-import java.math.BigInteger;
-import java.net.Socket;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.io.FileReader;
 import java.util.Arrays;
-import java.util.EventListener;
-import java.util.LinkedList;
-import java.util.Scanner;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.function.Consumer;
-
-import com.ngin.Transform.AckType;
-
-import commander.*;
 import commander.Command.*;
 
 interface IntStringFuction {
@@ -41,7 +19,7 @@ public class Nx extends Ngin {
         super();
     }
 
-    public void sendStageWait(NStageInfo.Builder builder) throws IOException, InterruptedException  {
+    protected void sendStageWait(NStageInfo.Builder builder) throws IOException, InterruptedException  {
         RemoteAction action = receiver.addRemoteAction();
         builder.setSn(action.sn);
         System.out.println(String.format("sendStageWait(%d)", action.sn));
@@ -49,13 +27,13 @@ public class Nx extends Ngin {
         action.lock();
     }
 
-    public void sendStage(NStageInfo.Builder builder) throws IOException  {
+    protected void sendStage(NStageInfo.Builder builder) throws IOException  {
         send(Head.stage, builder.build().toByteArray());      
     }
 
 
 
-    public RemoteAction sendObjWait(NObject.Builder builder) throws IOException, InterruptedException {
+    protected RemoteAction sendObjWait(NObject.Builder builder) throws IOException, InterruptedException {
         RemoteAction action = receiver.addRemoteAction();
         builder.setSn(action.sn);
         System.out.println(String.format("sendObjWait(%d)", action.sn));
@@ -64,44 +42,11 @@ public class Nx extends Ngin {
         return action;
     }
 
-    public void sendObj(NObject.Builder builder) throws IOException {
+    protected void sendObj(NObject.Builder builder) throws IOException {
         send(Head.object, builder.build().toByteArray());
     }
 
-    /*
-    public void sendTransform(Transform transform, int id, float time, String type) throws IOException {
-        Cmd.Builder c = transform.builder(id, time, type, AckType.NONE);
-        sendCmd(c);
-    }
-    
-    public void sendTransformWait(Transform transform, int id, float time, String type) throws IOException, InterruptedException {
-        Cmd.Builder c = transform.builder(id, time, type, AckType.ACK);
-        sendCmdWait(c);
-    }
-
-    public void sendTransformEvent(Transform transform, int id, float time, String type) throws IOException, InterruptedException {
-        Cmd.Builder c = transform.builder(id, time, type, AckType.EVENT);
-        sendCmdWait(c);
-    }      
-
-    public void sendTransform(Transform transform, int id, float time) throws IOException {
-        Cmd.Builder c = transform.builder(id, time, "easeInOut", AckType.NONE);
-        sendCmd(c);
-    }
-    
-    public void sendTransformWait(Transform transform, int id, float time) throws IOException, InterruptedException {
-        Cmd.Builder c = transform.builder(id, time, "easeInOut", AckType.ACK);
-        sendCmdWait(c);
-    }
-
-    public void sendTransformEvent(Transform transform, int id, float time) throws IOException {
-        Cmd.Builder c = transform.builder(id, time, "easeInOut", AckType.EVENT);
-        sendCmd(c);
-    }
-    */
-
-
-    public NStageInfo.Builder stageBuilder(float width, float height) {
+    protected NStageInfo.Builder stageBuilder(float width, float height) {
         NStageInfo.Builder c = NStageInfo.newBuilder();
         c.setBackground("");
         c.setGravityX(0);
@@ -116,7 +61,7 @@ public class Nx extends Ngin {
         return c;
     }
 
-    public NObject.Builder tilesBuilder(String data, float tileWidth, float tileHeight, float width, float height, Iterable<Integer> indices) {
+    protected NObject.Builder tilesBuilder(String data, float tileWidth, float tileHeight, float width, float height, Iterable<Integer> indices) {
         NObject.Builder c = NObject.newBuilder();
         c.setTid(0);
         NVisual.Builder v = c.getVisualBuilder();
@@ -140,7 +85,7 @@ public class Nx extends Ngin {
         return c;
     }
 
-    public NObject.Builder objBuilder(int id, String info) {
+    protected NObject.Builder objBuilder(int id, String info) {
         NObject.Builder c = NObject.newBuilder();
         c.setTid(0);
         c.setId(id);
@@ -148,7 +93,7 @@ public class Nx extends Ngin {
         return c;
     }
 
-    public NBody.Builder bodyBuilder(BodyShape shape, float x, float y) {
+    protected NBody.Builder bodyBuilder(BodyShape shape, float x, float y) {
         NBody.Builder p = NBody.newBuilder();
         p.setX(x);
         p.setY(y);
@@ -170,7 +115,7 @@ public class Nx extends Ngin {
         return p;
     }
     
-    public NVisual.Builder visualBuilder(NClip.Builder[] builders, float x, float y) {
+    protected NVisual.Builder visualBuilder(NClip.Builder[] builders, float x, float y) {
         NVisual.Builder v = NVisual.newBuilder();
         v.setPriority(0);
         v.setX(x);
@@ -187,11 +132,11 @@ public class Nx extends Ngin {
         return v;
     }
 
-    public NVisual.Builder visualBuilder(NClip.Builder[] builders) {
+    protected NVisual.Builder visualBuilder(NClip.Builder[] builders) {
         return visualBuilder(builders, 0, 0);
     }
 
-    public NVisual.Builder visualBuilder(Iterable<NClip> values, float x, float y) {
+    protected NVisual.Builder visualBuilder(Iterable<NClip> values, float x, float y) {
         NVisual.Builder v = NVisual.newBuilder();
         v.setPriority(0);
         v.setX(x);
@@ -206,11 +151,11 @@ public class Nx extends Ngin {
         return v;
     }
 
-    public NVisual.Builder visualBuilder(Iterable<NClip> builders) {
+    protected NVisual.Builder visualBuilder(Iterable<NClip> builders) {
         return visualBuilder(builders, 0, 0);
     }    
 
-    public NClip.Builder clipBuilder(String data, float width, float height, Iterable<Integer> indices, NClipType type, float stepTime) {
+    protected NClip.Builder clipBuilder(String data, float width, float height, Iterable<Integer> indices, NClipType type, float stepTime) {
         NClip.Builder a = NClip.newBuilder();
         if (indices != null) {
             a.addAllIndices(indices);
@@ -225,22 +170,29 @@ public class Nx extends Ngin {
         return a;
     }
 
-    public NClip.Builder clipBuilder(String path, float width, float height, Iterable<Integer> indices) {
+    protected NClip.Builder clipBuilder(String path, float width, float height, Iterable<Integer> indices) {
         return clipBuilder(path, width, height, indices, NClipType.loop, 0.05f);
     }
 
-    public NClip.Builder clipBuilder(String path, float width, float height) {
+    protected NClip.Builder clipBuilder(String path, float width, float height) {
         return clipBuilder(path, width, height, null, NClipType.loop, 0.05f);
     }
 
-    public NClip.Builder clipBuilder(String path, float width, float height, float stepTime) {
+    protected NClip.Builder clipBuilder(String path, float width, float height, float stepTime) {
         return clipBuilder(path, width, height, null, NClipType.loop, stepTime);
     }
 
-    public NClip.Builder clipBuilder(String path, float width, float height, NClipType type, float stepTime) {
+    protected NClip.Builder clipBuilder(String path, float width, float height, NClipType type, float stepTime) {
         return clipBuilder(path, width, height, null, type, stepTime);
     }    
 
+    /**
+     * Runs the event loop for the provided event handler. The event loop will continuously poll the event queue for new events and pass them to the event handler to be handled. The event loop will continue to run until the event handler is completed.
+     * 
+     * @param handler The event handler to run the event loop for.
+     * @throws IOException If an I/O error occurs while polling the event queue.
+     * @throws InterruptedException If the thread is interrupted while polling the event queue.
+    */
 
     public void runEventLoop(EventHandler handler) throws IOException, InterruptedException {
         //eventHandler = handler;
@@ -249,6 +201,12 @@ public class Nx extends Ngin {
         }
     }
 
+    /**
+     * Let the camera follow the object with the given ID.
+     *
+     * @param id The ID of the object to follow.
+     * @throws IOException If an I/O error occurs while sending the command.
+     */
     public void follow(int id) throws IOException {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("follow");
@@ -256,6 +214,12 @@ public class Nx extends Ngin {
         sendCmd(c);
     }
 
+    /**
+     * Removes the object with the given ID.
+     *
+     * @param id The ID of the object to remove.
+     * @throws IOException If an I/O error occurs while sending the command.
+     */    
     public void remove(int id) throws IOException {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("remove");
@@ -263,6 +227,12 @@ public class Nx extends Ngin {
         sendCmd(c);
     }
     
+    /**
+     * Submits the object with the given ID.
+     *
+     * @param id The ID of the object to submit.
+     * @throws IOException If an I/O error occurs while sending the command.
+     */    
     public void submit(int id) throws IOException {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("submit");
@@ -271,7 +241,14 @@ public class Nx extends Ngin {
         sendCmd(c);
     }
 
-
+    /**
+     * Gets the object info with the given ID.
+     *
+     * @param id The ID of the object to get info for.
+     * @return The object info for the given ID.
+     * @throws IOException If an I/O error occurs while sending the command.
+     * @throws InterruptedException If the thread is interrupted while waiting for the response.
+     */
     public NObjectInfo getObjInfo(int id) throws IOException, InterruptedException {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("objinfo");
@@ -280,6 +257,14 @@ public class Nx extends Ngin {
         return new NObjectInfo(action.event);
     }
 
+    /**
+     * Sets the clip index for the object with the given ID.
+     *
+     * @param id The ID of the object to set the clip index for.
+     * @param index The index of the clip to set.
+     * @param isFlipHorizonal Whether to flip the clip horizontally.
+     * @throws IOException If an I/O error occurs while sending the command.
+     */    
     public void setClipIndex(int id, int index, boolean isFlipHorizonal) throws IOException {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("clipIndex");
@@ -289,9 +274,28 @@ public class Nx extends Ngin {
         sendCmd(c);
     }
 
+    /**
+     * Sets the clip index for the object with the given ID.
+     *
+     * @param id The ID of the object to set the clip index for.
+     * @param index The index of the clip to set.
+     * @throws IOException If an I/O error occurs while sending the command.
+     */
     public void setClipIndex(int id, int index) throws IOException {
         setClipIndex(id, index, false);
     }
+
+    /**
+     * Plays the clip with the given index for the object with the given ID.
+     * 
+     * @param id The ID of the object to play the clip for.
+     * @param index The index of the clip to play.
+     * @param nextIndex The index of the next clip to play, or -1 if there is no next clip.
+     * @param isFlipHorizonal Whether to flip the clip horizontally.
+     * @param needAck Whether to wait for an acknowledgement from the server.
+     * @throws IOException If an I/O error occurs while sending the command.
+     * @throws InterruptedException If the thread is interrupted while waiting for the response.
+     */
 
     public void playClip(int id, int index, int nextIndex, boolean isFlipHorizonal, boolean needAck) throws IOException, InterruptedException {
         Cmd.Builder c = Cmd.newBuilder();
@@ -556,10 +560,6 @@ public class Nx extends Ngin {
         Cmd.Builder c = Cmd.newBuilder();
         c.addStrings("syncClips");
         c.addAllInts(ints);
-        /*
-        for (int i=0; i<ids.length; i++) {
-            c.addInts(ids[i]);
-        }*/
         sendCmd(c);
     }
 
@@ -772,7 +772,7 @@ public class Nx extends Ngin {
 
     static float defaultStepTime = 0.05f; 
     class Visible {
-        private NVisual.Builder v;
+        public NVisual.Builder v;
 
         Visible(float x, float y) {
             v = NVisual.newBuilder();
@@ -841,20 +841,24 @@ public class Nx extends Ngin {
             return this;            
         }        
 
-        void send(int id, String name) throws IOException {
-            sendObj(objBuilder(id, name).setVisual(v));   
+        public Visible send(int id, String name) throws IOException {
+            sendObj(objBuilder(id, name).setVisual(v));
+            return this;
         }
 
-        void sendWithAck(int id, String name) throws IOException, InterruptedException {
-            sendObjWait(objBuilder(id, name).setVisual(v));   
+        public Visible sendWithAck(int id, String name) throws IOException, InterruptedException {
+            sendObjWait(objBuilder(id, name).setVisual(v));
+            return this;            
         }
         
-        void send(int id) throws IOException {
+        public Visible send(int id) throws IOException {
             send(id, "");
+            return this;            
         }
 
-        void sendWithAck(int id) throws IOException, InterruptedException {
+        public Visible sendWithAck(int id) throws IOException, InterruptedException {
             sendWithAck(id, "");
+            return this;            
         }        
     }
 }
