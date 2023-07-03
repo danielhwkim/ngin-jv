@@ -20,6 +20,12 @@ public class Nx extends Ngin {
         super();
     }
 
+    
+    /** 
+     * @param builder
+     * @throws IOException
+     * @throws InterruptedException
+     */
     protected void sendStageWait(NStageInfo.Builder builder) throws IOException, InterruptedException  {
         RemoteAction action = receiver.addRemoteAction();
         builder.setSn(action.sn);
@@ -28,12 +34,24 @@ public class Nx extends Ngin {
         action.lock();
     }
 
+    
+    /** 
+     * @param builder
+     * @throws IOException
+     */
     protected void sendStage(NStageInfo.Builder builder) throws IOException  {
         send(Head.stage, builder.build().toByteArray());      
     }
 
 
 
+    
+    /** 
+     * @param builder
+     * @return RemoteAction
+     * @throws IOException
+     * @throws InterruptedException
+     */
     protected RemoteAction sendObjWait(NObject.Builder builder) throws IOException, InterruptedException {
         RemoteAction action = receiver.addRemoteAction();
         builder.setSn(action.sn);

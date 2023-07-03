@@ -12,12 +12,9 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.io.FileReader;
-import java.util.EventListener;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import commander.*;
 import commander.Command.*;
 
 
@@ -59,7 +56,7 @@ public class Ngin {
         socket.close();
     }
 
-    public void send(Head head, byte[] data) throws IOException {
+    protected void send(Head head, byte[] data) throws IOException {
         byte[] bhead = ByteBuffer.allocate(4).order(ByteOrder.nativeOrder()).putInt(head.getNumber()).array();
         byte[] bsize = ByteBuffer.allocate(4).order(ByteOrder.nativeOrder()).putInt(data.length).array();            
 
@@ -69,7 +66,7 @@ public class Ngin {
         out.flush();
     }
 
-    public RemoteAction sendCmdWait(Cmd.Builder builder) throws IOException, InterruptedException {
+    protected RemoteAction sendCmdWait(Cmd.Builder builder) throws IOException, InterruptedException {
         RemoteAction action = receiver.addRemoteAction();
         builder.setSn(action.sn);
         //System.out.println(String.format("sendCmdWait(%d)", action.sn));
@@ -78,7 +75,7 @@ public class Ngin {
         return action;
     }
 
-    public void sendCmd(Cmd.Builder builder) throws IOException {
+    protected void sendCmd(Cmd.Builder builder) throws IOException {
         send(Head.cmd, builder.build().toByteArray());
     }
 }
