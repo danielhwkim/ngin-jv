@@ -49,40 +49,73 @@ public class Tetris extends EventHandler {
         }
     }
 
-    public void rotate(float time) throws IOException {
-        // shape: L
-        Visible v0 = m.get(100);
-        Visible v1 = m.get(101);
-        Visible v2 = m.get(102);
-        Visible v3 = m.get(103);
+    public boolean canTransform(float[] changes) {
+        int index = 0;
+        for (int i : m.keySet()) {
+            Visible v = m.get(i);
+            Vector2 change = nx.new Vector2(changes[index], changes[index+1]);
+            index += 2;
+            Vector2 v2 = v.getPos().add(change);
+            if (v2.y > 19.5) return false;
+            if (map[(int)v2.x][(int)v2.y]) return false;
+        }
+        return true;
+    }
 
+    public void transform(float[] changes, float time) throws IOException {
+        int index = 0;
+        for (int i : m.keySet()) {
+            Visible v = m.get(i);
+            Vector2 change = nx.new Vector2(changes[index], changes[index+1]);
+            index += 2;
+            Vector2 v2 = v.getPos().add(change);
+
+            v.setPos(v2);
+            nx.new Transform().translate(v2).send(i, time);
+        }
+    }
+
+    public float[] getChanges() {
+        float x = m.get(100).getPos().x;
 
         if (angle == 0) {
-            Vector2 v0_newValue = v0.getPos().add(nx.new Vector2(1f, 1f));
-            v0.setPos(v0_newValue);
-            nx.new Transform().translate(v0_newValue).send(100, time);
-            
-            Vector2 v2_newValue = v2.getPos().add(nx.new Vector2(-1f, -1f));
-            v2.setPos(v2_newValue);
-            nx.new Transform().translate(v2_newValue).send(102, time);
-
-            Vector2 v3_newValue = v3.getPos().add(nx.new Vector2(-2f, 0f));
-            v3.setPos(v3_newValue);
-            nx.new Transform().translate(v3_newValue).send(103, time);
-            angle = 90;
+            if (x < 1) {
+                float[] v = {2f, 1f, 1f, 0f, 0f, -1f, -1f, 0f};
+                return v;
+            } else {
+                float[] v = {1f, 1f, 0f, 0f, -1f, -1f, -2f, 0f};
+                return v;
+            }
         } else if (angle == 90) {
-
-
-            angle = 180;
+            float[] v = {-1f, 1f, 0f, 0f, 1f, -1f, 0f, -2f};
+            return v;
         } else if (angle == 180) {
-
-            angle = 270;
-        } else if (angle == 270) {
-
-            angle = 0;
+            if (x>9) {
+                float[] v = {-2f, -1f, -1f, 0f, 0f, 1f, 1f, 0f};
+                return v;            
+            } else {
+                float[] v = {-1f, -1f, 0f, 0f, 1f, 1f, 2f, 0f};
+                return v; 
+            }
+        } else {
+            float[] v = {1f, -1f, 0f, 0f, -1f, 1f, 0f, 2f};
+            return v; 
         }
+    }
+
+
+    public void rotate(float time) throws IOException {
         
-      
+        // shape: L
+        float[] changes = getChanges();
+
+        if (canTransform(changes)) {
+            transform(changes, time);
+            angle += 90;
+            if (angle == 360) angle = 0;
+        } else {
+            //
+        }
     }
 
     public void moveDown(float dist, float time) throws IOException {
@@ -176,6 +209,7 @@ public class Tetris extends EventHandler {
     }    
     
     public void newPiece() throws IOException {
+        angle = 0;
         m = new HashMap<>(); 
 
         m.put(100, nx.new Visible(0.5f, 0.5f).addClip("Background/Yellow.png", 64, 64));
