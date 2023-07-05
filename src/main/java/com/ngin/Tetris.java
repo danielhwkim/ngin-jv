@@ -80,26 +80,20 @@ public class Tetris extends EventHandler {
 
         if (angle == 0) {
             if (x < 1) {
-                float[] v = {2f, 1f, 1f, 0f, 0f, -1f, -1f, 0f};
-                return v;
+                return new float[] {2f, 1f, 1f, 0f, 0f, -1f, -1f, 0f};
             } else {
-                float[] v = {1f, 1f, 0f, 0f, -1f, -1f, -2f, 0f};
-                return v;
+                return new float[] {1f, 1f, 0f, 0f, -1f, -1f, -2f, 0f};
             }
         } else if (angle == 90) {
-            float[] v = {-1f, 1f, 0f, 0f, 1f, -1f, 0f, -2f};
-            return v;
+            return new float[] {-1f, 1f, 0f, 0f, 1f, -1f, 0f, -2f};
         } else if (angle == 180) {
             if (x>9) {
-                float[] v = {-2f, -1f, -1f, 0f, 0f, 1f, 1f, 0f};
-                return v;            
+                return new float[] {-2f, -1f, -1f, 0f, 0f, 1f, 1f, 0f};          
             } else {
-                float[] v = {-1f, -1f, 0f, 0f, 1f, 1f, 2f, 0f};
-                return v; 
+                return new float[] {-1f, -1f, 0f, 0f, 1f, 1f, 2f, 0f};
             }
         } else {
-            float[] v = {1f, -1f, 0f, 0f, -1f, 1f, 0f, 2f};
-            return v; 
+            return new float[] {1f, -1f, 0f, 0f, -1f, 1f, 0f, 2f};
         }
     }
 
