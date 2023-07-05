@@ -14,6 +14,7 @@ public class Tetris extends EventHandler {
     Nx nx;
     HashMap<Integer, Visible> m;
     int width, height;
+    int angle = 0;
     
     boolean[][] map;
 
@@ -54,10 +55,34 @@ public class Tetris extends EventHandler {
         Visible v1 = m.get(101);
         Visible v2 = m.get(102);
         Visible v3 = m.get(103);
+
+
+        if (angle == 0) {
+            Vector2 v0_newValue = v0.getPos().add(nx.new Vector2(1f, 1f));
+            v0.setPos(v0_newValue);
+            nx.new Transform().translate(v0_newValue).send(100, time);
+            
+            Vector2 v2_newValue = v2.getPos().add(nx.new Vector2(-1f, -1f));
+            v2.setPos(v2_newValue);
+            nx.new Transform().translate(v2_newValue).send(102, time);
+
+            Vector2 v3_newValue = v3.getPos().add(nx.new Vector2(-2f, 0f));
+            v3.setPos(v3_newValue);
+            nx.new Transform().translate(v3_newValue).send(103, time);
+            angle = 90;
+        } else if (angle == 90) {
+
+
+            angle = 180;
+        } else if (angle == 180) {
+
+            angle = 270;
+        } else if (angle == 270) {
+
+            angle = 0;
+        }
         
-        Vector2 v0_newValue = v0.getPos().add(nx.new Vector2(1f, 1f));
-        v0.setPos(v0_newValue);
-        nx.new Transform().translate(v0_newValue).send(100, time);
+      
     }
 
     public void moveDown(float dist, float time) throws IOException {
