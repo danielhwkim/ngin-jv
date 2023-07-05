@@ -13,10 +13,15 @@ import com.ngin.Nx.Visible;
 public class Tetris extends EventHandler {
     Nx nx;
     HashMap<Integer, Visible> m;
+    int width, height;
+    
+    boolean[][] map;
 
     Tetris() throws IOException {
+        width = 10;
+        height = 20;
         nx = new Nx();
-        m = new HashMap<>(); 
+        map = new boolean[width][height];
     }
 
     @Override
@@ -72,6 +77,16 @@ public class Tetris extends EventHandler {
         return bottom;
     }
 
+    public boolean canMoveDown() {
+        for (int i : m.keySet()) {
+            Visible v = m.get(i);
+            if (map[(int)v.getPos().x][(int)v.getPos().y+1]) {
+                return false;
+            }
+        }
+        return true;
+    }    
+
     public float getLeft() {
         float left = 9;
         for (int i : m.keySet()) {
@@ -92,11 +107,18 @@ public class Tetris extends EventHandler {
             }
         }
         return right;
-    }     
+    }
 
-    public void run() throws IOException, InterruptedException {
-        nx.new Stage(10, 20).enableDebug(true).sendWithAck();
-        
+    public void updateMap() {
+        for (int i : m.keySet()) {
+            Visible v = m.get(i);
+            map[(int)v.getPos().x][(int)v.getPos().y] = true;
+        }
+    }    
+    
+    public void newPiece() throws IOException {
+        m = new HashMap<>(); 
+
         m.put(100, nx.new Visible(0.5f, 0.5f).addClip("Background/Yellow.png", 64, 64));
         m.put(101, nx.new Visible(0.5f, 1.5f).addClip("Background/Yellow.png", 64, 64));
         m.put(102, nx.new Visible(0.5f, 2.5f).addClip("Background/Yellow.png", 64, 64));
@@ -105,6 +127,11 @@ public class Tetris extends EventHandler {
         for (int i : m.keySet()) {
             m.get(i).send(i);
         }
+    }
+
+    public void run() throws IOException, InterruptedException {
+        nx.new Stage(width, height).enableDebug(true).sendWithAck();
+        newPiece();
 
         Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -113,14 +140,17 @@ public class Tetris extends EventHandler {
                 //System.out.println("Print in every second");
                 try {
                     //System.out.println(getBottom());
-                    if (getBottom() < 19) {
+                    if (getBottom()<19 && canMoveDown()) {
                         moveDown(1f, 0.1f);
+                    } else {
+                        updateMap();
+                        newPiece();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }                
             }
-		}, 0, 500);
+		}, 0, 300);
 
 
 
