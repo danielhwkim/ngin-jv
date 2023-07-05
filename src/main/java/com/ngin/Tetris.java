@@ -35,15 +35,29 @@ public class Tetris extends EventHandler {
         System.out.println(info);
         if (info.isPressed) {
             if (info.name.equals("Arrow Right")) {
-                if (getRight()<9.5) {
+                if (getRight()<9.5 && canMoveRight()) {
                     move(1f, 0.1f);
                 }
             } else if (info.name.equals("Arrow Left")) {
-                if (getLeft()>0.5) {
+                if (getLeft()>0.5 && canMoveLeft()) {
                     move(-1f, 0.1f);
                 }
+            } else if (info.name.equals("Arrow Up")) {
+                rotate(0.1f);
             }
         }
+    }
+
+    public void rotate(float time) throws IOException {
+        // shape: L
+        Visible v0 = m.get(100);
+        Visible v1 = m.get(101);
+        Visible v2 = m.get(102);
+        Visible v3 = m.get(103);
+        
+        Vector2 v0_newValue = v0.getPos().add(nx.new Vector2(1f, 1f));
+        v0.setPos(v0_newValue);
+        nx.new Transform().translate(v0_newValue).send(100, time);
     }
 
     public void moveDown(float dist, float time) throws IOException {
@@ -85,7 +99,27 @@ public class Tetris extends EventHandler {
             }
         }
         return true;
-    }    
+    }
+
+    public boolean canMoveLeft() {
+        for (int i : m.keySet()) {
+            Visible v = m.get(i);
+            if (map[(int)v.getPos().x-1][(int)v.getPos().y]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean canMoveRight() {
+        for (int i : m.keySet()) {
+            Visible v = m.get(i);
+            if (map[(int)v.getPos().x+1][(int)v.getPos().y]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public float getLeft() {
         float left = 9;
