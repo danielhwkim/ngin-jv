@@ -215,32 +215,55 @@ public class Tetris extends EventHandler {
             m.get(i).send(i);
         }
     }
+    
+    private int steps = 0;
+    private boolean highSpeed = false;
 
     public void run() throws IOException, InterruptedException {
         nx.new Stage(width, height).enableDebug(true).sendWithAck();
         newPiece();
 
+
         Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //System.out.println("Print in every second");
-                try {
-                    //System.out.println(getBottom());
-                    if (getBottom()<19 && canMoveDown()) {
-                        moveDown(1f, 0.1f);
-                    } else {
-                        updateMap();
-                        newPiece();
+                if (highSpeed == false) {
+                    if (steps == 0)
+                    {
+                        //System.out.println("Print in every second");
+                        try {
+                            //System.out.println(getBottom());
+                            if (getBottom()<19 && canMoveDown()) {
+                                moveDown(1f, 0.1f);
+                            } else {
+                                updateMap();
+                                newPiece();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }                
+
+                    steps += 1;
+                    if (steps == 6) steps = 0;
+                    
+                } else {
+                    //System.out.println("Print in every second");
+                    try {
+                        //System.out.println(getBottom());
+                        if (getBottom()<19 && canMoveDown()) {
+                            moveDown(1f, 0.05f);
+                        } else {
+                            updateMap();
+                            newPiece();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-		}, 0, 300);
-
-
-
+		}, 0, 50);
         nx.runEventLoop(this);
     }
 
