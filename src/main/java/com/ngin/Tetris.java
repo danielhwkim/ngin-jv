@@ -53,16 +53,71 @@ public class Tetris extends EventHandler {
     }
     
     class Shape {
-        private Part[] parts;
-        int angle;
+        protected Part[] parts;
+        protected int angle;
+        protected Vector8[] v8;
 
-        Shape() {
+        protected void initV8(float x, float y, Vector8 a0, Vector8 a90, Vector8 a180, Vector8 a270) {
             angle = 0;
             parts = new Part[4];
-            parts[0] = new Part(newId(), 0.5f, 0.5f);
-            parts[1] = new Part(newId(), 0.5f, 1.5f);
-            parts[2] = new Part(newId(), 0.5f, 2.5f);
-            parts[3] = new Part(newId(), 1.5f, 2.5f);
+            parts[0] = new Part(newId(), 0.5f + x + a0.data[0], 0.5f + y + a0.data[1]);
+            parts[1] = new Part(newId(), 0.5f + x + a0.data[2], 0.5f + y + a0.data[3]);
+            parts[2] = new Part(newId(), 0.5f + x + a0.data[4], 0.5f + y + a0.data[5]);
+            parts[3] = new Part(newId(), 0.5f + x + a0.data[6], 0.5f + y + a0.data[7]);
+                        
+            v8 = new Vector8[4];            
+            v8[0] = new Vector8(a90.subtract(a0));
+            v8[1] = new Vector8(a180.subtract(a90));
+            v8[2] = new Vector8(a270.subtract(a180));
+            v8[3] = new Vector8(a0.subtract(a270));   
+        }
+
+       class Vector8 {
+            protected float[] data;
+            Vector8(float[] data) {
+                this.data = data;
+            }
+
+            float[] subtract(Vector8 other) {
+                return new float[] {
+                    data[0] - other.data[0],
+                    data[1] - other.data[1],
+                    data[2] - other.data[2],
+                    data[3] - other.data[3],
+                    data[4] - other.data[4],
+                    data[5] - other.data[5],
+                    data[6] - other.data[6],
+                    data[7] - other.data[7],                                                                                                                                            
+                };
+            }
+
+            float[] add(float x, float y) {
+                return new float[] {
+                    data[0] + x,
+                    data[1] + y,
+                    data[2] + x,
+                    data[3] + y,
+                    data[4] + x,
+                    data[5] + y,
+                    data[6] + x,
+                    data[7] + y,                                                                                                                                            
+                };                
+            }
+        }        
+
+
+        Shape(int x, int y) {
+
+            Vector8 a0 = new Vector8(new float[] {0f, 1f, 1f, 1f, 2f, 1f, 2f, 0f});
+            Vector8 a90 = new Vector8(new float[] {1f, 0f, 1f, 1f, 1f, 2f, 2f, 2f});
+            Vector8 a180 = new Vector8(new float[] {2f, 1f, 1f, 1f, 0f, 1f, 0f, 2f});
+            Vector8 a270 = new Vector8(new float[] {1f, 2f, 1f, 1f, 1f, 0f, 0f, 0f});
+
+            initV8(x, y, a0, a90, a180, a270);            
+        }
+
+        Shape() {
+            this(0, 0);
         }
 
         public void send() throws IOException {
@@ -185,26 +240,54 @@ public class Tetris extends EventHandler {
 
         public float[] getChanges() {
             float x = parts[0].x;
-
             if (angle == 0) {
-                if (x < 1) {
-                    return new float[] {2f, 1f, 1f, 0f, 0f, -1f, -1f, 0f};
-                } else {
-                    return new float[] {1f, 1f, 0f, 0f, -1f, -1f, -2f, 0f};
-                }
+                return v8[0].data;
             } else if (angle == 90) {
-                return new float[] {-1f, 1f, 0f, 0f, 1f, -1f, 0f, -2f};
-            } else if (angle == 180) {
-                if (x > 9) {
-                    return new float[] {-2f, -1f, -1f, 0f, 0f, 1f, 1f, 0f};          
+                if (x < 1) {
+                    return v8[1].add(1, 0);
                 } else {
-                    return new float[] {-1f, -1f, 0f, 0f, 1f, 1f, 2f, 0f};
+                    return v8[1].data;
                 }
+            } else if (angle == 180) {
+                return v8[2].data;
             } else {
-                return new float[] {1f, -1f, 0f, 0f, -1f, 1f, 0f, 2f};
+                if (x > 9) {
+                    return v8[2].add(-1, 0);
+                } else {
+                    return v8[3].data;
+                }
+
             }
+        }            
+
+    }
+
+    class ShapeL extends Shape {
+
+    }
+
+    class ShapeI extends Shape {
+        ShapeI(int x, int y) {
+            Vector8 a0 = new Vector8(new float[] {0f, 1f, 1f, 1f, 2f, 1f, 3f, 1f});
+            Vector8 a90 = new Vector8(new float[] {2f, 0f, 2f, 1f, 2f, 2f, 2f, 3f});
+            Vector8 a180 = new Vector8(new float[] {0f, 2f, 1f, 2f, 2f, 2f, 3f, 2f});
+            Vector8 a270 = new Vector8(new float[] {1f, 0f, 1f, 1f, 1f, 2f, 1f, 3f});
+            initV8(x, y, a0, a90, a180, a270);                  
         }
 
+        @Override
+        public float[] getChanges() {
+            float x = parts[0].x;
+            if (angle == 0) {
+                return v8[0].data;
+            } else if (angle == 90) {
+                return v8[1].data;
+            } else if (angle == 180) {
+                return v8[2].data;
+            } else {
+                return v8[3].data;
+            }
+        }        
     }
 
     @Override
@@ -236,7 +319,8 @@ public class Tetris extends EventHandler {
     public void newPiece() throws IOException {
         highSpeed = false;
         steps = 0;
-        shape = new Shape();
+        //shape = new ShapeL();
+        shape = new ShapeI(0, 0);
         shape.send();
     }
 
