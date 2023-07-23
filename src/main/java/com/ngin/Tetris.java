@@ -3,6 +3,7 @@ package com.ngin;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,6 +27,7 @@ public class Tetris extends EventHandler {
         height = 20;
         nx = new Nx();
         map = new boolean[width][height];
+        rand = new Random();
     }
 
     class Part {
@@ -266,6 +268,18 @@ public class Tetris extends EventHandler {
 
     }
 
+    class ShapeS extends Shape {
+        ShapeS(int x, int y) {
+            Vector8 a0 = new Vector8(new float[] {0f, 0f, 0f, 1f, 1f, 1f, 1f, 0f});
+            initV8(x, y, a0, a0, a0, a0);                  
+        }
+        
+        @Override
+        public void rotate(float time) throws IOException {
+
+        }        
+    }
+
     class ShapeI extends Shape {
         ShapeI(int x, int y) {
             Vector8 a0 = new Vector8(new float[] {0f, 1f, 1f, 1f, 2f, 1f, 3f, 1f});
@@ -281,11 +295,23 @@ public class Tetris extends EventHandler {
             if (angle == 0) {
                 return v8[0].data;
             } else if (angle == 90) {
-                return v8[1].data;
+                if (x < 2) {
+                    return v8[1].add((int)(2.5-x), 0);
+                } else if (x > 8) {
+                    return v8[1].add((int)(8.5-x), 0f);
+                } else {
+                    return v8[1].data;
+                }
             } else if (angle == 180) {
                 return v8[2].data;
             } else {
-                return v8[3].data;
+                if (x < 1) {
+                    return v8[3].add((int)(1.5-x), 0);
+                } else if (x > 8) {
+                    return v8[3].add((int)(7.5-x), 0f);
+                } else {
+                    return v8[3].data;
+                }
             }
         }        
     }
@@ -316,11 +342,25 @@ public class Tetris extends EventHandler {
         }
     }
 
+    Random rand;
+
     public void newPiece() throws IOException {
         highSpeed = false;
         steps = 0;
+
+        switch(rand.nextInt(3)) {
+            case 0:
+                shape = new Shape(0, 0);
+                break;
+            case 1:
+                shape = new ShapeI(0, 0);
+                break;            
+            case 2:
+                shape = new ShapeS(0, 0);
+                break;
+        }
         //shape = new ShapeL();
-        shape = new ShapeI(0, 0);
+
         shape.send();
     }
 
